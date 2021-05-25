@@ -1,0 +1,37 @@
+.menu_custom {
+    background-color: #D6C2FE;
+    flex: 0;
+    padding: 20px;
+    border-radius: 50%;
+    color: #8950FC !important;
+    height: 45px;
+    width: 45px;
+    margin-right: 13px;
+}
+
+.after_register_p {
+    padding: 10%;
+}
+
+.after_register_tabs {
+    justify-content: space-between;
+}
+
+#citizenship__BV_label_ {
+    font-size: 130%;
+    font-weight: 550;
+}
+
+.card-header {
+    padding: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.card-header-pills {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.card-body {
+    padding: 2rem 0 0 0 !important;
+}
