@@ -455,7 +455,7 @@ export default {
         this.$store
           .dispatch(LOGIN, { email, password })
           // go to which page after successfully login
-          .then(() => this.$router.push({ name: "dashboard" }))
+          .then(() => this.$router.push({ name: "/" }))
           .catch(() => {});
 
         submitButton.classList.remove(

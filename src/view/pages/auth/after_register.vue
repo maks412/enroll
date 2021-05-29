@@ -44,12 +44,13 @@
                   <!-- Begin FORM -->
                   <div>
                     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                      <b-form-group 
+                      <b-form-group
                         id="citizenship"
                         label="Choose Citizenship"
                         label-for="citizenship_label"
                       >
-                        <b-form-select v-on:change="OnChange"
+                        <b-form-select
+                          v-on:change="OnChange"
                           id="citizenship_select"
                           v-model="form.citizenship"
                           :options="country"
@@ -72,7 +73,7 @@
                                 Choose Education Type
                               </p>
                               <div class="form-group">
-                                <b-tabs pills card fill>
+                                <b-tabs pills card fill v-model="tabIndex" type="is-toggle" @input="OnChange_paid">
                                   <b-tab title="Full" active></b-tab>
                                   <b-tab title="Shortened"></b-tab>
                                   <b-tab title="Second Higher"></b-tab>
@@ -88,7 +89,7 @@
                       <!-- END of Degree -->
                       <!-- Begin of Speciality -->
                       <b-form-group
-                        id="speciality"
+                        id="citizenship"
                         label="Choose Speciality"
                         label-for="citizenship_label"
                       >
@@ -103,7 +104,7 @@
 
                       <!-- Begin of Payment -->
                       <b-form-group
-                        id="payment"
+                        id="citizenship"
                         label="Choose Tutition Payment"
                         label-for="citizenship_label"
                       >
@@ -112,6 +113,7 @@
                           v-model="form.payment"
                           :options="payment"
                           required
+                          v-on:change="OnChange_paid"
                         ></b-form-select>
                       </b-form-group>
                       <!-- END of Payment -->
@@ -141,7 +143,7 @@
                       <!-- END IELTS -->
 
                       <!-- Begin Interview -->
-                      <div :style={display:Interview_div}>
+                      <div :style="{ display: Interview_div }">
                         <b-form-group
                           label="Have you passed international students interview?"
                           label-size="lg"
@@ -163,9 +165,35 @@
                         </b-form-group>
                       </div>
                       <!-- END Interview -->
-                      <b-button type="submit" variant="primary" style="float:right"
-                        >Next <b-icon-chevron-right></b-icon-chevron-right></b-button
-                      >
+                      <!-- Begin Interview -->
+                      <div :style="{ display: Admin_Interview_div }">
+                        <b-form-group
+                          label="Have you passed admission interview?"
+                          label-size="lg"
+                          class="font-weight-bold"
+                        >
+                          <b-form-radio-group
+                            buttons="true"
+                            button-variant="outline-primary"
+                            id="radio-group-2"
+                            v-model="selected"
+                            :options="options"
+                            name="radio-options"
+                          >
+                            <b-form-radio value="yes">yes</b-form-radio>
+                            <b-form-radio value="no"
+                              >no</b-form-radio
+                            ></b-form-radio-group
+                          >
+                        </b-form-group>
+                      </div>
+                      <!-- END Interview -->
+                      <b-button
+                        type="submit"
+                        variant="primary"
+                        style="float: right"
+                        >Next <b-icon-chevron-right></b-icon-chevron-right
+                      ></b-button>
                     </b-form>
                   </div>
                   <!-- END FORM -->
@@ -316,9 +344,12 @@ export default {
         "SDU",
         "Self",
         "Mama",
+        "Paid",
       ],
       show: true,
       Interview_div: "inline",
+      Admin_Interview_div: "none",
+      tabIndex: 0,
     };
   },
   methods: {
@@ -342,6 +373,13 @@ export default {
     OnChange: function () {
       if (this.form.citizenship == "Kazakhstan") this.Interview_div = "none";
       else this.Interview_div = "inline";
+    },
+    OnChange_paid: function () {
+      if (this.tabIndex == 1 || this.tabIndex == 2) {
+        if (this.form.payment != "Paid") this.Admin_Interview_div = "none";
+        else this.Admin_Interview_div = "inline";
+      }
+      if(this.tabIndex == 0) this.Admin_Interview_div = "none";
     },
   },
 };

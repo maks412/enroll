@@ -32,14 +32,32 @@ const getters = {
 const actions = {
     [LOGIN](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("@/login.php", credentials)
-                .then(({ data }) => {
-                    context.commit(SET_AUTH, data);
-                    resolve(data);
-                })
-                .catch(({ response }) => {
-                    context.commit(SET_ERROR, response.data.errors);
-                });
+
+            console.log(resolve);
+            var data = new FormData();
+            data.append("json", JSON.stringify(credentials));
+            // ApiService.post("http://localhost/login.php", credentials)
+            //     .then(({ data }) => {
+            //         context.commit(SET_AUTH, data);
+            //         console.log(data);
+            //         resolve(data);
+            //     })
+            //     .catch(({ response }) => {
+            //         context.commit(SET_ERROR, response.data.errors);
+            //     });
+            fetch("http://localhost/login.php", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    // 'Content-Type': 'application/json',
+                },
+                body: data
+            }).then((response) => response.json()).then((res) => {
+                console.log(res);
+                context.commit(SET_AUTH, res);
+                resolve(data);
+            });
+            console.log(context);
         });
     },
     [LOGOUT](context) {
