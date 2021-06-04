@@ -1,11 +1,13 @@
 <template>
   <!-- begin:: Header Topbar -->
   <div class="topbar">
-
     <!--begin: Language bar -->
     <div class="topbar-item">
-      <span class="symbol symbol-35 symbol-light-success" >
-        <span class="symbol-label font-size-h5 font-weight-bold" style="width: fit-content; padding: 0 5px; margin-right: 20px">
+      <span class="symbol symbol-35 symbol-light-success">
+        <span
+          class="symbol-label font-size-h5 font-weight-bold"
+          style="width: fit-content; padding: 0 5px; margin-right: 20px"
+        >
           Enrolled
         </span>
       </span>
@@ -52,28 +54,8 @@
             <span
               class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
             >
-              {{ currentUserPersonalInfo.email }}
+              {{ currentUser.email }}
             </span>
-
-            <!-- <span
-             class="text-dark-50 font-weight-bolder d-none d-md-inline mr-2" style="font-size: 90%"
-            >
-              {{ currentUserPersonalInfo.email }}
-              </span> -->
-
-            <!-- <span class="symbol symbol-35 symbol-light-success">
-              <img
-                v-if="false"
-                alt="Pic"
-                :src="currentUserPersonalInfo.photo"
-              />
-              <span
-                v-if="true"
-                class="symbol-label font-size-h5 font-weight-bold"
-              >
-                {{ currentUserPersonalInfo.name.charAt(0).toUpperCase() }}
-              </span>
-            </span> -->
           </span>
         </div>
       </template>
@@ -152,7 +134,7 @@ export default {
     getLanguageFlag() {
       return this.onLanguageChanged();
     },
-    ...mapGetters(["currentUserPersonalInfo"]),
+    ...mapGetters(["currentUser"]),
 
     getFullName() {
       return (

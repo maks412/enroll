@@ -48,21 +48,15 @@ const ApiService = {
      * @returns {*}
      */
     post(resource, params) {
-
         var data = new FormData();
         data.append("json", JSON.stringify(params));
-        // console.log(params);
         // return Vue.axios.post(`${resource}`, params);
-
         return fetch(`${resource}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                // 'Content-Type': 'application/json',
             },
             body: data
-        }).then((response) => response.json()).then((responseJsonFromServer) => {
-            console.log(responseJsonFromServer);
         });
     },
 

@@ -6,18 +6,18 @@ Vue.use(Router);
 export default new Router({
     routes: [{
             path: "/",
-            redirect: "/custom-wizard/wizard-4", //"/dashboard",
+            redirect: "/home/in", //"/dashboard",
             component: () =>
                 import ("@/view/layout/Layout"),
             children: [{
-                path: "/custom-wizard",
+                path: "/home",
                 name: "wizard",
                 component: () =>
                     import ("@/view/pages/wizard/Wizard.vue"),
                 children: [
 
                     {
-                        path: "wizard-4",
+                        path: "in",
                         name: "wizard-4",
                         component: () =>
                             import ("@/view/pages/wizard/Wizard-4.vue")
@@ -46,33 +46,16 @@ export default new Router({
         },
 
         {
-            path: "/",
+            path: "/login",
+            name: "login",
             component: () =>
-                import ("@/view/pages/auth/login_pages/Login-1"),
-            children: [{
-                    name: "login",
-                    path: "/login",
-                    component: () =>
-                        import ("@/view/pages/auth/login_pages/Login-1")
-                },
-                {
-                    name: "register",
-                    path: "/register",
-                    component: () =>
-                        import ("@/view/pages/auth/login_pages/Login-1")
-                }
-            ]
+                import ("@/view/pages/auth/login_pages/Login-1")
         },
         {
-            path: "/",
+            path: "/after_register",
+            name: "after_register",
             component: () =>
-                import ("@/view/pages/auth/after_register"),
-            children: [{
-                name: "after_register",
-                path: "/after_register",
-                component: () =>
-                    import ("@/view/pages/auth/after_register")
-            }]
+                import ("@/view/pages/auth/after_register")
         },
         {
             path: "*",

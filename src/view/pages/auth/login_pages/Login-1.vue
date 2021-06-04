@@ -110,14 +110,7 @@
                 />
                 <p @click="switchVisibility()" style="float: right; margin: 1%; cursor: pointer">{{show_hide}}</p>
               </div>
-              <!-- <div class="form-group">
-                <label class="checkbox mb-0">
-                  <input type="checkbox" name="agree" />
-                  <span class="mr-2"></span>
-                  I Agree the
-                  <a href="#" class="ml-2">terms and conditions</a>.
-                </label>
-              </div> -->
+              
               <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
                 <button
                   ref="kt_login_signup_submit"
@@ -263,21 +256,6 @@
           </div>
           <!--end::Forgot-->
         </div>
-        <!--begin::Content footer-->
-        <!-- <div
-          class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0"
-        >
-          <a href="#" class="text-primary font-weight-bolder font-size-h5"
-            >Terms</a
-          >
-          <a href="#" class="text-primary ml-10 font-weight-bolder font-size-h5"
-            >Plans</a
-          >
-          <a href="#" class="text-primary ml-10 font-weight-bolder font-size-h5"
-            >Contact Us</a
-          >
-        </div> -->
-        <!--end::Content footer-->
       </div>
       <!--end::Content-->
     </div>
@@ -298,7 +276,7 @@ import Bootstrap from "@/assets/plugins/formvalidation/dist/es6/plugins/Bootstra
 import SubmitButton from "@/assets/plugins/formvalidation/dist/es6/plugins/SubmitButton";
 
 import KTUtil from "@/assets/js/components/util";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
 import Swal from "sweetalert2";
 
@@ -322,7 +300,7 @@ export default {
     ...mapState({
       errors: state => state.auth.errors
     }),
-    ...mapGetters(["currentUser"]),
+    
 
     backgroundImage() {
       return (
@@ -455,7 +433,7 @@ export default {
         this.$store
           .dispatch(LOGIN, { email, password })
           // go to which page after successfully login
-          .then(() => this.$router.push({ name: "/" }))
+          .then(() => this.$router.push({ path: "/home/in" }))
           .catch(() => {});
 
         submitButton.classList.remove(
@@ -463,7 +441,7 @@ export default {
           "spinner-light",
           "spinner-right"
         );
-      }, 2000);
+      }, 0);
     });
 
     this.fv.on("core.form.invalid", () => {

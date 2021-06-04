@@ -729,6 +729,9 @@ import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
 export default {
+  data(){
+    
+  },
   name: "Wizard-4",
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [

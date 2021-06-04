@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-root" v-if="isAuthenticated">
+  <div class="d-flex flex-column flex-root">
     <!-- begin:: Header Mobile -->
     <KTHeaderMobile></KTHeaderMobile>
     <!-- end:: Header Mobile -->
@@ -64,26 +64,35 @@
                         Choose Education Program
                       </p>
                       <div class="form-group">
-                        <b-tabs pills card fill>
-                          <b-tab title="Bachelor" active
-                            ><b-card-text>
-                              <!-- Begin of Degree -->
-
-                              <p id="citizenship__BV_label_">
-                                Choose Education Type
-                              </p>
-                              <div class="form-group">
-                                <b-tabs pills card fill v-model="tabIndex" type="is-toggle" @input="OnChange_paid">
-                                  <b-tab title="Full" active></b-tab>
-                                  <b-tab title="Shortened"></b-tab>
-                                  <b-tab title="Second Higher"></b-tab>
-                                </b-tabs>
-                              </div>
-                              <!-- END of Degree -->
-                            </b-card-text></b-tab
-                          >
-                          <b-tab title="Master"></b-tab>
-                          <b-tab title="Doctorate"></b-tab>
+                        <b-tabs pills card fill v-model="form.tabDegree">
+                          <template>
+                            <b-tab
+                              v-for="(d, index) in degree"
+                              :key="index"
+                              :title="d"
+                            >
+                              <b-card-text v-if="d == 'Bachelor'">
+                                <p id="citizenship__BV_label_">
+                                  Choose Education Type
+                                </p>
+                                <div class="form-group">
+                                  <b-tabs
+                                    pills
+                                    card
+                                    fill
+                                    v-model="form.tab_bachDegree"
+                                    type="is-toggle"
+                                    @input="OnChange_paid"
+                                  >
+                                    <b-tab title="Full" active></b-tab>
+                                    <b-tab title="Shortened"></b-tab>
+                                    <b-tab title="Second Higher"></b-tab>
+                                  </b-tabs>
+                                </div>
+                                <!-- END of Degree -->
+                              </b-card-text>
+                            </b-tab>
+                          </template>
                         </b-tabs>
                       </div>
                       <!-- END of Degree -->
@@ -129,7 +138,7 @@
                             buttons="true"
                             button-variant="outline-primary"
                             id="radio-group-1"
-                            v-model="selected"
+                            v-model="form.IELTS"
                             :options="options"
                             name="radio-options"
                           >
@@ -153,7 +162,7 @@
                             buttons="true"
                             button-variant="outline-primary"
                             id="radio-group-2"
-                            v-model="selected"
+                            v-model="form.Interview"
                             :options="options"
                             name="radio-options"
                           >
@@ -165,7 +174,7 @@
                         </b-form-group>
                       </div>
                       <!-- END Interview -->
-                      <!-- Begin Interview -->
+                      <!-- Begin admin_Interview -->
                       <div :style="{ display: Admin_Interview_div }">
                         <b-form-group
                           label="Have you passed admission interview?"
@@ -176,7 +185,7 @@
                             buttons="true"
                             button-variant="outline-primary"
                             id="radio-group-2"
-                            v-model="selected"
+                            v-model="form.admin_Interview"
                             :options="options"
                             name="radio-options"
                           >
@@ -187,7 +196,7 @@
                           >
                         </b-form-group>
                       </div>
-                      <!-- END Interview -->
+                      <!-- END admin_Interview -->
                       <b-button
                         type="submit"
                         variant="primary"
@@ -320,42 +329,63 @@ export default {
     return {
       form: {
         citizenship: null,
-        name: "",
-        food: null,
-        checked: [],
+        tabDegree: 0,
+        tab_bachDegree: 0,
+        IELTS: null,
+        Interview: null,
+        admin_Interview: null,
+        speciality: null,
+        payment: null,
+        degree: null,
+        bach_degree: null,
       },
-      country: [
-        { text: "Select One", value: null },
-        "Kazakhstan",
-        "USA",
-        "Turkey",
-        "Aljir",
-      ],
-      speciality: [
-        { text: "Select One", value: null },
-        "Computer Science",
-        "Information System",
-        "Automation",
-        "Law",
-      ],
-      payment: [
-        { text: "Select One", value: null },
-        "Grant",
-        "SDU",
-        "Self",
-        "Mama",
-        "Paid",
-      ],
+      country: [],
+      payment: [],
+      speciality: [],
+      degree: [],
+      bach_degree: [],
       show: true,
       Interview_div: "inline",
       Admin_Interview_div: "none",
-      tabIndex: 0,
     };
+  },
+  async created() {
+    var data_created = new FormData();
+    data_created.append("json", JSON.stringify({action:"getAllData"}));
+    fetch("http://localhost/get_requirements.php", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: data_created
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        this.form.citizenship = res.country.selected_id;
+        this.country = res.country.list;
+        this.degree = res.degree.list;
+        if(res.degree.value == "B") this.tab_bachDegree = 0;
+        if(res.degree.value == "M") this.tab_bachDegree = 1;
+        if(res.degree.value == "D") this.tab_bachDegree = 2;
+      });
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      //alert(JSON.stringify(this.form));
+      var data_send = new FormData();
+      data_send.append("json", JSON.stringify(this.form));
+      fetch("./backend/get_require.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_send,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+        });
     },
     onReset(evt) {
       evt.preventDefault();
@@ -375,11 +405,11 @@ export default {
       else this.Interview_div = "inline";
     },
     OnChange_paid: function () {
-      if (this.tabIndex == 1 || this.tabIndex == 2) {
+      if (this.form.tab_bachDegree == 1 || this.form.tab_bachDegree == 2) {
         if (this.form.payment != "Paid") this.Admin_Interview_div = "none";
         else this.Admin_Interview_div = "inline";
       }
-      if(this.tabIndex == 0) this.Admin_Interview_div = "none";
+      if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";
     },
   },
 };

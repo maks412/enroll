@@ -15,8 +15,9 @@ export const SET_PASSWORD = "setPassword";
 export const SET_ERROR = "setError";
 
 const state = {
-    errors: null,
     user: {},
+    errors: null,
+    // user: {},
     isAuthenticated: !!JwtService.getToken()
 };
 
@@ -32,24 +33,13 @@ const getters = {
 const actions = {
     [LOGIN](context, credentials) {
         return new Promise(resolve => {
-
-            console.log(resolve);
+            console.log(credentials);
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
-            // ApiService.post("http://localhost/login.php", credentials)
-            //     .then(({ data }) => {
-            //         context.commit(SET_AUTH, data);
-            //         console.log(data);
-            //         resolve(data);
-            //     })
-            //     .catch(({ response }) => {
-            //         context.commit(SET_ERROR, response.data.errors);
-            //     });
-            fetch("http://localhost/login.php", {
+            fetch("/backend/login.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    // 'Content-Type': 'application/json',
                 },
                 body: data
             }).then((response) => response.json()).then((res) => {
@@ -65,14 +55,30 @@ const actions = {
     },
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("login", credentials)
-                .then(({ data }) => {
-                    context.commit(SET_AUTH, data);
-                    resolve(data);
-                })
-                .catch(({ response }) => {
-                    context.commit(SET_ERROR, response.data.errors);
-                });
+            // ApiService.post("login", credentials)
+            //     .then(({ data }) => {
+            //         context.commit(SET_AUTH, data);
+            //         resolve(data);
+            //     })
+            // .catch(({ response }) => {
+            //     context.commit(SET_ERROR, response.data.errors);
+            // });
+            var data = new FormData();
+            data.append("json", JSON.stringify(credentials));
+            console.log(credentials);
+            fetch("/backend/register.php", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                },
+                body: data
+            }).then((response) => response.json()).then((res) => {
+                console.log(res);
+                context.commit(SET_AUTH, res);
+                resolve(data);
+            }).catch(({ response }) => {
+                context.commit(SET_ERROR, response.data.errors);
+            });
         });
     },
     [VERIFY_AUTH](context) {
