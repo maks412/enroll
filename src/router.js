@@ -6,7 +6,7 @@ Vue.use(Router);
 export default new Router({
     routes: [{
             path: "/",
-            redirect: "/home/in", //"/dashboard",
+            redirect: "/home/1", //"/dashboard",
             component: () =>
                 import ("@/view/layout/Layout"),
             children: [{
@@ -17,10 +17,10 @@ export default new Router({
                 children: [
 
                     {
-                        path: "in",
+                        path: "1",
                         name: "wizard-4",
                         component: () =>
-                            import ("@/view/pages/wizard/Wizard-4.vue")
+                            import ("@/view/pages/wizard/page1.vue")
                     },
                     {
                         path: "wizard-2",

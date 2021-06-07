@@ -41,32 +41,32 @@ const links = [
   {
     name: "Main Info",
     description: "Setup Your Account Details",
-    navigate_to: "/custom-wizard/wizard-2"
+    navigate_to: "/home/1"
+  },
+  {
+    name: "Education",
+    description: "Setup Your Education Details",
+    navigate_to: "/home/2"
   },
   {
     name: "Contact",
-    description: "Setup Your Account Details",
-    navigate_to: "/custom-wizard/wizard-4"
+    description: "Add Your Contact Ditails",
+    navigate_to: "/home/3"
   },
   {
-    name: "Contact",
-    description: "Setup Your Account Details",
-    navigate_to: "/custom-wizard/wizard-3"
+    name: "Documents",
+    description: "Upload Your Documents",
+    navigate_to: "/home/4"
   },
   {
-    name: "Contact",
-    description: "Setup Your Account Details",
-    navigate_to: "/custom-wizard/wizard-2"
+    name: "Discount",
+    description: "Enter Your Discount Ditails",
+    navigate_to: "/home/5"
   },
   {
-    name: "Contact",
-    description: "Setup Your Account Details",
-    navigate_to: "/custom-wizard/wizard-3"
-  },
-  {
-    name: "Contact",
-    description: "Setup Your Account Details",
-    navigate_to: "/custom-wizard/wizard-1"
+    name: "Apply",
+    description: "Review and Submit",
+    navigate_to: "/home/6"
   }
 ]
 export default {
