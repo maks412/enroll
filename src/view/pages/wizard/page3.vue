@@ -44,108 +44,208 @@
                     data-wizard-state="current"
                   >
                     <div class="mb-10 font-weight-bold text-dark">
-                      Enter your Account Details
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <!-- citizenship -->
-                        <div class="form-group">
-                          <label>Citizenship</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="fname"
-                            v-model="form.citizenship"
-                            disabled
-                          />
-                          <span class="form-text text-muted"
-                            ><a href="/#/after_register"
-                              >Change Citizenship</a
-                            ></span
-                          >
-                        </div>
-                      </div>
-                      <!-- END citizenship -->
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>First Name</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="fname"
-                          />
-                          <span class="form-text text-muted"
-                            >Please enter your first name.</span
-                          >
-                        </div>
-                      </div>
+                      Enter your School Details
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Native Name</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="Nname"
-                          />
+                          <label>Country</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.country"
+                              :options="country"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
                           <span class="form-text text-muted"
-                            >Please enter your native name.</span
+                            >Please choose your schools country</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Last Name</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="lname"
-                          />
+                          <label>Province</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.province"
+                              :options="province"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
                           <span class="form-text text-muted"
-                            >Please enter your last name.</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Native Surname</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="Nsurname"
-                          />
-                          <span class="form-text text-muted"
-                            >Please enter your native last name.</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Patronymic</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="patronymic"
-                          />
-                          <span class="form-text text-muted"
-                            >Please enter your fathers name.</span
+                            >Please choose your schools city</span
                           >
                         </div>
                       </div>
                     </div>
 
-                    <div>
-                      <b-form-file
-                        v-model="form.photo"
-                        :state="Boolean(file)"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
-                      ></b-form-file>
-                      <div class="mt-3">
-                        Selected file: {{ file ? file.name : "" }}
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>School</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.school"
+                              :options="school"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your school</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-xl-3">
+                        <div class="form-group">
+                          <label>Language</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.language"
+                              :options="language"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your language</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-xl-3">
+                        <div class="form-group">
+                          <label>Foreign Language</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.foreign_language"
+                              :options="foreign_language"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your foreign language</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Attestat type</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.attestat_type"
+                              :options="attestat_type"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your attestat type</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Attestat Series</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.attestat_series"
+                              :options="attestat_series"
+                              required
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your attestat series</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Attestat No</label>
+                          <input
+                            type="number"
+                            class="form-control form-control-solid form-control-lg"
+                            name="Nname"
+                          />
+                          <span class="form-text text-muted"
+                            >Please enter your attestat number.</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Attestat Score</label>
+                          <input
+                            type="number"
+                            class="form-control form-control-solid form-control-lg"
+                            name="lname"
+                          />
+                          <span class="form-text text-muted"
+                            >Please enter your attestat score.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Given Date</label>
+                          <div>
+                            <b-input-group class="mb-3">
+                              <b-form-input
+                                v-model="form.attestat_given_date"
+                                type="text"
+                                placeholder="YYYY-MM-DD"
+                                autocomplete="off"
+                                
+                              ></b-form-input>
+                              <b-input-group-append>
+                                <b-form-datepicker
+                                  v-model="form.attestat_given_date"
+                                  button-only
+                                  right
+                                  locale="en-US"
+                                  aria-controls="example-input"
+                                ></b-form-datepicker>
+                              </b-input-group-append>
+                            </b-input-group>
+                          </div>
+                          <span class="form-text text-muted"
+                            >Please enter your attestat given date</span
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-xl-6">
+                        <label>Upload your attestat</label>
+                        <b-form-file
+                          multiple
+                          
+                          v-model="form.attestat_upload"
+                          :state="Boolean(file)"
+                          placeholder="Choose files..."
+                          drop-placeholder="Drop file here..."
+                          ><template slot="file-name" slot-scope="{ names }">
+                            <b-badge variant="dark">{{ names[0] }}</b-badge>
+                            <b-badge
+                              v-if="names.length > 1"
+                              variant="dark"
+                              class="ml-1"
+                              
+                            >
+                              + {{ names.length - 1 }} More files
+                            </b-badge>
+                          </template></b-form-file
+                        >
                       </div>
                     </div>
                   </div>
@@ -235,24 +335,6 @@
                           </b-form-group>
                           <span class="form-text text-muted"
                             >Please choose married status</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Social Status</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.social_status"
-                              :options="social_status"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your social status</span
                           >
                         </div>
                       </div>
@@ -437,44 +519,40 @@ export default {
         { title: "Additional Information", desc: "Birthday and Others" },
         { title: "Document Information", desc: "IIN and Document type" },
       ],
-      gender_options: [
+      country: [
         { text: "Male", value: "male" },
         { text: "Female", value: "female" },
       ],
-      gender_married: [
+      province: [
         { text: "Single", value: "single" },
         { text: "Married", value: "married" },
       ],
-      document_options: [
+      school: [
         { text: "Identity Card", value: "ID" },
         { text: "Passport", value: "passport" },
       ],
-      issued_options: [
+      attestat_type: [
         { text: "Ministry of Justice KZ", value: "ministry" },
         { text: "Passport", value: "passport" },
       ],
       nationality: [],
-      social_status: [],
       form: {
-        citizenship: "Kazakhstan",
-        photo: null,
-        birthday: "",
-        nationality: null,
-        gender: null,
-        married: null,
-        document_type: null,
-        IIN: null,
-        document_no: null,
-        issued_by: null,
-        issued_date: null,
-        social_status: null
+        country: "Kazakhstan",
+        province: null,
+        school: "",
+        language: null,
+        foreign_language: null,
+        attestat_type: null,
+        atteestat_series: null,
+        attestat_given_date: null,
+        attestat_upload: null
       },
     };
   },
   async created() {
     var data_created = new FormData();
     data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page1.php", {
+    fetch("http://localhost/Portal/enroll/backend/home/page3.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -488,8 +566,6 @@ export default {
         this.form.birthday = res.birthday;
         this.form.nationality = res.nationality.selected_id;
         this.nationality = res.nationality.list;
-        this.form.social_status = res.social_status.selected_id;
-        this.social_status = res.social_status.list;
         this.form.gender = res.gender;
         this.form.married = res.married;
         this.form.document_type = res.document_type;

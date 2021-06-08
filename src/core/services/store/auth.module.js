@@ -36,7 +36,7 @@ const actions = {
             console.log(credentials);
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
-            fetch("/backend/login.php", {
+            fetch("http://localhost/Portal/enroll/backend/Base/login.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -66,7 +66,7 @@ const actions = {
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
             console.log(credentials);
-            fetch("/backend/register.php", {
+            fetch("http://localhost/Portal/enroll/backend/Base/login.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

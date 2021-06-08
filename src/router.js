@@ -23,16 +23,16 @@ export default new Router({
                             import ("@/view/pages/wizard/page1.vue")
                     },
                     {
-                        path: "wizard-2",
-                        name: "wizard-2",
+                        path: "2",
+                        name: "wizard-4",
                         component: () =>
-                            import ("@/view/pages/wizard/Wizard-2.vue")
+                            import ("@/view/pages/wizard/page2.vue")
                     },
                     {
-                        path: "wizard-1",
-                        name: "wizard-1",
+                        path: "3",
+                        name: "wizard-4",
                         component: () =>
-                            import ("@/view/pages/wizard/Wizard-1.vue")
+                            import ("@/view/pages/wizard/page3.vue")
                     },
                     {
                         path: "wizard-3",
