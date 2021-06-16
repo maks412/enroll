@@ -35,10 +35,22 @@ export default new Router({
                             import ("@/view/pages/wizard/page3.vue")
                     },
                     {
-                        path: "wizard-3",
-                        name: "wizard-3",
+                        path: "4",
+                        name: "wizard-4",
                         component: () =>
-                            import ("@/view/pages/wizard/Wizard-3.vue")
+                            import ("@/view/pages/wizard/page4.vue")
+                    },
+                    {
+                        path: "5",
+                        name: "wizard-4",
+                        component: () =>
+                            import ("@/view/pages/wizard/page5.vue")
+                    },
+                    {
+                        path: "6",
+                        name: "wizard-4",
+                        component: () =>
+                            import ("@/view/pages/wizard/page6.vue")
                     }
 
                 ]

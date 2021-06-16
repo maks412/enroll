@@ -43,9 +43,9 @@
                     data-wizard-type="step-content"
                     data-wizard-state="current"
                   >
-                    <div class="mb-10 font-weight-bold text-dark">
+                    <h4 class="mb-10 font-weight-bold text-dark">
                       Enter your School Details
-                    </div>
+                    </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
@@ -136,9 +136,9 @@
 
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
-                    <div class="mb-10 font-weight-bold text-dark">
+                    <h4 class="mb-10 font-weight-bold text-dark">
                       Enter Your Attestat Ditails
-                    </div>
+                    </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
@@ -259,9 +259,9 @@
 
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
-                    <div class="mb-10 font-weight-bold text-dark">
+                    <h4 class="mb-10 font-weight-bold text-dark">
                       Enter your Preparation Course Details
-                    </div>
+                    </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">

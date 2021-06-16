@@ -25,13 +25,17 @@ const getters = {
     currentUser(state) {
         return state.user;
     },
-    isAuthenticated(state) {
-        return state.isAuthenticated;
+    isAuthenticated() {
+        //delete this MAAAAKS
+        return true;
+        // dont forget
+        // return state.isAuthenticated;
     }
 };
 
 const actions = {
     [LOGIN](context, credentials) {
+
         return new Promise(resolve => {
             console.log(credentials);
             var data = new FormData();
@@ -55,18 +59,10 @@ const actions = {
     },
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
-            // ApiService.post("login", credentials)
-            //     .then(({ data }) => {
-            //         context.commit(SET_AUTH, data);
-            //         resolve(data);
-            //     })
-            // .catch(({ response }) => {
-            //     context.commit(SET_ERROR, response.data.errors);
-            // });
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
             console.log(credentials);
-            fetch("http://localhost/Portal/enroll/backend/Base/login.php", {
+            fetch("http://localhost/Portal/enroll/backend/Base/register.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

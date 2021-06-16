@@ -43,9 +43,9 @@
                     data-wizard-type="step-content"
                     data-wizard-state="current"
                   >
-                    <div class="mb-10 font-weight-bold text-dark">
+                    <h4 class="mb-10 font-weight-bold text-dark">
                       Enter your Account Details
-                    </div>
+                    </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <!-- citizenship -->
@@ -73,6 +73,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="fname"
+                            v-model="fname"
                           />
                           <span class="form-text text-muted"
                             >Please enter your first name.</span
@@ -88,6 +89,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
+                            v-model="nname"
                           />
                           <span class="form-text text-muted"
                             >Please enter your native name.</span
@@ -101,6 +103,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
+                            v-model="lname"
                           />
                           <span class="form-text text-muted"
                             >Please enter your last name.</span
@@ -116,6 +119,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nsurname"
+                            v-model="nlname"
                           />
                           <span class="form-text text-muted"
                             >Please enter your native last name.</span
@@ -129,6 +133,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="patronymic"
+                            v-model="patronymic"
                           />
                           <span class="form-text text-muted"
                             >Please enter your fathers name.</span
@@ -153,9 +158,9 @@
 
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
-                    <div class="mb-10 font-weight-bold text-dark">
+                    <h4 class="mb-10 font-weight-bold text-dark">
                       Enter your Account Details
-                    </div>
+                    </h4>
 
                     <div class="row">
                       <div class="col-xl-6">
@@ -248,7 +253,7 @@
                               v-model="form.social_status"
                               :options="social_status"
                               required
-                              size="lg"
+                              
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
@@ -256,15 +261,38 @@
                           >
                         </div>
                       </div>
+
+                      <div class="col-xl-6">
+                        <label
+                          >Upload your Social Status Document</label
+                        >
+                        <b-form-file
+                          multiple
+                          v-model="form.social_status_upload"
+                          :state="Boolean(file)"
+                          placeholder="Choose Socail Status Document..."
+                          drop-placeholder="Drop file here..."
+                          ><template slot="file-name" slot-scope="{ names }">
+                            <b-badge variant="dark">{{ names[0] }}</b-badge>
+                            <b-badge
+                              v-if="names.length > 1"
+                              variant="dark"
+                              class="ml-1"
+                            >
+                              + {{ names.length - 1 }} More files
+                            </b-badge>
+                          </template></b-form-file
+                        >
+                      </div>
                     </div>
                   </div>
                   <!--end: Wizard Step 2-->
 
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
-                    <div class="mb-10 font-weight-bold text-dark">
+                    <h4 class="mb-10 font-weight-bold text-dark">
                       Enter your Account Details
-                    </div>
+                    </h4>
                     <div class="col-xl-6">
                       <div class="form-group">
                         <label>Document Type</label>
@@ -316,8 +344,6 @@
                         <div class="form-group">
                           <label>Issued By</label>
                           <b-form-select
-                            v-on:change="OnChange"
-                            id="citizenship_select"
                             v-model="form.issued_by"
                             :options="issued_options"
                             required
@@ -457,6 +483,11 @@ export default {
       social_status: [],
       form: {
         citizenship: "Kazakhstan",
+        fname: null,
+        lname: null,
+        nname: null,
+        nlname: null,
+        patronymic: null,
         photo: null,
         birthday: "",
         nationality: null,
@@ -467,7 +498,8 @@ export default {
         document_no: null,
         issued_by: null,
         issued_date: null,
-        social_status: null
+        social_status: null,
+        social_status_upload: null,
       },
     };
   },
@@ -497,6 +529,12 @@ export default {
         this.form.document_no = res.document_no;
         this.issued_by = res.issued_by;
         this.issued_date = res.issued_date;
+
+        this.form.fname = res.fname;
+        this.form.lname = res.lname;
+        this.form.nname = res.nname;
+        this.form.nlname = res.nlname;
+        this.form.patronymic = res.patronymic;
       });
   },
   name: "Wizard-4",

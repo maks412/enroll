@@ -1,9 +1,11 @@
 .menu_custom {
-    background-color: #D6C2FE;
+    background-color: #91b7fe;
+    /* background-color: #D6C2FE; */
     flex: 0;
     padding: 20px;
     border-radius: 50%;
-    color: #8950FC !important;
+    color: #002568 !important;
+    /* color: #8950FC !important; */
     height: 45px;
     width: 45px;
     margin-right: 13px;

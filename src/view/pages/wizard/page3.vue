@@ -43,423 +43,208 @@
                     data-wizard-type="step-content"
                     data-wizard-state="current"
                   >
-                    <div class="mb-10 font-weight-bold text-dark">
-                      Enter your School Details
-                    </div>
+                    <h4 class="mb-10 font-weight-bold text-dark">
+                      Enter your Contact Details
+                    </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Country</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.country"
-                              :options="country"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your schools country</span
-                          >
+                          <label>Current Address Country</label>
+                          <b-form-select
+                            v-model="form.current_address_country"
+                            :options="current_address_country_options"
+                            required
+                            size="sm"
+                          ></b-form-select>
                         </div>
                       </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Province</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.province"
-                              :options="province"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your schools city</span
-                          >
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>School</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.school"
-                              :options="school"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your school</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-3">
-                        <div class="form-group">
-                          <label>Language</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.language"
-                              :options="language"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your language</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-3">
-                        <div class="form-group">
-                          <label>Foreign Language</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.foreign_language"
-                              :options="foreign_language"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your foreign language</span
-                          >
+                          <label>Current Address Province</label>
+                          <b-form-select
+                            v-model="form.current_address_province"
+                            :options="current_address_province_options"
+                            required
+                            size="sm"
+                          ></b-form-select>
                         </div>
                       </div>
                     </div>
-
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Attestat type</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.attestat_type"
-                              :options="attestat_type"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your attestat type</span
-                          >
+                          <label>Current Address City</label>
+                          <b-form-select
+                            v-model="form.current_address_city"
+                            :options="current_address_city_options"
+                            required
+                            size="sm"
+                          ></b-form-select>
                         </div>
                       </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Attestat Series</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.attestat_series"
-                              :options="attestat_series"
-                              required
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose your attestat series</span
-                          >
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Attestat No</label>
+                          <label>Current Address</label>
                           <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            name="Nname"
+                            type="text"
+                            class="form-control form-control-solid form-control-sm"
+                            v-model="form.current_address"
                           />
-                          <span class="form-text text-muted"
-                            >Please enter your attestat number.</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Attestat Score</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            name="lname"
-                          />
-                          <span class="form-text text-muted"
-                            >Please enter your attestat score.</span
-                          >
                         </div>
                       </div>
                     </div>
+                    <hr />
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Given Date</label>
-                          <div>
-                            <b-input-group class="mb-3">
-                              <b-form-input
-                                v-model="form.attestat_given_date"
-                                type="text"
-                                placeholder="YYYY-MM-DD"
-                                autocomplete="off"
-                                
-                              ></b-form-input>
-                              <b-input-group-append>
-                                <b-form-datepicker
-                                  v-model="form.attestat_given_date"
-                                  button-only
-                                  right
-                                  locale="en-US"
-                                  aria-controls="example-input"
-                                ></b-form-datepicker>
-                              </b-input-group-append>
-                            </b-input-group>
-                          </div>
-                          <span class="form-text text-muted"
-                            >Please enter your attestat given date</span
-                          >
+                          <label>Registered Address Country</label>
+                          <b-form-select
+                            v-model="form.register_address_country"
+                            :options="register_address_country_options"
+                            required
+                            size="sm"
+                          ></b-form-select>
                         </div>
                       </div>
 
                       <div class="col-xl-6">
-                        <label>Upload your attestat</label>
-                        <b-form-file
-                          multiple
+                        <div class="form-group">
+                          <label>Registered Address Province</label>
                           
-                          v-model="form.attestat_upload"
-                          :state="Boolean(file)"
-                          placeholder="Choose files..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                              
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
+                          <b-form-select
+                            v-model="form.register_address_province"
+                            :options="register_address_province_options"
+                            required
+                            size="sm"
+                          ></b-form-select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Registered Address City</label>
+                          
+                          <b-form-select
+                            v-model="form.register_address_city"
+                            :options="register_address_city_options"
+                            required
+                            size="sm"
+                          ></b-form-select>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Registered Address</label>
+                          <input
+                            type="text"
+                            class="form-control form-control-solid form-control-sm"
+                            v-model="form.register_address"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Mobile Phone</label>
+                          <input
+                            type="text"
+                            class="form-control form-control-solid form-control-lg"
+                            @input="acceptNumber"
+                            v-model="form.phone"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Do you need student house?</label>
+                          <div>
+                            <b-form-group>
+                              <b-form-radio-group
+                                buttons="true"
+                                button-variant="outline-primary"
+                                id="radio-group-2"
+                                v-model="form.student_house"
+                                :options="options"
+                                name="radio-options"
+                                size="lg"
+                              >
+                                <b-form-radio value="yes">yes</b-form-radio>
+                                <b-form-radio value="no"
+                                  >no</b-form-radio
+                                ></b-form-radio-group
+                              >
+                            </b-form-group>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <!--end: Wizard Step 1-->
 
-                  <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
-                    <div class="mb-10 font-weight-bold text-dark">
-                      Enter your Account Details
-                    </div>
-
+                    <h4 class="mb-10 font-weight-bold text-dark">
+                      Enter Your Relative Information
+                    </h4>
                     <div class="row">
-                      <div class="col-xl-6">
+                      <div class="col-xl-4">
                         <div class="form-group">
-                          <label>Date of Birth</label>
-                          <div>
-                            <b-input-group class="mb-3">
-                              <b-form-input
-                                v-model="form.birthday"
-                                type="text"
-                                placeholder="YYYY-MM-DD"
-                                autocomplete="off"
-                                size="lg"
-                              ></b-form-input>
-                              <b-input-group-append>
-                                <b-form-datepicker
-                                  v-model="form.birthday"
-                                  button-only
-                                  right
-                                  locale="en-US"
-                                  aria-controls="example-input"
-                                ></b-form-datepicker>
-                              </b-input-group-append>
-                            </b-input-group>
-                          </div>
-                          <span class="form-text text-muted"
-                            >Please choose date of birth</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Nationality</label>
+                          <label>Relative Type</label>
                           <b-form-group>
                             <b-form-select
-                              v-model="form.nationality"
-                              :options="nationality"
-                              required
+                              v-model="rel_type"
+                              :options="relative_type_options"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please enter your nationality</span
-                          >
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="form-group">
+                          <label>Full Name</label>
+                          <input
+                            type="text"
+                            class="form-control form-control-solid form-control-lg"
+                            v-model="rel_name"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="form-group">
+                          <label>Contact</label>
+                          <input
+                            type="text"
+                            class="form-control form-control-solid form-control-lg"
+                            v-model="rel_cont"
+                          />
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Gender</label>
-                          <b-form-group v-slot="{ ariaDescribedby }">
-                            <b-form-radio-group
-                              v-model="form.gender"
-                              :options="gender_options"
-                              :aria-describedby="ariaDescribedby"
-                              name="radio-inline"
-                              size="lg"
-                            ></b-form-radio-group>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose gender</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Married Status</label>
-                          <b-form-group v-slot="{ ariaDescribedby }">
-                            <b-form-radio-group
-                              v-model="form.married"
-                              :options="gender_married"
-                              :aria-describedby="ariaDescribedby"
-                              name="radio-inline"
-                              size="lg"
-                            ></b-form-radio-group>
-                          </b-form-group>
-                          <span class="form-text text-muted"
-                            >Please choose married status</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--end: Wizard Step 2-->
+                    <button
+                      style="float: right"
+                      class="btn btn-primary text-uppercase px-3 py-1"
+                      v-on:click="add_relative"
+                    >
+                      Add Relative
+                    </button>
 
-                  <!--begin: Wizard Step 3-->
-                  <div class="pb-5" data-wizard-type="step-content">
-                    <div class="mb-10 font-weight-bold text-dark">
-                      Enter your Account Details
-                    </div>
-                    <div class="col-xl-6">
-                      <div class="form-group">
-                        <label>Document Type</label>
-                        <b-form-group v-slot="{ ariaDescribedby }">
-                          <b-form-radio-group
-                            v-model="form.document_type"
-                            :options="document_options"
-                            :aria-describedby="ariaDescribedby"
-                            name="radio-inline"
-                            size="lg"
-                          ></b-form-radio-group>
-                        </b-form-group>
-                        <span class="form-text text-muted"
-                          >Please choose document type</span
-                        >
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>IIN</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            name="IIN"
-                            v-model="form.IIN"
-                          />
-                          <span class="form-text text-muted"
-                            >Please enter your IIN: 12 numbers.</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Document No</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            v-model="form.document_no"
-                          />
-                          <span class="form-text text-muted"
-                            >Please enter your document number.</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Issued By</label>
-                          <b-form-select
-                            v-on:change="OnChange"
-                            id="citizenship_select"
-                            v-model="form.issued_by"
-                            :options="issued_options"
-                            required
-                            size="lg"
-                          ></b-form-select>
-                          <span class="form-text text-muted"
-                            >Please select issued place</span
-                          >
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Issued Date</label>
-                          <div>
-                            <b-input-group class="mb-3">
-                              <b-form-input
-                                v-model="form.issued_date"
-                                type="text"
-                                placeholder="YYYY-MM-DD"
-                                autocomplete="off"
-                                size="lg"
-                              ></b-form-input>
-                              <b-input-group-append>
-                                <b-form-datepicker
-                                  v-model="form.issued_date"
-                                  button-only
-                                  right
-                                  locale="en-US"
-                                  aria-controls="example-input"
-                                ></b-form-datepicker>
-                              </b-input-group-append>
-                            </b-input-group>
-                          </div>
-                          <span class="form-text text-muted"
-                            >Please enter your Card Expiry Year.</span
-                          >
-                        </div>
-                      </div>
-                    </div>
                     <div>
-                      <b-form-file
-                        multiple
-                        v-model="form.documents"
-                        :state="Boolean(file)"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
-                        ><template slot="file-name" slot-scope="{ names }">
-                          <b-badge variant="dark">{{ names[0] }}</b-badge>
-                          <b-badge
-                            v-if="names.length > 1"
-                            variant="dark"
-                            class="ml-1"
-                          >
-                            + {{ names.length - 1 }} More files
-                          </b-badge>
-                        </template></b-form-file
+                      <b-table hover :items="form.items" :fields="fields">
+                      </b-table>
+                      <button
+                        style="float: right"
+                        class="btn btn-primary text-uppercase px-4 py-1"
+                        v-on:click="delete_relative"
                       >
+                        Delete Last
+                      </button>
                     </div>
                   </div>
-                  <!--end: Wizard Step 3-->
 
                   <!--begin: Wizard Actions -->
                   <div class="d-flex justify-content-between border-top pt-10">
@@ -514,38 +299,30 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      tabs: [
-        { title: "Personal Information", desc: "Name and Surname" },
-        { title: "Additional Information", desc: "Birthday and Others" },
-        { title: "Document Information", desc: "IIN and Document type" },
-      ],
-      country: [
-        { text: "Male", value: "male" },
-        { text: "Female", value: "female" },
-      ],
-      province: [
-        { text: "Single", value: "single" },
-        { text: "Married", value: "married" },
-      ],
-      school: [
-        { text: "Identity Card", value: "ID" },
-        { text: "Passport", value: "passport" },
-      ],
-      attestat_type: [
-        { text: "Ministry of Justice KZ", value: "ministry" },
-        { text: "Passport", value: "passport" },
-      ],
-      nationality: [],
+      tabs: [{ title: "Contact Ditails" }, { title: "Relative Information" }],
+      relative_type_options: ["Mother", "Father", "Sister", "Brother"],
+      fields: ["relative_type", "full_name", "contact"],
+      rel_type: "",
+      rel_name: "",
+      rel_cont: "",
+      current_address_country_options: [],
+      current_address_province_options: [],
+      current_address_city_options: [],
+      register_address_country_options: [],
+      register_address_province_options: [],
+      register_address_city_options: [],
       form: {
-        country: "Kazakhstan",
-        province: null,
-        school: "",
-        language: null,
-        foreign_language: null,
-        attestat_type: null,
-        atteestat_series: null,
-        attestat_given_date: null,
-        attestat_upload: null
+        phone: "",
+        current_address_country: "",
+        current_address_province: "",
+        current_address_city: "",
+        current_address: "",
+        register_address_country: "",
+        register_address_province: "",
+        register_address_city: "",
+        register_address: "",
+        student_house: "",
+        items: [],
       },
     };
   },
@@ -561,18 +338,13 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.citizenship = res.citizenship;
-        //this.form.photo = res.photo;
-        this.form.birthday = res.birthday;
-        this.form.nationality = res.nationality.selected_id;
-        this.nationality = res.nationality.list;
-        this.form.gender = res.gender;
-        this.form.married = res.married;
-        this.form.document_type = res.document_type;
-        this.form.IIN = res.IIN;
-        this.form.document_no = res.document_no;
-        this.issued_by = res.issued_by;
-        this.issued_date = res.issued_date;
+        this.relative_type_options = res.relative_type_options;
+        this.register_address_country_options = res.register_address_country_options;
+        this.register_address_province_options = res.register_address_province_options;
+        this.register_address_city_options = res.register_address_city_options;
+        this.current_address_country_options = res.current_address_country_options;
+        this.current_address_province_options = res.current_address_province_options;
+        this.current_address_city_options = res.current_address_city_options;
       });
   },
   name: "Wizard-4",
@@ -610,6 +382,29 @@ export default {
         icon: "success",
         confirmButtonClass: "btn btn-secondary",
       });
+    },
+    acceptNumber() {
+      var x = this.form.phone
+        .replace(/\D/g, "")
+        .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+      this.form.phone = !x[2]
+        ? x[1]
+        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+    },
+    add_relative() {
+      if (this.rel_type != "" && this.rel_name != "" && this.rel_cont != "") {
+        this.form.items.push({
+          relative_type: this.rel_type,
+          full_name: this.rel_name,
+          contact: this.rel_cont,
+        });
+        this.rel_type = "";
+        this.rel_name = "";
+        this.rel_cont = "";
+      }
+    },
+    delete_relative() {
+      this.form.items.splice(this.form.items.length - 1, 1);
     },
   },
 };

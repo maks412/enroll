@@ -33,7 +33,6 @@
 
     
   </ul>
-
   
 </template>
 
@@ -56,13 +55,13 @@ const links = [
     navigate_to: "/home/3"
   },
   {
-    name: "Documents",
-    description: "Upload Your Documents",
+    name: "Grant Info",
+    description: "Provide Grant Information",
     navigate_to: "/home/4"
   },
   {
-    name: "Discount",
-    description: "Enter Your Discount Ditails",
+    name: "Documents",
+    description: "Upload Your Documents",
     navigate_to: "/home/5"
   },
   {
