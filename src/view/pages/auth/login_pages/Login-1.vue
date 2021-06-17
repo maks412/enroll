@@ -5,34 +5,29 @@
       :class="{
         'login-signin-on': this.state == 'signin',
         'login-signup-on': this.state == 'signup',
-        'login-forgot-on': this.state == 'forgot'
+        'login-forgot-on': this.state == 'forgot',
       }"
       id="kt_login"
     >
       <!-- begin::Aside -->
       <div
         class="login-aside d-flex flex-column flex-row-auto"
-        style="background-color: #FFF0F0;"
+        style="background-color: #fff0f0"
       >
-      
         <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
           <a href="#" class="text-center mb-10">
-            <img
-              src="media/logos/sdu_logo.jpg"
-              class="max-h-70px"
-              alt=""
-            />
+            <img src="media/logos/sdu_logo.jpg" class="max-h-70px" alt="" />
           </a>
           <h3
             class="font-weight-bolder text-center font-size-h4 font-size-h1-lg"
-            style="color: #986923;"
+            style="color: #986923"
           >
             SDU Enroll <br />build your bright future
           </h3>
         </div>
         <div
           class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center"
-          :style="{ backgroundImage: `url(${backgroundImage})`}"
+          :style="{ backgroundImage: `url(${backgroundImage})` }"
         ></div>
       </div>
       <!--begin::Aside-->
@@ -42,7 +37,6 @@
       >
         <!-- <img class="bgi-position-x-center" :src="`${backgroundLogo}`" style="width:30%;"> -->
         <div class="d-flex flex-column-fluid flex-center">
-
           <!--begin::Signup-->
           <div class="login-form login-signup">
             <form
@@ -69,10 +63,11 @@
                   ></span
                 >
               </div>
-             
+
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark"
-                  >Email</label>
+                  >Email</label
+                >
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="email"
@@ -84,22 +79,21 @@
               </div>
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark"
-                  >Password</label>
+                  >Password</label
+                >
                 <input
                   :type="passwordFieldType"
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  
                   placeholder=""
                   name="password"
                   ref="rpassword"
                   autocomplete="off"
                 />
-                
-
               </div>
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark"
-                  >Confirm password</label>
+                  >Confirm password</label
+                >
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   :type="passwordFieldType"
@@ -108,18 +102,22 @@
                   ref="cpassword"
                   autocomplete="off"
                 />
-                <p @click="switchVisibility()" style="float: right; margin: 1%; cursor: pointer">{{show_hide}}</p>
+                <p
+                  @click="switchVisibility()"
+                  style="float: right; margin: 1%; cursor: pointer"
+                >
+                  {{ show_hide }}
+                </p>
               </div>
-              
+
               <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
                 <button
                   ref="kt_login_signup_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
-                  style="width:150px;"
+                  style="width: 150px"
                 >
                   Submit
                 </button>
-                
               </div>
             </form>
           </div>
@@ -138,7 +136,6 @@
                 >
                   Welcome back to Enroll
                 </h3>
-                
               </div>
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark"
@@ -169,7 +166,6 @@
                     @click="showForm('forgot')"
                     >Forgot Password ?</a
                   >
-                  
                 </div>
                 <div
                   id="example-input-group-2"
@@ -184,7 +180,12 @@
                     v-model="form.password"
                     autocomplete="off"
                   />
-                  <p @click="switchVisibility_in()" style="float: right; margin: 1%; cursor: pointer">{{show_hide_in}}</p>
+                  <p
+                    @click="switchVisibility_in()"
+                    style="float: right; margin: 1%; cursor: pointer"
+                  >
+                    {{ show_hide_in }}
+                  </p>
                 </div>
               </div>
               <div class="pb-lg-0 pb-5">
@@ -206,7 +207,7 @@
             </form>
           </div>
           <!--end::Signin-->
-          
+
           <!--begin::Forgot-->
           <div class="login-form login-forgot">
             <!--begin::Form-->
@@ -280,6 +281,8 @@ import { mapState } from "vuex";
 import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
 import Swal from "sweetalert2";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "login-1",
   data() {
@@ -288,30 +291,28 @@ export default {
       // Remove this dummy login info
       form: {
         email: "admin@demo.com",
-        password: "demo"
+        password: "demo",
       },
       passwordFieldType: "password",
       show_hide: "show",
       passwordFieldType_in: "password",
-      show_hide_in: "show"
+      show_hide_in: "show",
     };
   },
   computed: {
     ...mapState({
-      errors: state => state.auth.errors
+      errors: (state) => state.auth.errors,
     }),
-    
 
+    ...mapGetters(["currentUser"]),
     backgroundImage() {
       return (
         process.env.BASE_URL + "media/svg/illustrations/login-visual-5.svg"
       );
     },
     backgroundLogo() {
-      return (
-        process.env.BASE_URL + "media/svg/illustrations/Logo.png"
-      );
-    }
+      return process.env.BASE_URL + "media/svg/illustrations/Logo.png";
+    },
   },
   mounted() {
     const signin_form = KTUtil.getById("kt_login_signin_form");
@@ -323,23 +324,23 @@ export default {
         email: {
           validators: {
             notEmpty: {
-              message: "Username is required"
-            }
-          }
+              message: "Username is required",
+            },
+          },
         },
         password: {
           validators: {
             notEmpty: {
-              message: "Password is required"
-            }
-          }
-        }
+              message: "Password is required",
+            },
+          },
+        },
       },
       plugins: {
         trigger: new Trigger(),
         submitButton: new SubmitButton(),
-        bootstrap: new Bootstrap()
-      }
+        bootstrap: new Bootstrap(),
+      },
     });
 
     this.fv1 = formValidation(signup_form, {
@@ -347,53 +348,53 @@ export default {
         fullname: {
           validators: {
             notEmpty: {
-              message: "Full name is required"
-            }
-          }
+              message: "Full name is required",
+            },
+          },
         },
         email: {
           validators: {
             notEmpty: {
-              message: "Email is required"
+              message: "Email is required",
             },
             emailAddress: {
-              message: "The value is not a valid email address"
-            }
-          }
+              message: "The value is not a valid email address",
+            },
+          },
         },
         password: {
           validators: {
             notEmpty: {
-              message: "Password is required"
-            }
-          }
+              message: "Password is required",
+            },
+          },
         },
         cpassword: {
           validators: {
             notEmpty: {
-              message: "Confirm password is required"
+              message: "Confirm password is required",
             },
             identical: {
-              compare: function() {
+              compare: function () {
                 return signup_form.querySelector('[name="password"]').value;
               },
-              message: "The password and its confirm are not the same"
-            }
-          }
+              message: "The password and its confirm are not the same",
+            },
+          },
         },
         agree: {
           validators: {
             notEmpty: {
-              message: "You should agree terms and conditions"
-            }
-          }
-        }
+              message: "You should agree terms and conditions",
+            },
+          },
+        },
       },
       plugins: {
         trigger: new Trigger(),
         submitButton: new SubmitButton(),
-        bootstrap: new Bootstrap()
-      }
+        bootstrap: new Bootstrap(),
+      },
     });
 
     this.fv2 = formValidation(forgot_form, {
@@ -401,19 +402,19 @@ export default {
         email: {
           validators: {
             notEmpty: {
-              message: "Email is required"
+              message: "Email is required",
             },
             emailAddress: {
-              message: "The value is not a valid email address"
-            }
-          }
-        }
+              message: "The value is not a valid email address",
+            },
+          },
+        },
       },
       plugins: {
         trigger: new Trigger(),
         submitButton: new SubmitButton(),
-        bootstrap: new Bootstrap()
-      }
+        bootstrap: new Bootstrap(),
+      },
     });
 
     this.fv.on("core.form.valid", () => {
@@ -433,7 +434,13 @@ export default {
         this.$store
           .dispatch(LOGIN, { email, password })
           // go to which page after successfully login
-          .then(() => this.$router.push({ path: "/home/1" }))
+          .then(() => {
+            if (this.currentUser.AFTER_REG == "true") {
+              this.$router.push({ path: "/after_register" });
+            } else {
+              this.$router.push({ path: "/home/1" });
+            }
+          })
           .catch(() => {});
 
         submitButton.classList.remove(
@@ -450,7 +457,7 @@ export default {
         text: "Please, provide correct data!",
         icon: "error",
         confirmButtonClass: "btn btn-secondary",
-        heightAuto: false
+        heightAuto: false,
       });
     });
 
@@ -471,7 +478,7 @@ export default {
         this.$store
           .dispatch(REGISTER, {
             email: email,
-            password: password
+            password: password,
           })
           .then(() => this.$router.push({ name: "dashboard" }));
 
@@ -489,7 +496,7 @@ export default {
         text: "Please, provide correct data!",
         icon: "error",
         confirmButtonClass: "btn btn-secondary",
-        heightAuto: false
+        heightAuto: false,
       });
     });
   },
@@ -503,13 +510,15 @@ export default {
       );
     },
     switchVisibility() {
-      this.passwordFieldType = this.passwordFieldType === "password" ? "text" : "password";
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
       this.show_hide = this.show_hide === "show" ? "hide" : "show";
     },
-    switchVisibility_in(){
-      this.passwordFieldType_in = this.passwordFieldType_in === "password" ? "text" : "password";
+    switchVisibility_in() {
+      this.passwordFieldType_in =
+        this.passwordFieldType_in === "password" ? "text" : "password";
       this.show_hide_in = this.show_hide_in === "show" ? "hide" : "show";
-    }
-  }
+    },
+  },
 };
 </script>

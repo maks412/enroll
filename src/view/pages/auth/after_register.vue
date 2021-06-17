@@ -383,9 +383,7 @@ export default {
         body: data_send,
       })
         .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-        });
+        .then(() => this.$router.push({ path: "/home/1" }))
     },
     onReset(evt) {
       evt.preventDefault();

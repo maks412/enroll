@@ -27,9 +27,9 @@ const getters = {
     },
     isAuthenticated() {
         //delete this MAAAAKS
-        return true;
+        //return true;
         // dont forget
-        // return state.isAuthenticated;
+        return state.isAuthenticated;
     }
 };
 
