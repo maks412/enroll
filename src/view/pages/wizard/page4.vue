@@ -44,7 +44,8 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Grant Information
+                      Grant Information<br>
+                      <h6>Only for grant students</h6>
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
@@ -140,13 +141,17 @@ export default {
       form: {
         grant_cert: null,
         grant_cert_text: null,
+
+        mod: "page4",
+        method: "set",
+        action: "setAllData"
       },
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page4.php", {
+    data_created.append("json", JSON.stringify({ mod: "page4", method: "get", action: "getAllData" }));
+    fetch("./backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -155,7 +160,8 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.country = res.country.selected_id;
+        this.form.grant_cert_text = res.grant_cert_text;
+        this.form.grant_cert = res.grant_cert;
       });
   },
   name: "Wizard-4",
@@ -187,12 +193,38 @@ export default {
   methods: {
     submit: function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify(this.form));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 0) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+            
+          }
+          if (res.code == 1) {
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+            this.$router.push({ name: "/home/2" });
+          }
+          
+        });
     },
   },
 };

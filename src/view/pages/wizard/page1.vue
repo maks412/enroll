@@ -73,7 +73,8 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="fname"
-                            v-model="fname"
+                            v-model="form.fname"
+                            required
                           />
                           <span class="form-text text-muted"
                             >Please enter your first name.</span
@@ -89,7 +90,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
-                            v-model="nname"
+                            v-model="form.nname"
                           />
                           <span class="form-text text-muted"
                             >Please enter your native name.</span
@@ -103,7 +104,8 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
-                            v-model="lname"
+                            v-model="form.lname"
+                            required
                           />
                           <span class="form-text text-muted"
                             >Please enter your last name.</span
@@ -119,7 +121,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nsurname"
-                            v-model="nlname"
+                            v-model="form.nlname"
                           />
                           <span class="form-text text-muted"
                             >Please enter your native last name.</span
@@ -133,7 +135,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="patronymic"
-                            v-model="patronymic"
+                            v-model="form.patronymic"
                           />
                           <span class="form-text text-muted"
                             >Please enter your fathers name.</span
@@ -141,19 +143,33 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <label>Upload your profile picture</label>
+                        <b-form-file
+                          v-model="form.photo"
+                          :state="Boolean(file)"
+                          placeholder="Choose a file or drop it here..."
+                          drop-placeholder="Drop file here..."
+                          @change="previewImage"
+                        ></b-form-file>
+                      </div>
 
-                    <div>
-                      <b-form-file
-                        v-model="form.photo"
-                        :state="Boolean(file)"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
-                      ></b-form-file>
-                      <div class="mt-3">
-                        Selected file: {{ file ? file.name : "" }}
+                      <div class="col-xl-6">
+                        <img
+                          :src="preview"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
                     </div>
                   </div>
+
                   <!--end: Wizard Step 1-->
 
                   <!--begin: Wizard Step 2-->
@@ -174,6 +190,7 @@
                                 placeholder="YYYY-MM-DD"
                                 autocomplete="off"
                                 size="lg"
+                                required
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -219,6 +236,7 @@
                               :aria-describedby="ariaDescribedby"
                               name="radio-inline"
                               size="lg"
+                              required
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted"
@@ -236,6 +254,7 @@
                               :aria-describedby="ariaDescribedby"
                               name="radio-inline"
                               size="lg"
+                              required
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted"
@@ -253,7 +272,6 @@
                               v-model="form.social_status"
                               :options="social_status"
                               required
-                              
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
@@ -263,9 +281,7 @@
                       </div>
 
                       <div class="col-xl-6">
-                        <label
-                          >Upload your Social Status Document</label
-                        >
+                        <label>Upload your Social Status Document</label>
                         <b-form-file
                           multiple
                           v-model="form.social_status_upload"
@@ -303,6 +319,7 @@
                             :aria-describedby="ariaDescribedby"
                             name="radio-inline"
                             size="lg"
+                            required
                           ></b-form-radio-group>
                         </b-form-group>
                         <span class="form-text text-muted"
@@ -319,6 +336,7 @@
                             class="form-control form-control-solid form-control-lg"
                             name="IIN"
                             v-model="form.IIN"
+                            required
                           />
                           <span class="form-text text-muted"
                             >Please enter your IIN: 12 numbers.</span
@@ -332,6 +350,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.document_no"
+                            required
                           />
                           <span class="form-text text-muted"
                             >Please enter your document number.</span
@@ -365,6 +384,7 @@
                                 placeholder="YYYY-MM-DD"
                                 autocomplete="off"
                                 size="lg"
+                                required
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -396,6 +416,7 @@
                             v-if="names.length > 1"
                             variant="dark"
                             class="ml-1"
+                            required
                           >
                             + {{ names.length - 1 }} More files
                           </b-badge>
@@ -481,61 +502,35 @@ export default {
       ],
       nationality: [],
       social_status: [],
+      preview: null,
+      image: null,
       form: {
-        citizenship: "Kazakhstan",
-        fname: null,
-        lname: null,
-        nname: null,
-        nlname: null,
-        patronymic: null,
         photo: null,
+        citizenship: "",
         birthday: "",
         nationality: null,
-        gender: null,
-        married: null,
-        document_type: null,
-        IIN: null,
-        document_no: null,
-        issued_by: null,
-        issued_date: null,
         social_status: null,
-        social_status_upload: null,
+        gender: "",
+        married: "",
+        document_type: "",
+        IIN: "",
+        document_no: "",
+        issued_by: "",
+        issued_date: "",
+        fname: "",
+        lname: "",
+        nname: "",
+        nlname: "",
+        patronymic: "",
+
+        mod: "page1",
+        method: "set",
+        action: "setAllData"
       },
     };
   },
-  async created() {
-    var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page1.php", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: data_created,
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        this.form.citizenship = res.citizenship;
-        //this.form.photo = res.photo;
-        this.form.birthday = res.birthday;
-        this.form.nationality = res.nationality.selected_id;
-        this.nationality = res.nationality.list;
-        this.form.social_status = res.social_status.selected_id;
-        this.social_status = res.social_status.list;
-        this.form.gender = res.gender;
-        this.form.married = res.married;
-        this.form.document_type = res.document_type;
-        this.form.IIN = res.IIN;
-        this.form.document_no = res.document_no;
-        this.issued_by = res.issued_by;
-        this.issued_date = res.issued_date;
-
-        this.form.fname = res.fname;
-        this.form.lname = res.lname;
-        this.form.nname = res.nname;
-        this.form.nlname = res.nlname;
-        this.form.patronymic = res.patronymic;
-      });
+  created() {
+    this.loadData();
   },
   name: "Wizard-4",
   mounted() {
@@ -566,13 +561,152 @@ export default {
   methods: {
     submit: function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify(this.form));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 0) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+            
+          }
+          if (res.code == 1) {
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+            this.$router.push({ name: "/home/2" });
+          }
+          
+        });
+    },
+    loadData() {
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify({ mod: "page1", method: "get", action: "getAllData" }));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.form.citizenship = res.citizenship;
+          this.form.birthday = res.birthday;
+          this.form.gender = res.gender;
+          this.form.married = res.married;
+          this.form.document_type = res.document_type;
+          this.form.IIN = res.IIN;
+          this.form.document_no = res.document_no;
+          this.form.issued_by = res.issued_by;
+          this.form.issued_date = res.issued_date;
+          this.form.fname = res.fname;
+          this.form.lname = res.lname;
+          this.form.nname = res.nname;
+          this.form.nlname = res.nlname;
+          this.form.patronymic = res.patronymic;
+
+          this.nationality = res.nationality.list;
+          this.social_status = res.social_status.list;
+          this.form.nationality = res.nationality.selected_id;
+          this.form.social_status = res.social_status.selected_id;
+
+          this.form.photo = res.photo;
+        });
+    },
+
+    previewImage: function (e) {
+      var input = e.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          console.log("onload1");
+          const imgElement = document.createElement("img");
+          imgElement.src = event.target.result;
+
+          imgElement.onload = function (e) {
+            const canvas = document.createElement("canvas");
+            const MAX_WIDTH = 400;
+
+            const scaleSize = MAX_WIDTH / e.target.width;
+            canvas.width = MAX_WIDTH;
+            canvas.height = e.target.height * scaleSize;
+
+            const ctx = canvas.getContext("2d");
+
+            ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
+
+            const srcEncoded = ctx.canvas.toDataURL(e.target, "image/jpeg");
+            // you can send srcEncoded to the server
+            //this.form.photo = srcEncoded;
+            this.form.photo = base64ToFile(srcEncoded);
+            console.log("this.form.photo");
+            pickFile();
+            //console.log(srcEncoded);
+          };
+        };
+
+        //this.preview = e.target.result;
+
+        this.image = input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
+
+      // const reader = new FileReader();
+
+      // reader.readAsDataURL(event.target.result);
+      // console.log("start");
     },
   },
 };
+
+function base64ToFile(dataURI) {
+  var byteString, mimestring;
+
+  if (dataURI.split(",")[0].indexOf("base64") !== -1) {
+    byteString = atob(dataURI.split(",")[1]);
+  } else {
+    byteString = decodeURI(dataURI.split(",")[1]);
+  }
+  mimestring = dataURI.split(",")[0].split(":")[1].split(";")[0];
+
+  var content = new Array();
+  for (var i = 0; i < byteString.length; i++) {
+    content[i] = byteString.charCodeAt(i);
+  }
+  //var uarray = new Uint8Array(content);
+  var newFile = new File([new Uint8Array(content)], "sdu.jpeg", {
+    type: mimestring,
+  });
+  // Copy props set by the dropzone in the original file
+
+  return newFile;
+}
+
+function pickFile() {
+  let input = this.form.photo;
+  let file = input.files;
+  if (file && file[0]) {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      this.preview = e.target.result;
+    };
+    reader.readAsDataURL(file[0]);
+  }
+}
 </script>

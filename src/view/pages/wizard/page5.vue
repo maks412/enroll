@@ -381,10 +381,6 @@ export default {
         { title: "Payments", desc: "" },
         { title: "Additional Documents", desc: "" },
       ],
-      preparation_course: [
-        { text: "Ministry of Justice KZ", value: "ministry" },
-        { text: "Passport", value: "passport" },
-      ],
 
       form: {
         certificate75: null,
@@ -401,13 +397,17 @@ export default {
         pedagogical_test: null,
         creative_exam_text: null,
         pedagogical_test_text: null,
+
+        mod: "page5",
+        method: "set",
+        action: "setAllData"
       },
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page5.php", {
+    data_created.append("json", JSON.stringify({ mod: "page5", method: "get", action: "getAllData" }));
+    fetch("./backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -448,12 +448,38 @@ export default {
   methods: {
     submit: function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify(this.form));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 0) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+            
+          }
+          if (res.code == 1) {
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+            this.$router.push({ name: "/home/2" });
+          }
+          
+        });
     },
   },
 };

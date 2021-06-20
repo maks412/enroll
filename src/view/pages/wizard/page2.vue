@@ -376,38 +376,22 @@ export default {
         { title: "Attestat Information", desc: "" },
         { title: "Preparation Course", desc: "" },
       ],
-      country: [
-        { text: "Male", value: "male" },
-        { text: "KZ", value: "Kazakhstan" },
-        { text: "Female", value: "female" },
-      ],
-      province: [
-        { text: "Single", value: "single" },
-        { text: "Married", value: "married" },
-      ],
-      school: [
-        { text: "Identity Card", value: "ID" },
-        { text: "Passport", value: "passport" },
-      ],
-      attestat_type: [
-        { text: "Ministry of Justice KZ", value: "ministry" },
-        { text: "Passport", value: "passport" },
-      ],
-      preparation_course: [
-        { text: "Ministry of Justice KZ", value: "ministry" },
-        { text: "Passport", value: "passport" },
-      ],
+      country: [],
+      province: [],
+      school: [],
+      attestat_type: [],
+      preparation_course: [],
       nationality: [],
       language: [],
       foreign_language: [],
       attestat_series: [],
       preparation_province: [],
       preparation_country: [],
-      
+
       form: {
-        country: "Kazakhstan",
+        country: null,
         province: null,
-        school: "",
+        school: null,
         language: null,
         foreign_language: null,
         attestat_type: null,
@@ -419,13 +403,17 @@ export default {
         preparation_course: null,
         preparation_country: null,
         preparation_province: null,
+
+        mod: "page2",
+        method: "set",
+        action: "setAllData"
       },
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page2.php", {
+    data_created.append("json", JSON.stringify({ mod: "page2", method: "get", action: "getAllData" }));
+    fetch("./backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -456,7 +444,7 @@ export default {
         this.preparation_course = res.preparation_course.list;
         this.form.preparation_country = res.preparation_country.selected_id;
         this.preparation_country = res.preparation_country.list;
-        this.form.attestat_series = res.attestat_series.selected_id;
+        this.form.preparation_province = res.attestat_series.selected_id;
         this.preparation_province = res.preparation_province.list;
       });
   },
@@ -489,12 +477,38 @@ export default {
   methods: {
     submit: function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify(this.form));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 0) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+            
+          }
+          if (res.code == 1) {
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+            this.$router.push({ name: "/home/2" });
+          }
+          
+        });
     },
   },
 };

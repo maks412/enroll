@@ -6,7 +6,7 @@
   >
     <!--begin::Logo-->
     <a href="/">
-      <img alt="Logo" :src="headerLogo" />
+      <img alt="Logo" :src="headerLogo" style="width: 40%"/>
     </a>
     <!--end::Logo-->
     <!--begin::Toolbar-->

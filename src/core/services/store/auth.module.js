@@ -17,7 +17,6 @@ export const SET_ERROR = "setError";
 const state = {
     user: {},
     errors: null,
-    // user: {},
     isAuthenticated: !!JwtService.getToken()
 };
 

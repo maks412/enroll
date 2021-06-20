@@ -31,6 +31,8 @@ echo json_encode(array(
     "nname" => "Макс",
     "nlname" => "Галиев",
     "patronymic" => "Естайулы",
+
+    "photo" => "upload photo file"
 ));
 ?>
 

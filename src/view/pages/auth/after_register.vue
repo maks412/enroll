@@ -337,13 +337,11 @@ export default {
         speciality: null,
         payment: null,
         degree: null,
-        bach_degree: null,
       },
       country: [],
       payment: [],
       speciality: [],
       degree: [],
-      bach_degree: [],
       show: true,
       Interview_div: "inline",
       Admin_Interview_div: "none",
@@ -364,9 +362,9 @@ export default {
         this.form.citizenship = res.country.selected_id;
         this.country = res.country.list;
         this.degree = res.degree.list;
-        if(res.degree.value == "B") this.tab_bachDegree = 0;
-        if(res.degree.value == "M") this.tab_bachDegree = 1;
-        if(res.degree.value == "D") this.tab_bachDegree = 2;
+        if(res.degree.value == "B") this.form.tabDegree = 0;
+        if(res.degree.value == "M") this.form.tabDegree = 1;
+        if(res.degree.value == "D") this.form.tabDegree = 2;
       });
   },
   methods: {

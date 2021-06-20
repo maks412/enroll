@@ -44,26 +44,13 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Upload your Medical Document
+                      Download and Fill the Contract<br />
+                      Then bring printed contract to SDU
                     </h4>
 
                     <div>
-                      <b-form-file
-                        multiple
-                        v-model="form.certificate75"
-                        :state="Boolean(file)"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
-                        ><template slot="file-name" slot-scope="{ names }">
-                          <b-badge variant="dark">{{ names[0] }}</b-badge>
-                          <b-badge
-                            v-if="names.length > 1"
-                            variant="dark"
-                            class="ml-1"
-                          >
-                            + {{ names.length - 1 }} More files
-                          </b-badge>
-                        </template></b-form-file
+                      <b-link target="blank" href="https://google.com"
+                        >Contract link</b-link
                       >
                     </div>
                   </div>
@@ -72,256 +59,69 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Upload your Achivements
+                      Argee terms and conditions
                     </h4>
+
                     <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>SPT Certificate No</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            v-model="form.spt_number"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>SPT Score</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            name="lname"
-                            v-model="form.spt_point"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-8">
-                        <label>Upload your SPT Certificate</label>
-                        <b-form-file
-                          multiple
-                          v-model="form.spt_upload"
-                          :state="Boolean(file)"
-                          placeholder="Choose SPT file..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
+                      <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+                      <p class="text-justify">
+                        {{ checks.check1 }}{{ checks.check1_1 }}
+                      </p>
+                      <b-form-checkbox
+                        v-model="checkbox1"
+                        value="true"
+                        unchecked-value="false"
+                        switch
+                        size="lg"
+                      >
+                        I accept the terms and use
+                      </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Infomatrix Certificate No</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            v-model="form.infomatrix_number"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Infomatrix Score</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            name="lname"
-                            v-model="form.infomatrix_point"
-                          />
-                        </div>
-                      </div>
+                      <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+                      <p class="text-justify">{{ checks.check2 }}</p>
+                      <b-form-checkbox
+                        v-model="checkbox2"
+                        value="true"
+                        unchecked-value="false"
+                        switch
+                        size="lg"
+                      >
+                        I accept the terms and use
+                      </b-form-checkbox>
                     </div>
+                    <hr />
                     <div class="row">
-                      <div class="col-xl-8">
-                        <label>Upload your Infomatrix Certificate</label>
-                        <b-form-file
-                          multiple
-                          v-model="form.infomatrix_upload"
-                          :state="Boolean(file)"
-                          placeholder="Choose SPT file..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
+                      <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+                      <p class="text-justify">{{ checks.check3 }}</p>
+                      <b-form-checkbox
+                        v-model="checkbox3"
+                        value="true"
+                        unchecked-value="false"
+                        switch
+                        size="lg"
+                      >
+                        I accept the terms and use
+                      </b-form-checkbox>
+                    </div>
+                    <hr />
+                    <div class="row">
+                      <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+                      <p class="text-justify">{{ checks.check4 }}</p>
+                      <b-form-checkbox
+                        v-model="checkbox4"
+                        value="true"
+                        unchecked-value="false"
+                        switch
+                        size="lg"
+                      >
+                        I accept the terms and use
+                      </b-form-checkbox>
                     </div>
                   </div>
                   <!--end: Wizard Step 2-->
 
-                  <!--begin: Wizard Step 3-->
-                  <div class="pb-5" data-wizard-type="step-content">
-                    <h4 class="mb-10 font-weight-bold text-dark">
-                      Upload Your Payment Documents
-                    </h4>
-
-                    <div class="row">
-                      <div class="col-xl-8">
-                        <label>Upload your Student Fee Receipt</label>
-                        <b-form-file
-                          multiple
-                          v-model="form.student_fee"
-                          :state="Boolean(file)"
-                          placeholder="Choose Student fee..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                      <div class="col-xl-8">
-                        <label>Upload your Tuition Fee Receipt</label>
-                        <b-form-file
-                          multiple
-                          v-model="form.tuition_fee"
-                          :state="Boolean(file)"
-                          placeholder="Choose Tuition Fee..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                      <div class="col-xl-8">
-                        <label
-                          >Upload your English Language Course Receipt</label
-                        >
-                        <b-form-file
-                          multiple
-                          v-model="form.eng_course"
-                          :state="Boolean(file)"
-                          placeholder="Choose English Language Course..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
-                    </div>
-                  </div>
-                  <!--end: Wizard Step 3-->
-
-                  <!-- STEP 4 -->
-                  <div class="pb-5" data-wizard-type="step-content">
-                    <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter Your Addtional Documents Information
-                    </h4>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>Creative Exam Reference</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            v-model="form.creative_exam_text"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <label
-                          >Upload your Creative Exam Reference(if journal 6B03201)</label
-                        >
-                        <b-form-file
-                          multiple
-                          v-model="form.creative_exam"
-                          :state="Boolean(file)"
-                          placeholder="Choose Creative Exam..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>IPedagogical Test Reference</label>
-                          <input
-                            type="text"
-                            class="form-control form-control-solid form-control-lg"
-                            v-model="form.pedagogical_test_text"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <label
-                          >Upload your Pedagogical Test Reference(If pedagog)</label
-                        >
-                        <b-form-file
-                          multiple
-                          v-model="form.eng_course"
-                          :state="Boolean(file)"
-                          placeholder="Choose Pedagogical Test..."
-                          drop-placeholder="Drop file here..."
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              + {{ names.length - 1 }} More files
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                      </div>
-                    </div>
-                  </div>
                   <!--begin: Wizard Actions -->
                   <div class="d-flex justify-content-between border-top pt-10">
                     <div class="mr-2">
@@ -375,49 +175,25 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      tabs: [
-        { title: "Medical Document" },
-        { title: "Achivements", desc: "" },
-        { title: "Payments", desc: "" },
-        { title: "Additional Documents", desc: "" },
-      ],
-      preparation_course: [
-        { text: "Ministry of Justice KZ", value: "ministry" },
-        { text: "Passport", value: "passport" },
-      ],
-
-      form: {
-        certificate75: null,
-        spt_number: null,
-        spt_point: null,
-        spt_upload: null,
-        infomatrix_number: null,
-        infomatrix_point: null,
-        infomatrix_upload: null,
-        student_fee: null,
-        tuition_fee: null,
-        eng_course: null,
-        creative_exam: null,
-        pedagogical_test: null,
-        creative_exam_text: null,
-        pedagogical_test_text: null,
+      tabs: [{ title: "Contract" }, { title: "Agreements", desc: "" }],
+      selected: [], // Must be an array reference!
+      checks: {
+        check1:
+          "In accordance with the Law of the Republic of Kazakhstan “On personal data and their protection” dated May 21, 2013 and other legislative acts of the Republic, I hereby give the Institution “Suleyman Demirel University” unconditional consent to the collection and processing of my (about me) ",
+        check1_1:
+          "personal data, that is, all information relating to me and recorded on electronic, paper and (or) other tangible media that will or will become known to the University in the course of its activities and / or within the framework of civil law / labor and / or other relationship.",
+        check2:
+          "I undertake to provide the original certificate / diploma, UNT certificate (if available), 6 photos of size 3 * 4, medical certificate 086 with fluorography, an identity card / passport before 08.20.2020 to the admission committee of the SDU.",
+        check3:
+          "I confirm that all information on this site has been filled in correctly and reliably.",
+        check4:
+          "I have been informed of the mandatory consent of the parents (legal representative) of the applicant under the age of 18) to conclude and sign the “Contract for the provision of paid / free educational services with the institution“ Suleyman Demirel University ”until 08.20.2021.",
       },
+      checkbox1: "",
+      checkbox2: "",
+      checkbox3: "",
+      checkbox4: "",
     };
-  },
-  async created() {
-    var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page5.php", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: data_created,
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        this.form.country = res.country.selected_id;
-      });
   },
   name: "Wizard-4",
   mounted() {
@@ -448,12 +224,47 @@ export default {
   methods: {
     submit: function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+
+      if (
+        this.checkbox1 == "true" &&
+        this.checkbox2 == "true" &&
+        this.checkbox3 == "true" &&
+        this.checkbox4 == "true"
+      ) {
+        this.apply();
+      }
+    },
+
+    apply() {
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify({ mod: "page6", method: "set", action: "setStatus" }));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 0) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+          }
+          if (res.status == 1) {
+            Swal.fire({
+              title: "",
+              text: "The application has been successfully submitted!",
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+          }
+        });
     },
   },
 };

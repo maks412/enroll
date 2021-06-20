@@ -323,13 +323,17 @@ export default {
         register_address: "",
         student_house: "",
         items: [],
+
+        mod: "page3",
+        method: "set",
+        action: "setAllData"
       },
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("http://localhost/Portal/enroll/backend/home/page3.php", {
+    data_created.append("json", JSON.stringify({ mod: "page3", method: "get", action: "getAllData" }));
+    fetch("./backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -338,13 +342,26 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.relative_type_options = res.relative_type_options;
-        this.register_address_country_options = res.register_address_country_options;
-        this.register_address_province_options = res.register_address_province_options;
-        this.register_address_city_options = res.register_address_city_options;
-        this.current_address_country_options = res.current_address_country_options;
-        this.current_address_province_options = res.current_address_province_options;
-        this.current_address_city_options = res.current_address_city_options;
+        this.register_address_country_options = res.register_address_country.list;
+        this.register_address_province_options = res.register_address_province.list;
+        this.register_address_city_options = res.register_address_city.list;
+        this.current_address_country_options = res.current_address_country.list;
+        this.current_address_province_options = res.current_address_province.list;
+        this.current_address_city_options = res.current_address_city.list;
+
+        this.form.phone = res.phone;
+        this.form.current_address_country = res.current_address_country.selected_id;
+        this.form.current_address_province = res.current_address_province.selected_id;
+        this.form.current_address_city = res.current_address_city.selected_id;
+        this.form.current_address = res.current_address.selected_id;
+        this.form.register_address_country = res.register_address_country.selected_id;
+        this.form.register_address_province = res.register_address_province.selected_id;
+        this.form.register_address_city = res.register_address_city.selected_id;
+        this.form.register_address = res.register_address.selected_id;
+
+        this.form.student_house = res.student_house;
+        this.form.items = res.relatives;
+        
       });
   },
   name: "Wizard-4",
@@ -376,13 +393,41 @@ export default {
   methods: {
     submit: function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify(this.form));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 0) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+            
+          }
+          if (res.code == 1) {
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+            this.$router.push({ name: "/home/2" });
+          }
+          
+        });
     },
+
+
     acceptNumber() {
       var x = this.form.phone
         .replace(/\D/g, "")

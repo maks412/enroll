@@ -278,7 +278,7 @@ import SubmitButton from "@/assets/plugins/formvalidation/dist/es6/plugins/Submi
 
 import KTUtil from "@/assets/js/components/util";
 import { mapState } from "vuex";
-import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
+import { LOGIN, LOGOUT } from "@/core/services/store/auth.module";
 import Swal from "sweetalert2";
 
 import { mapGetters } from "vuex";
@@ -290,8 +290,10 @@ export default {
       state: "signup",
       // Remove this dummy login info
       form: {
-        email: "admin@demo.com",
-        password: "demo",
+        // email: "admin@demo.com",
+        // password: "demo",
+        email: "",
+        password: "",
       },
       passwordFieldType: "password",
       show_hide: "show",
@@ -475,19 +477,44 @@ export default {
       // dummy delay
       setTimeout(() => {
         // send register request
-        this.$store
-          .dispatch(REGISTER, {
-            email: email,
-            password: password,
-          })
-          .then(() => this.$router.push({ name: "dashboard" }));
+        var data_created = new FormData();
+        data_created.append("json", JSON.stringify(email, password));
+        fetch("./backend/register.php", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+          body: data_created,
+        })
+          .then((response) => response.json())
+          .then((res) => {
+            if (res.code == 0) {
+              this.fv.on("core.form.invalid", () => {
+                Swal.fire({
+                  title: "",
+                  text: res.message,
+                  icon: "error",
+                  confirmButtonClass: "btn btn-secondary",
+                  heightAuto: false,
+                });
+              });
+            }
+            if (res.code == 1) {
+              Swal.fire({
+                title: "",
+                text: res.message,
+                icon: "success",
+                confirmButtonClass: "btn btn-secondary",
+              });
+            }
+          });
 
         submitButton.classList.remove(
           "spinner",
           "spinner-light",
           "spinner-right"
         );
-      }, 2000);
+      }, 0);
     });
 
     this.fv1.on("core.form.invalid", () => {
