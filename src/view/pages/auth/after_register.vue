@@ -359,7 +359,7 @@ export default {
         degree: null,
       },
       country: [],
-      payment: [],
+      payment: ["State Grant", "Paid"],
       speciality: [],
       show_speciality: [],
       degree: [],
@@ -371,7 +371,7 @@ export default {
   async created() {
     var data_created = new FormData();
     data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("./backend/get_require.php", {
+    fetch("./backend/GET/get_require.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -402,7 +402,7 @@ export default {
       //alert(JSON.stringify(this.form));
       var data_send = new FormData();
       data_send.append("json", JSON.stringify(this.form));
-      fetch("./backend/get_require.php", {
+      fetch("./backend/SET/set_require.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
