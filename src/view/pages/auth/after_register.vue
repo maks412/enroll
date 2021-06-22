@@ -72,7 +72,7 @@
                               :key="index"
                               :title="d"
                             >
-                              <b-card-text v-if="d == 'Bachelor'">
+                              <b-card-text v-if="index == 0">
                                 <p id="citizenship__BV_label_">
                                   Choose Education Type
                                 </p>
@@ -388,6 +388,7 @@ export default {
         this.form.Interview = res.Interview;
         this.form.admin_Interview = res.admin_Interview;
         this.form.payment = res.payment;
+        this.show_speciality = this.speciality.B.a8;
 
         this.degree = res.degree.list;
         if (res.degree.value == "B") this.form.tabDegree = 0;

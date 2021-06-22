@@ -49,7 +49,7 @@
                     </h4>
 
                     <div>
-                      <b-link target="blank" href="https://google.com"
+                      <b-link target="blank" href="https://enroll.sdu.edu.kz/2021-2022contract.pdf"
                         >Contract link</b-link
                       >
                     </div>

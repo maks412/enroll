@@ -35,6 +35,12 @@ export default new Router({
                             import ("@/view/pages/wizard/page3.vue")
                     },
                     {
+                        path: "4_ielts",
+                        name: "wizard-4",
+                        component: () =>
+                            import ("@/view/pages/wizard/page4_IELTS.vue")
+                    },
+                    {
                         path: "4",
                         name: "wizard-4",
                         component: () =>
