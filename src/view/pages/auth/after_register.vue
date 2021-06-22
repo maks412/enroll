@@ -67,6 +67,7 @@
                         <b-tabs pills card fill v-model="form.tabDegree">
                           <template>
                             <b-tab
+                              v-on:click="change_speciality"
                               v-for="(d, index) in degree"
                               :key="index"
                               :title="d"
@@ -77,6 +78,7 @@
                                 </p>
                                 <div class="form-group">
                                   <b-tabs
+                                    v-on:click="change_bach_speciality"
                                     pills
                                     card
                                     fill
@@ -105,7 +107,7 @@
                         <b-form-select
                           id="citizenship_select"
                           v-model="form.speciality"
-                          :options="speciality"
+                          :options="show_speciality"
                           required
                         ></b-form-select>
                       </b-form-group>
@@ -359,6 +361,7 @@ export default {
       country: [],
       payment: [],
       speciality: [],
+      show_speciality: [],
       degree: [],
       show: true,
       Interview_div: "inline",
@@ -432,6 +435,31 @@ export default {
       }
       if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";
     },
+    change_speciality: function () {
+      //a4 - second higher education
+      //a6 - shortoned
+      //a8 - full
+      if (this.tabDegree == 0) {
+        this.show_speciality = this.speciality.B.a8;
+      }
+      if (this.tabDegree == 1) {
+        this.show_speciality = this.speciality.M;
+      }
+      if (this.tabDegree == 2) {
+        this.show_speciality = this.speciality.D;
+      }
+    },
+    change_bach_speciality: function(){
+      if (this.tab_bachDegree == 0) {
+        this.show_speciality = this.speciality.B.a8;
+      }
+      if (this.tab_bachDegree == 1) {
+        this.show_speciality = this.speciality.B.a6;
+      }
+      if (this.tab_bachDegree == 2) {
+        this.show_speciality = this.speciality.B.a4;
+      }
+    }
   },
 };
 </script>

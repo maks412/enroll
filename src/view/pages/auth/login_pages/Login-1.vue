@@ -478,7 +478,7 @@ export default {
       setTimeout(() => {
         // send register request
         var data_created = new FormData();
-        data_created.append("json", JSON.stringify(email, password));
+        data_created.append("json", JSON.stringify({email: email, password: password}));
         fetch("./backend/register.php", {
           method: "POST",
           headers: {

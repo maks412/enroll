@@ -60,7 +60,7 @@
         </div>
       </template>
       <b-dropdown-text tag="div">
-        <KTDropdownQuickAction></KTDropdownQuickAction>
+        <KTDropdownQuickAction :speciality="back_special"></KTDropdownQuickAction>
       </b-dropdown-text>
     </b-dropdown>
     <!--end: Quick Actions -->
@@ -114,6 +114,7 @@ export default {
 
       status: "Not applied",
       status_color: "warning",
+      back_special: ""
     };
   },
   components: {
@@ -149,7 +150,7 @@ export default {
   },
 
   async created(){
-    
+
       get_user();
     
   }, 
@@ -175,6 +176,8 @@ function get_user(){
           if(res.status == "Accepted") this.status_color = "info";
           if(res.status == "Rejected") this.status_color = "primary";
           if(res.status == "Confirmed") this.status_color = "success";
+
+          this.back_special = res.speciality;
           /////////////
         });
   }
