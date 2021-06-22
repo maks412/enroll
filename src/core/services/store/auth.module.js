@@ -39,7 +39,7 @@ const actions = {
             console.log(credentials);
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
-            fetch("http://localhost/Portal/enroll/backend/Base/login.php", {
+            fetch("./backend/login.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

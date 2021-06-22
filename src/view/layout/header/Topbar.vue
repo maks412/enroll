@@ -3,12 +3,12 @@
   <div class="topbar">
     <!--begin: Language bar -->
     <div class="topbar-item">
-      <span class="symbol symbol-35 symbol-light-success">
+      <span class="symbol symbol-35" :class="'symbol-light-'+status_color">
         <span
           class="symbol-label font-size-h5 font-weight-bold"
           style="width: fit-content; padding: 0 5px; margin-right: 20px"
         >
-          Enrolled
+          {{status}}
         </span>
       </span>
     </div>
@@ -111,6 +111,9 @@ export default {
     return {
       languageFlag: "",
       languages: i18nService.languages,
+
+      status: "Not applied",
+      status_color: "warning",
     };
   },
   components: {
@@ -144,5 +147,35 @@ export default {
       );
     },
   },
-};
+
+  async created(){
+    
+      get_user();
+    
+  }, 
+}
+
+function get_user(){
+    var data_created = new FormData();
+      data_created.append("json", JSON.stringify({ mod: "user",method: "get", action: "getAllData"}));
+      fetch("./backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.currentUser.email = res.email;
+          this.status = res.status;
+
+          if(res.status == "Not applied") this.status_color = "danger";
+          if(res.status == "Applied") this.status_color = "warning";
+          if(res.status == "Accepted") this.status_color = "info";
+          if(res.status == "Rejected") this.status_color = "primary";
+          if(res.status == "Confirmed") this.status_color = "success";
+          /////////////
+        });
+  }
 </script>

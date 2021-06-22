@@ -636,29 +636,29 @@ export default {
         var reader = new FileReader();
         reader.onload = (event) => {
           console.log("onload1");
-          const imgElement = document.createElement("img");
-          imgElement.src = event.target.result;
+          //const imgElement = document.createElement("img");
+          //imgElement.src = event.target.result;
+          this.preview = event.target.result;
+          // imgElement.onload = function (e) {
+          //   const canvas = document.createElement("canvas");
+          //   const MAX_WIDTH = 400;
 
-          imgElement.onload = function (e) {
-            const canvas = document.createElement("canvas");
-            const MAX_WIDTH = 400;
+          //   const scaleSize = MAX_WIDTH / e.target.width;
+          //   canvas.width = MAX_WIDTH;
+          //   canvas.height = e.target.height * scaleSize;
 
-            const scaleSize = MAX_WIDTH / e.target.width;
-            canvas.width = MAX_WIDTH;
-            canvas.height = e.target.height * scaleSize;
+          //   const ctx = canvas.getContext("2d");
 
-            const ctx = canvas.getContext("2d");
+          //   ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
 
-            ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
-
-            const srcEncoded = ctx.canvas.toDataURL(e.target, "image/jpeg");
-            // you can send srcEncoded to the server
-            //this.form.photo = srcEncoded;
-            this.form.photo = base64ToFile(srcEncoded);
-            console.log("this.form.photo");
-            pickFile();
-            //console.log(srcEncoded);
-          };
+          //   const srcEncoded = ctx.canvas.toDataURL(e.target, "image/jpeg");
+          //   // you can send srcEncoded to the server
+          //   //this.form.photo = srcEncoded;
+          //   this.form.photo = base64ToFile(srcEncoded);
+          //   console.log("this.form.photo");
+          //   pickFile();
+          //   //console.log(srcEncoded);
+          // };
         };
 
         //this.preview = e.target.result;
@@ -675,38 +675,38 @@ export default {
   },
 };
 
-function base64ToFile(dataURI) {
-  var byteString, mimestring;
+// function base64ToFile(dataURI) {
+//   var byteString, mimestring;
 
-  if (dataURI.split(",")[0].indexOf("base64") !== -1) {
-    byteString = atob(dataURI.split(",")[1]);
-  } else {
-    byteString = decodeURI(dataURI.split(",")[1]);
-  }
-  mimestring = dataURI.split(",")[0].split(":")[1].split(";")[0];
+//   if (dataURI.split(",")[0].indexOf("base64") !== -1) {
+//     byteString = atob(dataURI.split(",")[1]);
+//   } else {
+//     byteString = decodeURI(dataURI.split(",")[1]);
+//   }
+//   mimestring = dataURI.split(",")[0].split(":")[1].split(";")[0];
 
-  var content = new Array();
-  for (var i = 0; i < byteString.length; i++) {
-    content[i] = byteString.charCodeAt(i);
-  }
-  //var uarray = new Uint8Array(content);
-  var newFile = new File([new Uint8Array(content)], "sdu.jpeg", {
-    type: mimestring,
-  });
-  // Copy props set by the dropzone in the original file
+//   var content = new Array();
+//   for (var i = 0; i < byteString.length; i++) {
+//     content[i] = byteString.charCodeAt(i);
+//   }
+//   //var uarray = new Uint8Array(content);
+//   var newFile = new File([new Uint8Array(content)], "sdu.jpeg", {
+//     type: mimestring,
+//   });
+//   // Copy props set by the dropzone in the original file
+//   this.form.photo = newFile;
+//   return newFile;
+// }
 
-  return newFile;
-}
-
-function pickFile() {
-  let input = this.form.photo;
-  let file = input.files;
-  if (file && file[0]) {
-    let reader = new FileReader();
-    reader.onload = (e) => {
-      this.preview = e.target.result;
-    };
-    reader.readAsDataURL(file[0]);
-  }
-}
+// function pickFile() {
+//   let input = this.form.photo;
+//   let file = input.files;
+//   if (file && file[0]) {
+//     let reader = new FileReader();
+//     reader.onload = (e) => {
+//       this.preview = e.target.result;
+//     };
+//     reader.readAsDataURL(file[0]);
+//   }
+// }
 </script>

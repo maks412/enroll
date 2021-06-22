@@ -147,6 +147,15 @@
                               >no</b-form-radio
                             ></b-form-radio-group
                           >
+                          <div style="display: inline; margin-left: 5%">
+                            <b-link
+                              v-if="form.IELTS == 'no'"
+                              target="blank"
+                              href="https://docs.google.com/forms/d/e/1FAIpQLSfvl1BmV_dPhTNZ2THgJKbZhgfwp771DFDqmU75B50TI99WEA/viewform?ts=60d04f1d&edit_requested=true"
+                              >If you don't have, please follow this
+                              link</b-link
+                            >
+                          </div>
                         </b-form-group>
                       </div>
                       <!-- END IELTS -->
@@ -171,6 +180,15 @@
                               >no</b-form-radio
                             ></b-form-radio-group
                           >
+                          <div style="display: inline; margin-left: 5%">
+                            <b-link
+                              v-if="form.Interview == 'no'"
+                              target="blank"
+                              href="https://docs.google.com/forms/d/e/1FAIpQLSftZA82vom7qPFNrAtTDdNlPLpED4NMk9pE04xLgtaFWetiAQ/viewform"
+                              >If you didn't pass, please follow this
+                              link</b-link
+                            >
+                          </div>
                         </b-form-group>
                       </div>
                       <!-- END Interview -->
@@ -349,22 +367,29 @@ export default {
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({action:"getAllData"}));
-    fetch("http://localhost/get_requirements.php", {
+    data_created.append("json", JSON.stringify({ action: "getAllData" }));
+    fetch("./backend/get_require.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body: data_created
+      body: data_created,
     })
       .then((response) => response.json())
       .then((res) => {
         this.form.citizenship = res.country.selected_id;
         this.country = res.country.list;
+        this.form.speciality = res.speciality.selected_id;
+        this.speciality = res.speciality.list;
+        this.form.IELTS = res.IELTS;
+        this.form.Interview = res.Interview;
+        this.form.admin_Interview = res.admin_Interview;
+        this.form.payment = res.payment;
+
         this.degree = res.degree.list;
-        if(res.degree.value == "B") this.form.tabDegree = 0;
-        if(res.degree.value == "M") this.form.tabDegree = 1;
-        if(res.degree.value == "D") this.form.tabDegree = 2;
+        if (res.degree.value == "B") this.form.tabDegree = 0;
+        if (res.degree.value == "M") this.form.tabDegree = 1;
+        if (res.degree.value == "D") this.form.tabDegree = 2;
       });
   },
   methods: {
@@ -381,7 +406,7 @@ export default {
         body: data_send,
       })
         .then((response) => response.json())
-        .then(() => this.$router.push({ path: "/home/1" }))
+        .then(() => this.$router.push({ path: "/home/1" }));
     },
     onReset(evt) {
       evt.preventDefault();

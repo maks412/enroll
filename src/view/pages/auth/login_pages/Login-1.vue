@@ -437,7 +437,7 @@ export default {
           .dispatch(LOGIN, { email, password })
           // go to which page after successfully login
           .then(() => {
-            if (this.currentUser.AFTER_REG == "true") {
+            if (this.currentUser.AFTER_REG) {
               this.$router.push({ path: "/after_register" });
             } else {
               this.$router.push({ path: "/home/1" });

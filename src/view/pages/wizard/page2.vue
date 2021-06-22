@@ -262,7 +262,7 @@
                     <h4 class="mb-10 font-weight-bold text-dark">
                       Enter your Preparation Course Details
                     </h4>
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
                           <label>Country</label>
@@ -295,7 +295,7 @@
                           >
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="row">
                       <div class="col-xl-6">
@@ -385,8 +385,8 @@ export default {
       language: [],
       foreign_language: [],
       attestat_series: [],
-      preparation_province: [],
-      preparation_country: [],
+      //preparation_province: [],
+      //preparation_country: [],
 
       form: {
         country: null,
@@ -401,8 +401,8 @@ export default {
         attestat_given_date: null,
         attestat_upload: null,
         preparation_course: null,
-        preparation_country: null,
-        preparation_province: null,
+        //preparation_country: null,
+        //preparation_province: null,
 
         mod: "page2",
         method: "set",
@@ -442,10 +442,10 @@ export default {
         //this.form.attestat_upload = res.attestat_upload;
         this.form.preparation_course = res.preparation_course.selected_id;
         this.preparation_course = res.preparation_course.list;
-        this.form.preparation_country = res.preparation_country.selected_id;
-        this.preparation_country = res.preparation_country.list;
-        this.form.preparation_province = res.attestat_series.selected_id;
-        this.preparation_province = res.preparation_province.list;
+        //this.form.preparation_country = res.preparation_country.selected_id;
+        //this.preparation_country = res.preparation_country.list;
+        //this.form.preparation_province = res.attestat_series.selected_id;
+        //this.preparation_province = res.preparation_province.list;
       });
   },
   name: "Wizard-4",
