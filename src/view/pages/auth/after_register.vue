@@ -64,10 +64,9 @@
                         Choose Education Program
                       </p>
                       <div class="form-group">
-                        <b-tabs pills card fill v-model="form.tabDegree">
+                        <b-tabs pills card fill v-model="form.tabDegree" @input="change_speciality">
                           <template>
                             <b-tab
-                              v-on:click="change_speciality"
                               v-for="(d, index) in degree"
                               :key="index"
                               :title="d"
@@ -78,13 +77,12 @@
                                 </p>
                                 <div class="form-group">
                                   <b-tabs
-                                    v-on:click="change_bach_speciality"
                                     pills
                                     card
                                     fill
                                     v-model="form.tab_bachDegree"
                                     type="is-toggle"
-                                    @input="OnChange_paid"
+                                    @input="change_bach_speciality"
                                   >
                                     <b-tab title="Full" active></b-tab>
                                     <b-tab title="Shortened"></b-tab>
@@ -360,7 +358,7 @@ export default {
       },
       country: [],
       payment: ["State Grant", "Paid"],
-      speciality: [],
+      speciality: {},
       show_speciality: [],
       degree: [],
       show: true,
@@ -437,27 +435,30 @@ export default {
       if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";
     },
     change_speciality: function () {
+      
       //a4 - second higher education
       //a6 - shortoned
       //a8 - full
-      if (this.tabDegree == 0) {
+      if (this.form.tabDegree == 0) {
         this.show_speciality = this.speciality.B.a8;
       }
-      if (this.tabDegree == 1) {
+      if (this.form.tabDegree == 1) {
         this.show_speciality = this.speciality.M;
       }
-      if (this.tabDegree == 2) {
+      if (this.form.tabDegree == 2) {
         this.show_speciality = this.speciality.D;
       }
     },
     change_bach_speciality: function(){
-      if (this.tab_bachDegree == 0) {
+      
+      this.OnChange_paid();
+      if (this.form.tab_bachDegree == 0) {
         this.show_speciality = this.speciality.B.a8;
       }
-      if (this.tab_bachDegree == 1) {
+      if (this.form.tab_bachDegree == 1) {
         this.show_speciality = this.speciality.B.a6;
       }
-      if (this.tab_bachDegree == 2) {
+      if (this.form.tab_bachDegree == 2) {
         this.show_speciality = this.speciality.B.a4;
       }
     }
