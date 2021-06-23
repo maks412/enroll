@@ -114,7 +114,7 @@
                       <!-- Begin of Payment -->
                       <b-form-group
                         id="citizenship"
-                        label="Choose Tutition Payment"
+                        label="Choose Tuition Payment"
                         label-for="citizenship_label"
                       >
                         <b-form-select
