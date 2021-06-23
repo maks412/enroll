@@ -234,7 +234,6 @@
                               v-model="form.gender"
                               :options="gender_options"
                               :aria-describedby="ariaDescribedby"
-                              name="radio-inline"
                               size="lg"
                               required
                             ></b-form-radio-group>
