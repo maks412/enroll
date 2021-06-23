@@ -1,36 +1,36 @@
-// Spain
+// USA
 export const locale = {
   TRANSLATOR: {
-    SELECT: "Elige tu idioma"
+    SELECT: "Select your language"
   },
   MENU: {
-    NEW: "nuevo",
-    ACTIONS: "Comportamiento",
-    CREATE_POST: "Crear nueva publicación",
+    NEW: "new",
+    ACTIONS: "Actions",
+    CREATE_POST: "Create New Post",
     PAGES: "Pages",
-    FEATURES: "Caracteristicas",
-    APPS: "Aplicaciones",
-    DASHBOARD: "Tablero"
+    FEATURES: "Features",
+    APPS: "Apps",
+    DASHBOARD: "Dashboard"
   },
   AUTH: {
     GENERAL: {
-      OR: "O",
-      SUBMIT_BUTTON: "Enviar",
-      NO_ACCOUNT: "No tienes una cuenta?",
-      SIGNUP_BUTTON: "Regístrate",
-      FORGOT_BUTTON: "Se te olvidó tu contraseña",
-      BACK_BUTTON: "Espalda",
-      PRIVACY: "Intimidad",
+      OR: "Or",
+      SUBMIT_BUTTON: "Submit",
+      NO_ACCOUNT: "Don't have an account?",
+      SIGNUP_BUTTON: "Sign Up",
+      FORGOT_BUTTON: "Forgot Password",
+      BACK_BUTTON: "Back",
+      PRIVACY: "Privacy",
       LEGAL: "Legal",
-      CONTACT: "Contacto"
+      CONTACT: "Contact"
     },
     LOGIN: {
-      TITLE: "Crear una cuenta",
-      BUTTON: "Registrarse"
+      TITLE: "Login Account",
+      BUTTON: "Sign In"
     },
     FORGOT: {
-      TITLE: "Contraseña olvidada?",
-      DESC: "Ingrese su correo electrónico para restablecer su contraseña",
+      TITLE: "Forgot Password?",
+      DESC: "Enter your email to reset your password",
       SUCCESS: "Your account has been successfully reset."
     },
     REGISTER: {
@@ -43,7 +43,7 @@ export const locale = {
       FULLNAME: "Fullname",
       PASSWORD: "Password",
       CONFIRM_PASSWORD: "Confirm Password",
-      USERNAME: "Usuario"
+      USERNAME: "Username"
     },
     VALIDATION: {
       INVALID: "{{name}} is not valid",

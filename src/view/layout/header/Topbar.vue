@@ -13,7 +13,9 @@
       </span>
     </div>
 
-    <div class="topbar-item">
+    <!-- mask koooos language -->
+
+    <!-- <div class="topbar-item">
       <b-dropdown
         size="sm"
         variant="link"
@@ -35,7 +37,9 @@
           ></KTDropdownLanguage>
         </b-dropdown-text>
       </b-dropdown>
-    </div>
+    </div> -->
+
+
     <!--end: Language bar -->
     <!--begin: Quick Actions -->
     <b-dropdown
@@ -100,7 +104,7 @@ import { mapGetters } from "vuex";
 // import KTDropdownNotification from "@/view/layout/extras/dropdown/DropdownNotification.vue";
 import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAction.vue";
 // import KTDropdownMyCart from "@/view/layout/extras/dropdown/DropdownMyCart.vue";
-import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
+//import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
 // import KTQuickUser from "@/view/layout/extras/offcanvas/QuickUser.vue";
 // import KTQuickPane l from "@/view/layout/extras/offcanvas/QuickPanel.vue";
 import i18nService from "@/core/services/i18n.service.js";
@@ -122,7 +126,7 @@ export default {
     // KTDropdownNotification,
 
     // KTDropdownMyCart,
-    KTDropdownLanguage,
+    //KTDropdownLanguage,
     // KTQuickUser,
     KTDropdownQuickAction,
     // KTQuickPanel
