@@ -396,7 +396,7 @@ export default {
         foreign_language: null,
         attestat_type: null,
         attestat_series: null,
-        attestat_number: null,
+        attestat_number: "34233",
         attestat_score: null,
         attestat_given_date: null,
         attestat_upload: null,
@@ -422,12 +422,7 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.country = res.country.selected_id;
-        this.country = res.country.list;
-        this.form.province = res.province.selected_id;
-        this.province = res.province.list;
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
+       
         this.form.language = res.language.selected_id;
         this.language = res.language.list;
         this.form.foreign_language = res.foreign_language.selected_id;
@@ -442,10 +437,13 @@ export default {
         //this.form.attestat_upload = res.attestat_upload;
         this.form.preparation_course = res.preparation_course.selected_id;
         this.preparation_course = res.preparation_course.list;
-        //this.form.preparation_country = res.preparation_country.selected_id;
-        //this.preparation_country = res.preparation_country.list;
-        //this.form.preparation_province = res.attestat_series.selected_id;
-        //this.preparation_province = res.preparation_province.list;
+
+        this.form.country = res.country.selected_id;
+        this.country = res.country.list;
+        this.form.province = res.province.selected_id;
+        this.province = res.province.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
       });
   },
   name: "Wizard-4",
