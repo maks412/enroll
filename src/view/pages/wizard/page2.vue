@@ -56,6 +56,7 @@
                               :options="country"
                               required
                               size="lg"
+                              v-on:change="press_country"
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
@@ -72,6 +73,44 @@
                               :options="province"
                               required
                               size="lg"
+                              v-on:change="press_province"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your schools province</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>Region</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.region"
+                              :options="region"
+                              required
+                              size="lg"
+                              v-on:change="press_region"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted"
+                            >Please choose your schools region</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>City</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.city"
+                              :options="city"
+                              required
+                              size="lg"
+                              v-on:change="press_city"
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
@@ -378,6 +417,8 @@ export default {
       ],
       country: [],
       province: [],
+      region: [],
+      city: [],
       school: [],
       attestat_type: [],
       preparation_course: [],
@@ -391,6 +432,8 @@ export default {
       form: {
         country: null,
         province: null,
+        region: null,
+        city: null,
         school: null,
         language: "",
         foreign_language: null,
@@ -406,13 +449,16 @@ export default {
 
         mod: "page2",
         method: "set",
-        action: "setAllData"
+        action: "setAllData",
       },
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ mod: "page2", method: "get", action: "getAllData" }));
+    data_created.append(
+      "json",
+      JSON.stringify({ mod: "page2", method: "get", action: "getAllData" })
+    );
     fetch("./backend/middle.php", {
       method: "POST",
       headers: {
@@ -422,7 +468,6 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-       
         this.form.language = res.language.selected_id;
         this.language_options = res.language.list;
         this.form.foreign_language = res.foreign_language.selected_id;
@@ -487,14 +532,13 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 0) {
-              Swal.fire({
-                title: "",
-                text: res.message,
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false,
-              });
-            
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              heightAuto: false,
+            });
           }
           if (res.code == 1) {
             Swal.fire({
@@ -505,9 +549,73 @@ export default {
             });
             this.$router.push({ name: "/home/2" });
           }
-          
         });
+    },
+
+    press_country: function(){
+      get_address(0, "country");
+    },
+    press_province: function(){
+      get_address(1, "province");
+    },
+    press_region: function(){
+      get_address(2, "region");
+    },
+    press_city: function(){
+      get_address(3, "city");
     },
   },
 };
+
+function get_address(index, type) {
+  var data_created = new FormData();
+  data_created.append(
+    "json",
+    JSON.stringify({
+      mod: "page2",
+      method: "get",
+      action: "getAddress",
+      index: index,
+    })
+  );
+  fetch("./backend/middle.php", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+    body: data_created,
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      if (type == "country") {
+        this.form.province = res.province.selected_id;
+        this.province = res.province.list;
+        this.form.region = res.region.selected_id;
+        this.region = res.region.list;
+        this.form.city = res.city.selected_id;
+        this.city = res.city.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+      if (type == "province") {
+        this.form.region = res.region.selected_id;
+        this.region = res.region.list;
+        this.form.city = res.city.selected_id;
+        this.city = res.city.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+      if (type == "region") {
+        this.form.city = res.city.selected_id;
+        this.city = res.city.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+      if (type == "city") {
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+
+    });
+}
 </script>
