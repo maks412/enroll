@@ -104,7 +104,7 @@
                           <b-form-group>
                             <b-form-select
                               v-model="form.language"
-                              :options="language"
+                              :options="language_options"
                               required
                               size="lg"
                             ></b-form-select>
@@ -382,7 +382,7 @@ export default {
       attestat_type: [],
       preparation_course: [],
       nationality: [],
-      language: [],
+      language_options: [],
       foreign_language: [],
       attestat_series: [],
       //preparation_province: [],
@@ -392,12 +392,12 @@ export default {
         country: null,
         province: null,
         school: null,
-        language: null,
+        language: "",
         foreign_language: null,
-        attestat_type: null,
-        attestat_series: null,
-        attestat_number: "34233",
-        attestat_score: null,
+        attestat_type: "",
+        attestat_series: "",
+        attestat_number: "",
+        attestat_score: "",
         attestat_given_date: null,
         attestat_upload: null,
         preparation_course: null,
@@ -424,7 +424,7 @@ export default {
       .then((res) => {
        
         this.form.language = res.language.selected_id;
-        this.language = res.language.list;
+        this.language_options = res.language.list;
         this.form.foreign_language = res.foreign_language.selected_id;
         this.foreign_language = res.foreign_language.list;
         this.form.attestat_type = res.attestat_type.selected_id;
