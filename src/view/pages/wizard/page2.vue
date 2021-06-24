@@ -485,10 +485,7 @@ export default {
 
         this.form.country = res.country.selected_id;
         this.country = res.country.list;
-        this.form.province = res.province.selected_id;
-        this.province = res.province.list;
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
+
       });
   },
   name: "Wizard-4",
@@ -553,21 +550,21 @@ export default {
     },
 
     press_country: function(){
-      get_address(0, "country");
+      get_address(0, "country", this.form.country);
     },
     press_province: function(){
-      get_address(1, "province");
+      get_address(1, "province", this.form.province);
     },
     press_region: function(){
-      get_address(2, "region");
+      get_address(2, "region", this.form.region);
     },
     press_city: function(){
-      get_address(3, "city");
+      get_address(3, "city", this.form.city);
     },
   },
 };
 
-function get_address(index, type) {
+function get_address(index, type, value) {
   var data_created = new FormData();
   data_created.append(
     "json",
@@ -575,7 +572,8 @@ function get_address(index, type) {
       mod: "page2",
       method: "get",
       action: "getAddress",
-      index: index,
+      type: index,
+      pid: value,
     })
   );
   fetch("./backend/middle.php", {
