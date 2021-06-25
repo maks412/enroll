@@ -56,7 +56,7 @@
             <!-- <inline-svg src="media/svg/icons/Media/Equalizer.svg" /> -->
 
             <span
-              class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
+              class="text-dark-50 font-weight-bolder font-size-base d-md-inline mr-3"
             >
               {{ currentUser.email }}
             </span>

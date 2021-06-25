@@ -3,15 +3,15 @@
     "self": {
         "layout": "default",
         "logo": {
-            "dark": "media/logos/sdu_logo.jpg",
-            "light": "media/logos/sdu_logo.jpg",
-            "brand": "media/logos/sdu_logo.jpg",
-            "green": "media/logos/sdu_logo.jpg"
+            "dark": "media/logos/sdu_logo.png",
+            "light": "media/logos/sdu_logo.png",
+            "brand": "media/logos/sdu_logo.png",
+            "green": "media/logos/sdu_logo.png"
         }
     },
     "loader": {
         "type": "spinner-logo",
-        "logo": "media/logos/sdu_logo.jpg",
+        "logo": "media/logos/sdu_logo.png",
         "message": "Please wait..."
     },
     "breakpoints": {

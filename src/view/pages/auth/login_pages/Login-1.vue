@@ -16,7 +16,7 @@
       >
         <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
           <a href="#" class="text-center mb-10">
-            <img src="media/logos/sdu_logo.jpg" class="max-h-70px" alt="" />
+            <img src="media/logos/sdu_logo.png" class="max-h-70px" alt="" />
           </a>
           <h3
             class="font-weight-bolder text-center font-size-h4 font-size-h1-lg"
