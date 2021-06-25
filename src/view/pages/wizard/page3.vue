@@ -414,13 +414,8 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.register_address_country_options =
-          res.register_address_country.list;
-        //this.register_address_province_options = res.register_address_province.list;
-        //this.register_address_city_options = res.register_address_city.list;
-        this.current_address_country_options = res.current_address_country.list;
-        //this.current_address_province_options = res.current_address_province.list;
-        //this.current_address_city_options = res.current_address_city.list;
+        this.register_address_country_options =res.register_country.list;
+        this.current_address_country_options = res.current_country.list;
 
         this.form.phone = res.phone;
         this.form.current_address_country =
