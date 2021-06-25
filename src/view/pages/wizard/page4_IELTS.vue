@@ -44,13 +44,13 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      English Language Test Information<br />
+                      {{$t('page5.eng_test_info')}}<br />
                       
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>English Language Certificate</label>
+                          <label>{{$t('page5.eng_certificate')}}</label>
                           <b-form-select
                             v-model="form.english_certificate"
                             :options="english_certificate_options"
@@ -62,7 +62,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label> Certificate Number</label>
+                          <label> {{$t('page5.certificate_num')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -74,13 +74,13 @@
 
                     <div class="row">
                       <div class="col-xl-6">
-                        <label>Upload Scan of Certificate</label>
+                        <label>{{$t('page5.upload_certificate')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.certificate_upload"
                           :state="Boolean(file)"
-                          placeholder="Choose Grant Certificate..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page5.choose_certificate')"
+                          :drop-placeholder="$t('common.drop_files')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -88,7 +88,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -104,7 +104,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -113,13 +113,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>

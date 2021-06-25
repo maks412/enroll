@@ -21,8 +21,8 @@
               <div class="wizard-wrapper">
                 <div class="wizard-number">{{ index + 1 }}</div>
                 <div class="wizard-label">
-                  <div class="wizard-title">{{ tab.title }}</div>
-                  <div class="wizard-desc">{{ tab.desc }}</div>
+                  <div class="wizard-title">{{ $t(tab.title) }}</div>
+                  <div class="wizard-desc">{{ $t(tab.desc) }}</div>
                 </div>
               </div>
             </div>
@@ -44,13 +44,13 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Download and Fill the Contract<br />
-                      Then bring printed contract to SDU
+                      {{$t('page7.download_and_fill')}}<br />
+                      {{$t('page7.bring_to_SDU')}}
                     </h4>
 
                     <div>
                       <b-link target="blank" href="https://enroll.sdu.edu.kz/2021-2022contract.pdf"
-                        >Contract link</b-link
+                        >{{$t('page7.contract_link')}}</b-link
                       >
                     </div>
                   </div>
@@ -59,13 +59,13 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Argee terms and conditions
+                      {{$t('page7.agree_terms')}}
                     </h4>
 
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
                       <p class="text-justify">
-                        {{ checks.check1 }}{{ checks.check1_1 }}
+                        {{ $t('page7.check1') }}
                       </p>
                       <b-form-checkbox
                         v-model="checkbox1"
@@ -74,13 +74,13 @@
                         switch
                         size="lg"
                       >
-                        I accept the terms and use
+                        {{$t('page7.accept_terms')}}
                       </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-                      <p class="text-justify">{{ checks.check2 }}</p>
+                      <p class="text-justify">{{ $t('page7.check2') }}</p>
                       <b-form-checkbox
                         v-model="checkbox2"
                         value="true"
@@ -88,13 +88,13 @@
                         switch
                         size="lg"
                       >
-                        I accept the terms and use
+                        {{$t('page7.accept_terms')}}
                       </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-                      <p class="text-justify">{{ checks.check3 }}</p>
+                      <p class="text-justify">{{ $t('page7.check3') }}</p>
                       <b-form-checkbox
                         v-model="checkbox3"
                         value="true"
@@ -102,13 +102,13 @@
                         switch
                         size="lg"
                       >
-                        I accept the terms and use
+                        {{$t('page7.accept_terms')}}
                       </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-                      <p class="text-justify">{{ checks.check4 }}</p>
+                      <p class="text-justify">{{ $t('page7.check4') }}</p>
                       <b-form-checkbox
                         v-model="checkbox4"
                         value="true"
@@ -116,7 +116,7 @@
                         switch
                         size="lg"
                       >
-                        I accept the terms and use
+                        {{$t('page7.accept_terms')}}
                       </b-form-checkbox>
                     </div>
                   </div>
@@ -129,7 +129,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -138,13 +138,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -175,20 +175,8 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      tabs: [{ title: "Contract" }, { title: "Agreements", desc: "" }],
+      tabs: [{ title: "page7.contact" }, { title: "page7.agreements", desc: "" }],
       selected: [], // Must be an array reference!
-      checks: {
-        check1:
-          "In accordance with the Law of the Republic of Kazakhstan “On personal data and their protection” dated May 21, 2013 and other legislative acts of the Republic, I hereby give the Institution “Suleyman Demirel University” unconditional consent to the collection and processing of my (about me) ",
-        check1_1:
-          "personal data, that is, all information relating to me and recorded on electronic, paper and (or) other tangible media that will or will become known to the University in the course of its activities and / or within the framework of civil law / labor and / or other relationship.",
-        check2:
-          "I undertake to provide the original certificate / diploma, UNT certificate (if available), 6 photos of size 3 * 4, medical certificate 086 with fluorography, an identity card / passport before 08.20.2020 to the admission committee of the SDU.",
-        check3:
-          "I confirm that all information on this site has been filled in correctly and reliably.",
-        check4:
-          "I have been informed of the mandatory consent of the parents (legal representative) of the applicant under the age of 18) to conclude and sign the “Contract for the provision of paid / free educational services with the institution“ Suleyman Demirel University ”until 08.20.2021.",
-      },
       checkbox1: "",
       checkbox2: "",
       checkbox3: "",
