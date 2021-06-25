@@ -162,7 +162,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t("need_stud_house")}}</label>
+                          <label>{{$t('page3.need_stud_house')}}</label>
                           <div>
                             <b-form-group>
                               <b-form-radio-group
@@ -206,7 +206,7 @@
                       </div>
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>{{$t('page3.f_name')}}</label>
+                          <label>{{$t('page3.full_name')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -299,9 +299,9 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      tabs: [{ title: "contact_details" }, { title: "relative_information" }],
-      relative_type_options: [this.$t("mother"), this.$t("father"), this.$t("sister"), this.$t("brother")],
-      fields: [this.$t("relative_type"), this.$t("full_name"), this.$t("contact")],
+      tabs: [{ title: "page3.contact_details" }, { title: "page3.relative_information" }],
+      relative_type_options: [this.$t("page3.mother"), this.$t("page3.father"), this.$t("page3.sister"), this.$t("page3.brother")],
+      fields: [this.$t("page3.relative_type"), this.$t("page3.full_name"), this.$t("page3.contact")],
       rel_type: "",
       rel_name: "",
       rel_cont: "",

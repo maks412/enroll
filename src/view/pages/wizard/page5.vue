@@ -21,8 +21,8 @@
               <div class="wizard-wrapper">
                 <div class="wizard-number">{{ index + 1 }}</div>
                 <div class="wizard-label">
-                  <div class="wizard-title">{{ tab.title }}</div>
-                  <div class="wizard-desc">{{ tab.desc }}</div>
+                  <div class="wizard-title">{{ $t(tab.title) }}</div>
+                  <div class="wizard-desc">{{ $t(tab.desc) }}</div>
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Upload your Medical Document
+                      {{$t('page6.upload_med_doc')}}
                     </h4>
 
                     <div>
@@ -52,8 +52,8 @@
                         multiple
                         v-model="form.certificate75"
                         :state="Boolean(file)"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
+                        :placeholder="$t('common.choose_file')"
+                        :drop-placeholder="$t('common.drop_file')"
                         ><template slot="file-name" slot-scope="{ names }">
                           <b-badge variant="dark">{{ names[0] }}</b-badge>
                           <b-badge
@@ -61,7 +61,7 @@
                             variant="dark"
                             class="ml-1"
                           >
-                            + {{ names.length - 1 }} More files
+                            + {{ $t('common.more_files',{num:names.length - 1}) }}
                           </b-badge>
                         </template></b-form-file
                       >
@@ -72,12 +72,12 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Upload your Achivements
+                      {{$t('page6.upload_achievements')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>SPT Certificate No</label>
+                          <label>{{$t('page6.spt_certificate_no')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -87,7 +87,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>SPT Score</label>
+                          <label>{{$t('page6.spt_score')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -99,13 +99,13 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>Upload your SPT Certificate</label>
+                        <label>{{$t('page6.upload_spt_certificate')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.spt_upload"
                           :state="Boolean(file)"
-                          placeholder="Choose SPT file..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_spt')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -113,7 +113,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -123,7 +123,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Infomatrix Certificate No</label>
+                          <label>{{$t('page6.inf_certificate_no')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -133,7 +133,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Infomatrix Score</label>
+                          <label>{{$t('page6.inf_score')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -145,13 +145,13 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>Upload your Infomatrix Certificate</label>
+                        <label>{{$t('page6.upload_inf_certificate')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.infomatrix_upload"
                           :state="Boolean(file)"
-                          placeholder="Choose SPT file..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_inf')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -159,7 +159,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -171,18 +171,18 @@
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Upload Your Payment Documents
+                      {{$t('page6.upload_payment_doc')}}
                     </h4>
 
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>Upload your Student Fee Receipt</label>
+                        <label>{{$t('page6.upload_stud_fee')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.student_fee"
                           :state="Boolean(file)"
-                          placeholder="Choose Student fee..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_stud_fee')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -190,7 +190,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -199,13 +199,13 @@
                     <hr />
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>Upload your Tuition Fee Receipt</label>
+                        <label>{{$t('page6.upload_tut_fee')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.tuition_fee"
                           :state="Boolean(file)"
-                          placeholder="Choose Tuition Fee..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_tut_fee')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -213,7 +213,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -223,14 +223,14 @@
                     <div class="row">
                       <div class="col-xl-8">
                         <label
-                          >Upload your English Language Course Receipt</label
+                          >{{$t('page6.upload_eng')}}</label
                         >
                         <b-form-file
                           multiple
                           v-model="form.eng_course"
                           :state="Boolean(file)"
-                          placeholder="Choose English Language Course..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_eng')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -238,7 +238,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -250,12 +250,12 @@
                   <!-- STEP 4 -->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter Your Addtional Documents Information
+                      {{$t('page6.enter_add_doc_info')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Creative Exam Reference</label>
+                          <label>{{$t('page6.creative_exam_referrence')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -265,14 +265,14 @@
                       </div>
                       <div class="col-xl-6">
                         <label
-                          >Upload your Creative Exam Reference(if journal 6B03201)</label
+                          >{{$t('page6.upload_creative_exam_referrence')}}</label
                         >
                         <b-form-file
                           multiple
                           v-model="form.creative_exam"
                           :state="Boolean(file)"
-                          placeholder="Choose Creative Exam..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_creative_exam')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -280,7 +280,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -290,7 +290,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>IPedagogical Test Reference</label>
+                          <label>{{$t('page6.ped_test')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -300,14 +300,14 @@
                       </div>
                       <div class="col-xl-6">
                         <label
-                          >Upload your Pedagogical Test Reference(If pedagog)</label
+                          >{{$t('page6.upload_ped_test')}}</label
                         >
                         <b-form-file
                           multiple
                           v-model="form.eng_course"
                           :state="Boolean(file)"
-                          placeholder="Choose Pedagogical Test..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page6.choose_ped_test')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -315,7 +315,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1}) }} More files
                             </b-badge>
                           </template></b-form-file
                         >
@@ -329,7 +329,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -338,13 +338,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -376,10 +376,10 @@ export default {
   data() {
     return {
       tabs: [
-        { title: "Medical Document" },
-        { title: "Achivements", desc: "" },
-        { title: "Payments", desc: "" },
-        { title: "Additional Documents", desc: "" },
+        { title: this.$t('page6.med_doc'), desc:this.$t('page6.med_doc_d') },
+        { title: this.$t('page6.achievements'), desc: this.$t('page6.achievements_d') },
+        { title: this.$t('page6.payments'), desc: this.$t('page6.payments_d') },
+        { title: this.$t('page6.add_docs'), desc: this.$t('page6.add_docs_d') },
       ],
 
       form: {
