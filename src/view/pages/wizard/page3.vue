@@ -44,12 +44,14 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page3.enter_contact_details')}}
+                      {{ $t("page3.enter_contact_details") }}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.current_address_country')}}</label>
+                          <label>{{
+                            $t("page3.current_address_country")
+                          }}</label>
                           <b-form-select
                             v-model="form.current_address_country"
                             :options="current_address_country_options"
@@ -62,7 +64,9 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.current_address_province')}}</label>
+                          <label>{{
+                            $t("page3.current_address_province")
+                          }}</label>
                           <b-form-select
                             v-model="form.current_address_province"
                             :options="current_address_province_options"
@@ -76,7 +80,9 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.current_address_region')}}</label>
+                          <label>{{
+                            $t("page3.current_address_region")
+                          }}</label>
                           <b-form-select
                             v-model="form.current_address_region"
                             :options="current_address_region_options"
@@ -89,7 +95,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.current_address_city')}}</label>
+                          <label>{{ $t("page3.current_address_city") }}</label>
                           <b-form-select
                             v-model="form.current_address_city"
                             :options="current_address_city_options"
@@ -98,14 +104,12 @@
                           ></b-form-select>
                         </div>
                       </div>
-
-                     
                     </div>
 
                     <div class="row">
-                       <div class="col-xl-9">
+                      <div class="col-xl-9">
                         <div class="form-group">
-                          <label>{{$t('page3.current_address')}}</label>
+                          <label>{{ $t("page3.current_address") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-sm"
@@ -113,12 +117,14 @@
                           />
                         </div>
                       </div>
-                      </div>
+                    </div>
                     <hr />
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.registered_address_country')}}</label>
+                          <label>{{
+                            $t("page3.registered_address_country")
+                          }}</label>
                           <b-form-select
                             v-model="form.register_address_country"
                             :options="register_address_country_options"
@@ -131,8 +137,10 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.registered_address_province')}}</label>
-                          
+                          <label>{{
+                            $t("page3.registered_address_province")
+                          }}</label>
+
                           <b-form-select
                             v-model="form.register_address_province"
                             :options="register_address_province_options"
@@ -143,11 +151,30 @@
                         </div>
                       </div>
                     </div>
+
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.registered_address_city')}}</label>
-                          
+                          <label>{{
+                            $t("page3.registered_address_region")
+                          }}</label>
+
+                          <b-form-select
+                            v-model="form.register_address_region"
+                            :options="register_address_region_options"
+                            required
+                            size="sm"
+                            v-on:change="press_register_region"
+                          ></b-form-select>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label>{{
+                            $t("page3.registered_address_city")
+                          }}</label>
+
                           <b-form-select
                             v-model="form.register_address_city"
                             :options="register_address_city_options"
@@ -156,10 +183,12 @@
                           ></b-form-select>
                         </div>
                       </div>
+                    </div>
 
-                      <div class="col-xl-6">
+                    <div class="row">
+                      <div class="col-xl-9">
                         <div class="form-group">
-                          <label>{{$t('page3.registered_address')}}</label>
+                          <label>{{ $t("page3.registered_address") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-sm"
@@ -172,7 +201,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.mobile_phone')}}</label>
+                          <label>{{ $t("page3.mobile_phone") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -183,7 +212,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page3.need_stud_house')}}</label>
+                          <label>{{ $t("page3.need_stud_house") }}</label>
                           <div>
                             <b-form-group>
                               <b-form-radio-group
@@ -195,10 +224,12 @@
                                 name="radio-options"
                                 size="lg"
                               >
-                                <b-form-radio value="yes">{{$t('page3.yes')}}</b-form-radio>
-                                <b-form-radio value="no"
-                                  >{{$t('page3.no')}}</b-form-radio
-                                ></b-form-radio-group
+                                <b-form-radio value="yes">{{
+                                  $t("page3.yes")
+                                }}</b-form-radio>
+                                <b-form-radio value="no">{{
+                                  $t("page3.no")
+                                }}</b-form-radio></b-form-radio-group
                               >
                             </b-form-group>
                           </div>
@@ -210,12 +241,12 @@
 
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page3.enter_rel_info')}}
+                      {{ $t("page3.enter_rel_info") }}
                     </h4>
                     <div class="row">
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>{{$t('page3.relative_type')}}</label>
+                          <label>{{ $t("page3.relative_type") }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="rel_type"
@@ -227,7 +258,7 @@
                       </div>
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>{{$t('page3.full_name')}}</label>
+                          <label>{{ $t("page3.full_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -237,7 +268,7 @@
                       </div>
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>{{$t('page3.contact')}}</label>
+                          <label>{{ $t("page3.contact") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -251,7 +282,7 @@
                       class="btn btn-primary text-uppercase px-3 py-1"
                       v-on:click="add_relative"
                     >
-                      {{$t('page3.add_relative')}}
+                      {{ $t("page3.add_relative") }}
                     </button>
 
                     <div>
@@ -262,7 +293,7 @@
                         class="btn btn-primary text-uppercase px-4 py-1"
                         v-on:click="delete_relative"
                       >
-                        {{$t('page3.delete_last')}}
+                        {{ $t("page3.delete_last") }}
                       </button>
                     </div>
                   </div>
@@ -274,7 +305,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        {{$t('common.previous')}}
+                        {{ $t("common.previous") }}
                       </button>
                     </div>
                     <div>
@@ -283,13 +314,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        {{$t('common.submit')}}
+                        {{ $t("common.submit") }}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        {{$t('common.next_step')}}
+                        {{ $t("common.next_step") }}
                       </button>
                     </div>
                   </div>
@@ -320,9 +351,21 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      tabs: [{ title: "page3.contact_details" }, { title: "page3.relative_information" }],
-      relative_type_options: [this.$t("page3.mother"), this.$t("page3.father"), this.$t("page3.sister"), this.$t("page3.brother")],
-      fields: [this.$t("page3.relative_type"), this.$t("page3.full_name"), this.$t("page3.contact")],
+      tabs: [
+        { title: "page3.contact_details" },
+        { title: "page3.relative_information" },
+      ],
+      relative_type_options: [
+        this.$t("page3.mother"),
+        this.$t("page3.father"),
+        this.$t("page3.sister"),
+        this.$t("page3.brother"),
+      ],
+      fields: [
+        this.$t("page3.relative_type"),
+        this.$t("page3.full_name"),
+        this.$t("page3.contact"),
+      ],
       rel_type: "",
       rel_name: "",
       rel_cont: "",
@@ -351,14 +394,17 @@ export default {
 
         mod: "page3",
         method: "set",
-        action: "setAllData"
+        action: "setAllData",
       },
-      options:[]
+      options: [],
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ mod: "page3", method: "get", action: "getAllData" }));
+    data_created.append(
+      "json",
+      JSON.stringify({ mod: "page3", method: "get", action: "getAllData" })
+    );
     fetch("./backend/middle.php", {
       method: "POST",
       headers: {
@@ -368,7 +414,8 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.register_address_country_options = res.register_address_country.list;
+        this.register_address_country_options =
+          res.register_address_country.list;
         //this.register_address_province_options = res.register_address_province.list;
         //this.register_address_city_options = res.register_address_city.list;
         this.current_address_country_options = res.current_address_country.list;
@@ -376,18 +423,21 @@ export default {
         //this.current_address_city_options = res.current_address_city.list;
 
         this.form.phone = res.phone;
-        this.form.current_address_country = res.current_address_country.selected_id;
-        this.form.current_address_province = res.current_address_province.selected_id;
+        this.form.current_address_country =
+          res.current_address_country.selected_id;
+        this.form.current_address_province =
+          res.current_address_province.selected_id;
         this.form.current_address_city = res.current_address_city.selected_id;
         this.form.current_address = res.current_address.selected_id;
-        this.form.register_address_country = res.register_address_country.selected_id;
-        this.form.register_address_province = res.register_address_province.selected_id;
+        this.form.register_address_country =
+          res.register_address_country.selected_id;
+        this.form.register_address_province =
+          res.register_address_province.selected_id;
         this.form.register_address_city = res.register_address_city.selected_id;
         this.form.register_address = res.register_address.selected_id;
 
         this.form.student_house = res.student_house;
         this.form.items = res.relatives;
-        
       });
   },
   name: "Wizard-4",
@@ -431,14 +481,13 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 0) {
-              Swal.fire({
-                title: "",
-                text: res.message,
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false,
-              });
-            
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              heightAuto: false,
+            });
           }
           if (res.code == 1) {
             Swal.fire({
@@ -449,7 +498,6 @@ export default {
             });
             this.$router.push({ name: "/home/2" });
           }
-          
         });
     },
 
@@ -470,7 +518,7 @@ export default {
         JSON.stringify({
           mod: "page3",
           method: "get",
-          action: "getAddress",
+          action: "getCurrentAddress",
           type: index,
           pid: value,
         })
@@ -506,10 +554,18 @@ export default {
     },
 
     press_register_country: function () {
-      this.get_register_address(0, "country", this.form.register_address_country);
+      this.get_register_address(
+        0,
+        "country",
+        this.form.register_address_country
+      );
     },
     press_register_rovince: function () {
-      this.get_register_address(1, "province", this.form.register_address_province);
+      this.get_register_address(
+        1,
+        "province",
+        this.form.register_address_province
+      );
     },
     press_register_region: function () {
       this.get_register_address(2, "region", this.form.register_address_region);
@@ -522,7 +578,7 @@ export default {
         JSON.stringify({
           mod: "page3",
           method: "get",
-          action: "getAddress",
+          action: "getRegisteredAddress",
           type: index,
           pid: value,
         })
@@ -537,22 +593,22 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (type == "country") {
-            this.form.current_address_province = res.province.selected_id;
-            this.current_address_province = res.province.list;
-            this.form.current_address_region = res.region.selected_id;
-            this.current_address_region_options = res.region.list;
-            this.form.current_address_city = res.city.selected_id;
-            this.current_address_city_options = res.city.list;
+            this.form.register_address_province = res.province.selected_id;
+            this.register_address_province = res.province.list;
+            this.form.register_address_region = res.region.selected_id;
+            this.register_address_region_options = res.region.list;
+            this.form.register_address_city = res.city.selected_id;
+            this.register_address_city_options = res.city.list;
           }
           if (type == "province") {
-            this.form.current_address_region = res.region.selected_id;
-            this.current_address_region_options = res.region.list;
-            this.form.current_address_city = res.city.selected_id;
-            this.current_address_city_options = res.city.list;
+            this.form.register_address_region = res.region.selected_id;
+            this.register_address_region_options = res.region.list;
+            this.form.register_address_city = res.city.selected_id;
+            this.register_address_city_options = res.city.list;
           }
           if (type == "region") {
-            this.form.current_address_city = res.city.selected_id;
-            this.current_address_city_options = res.city.list;
+            this.form.register_address_city = res.city.selected_id;
+            this.register_address_city_options = res.city.list;
           }
         });
     },

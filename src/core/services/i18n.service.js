@@ -11,11 +11,6 @@ const i18nService = {
             name: "English",
             flag: process.env.BASE_URL + "media/svg/flags/226-united-states.svg"
         },
-        {
-            lang: "ru",
-            name: "Russian",
-            flag: process.env.BASE_URL + "media/svg/flags/013-russia.svg"
-        },
     ],
 
     /**
