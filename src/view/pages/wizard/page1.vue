@@ -21,8 +21,8 @@
               <div class="wizard-wrapper">
                 <div class="wizard-number">{{ index + 1 }}</div>
                 <div class="wizard-label">
-                  <div class="wizard-title">{{ tab.title }}</div>
-                  <div class="wizard-desc">{{ tab.desc }}</div>
+                  <div class="wizard-title">{{ $t(tab.title) }}</div>
+                  <div class="wizard-desc">{{ $t(tab.desc) }}</div>
                 </div>
               </div>
             </div>
@@ -44,13 +44,13 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter your Account Details
+                      {{$t('page1.enter_acc_details')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <!-- citizenship -->
                         <div class="form-group">
-                          <label>Citizenship</label>
+                          <label>{{$t('page1.citizenship')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -60,7 +60,7 @@
                           />
                           <span class="form-text text-muted"
                             ><a href="/#/after_register"
-                              >Change Citizenship</a
+                              >{{$t('page1.change_citizenship')}}</a
                             ></span
                           >
                         </div>
@@ -68,7 +68,7 @@
                       <!-- END citizenship -->
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>First Name</label>
+                          <label>{{$t('page1.f_name')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -77,7 +77,7 @@
                             required
                           />
                           <span class="form-text text-muted"
-                            >Please enter your first name.</span
+                            >{{$t('page1.enter_f_name')}}</span
                           >
                         </div>
                       </div>
@@ -85,7 +85,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Native Name</label>
+                          <label>{{$t('page1.native_name')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -93,13 +93,13 @@
                             v-model="form.nname"
                           />
                           <span class="form-text text-muted"
-                            >Please enter your native name.</span
+                            >{{$t('page1.enter_n_f_name')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Last Name</label>
+                          <label>{{$t('page1.last_name')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -108,7 +108,7 @@
                             required
                           />
                           <span class="form-text text-muted"
-                            >Please enter your last name.</span
+                            >{{$t('page1.enter_l_name')}}</span
                           >
                         </div>
                       </div>
@@ -116,7 +116,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Native Surname</label>
+                          <label>{{$t('page1.native_last_name')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -124,13 +124,13 @@
                             v-model="form.nlname"
                           />
                           <span class="form-text text-muted"
-                            >Please enter your native last name.</span
+                            >{{$t('page1.enter_n_l_name')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Patronymic</label>
+                          <label>{{$t('page1.patronymic')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -138,19 +138,19 @@
                             v-model="form.patronymic"
                           />
                           <span class="form-text text-muted"
-                            >Please enter your fathers name.</span
+                            >{{$t('page1.enter_patronymic')}}</span
                           >
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
-                        <label>Upload your profile picture</label>
+                        <label>{{$t('page1.upload_pic')}}</label>
                         <b-form-file
                           v-model="form.photo"
                           :state="Boolean(file)"
-                          placeholder="Choose a file or drop it here..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('common.choose_file')"
+                          :drop-placeholder="$t('common.drop_file')"
                           @change="previewImage"
                         ></b-form-file>
                       </div>
@@ -175,13 +175,13 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter your Account Details
+                      {{$t('page1.enter_acc_details')}}
                     </h4>
 
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Date of Birth</label>
+                          <label>{{$t('page1.date_of_birth')}}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -204,13 +204,13 @@
                             </b-input-group>
                           </div>
                           <span class="form-text text-muted"
-                            >Please choose date of birth</span
+                            >{{$t('page1.enter_date_of_birth')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Nationality</label>
+                          <label>{{$t('page1.nationality')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.nationality"
@@ -220,7 +220,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please enter your nationality</span
+                            >{{$t('page1.enter_nationality')}}</span
                           >
                         </div>
                       </div>
@@ -228,7 +228,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Gender</label>
+                          <label>{{$t('page1.gender')}}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.gender"
@@ -239,13 +239,13 @@
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose gender</span
+                            >{{$t('page1.choose_gender')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Married Status</label>
+                          <label>{{$t('page1.married_status')}}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.married"
@@ -257,7 +257,7 @@
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose married status</span
+                            >{{$t('page1.choose_married_status')}}</span
                           >
                         </div>
                       </div>
@@ -265,7 +265,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Social Status</label>
+                          <label>{{$t('page1.social_status')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.social_status"
@@ -274,19 +274,19 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your social status</span
+                            >{{$t('page1.choose_social_status')}}</span
                           >
                         </div>
                       </div>
 
                       <div class="col-xl-6">
-                        <label>Upload your Social Status Document</label>
+                        <label>{{$t('page1.upload_status_document')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.social_status_upload"
                           :state="Boolean(file)"
-                          placeholder="Choose Socail Status Document..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page1.choose_status_document')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -294,7 +294,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{ $t('common.more_files',{num:names.length - 1})}}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -306,11 +306,11 @@
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter your Account Details
+                      {{$t('page1.enter_acc_details')}}
                     </h4>
                     <div class="col-xl-6">
                       <div class="form-group">
-                        <label>Document Type</label>
+                        <label>{{$t('page1.doc_type')}}</label>
                         <b-form-group v-slot="{ ariaDescribedby }">
                           <b-form-radio-group
                             v-model="form.document_type"
@@ -322,14 +322,14 @@
                           ></b-form-radio-group>
                         </b-form-group>
                         <span class="form-text text-muted"
-                          >Please choose document type</span
+                          >{{$t('page1.choose_doc_type')}}</span
                         >
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>IIN</label>
+                          <label>{{$t('page1.iin')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -338,13 +338,13 @@
                             required
                           />
                           <span class="form-text text-muted"
-                            >Please enter your IIN: 12 numbers.</span
+                            >{{$t('page1.enter_iin')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Document No</label>
+                          <label>{{$t('page1.doc_no')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -352,7 +352,7 @@
                             required
                           />
                           <span class="form-text text-muted"
-                            >Please enter your document number.</span
+                            >{{$t('page1.enter_doc_no')}}</span
                           >
                         </div>
                       </div>
@@ -360,7 +360,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Issued By</label>
+                          <label>{{$t('page1.issued_by')}}</label>
                           <b-form-select
                             v-model="form.issued_by"
                             :options="issued_options"
@@ -368,13 +368,13 @@
                             size="lg"
                           ></b-form-select>
                           <span class="form-text text-muted"
-                            >Please select issued place</span
+                            >{{$t('page1.select_issued_by')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Issued Date</label>
+                          <label>{{$t('page1.issued_date')}}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -397,7 +397,7 @@
                             </b-input-group>
                           </div>
                           <span class="form-text text-muted"
-                            >Please enter your Card Expiry Year.</span
+                            >{{$t('page1.enter_issued_date')}}</span
                           >
                         </div>
                       </div>
@@ -407,8 +407,8 @@
                         multiple
                         v-model="form.documents"
                         :state="Boolean(file)"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
+                        :placeholder="$t('common.choose_file')"
+                        :drop-placeholder="$t('common.drop_file')"
                         ><template slot="file-name" slot-scope="{ names }">
                           <b-badge variant="dark">{{ names[0] }}</b-badge>
                           <b-badge
@@ -417,7 +417,7 @@
                             class="ml-1"
                             required
                           >
-                            + {{ names.length - 1 }} More files
+                            + {{ $t('common.more_files',{num:names.length - 1})}}
                           </b-badge>
                         </template></b-form-file
                       >
@@ -432,7 +432,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -441,13 +441,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -479,25 +479,25 @@ export default {
   data() {
     return {
       tabs: [
-        { title: "Personal Information", desc: "Name and Surname" },
-        { title: "Additional Information", desc: "Birthday and Others" },
-        { title: "Document Information", desc: "IIN and Document type" },
+        { title: "page1.personal_info", desc: "page1.personal_info_d" },
+        { title: "page1.additional_info", desc: "page1.additional_info_d" },
+        { title: "page1.doc_info", desc: "page1.doc_info_d" },
       ],
       gender_options: [
-        { text: "Male", value: "male" },
-        { text: "Female", value: "female" },
+        { text: this.$t("page1.male"), value: "male" },
+        { text: this.$t("page1.female"), value: "female" },
       ],
       gender_married: [
-        { text: "Single", value: "single" },
-        { text: "Married", value: "married" },
+        { text: this.$t("page1.single"), value: "single" },
+        { text: this.$t("page1.married"), value: "married" },
       ],
       document_options: [
-        { text: "Identity Card", value: "ID" },
-        { text: "Passport", value: "passport" },
+        { text: this.$t("page1.id"), value: "ID" },
+        { text: this.$t("page1.passport"), value: "passport" },
       ],
       issued_options: [
-        { text: "Ministry of Justice KZ", value: "ministry" },
-        { text: "Passport", value: "passport" },
+        { text: this.$t("page1.ministry"), value: "ministry" },
+        { text: this.$t("page1.passport"), value: "passport" },
       ],
       nationality: [],
       social_status: [],
@@ -526,6 +526,7 @@ export default {
         method: "set",
         action: "setAllData"
       },
+      file:''
     };
   },
   created() {

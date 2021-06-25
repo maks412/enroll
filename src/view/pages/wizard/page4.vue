@@ -44,13 +44,13 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Grant Information<br>
-                      <h6>Only for grant students</h6>
+                      {{$t('page4.grant_info')}}<br>
+                      <h6>{{$t('page4.grant_info_d')}}</h6>
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label> ТКЖ/ИКТ</label>
+                          <label> {{$t('page4.ikt')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -60,14 +60,14 @@
                       </div>
                       <div class="col-xl-6">
                         <label
-                          >Upload your Grant Certificate</label
+                          >{{$t('page4.upload_certificate')}}</label
                         >
                         <b-form-file
                           multiple
                           v-model="form.grant_cert"
                           :state="Boolean(file)"
-                          placeholder="Choose Grant Certificate..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page4.choose_certificate')"
+                          :drop-placeholder="$t('common.drop_files')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -75,7 +75,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              {{$t('common.more_files',{num:names.length-1})}}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -91,7 +91,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -100,13 +100,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -146,6 +146,7 @@ export default {
         method: "set",
         action: "setAllData"
       },
+      file:''
     };
   },
   async created() {
