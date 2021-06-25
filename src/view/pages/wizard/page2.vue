@@ -44,12 +44,12 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_school_details") }}
+                      {{$t('page2.enter_school_details')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.country") }}</label>
+                          <label>{{$t('page2.country')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.country"
@@ -59,14 +59,14 @@
                               v-on:change="press_country"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_country")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_country')}}</span
+                          >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.province") }}</label>
+                          <label>{{$t('page2.province')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.province"
@@ -76,9 +76,9 @@
                               v-on:change="press_province"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_province")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_province')}}</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t("page2.region")}}</label>
+                          <label>{{$t('page2.region')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.region"
@@ -97,13 +97,13 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >{{$t("page2.choose_region")}}</span
+                            >{{$t('page2.choose_region')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t("page2.city")}}</label>
+                          <label>{{$t('page2.city')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.city"
@@ -113,9 +113,9 @@
                               v-on:change="press_city"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_city")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_city')}}</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -123,7 +123,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.school") }}</label>
+                          <label>{{$t('page2.school')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.school"
@@ -132,14 +132,14 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_school")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_school')}}</span
+                          >
                         </div>
                       </div>
                       <div class="col-xl-3">
                         <div class="form-group">
-                          <label>{{ $t("page2.language") }}</label>
+                          <label>{{$t('page2.language')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.language"
@@ -148,14 +148,14 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_language")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_language')}}</span
+                          >
                         </div>
                       </div>
                       <div class="col-xl-3">
                         <div class="form-group">
-                          <label>{{ $t("page2.f_language") }}</label>
+                          <label>{{$t('page2.f_language')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.foreign_language"
@@ -164,9 +164,9 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_f_language")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_f_language')}}</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -176,12 +176,12 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_att_details") }}
+                      {{$t('page2.enter_att_details')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.attestat_type") }}</label>
+                          <label>{{$t('page2.attestat_type')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.attestat_type"
@@ -190,14 +190,14 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_attestat_type")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_attestat_type')}}</span
+                          >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.attestat_series") }}</label>
+                          <label>{{$t('page2.attestat_series')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.attestat_series"
@@ -206,9 +206,9 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_attestat_series")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_attestat_series')}}</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -216,37 +216,37 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.attestat_no") }}</label>
+                          <label>{{$t('page2.attestat_no')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
                             v-model="form.attestat_number"
                           />
-                          <span class="form-text text-muted">{{
-                            $t("page2.enter_attestat_no")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.enter_attestat_no')}}</span
+                          >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.attestat_score") }}</label>
+                          <label>{{$t('page2.attestat_score')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
                             v-model="form.attestat_score"
                           />
-                          <span class="form-text text-muted">{{
-                            $t("page2.enter_attestat_score")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.enter_attestat_score')}}</span
+                          >
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.given_date") }}</label>
+                          <label>{{$t('page2.given_date')}}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -266,20 +266,20 @@
                               </b-input-group-append>
                             </b-input-group>
                           </div>
-                          <span class="form-text text-muted">{{
-                            $t("page2.enter_given_date")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.enter_given_date')}}</span
+                          >
                         </div>
                       </div>
 
                       <div class="col-xl-6">
-                        <label>{{ $t("upload_attestat") }}</label>
+                        <label>{{$t('page2.upload_attestat')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.attestat_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('page2.choose_files')"
-                          :drop-placeholder="$t('page2.drop_files')"
+                          :placeholder="$t('common.choose_file')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -287,12 +287,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              +
-                              {{
-                                $t("page2.more_files", {
-                                  num: names.length - 1,
-                                })
-                              }}
+                              + {{$t('page2.more_files',{num:names.length - 1})}}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -304,7 +299,7 @@
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_prep_c_details") }}
+                      {{$t('page2.enter_prep_c_details')}}
                     </h4>
                     <!-- <div class="row">
                       <div class="col-xl-6">
@@ -344,7 +339,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.preparation_course") }}</label>
+                          <label>{{$t('page2.preparation_course')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.preparation_course"
@@ -353,9 +348,9 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_preparation_course")
-                          }}</span>
+                          <span class="form-text text-muted"
+                            >{{$t('page2.choose_preparation_course')}}</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -369,7 +364,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        {{ $t("common.previous") }}
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -378,13 +373,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        {{ $t("common.submit") }}
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        {{ $t("common.next_step") }}
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -418,10 +413,7 @@ export default {
       tabs: [
         { title: "page2.school_info", desc: "page2.school_info_d" },
         { title: "page2.attestat_info", desc: "page2.attestat_info_d" },
-        {
-          title: "page2.preparation_course",
-          desc: "page2.preparation_course_d",
-        },
+        { title: "page2.preparation_course", desc: "page2.preparation_course_d" },
       ],
       country: [],
       province: [],
@@ -459,7 +451,7 @@ export default {
         method: "set",
         action: "setAllData",
       },
-      file: "",
+      file:''
     };
   },
   async created() {
@@ -494,6 +486,7 @@ export default {
 
         this.form.country = res.country.selected_id;
         this.country = res.country.list;
+
       });
   },
   name: "Wizard-4",
@@ -557,70 +550,71 @@ export default {
         });
     },
 
-    press_country: function () {
-      this.get_address(0, "country", this.form.country);
+    press_country: function(){
+      get_address(0, "country", this.form.country);
     },
-    press_province: function () {
-      this.get_address(1, "province", this.form.province);
+    press_province: function(){
+      get_address(1, "province", this.form.province);
     },
-    press_region: function () {
-      this.get_address(2, "region", this.form.region);
+    press_region: function(){
+      get_address(2, "region", this.form.region);
     },
-    press_city: function () {
-      this.get_address(3, "city", this.form.city);
-    },
-
-    get_address: function (index, type, value) {
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          mod: "page2",
-          method: "get",
-          action: "getAddress",
-          type: index,
-          pid: value,
-        })
-      );
-      fetch("./backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          if (type == "country") {
-            this.form.province = res.province.selected_id;
-            this.province = res.province.list;
-            this.form.region = res.region.selected_id;
-            this.region = res.region.list;
-            this.form.city = res.city.selected_id;
-            this.city = res.city.list;
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
-          if (type == "province") {
-            this.form.region = res.region.selected_id;
-            this.region = res.region.list;
-            this.form.city = res.city.selected_id;
-            this.city = res.city.list;
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
-          if (type == "region") {
-            this.form.city = res.city.selected_id;
-            this.city = res.city.list;
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
-          if (type == "city") {
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
-        });
+    press_city: function(){
+      get_address(3, "city", this.form.city);
     },
   },
 };
+
+function get_address(index, type, value) {
+  var data_created = new FormData();
+  data_created.append(
+    "json",
+    JSON.stringify({
+      mod: "page2",
+      method: "get",
+      action: "getAddress",
+      type: index,
+      pid: value,
+    })
+  );
+  fetch("./backend/middle.php", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+    body: data_created,
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      if (type == "country") {
+        this.form.province = res.province.selected_id;
+        this.province = res.province.list;
+        this.form.region = res.region.selected_id;
+        this.region = res.region.list;
+        this.form.city = res.city.selected_id;
+        this.city = res.city.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+      if (type == "province") {
+        this.form.region = res.region.selected_id;
+        this.region = res.region.list;
+        this.form.city = res.city.selected_id;
+        this.city = res.city.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+      if (type == "region") {
+        this.form.city = res.city.selected_id;
+        this.city = res.city.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+      if (type == "city") {
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+      }
+
+    });
+}
 </script>
