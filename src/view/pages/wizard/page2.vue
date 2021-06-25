@@ -77,7 +77,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your schools province</span
+                            >{{$t('page2.choose_province')}}</span
                           >
                         </div>
                       </div>
@@ -86,7 +86,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Region</label>
+                          <label>{{$t('page2.region')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.region"
@@ -97,13 +97,13 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your schools region</span
+                            >{{$t('page2.choose_region')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>City</label>
+                          <label>{{$t('page2.city')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.city"
@@ -114,7 +114,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >{{$t('page2.choose_province')}}</span
+                            >{{$t('page2.choose_city')}}</span
                           >
                         </div>
                       </div>
@@ -273,13 +273,13 @@
                       </div>
 
                       <div class="col-xl-6">
-                        <label>{{$t("upload_attestat")}}</label>
+                        <label>{{$t('page2.upload_attestat')}}</label>
                         <b-form-file
                           multiple
                           v-model="form.attestat_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('page2.choose_files')"
-                          :drop-placeholder="$t('page2.drop_files')"
+                          :placeholder="$t('common.choose_file')"
+                          :drop-placeholder="$t('common.drop_file')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
