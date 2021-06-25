@@ -20,11 +20,11 @@
           <div class="menu-icon menu_custom" :class="{'pad-1':index!=0}">{{index+1}}</div>
           <div>
             <span class="menu-text" style="font-size: 15px; font-weight: 500"
-              >{{link.name}}</span
+              >{{$t(link.name)}}</span
             >
 
             <span class="menu-text" style="font-size: 11px"
-              >{{link.description}}</span
+              >{{$t(link.description)}}</span
             >
           </div>
         </a>
@@ -40,38 +40,38 @@
 <script>
 const links = [
   {
-    name: "Main Info",
-    description: "Setup Your Account Details",
+    name: "aside.main_info",
+    description: "aside.main_info_d",
     navigate_to: "/home/1"
   },
   {
-    name: "Education",
-    description: "Setup Your Education Details",
+    name: "aside.education",
+    description: "aside.education_d",
     navigate_to: "/home/2"
   },
   {
-    name: "Contact",
-    description: "Add Your Contact Ditails",
+    name: "aside.contact",
+    description: "aside.contact_d",
     navigate_to: "/home/3"
   },
   {
-    name: "Grant Info",
-    description: "Provide Grant Information",
+    name: "aside.grant_info",
+    description: "aside.grant_info_d",
     navigate_to: "/home/4"
   },
   {
-    name: "English Language Tests",
-    description: "Give English Test Information",
+    name: "aside.eng_tests",
+    description: "aside.eng_tests_d",
     navigate_to: "/home/4_ielts"
   },
   {
-    name: "Documents",
-    description: "Upload Your Documents",
+    name: "aside.documents",
+    description: "aside.documents_d",
     navigate_to: "/home/5"
   },
   {
-    name: "Apply",
-    description: "Review and Submit",
+    name: "aside.apply",
+    description: "aside.apply_d",
     navigate_to: "/home/6"
   }
 ]

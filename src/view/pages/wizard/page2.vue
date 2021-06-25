@@ -21,8 +21,8 @@
               <div class="wizard-wrapper">
                 <div class="wizard-number">{{ index + 1 }}</div>
                 <div class="wizard-label">
-                  <div class="wizard-title">{{ tab.title }}</div>
-                  <div class="wizard-desc">{{ tab.desc }}</div>
+                  <div class="wizard-title">{{ $t(tab.title) }}</div>
+                  <div class="wizard-desc">{{ $t(tab.desc) }}</div>
                 </div>
               </div>
             </div>
@@ -44,12 +44,12 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter your School Details
+                      {{$t('page2.enter_school_details')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Country</label>
+                          <label>{{$t('page2.country')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.country"
@@ -59,13 +59,13 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your schools country</span
+                            >{{$t('page2.choose_country')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Province</label>
+                          <label>{{$t('page2.province')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.province"
@@ -75,7 +75,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your schools city</span
+                            >{{$t('page2.choose_province')}}</span
                           >
                         </div>
                       </div>
@@ -84,7 +84,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>School</label>
+                          <label>{{$t('page2.school')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.school"
@@ -94,13 +94,13 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your school</span
+                            >{{$t('page2.choose_school')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-3">
                         <div class="form-group">
-                          <label>Language</label>
+                          <label>{{$t('page2.language')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.language"
@@ -110,13 +110,13 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your language</span
+                            >{{$t('page2.choose_language')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-3">
                         <div class="form-group">
-                          <label>Foreign Language</label>
+                          <label>{{$t('page2.f_language')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.foreign_language"
@@ -126,7 +126,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your foreign language</span
+                            >{{$t('page2.choose_f_language')}}</span
                           >
                         </div>
                       </div>
@@ -137,12 +137,12 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter Your Attestat Ditails
+                      {{$t('page2.enter_att_details')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Attestat type</label>
+                          <label>{{$t('page2.attestat_type')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.attestat_type"
@@ -152,13 +152,13 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your attestat type</span
+                            >{{$t('page2.choose_attestat_type')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Attestat Series</label>
+                          <label>{{$t('page2.attestat_series')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.attestat_series"
@@ -168,7 +168,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your attestat series</span
+                            >{{$t('page2.choose_attestat_series')}}</span
                           >
                         </div>
                       </div>
@@ -177,7 +177,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Attestat No</label>
+                          <label>{{$t('page2.attestat_no')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -185,13 +185,13 @@
                             v-model="form.attestat_number"
                           />
                           <span class="form-text text-muted"
-                            >Please enter your attestat number.</span
+                            >{{$t('page2.enter_attestat_no')}}</span
                           >
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Attestat Score</label>
+                          <label>{{$t('page2.attestat_score')}}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -199,7 +199,7 @@
                             v-model="form.attestat_score"
                           />
                           <span class="form-text text-muted"
-                            >Please enter your attestat score.</span
+                            >{{$t('page2.enter_attestat_score')}}</span
                           >
                         </div>
                       </div>
@@ -207,7 +207,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Given Date</label>
+                          <label>{{$t('page2.given_date')}}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -228,19 +228,19 @@
                             </b-input-group>
                           </div>
                           <span class="form-text text-muted"
-                            >Please enter your attestat given date</span
+                            >{{$t('page2.enter_given_date')}}</span
                           >
                         </div>
                       </div>
 
                       <div class="col-xl-6">
-                        <label>Upload your attestat</label>
+                        <label>{{$t("upload_attestat")}}</label>
                         <b-form-file
                           multiple
                           v-model="form.attestat_upload"
                           :state="Boolean(file)"
-                          placeholder="Choose files..."
-                          drop-placeholder="Drop file here..."
+                          :placeholder="$t('page2.choose_files')"
+                          :drop-placeholder="$t('page2.drop_files')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -248,7 +248,7 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ names.length - 1 }} More files
+                              + {{$t('page2.more_files',{num:names.length - 1})}}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -260,7 +260,7 @@
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter your Preparation Course Details
+                      {{$t('page2.enter_prep_c_details')}}
                     </h4>
                     <!-- <div class="row">
                       <div class="col-xl-6">
@@ -300,7 +300,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Preparation Course</label>
+                          <label>{{$t('page2.preparation_course')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.preparation_course"
@@ -310,7 +310,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted"
-                            >Please choose your preparation course</span
+                            >{{$t('page2.choose_preparation_course')}}</span
                           >
                         </div>
                       </div>
@@ -325,7 +325,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -334,13 +334,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -372,9 +372,9 @@ export default {
   data() {
     return {
       tabs: [
-        { title: "School Information", desc: "Primary School" },
-        { title: "Attestat Information", desc: "" },
-        { title: "Preparation Course", desc: "" },
+        { title: "page2.school_info", desc: "page2.school_info_d" },
+        { title: "page2.attestat_info", desc: "page2.attestat_info_d" },
+        { title: "page2.preparation_course", desc: "page2.preparation_course_d" },
       ],
       country: [],
       province: [],
@@ -408,6 +408,7 @@ export default {
         method: "set",
         action: "setAllData"
       },
+      file:''
     };
   },
   async created() {

@@ -18,25 +18,25 @@ export default new Router({
 
                     {
                         path: "1",
-                        name: "wizard-4",
+                        name: "wizard-1",
                         component: () =>
                             import ("@/view/pages/wizard/page1.vue")
                     },
                     {
                         path: "2",
-                        name: "wizard-4",
+                        name: "wizard-2",
                         component: () =>
                             import ("@/view/pages/wizard/page2.vue")
                     },
                     {
                         path: "3",
-                        name: "wizard-4",
+                        name: "wizard-3",
                         component: () =>
                             import ("@/view/pages/wizard/page3.vue")
                     },
                     {
                         path: "4_ielts",
-                        name: "wizard-4",
+                        name: "wizard-4_ielts",
                         component: () =>
                             import ("@/view/pages/wizard/page4_IELTS.vue")
                     },
@@ -48,13 +48,13 @@ export default new Router({
                     },
                     {
                         path: "5",
-                        name: "wizard-4",
+                        name: "wizard-5",
                         component: () =>
                             import ("@/view/pages/wizard/page5.vue")
                     },
                     {
                         path: "6",
-                        name: "wizard-4",
+                        name: "wizard-6",
                         component: () =>
                             import ("@/view/pages/wizard/page6.vue")
                     }

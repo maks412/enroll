@@ -21,8 +21,8 @@
               <div class="wizard-wrapper">
                 <div class="wizard-number">{{ index + 1 }}</div>
                 <div class="wizard-label">
-                  <div class="wizard-title">{{ tab.title }}</div>
-                  <div class="wizard-desc">{{ tab.desc }}</div>
+                  <div class="wizard-title">{{ $t(tab.title) }}</div>
+                  <div class="wizard-desc">{{ $t(tab.desc) }}</div>
                 </div>
               </div>
             </div>
@@ -44,12 +44,12 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter your Contact Details
+                      {{$t('page3.enter_contact_details')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Current Address Country</label>
+                          <label>{{$t('page3.current_address_country')}}</label>
                           <b-form-select
                             v-model="form.current_address_country"
                             :options="current_address_country_options"
@@ -61,7 +61,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Current Address Province</label>
+                          <label>{{$t('page3.current_address_province')}}</label>
                           <b-form-select
                             v-model="form.current_address_province"
                             :options="current_address_province_options"
@@ -74,7 +74,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Current Address City</label>
+                          <label>{{$t('page3.current_address_city')}}</label>
                           <b-form-select
                             v-model="form.current_address_city"
                             :options="current_address_city_options"
@@ -86,7 +86,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Current Address</label>
+                          <label>{{$t('page3.current_address')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-sm"
@@ -99,7 +99,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Registered Address Country</label>
+                          <label>{{$t('page3.registered_address_country')}}</label>
                           <b-form-select
                             v-model="form.register_address_country"
                             :options="register_address_country_options"
@@ -111,7 +111,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Registered Address Province</label>
+                          <label>{{$t('page3.registered_address_province')}}</label>
                           
                           <b-form-select
                             v-model="form.register_address_province"
@@ -125,7 +125,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Registered Address City</label>
+                          <label>{{$t('page3.registered_address_city')}}</label>
                           
                           <b-form-select
                             v-model="form.register_address_city"
@@ -138,7 +138,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Registered Address</label>
+                          <label>{{$t('page3.registered_address')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-sm"
@@ -151,7 +151,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Mobile Phone</label>
+                          <label>{{$t('page3.mobile_phone')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -162,11 +162,11 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>Do you need student house?</label>
+                          <label>{{$t("need_stud_house")}}</label>
                           <div>
                             <b-form-group>
                               <b-form-radio-group
-                                buttons="true"
+                                :buttons="true"
                                 button-variant="outline-primary"
                                 id="radio-group-2"
                                 v-model="form.student_house"
@@ -174,9 +174,9 @@
                                 name="radio-options"
                                 size="lg"
                               >
-                                <b-form-radio value="yes">yes</b-form-radio>
+                                <b-form-radio value="yes">{{$t('page3.yes')}}</b-form-radio>
                                 <b-form-radio value="no"
-                                  >no</b-form-radio
+                                  >{{$t('page3.no')}}</b-form-radio
                                 ></b-form-radio-group
                               >
                             </b-form-group>
@@ -189,12 +189,12 @@
 
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      Enter Your Relative Information
+                      {{$t('page3.enter_rel_info')}}
                     </h4>
                     <div class="row">
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>Relative Type</label>
+                          <label>{{$t('page3.relative_type')}}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="rel_type"
@@ -206,7 +206,7 @@
                       </div>
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>Full Name</label>
+                          <label>{{$t('page3.f_name')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -216,7 +216,7 @@
                       </div>
                       <div class="col-xl-4">
                         <div class="form-group">
-                          <label>Contact</label>
+                          <label>{{$t('page3.contact')}}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -230,7 +230,7 @@
                       class="btn btn-primary text-uppercase px-3 py-1"
                       v-on:click="add_relative"
                     >
-                      Add Relative
+                      {{$t('page3.add_relative')}}
                     </button>
 
                     <div>
@@ -241,7 +241,7 @@
                         class="btn btn-primary text-uppercase px-4 py-1"
                         v-on:click="delete_relative"
                       >
-                        Delete Last
+                        {{$t('page3.delete_last')}}
                       </button>
                     </div>
                   </div>
@@ -253,7 +253,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        Previous
+                        {{$t('common.previous')}}
                       </button>
                     </div>
                     <div>
@@ -262,13 +262,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        Submit
+                        {{$t('common.submit')}}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        Next Step
+                        {{$t('common.next_step')}}
                       </button>
                     </div>
                   </div>
@@ -299,9 +299,9 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      tabs: [{ title: "Contact Ditails" }, { title: "Relative Information" }],
-      relative_type_options: ["Mother", "Father", "Sister", "Brother"],
-      fields: ["relative_type", "full_name", "contact"],
+      tabs: [{ title: "contact_details" }, { title: "relative_information" }],
+      relative_type_options: [this.$t("mother"), this.$t("father"), this.$t("sister"), this.$t("brother")],
+      fields: [this.$t("relative_type"), this.$t("full_name"), this.$t("contact")],
       rel_type: "",
       rel_name: "",
       rel_cont: "",
@@ -328,6 +328,7 @@ export default {
         method: "set",
         action: "setAllData"
       },
+      options:[]
     };
   },
   async created() {

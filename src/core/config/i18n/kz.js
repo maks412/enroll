@@ -1,102 +1,47 @@
-// USA
+// KZ
 export const locale = {
-    TRANSLATOR: {
-        SELECT: "Өз тіліңізді таңдаңыз"
+    common: {
+        "previous": "Алдыңғы",
+        "submit": "Жіберу",
+        "next_step": "Келесі",
+        "choose_file": "Файл таңдаңыз ...",
     },
-    MENU: {
-        NEW: "жаңа",
-        ACTIONS: "Әрекеттер",
-        CREATE_POST: "Жаңа хабарлама жасау",
-        PAGES: "Pages",
-        FEATURES: "Features",
-        APPS: "Apps",
-        DASHBOARD: "Dashboard"
-    },
-    AUTH: {
-        GENERAL: {
-            OR: "Or",
-            SUBMIT_BUTTON: "Submit",
-            NO_ACCOUNT: "Don't have an account?",
-            SIGNUP_BUTTON: "Sign Up",
-            FORGOT_BUTTON: "Forgot Password",
-            BACK_BUTTON: "Back",
-            PRIVACY: "Privacy",
-            LEGAL: "Legal",
-            CONTACT: "Contact"
-        },
-        LOGIN: {
-            TITLE: "Login Account",
-            BUTTON: "Sign In"
-        },
-        FORGOT: {
-            TITLE: "Forgot Password?",
-            DESC: "Enter your email to reset your password",
-            SUCCESS: "Your account has been successfully reset."
-        },
-        REGISTER: {
-            TITLE: "Sign Up",
-            DESC: "Enter your details to create your account",
-            SUCCESS: "Your account has been successfuly registered."
-        },
-        INPUT: {
-            EMAIL: "Email",
-            FULLNAME: "Fullname",
-            PASSWORD: "Password",
-            CONFIRM_PASSWORD: "Confirm Password",
-            USERNAME: "Username"
-        },
-        VALIDATION: {
-            INVALID: "{{name}} is not valid",
-            REQUIRED: "{{name}} is required",
-            MIN_LENGTH: "{{name}} minimum length is {{min}}",
-            AGREEMENT_REQUIRED: "Accepting terms & conditions are required",
-            NOT_FOUND: "The requested {{name}} is not found",
-            INVALID_LOGIN: "The login detail is incorrect",
-            REQUIRED_FIELD: "Required field",
-            MIN_LENGTH_FIELD: "Minimum field length:",
-            MAX_LENGTH_FIELD: "Maximum field length:",
-            INVALID_FIELD: "Field is not valid"
-        }
-    },
-    ECOMMERCE: {
-        COMMON: {
-            SELECTED_RECORDS_COUNT: "Selected records count: ",
-            ALL: "All",
-            SUSPENDED: "Suspended",
-            ACTIVE: "Active",
-            FILTER: "Filter",
-            BY_STATUS: "by Status",
-            BY_TYPE: "by Type",
-            BUSINESS: "Business",
-            INDIVIDUAL: "Individual",
-            SEARCH: "Search",
-            IN_ALL_FIELDS: "in all fields"
-        },
-        ECOMMERCE: "eCommerce",
-        CUSTOMERS: {
-            CUSTOMERS: "Customers",
-            CUSTOMERS_LIST: "Customers list",
-            NEW_CUSTOMER: "New Customer",
-            DELETE_CUSTOMER_SIMPLE: {
-                TITLE: "Customer Delete",
-                DESCRIPTION: "Are you sure to permanently delete this customer?",
-                WAIT_DESCRIPTION: "Customer is deleting...",
-                MESSAGE: "Customer has been deleted"
-            },
-            DELETE_CUSTOMER_MULTY: {
-                TITLE: "Customers Delete",
-                DESCRIPTION: "Are you sure to permanently delete selected customers?",
-                WAIT_DESCRIPTION: "Customers are deleting...",
-                MESSAGE: "Selected customers have been deleted"
-            },
-            UPDATE_STATUS: {
-                TITLE: "Status has been updated for selected customers",
-                MESSAGE: "Selected customers status have successfully been updated"
-            },
-            EDIT: {
-                UPDATE_MESSAGE: "Customer has been updated",
-                ADD_MESSAGE: "Customer has been created"
-            }
-        }
+    page1: {
+        "enter_acc_details": "Аккаунт туралы мәліметтерді енгізіңіз",
+        "citizenship": "Азаматтық берілген жер",
+        "change_citizenship": "Азаматтық берілген жерді өзгерту",
+        "f_name": "Аты",
+        "enter_f_name": "Атыңызды енгізіңіз",
+        "native_name": "Құжаттағы аты",
+        "enter_n_f_name": "Құжаттағы атыңызды енгізіңіз",
+        "last_name": "Фамилия",
+        "enter_l_name": "Фамилияңызды енгізіңіз",
+        "native_last_name": "Құжаттағы фамилия",
+        "enter_n_l_name": "Құжаттағы фамилияңызды енгізіңіз",
+        "patronymic": "Әкесінің аты",
+        "enter_patronymic": "Әкесініңдің атын енгізіңіз",
+        "upload_pic": "Профильді суретті жүктеңіз",
+        "date_of_birth": "Туылған күні",
+        "enter_date_of_birth": "Туылған күніңізді ензіңіз",
+        "nationality": "Ұлты",
+        "enter_nationality": "Ұлтыңызды енгізіңіз",
+        "gender": "Жынысы",
+        "choose_gender": "Жынысты таңдаңыз",
+        "married_status": "Статус",
+        "choose_married_status": "Статусты таңдаңыз",
+        "social_status": "Социалды статус",
+        "choose_social_status": "Социалды статусты таңдаңыз",
+        "upload_status_document": "Социалды статус құжатын жүктеңіз",
+        "choose_status_document": "Социалды статус құжатын жүктеңіз...",
+        "doc_type": "Құжат түрі",
+        "choose_doc_type": "Құжат түрін таңдаңыз",
+        "iin": "ИИН",
+        "enter_iin": "ИИН енгізіңіз: минимум 12 таңбалар",
+        "doc_no": "Құжат нөмері",
+        "enter_doc_no": "Құжат нөмерін енгізіңіз",
+        "issued_by": "Берілген күні",
+        "select_issued_by": "Берілген күнін таңдаңыз",
+        "issued_date": "Уақыты бітетін күні",
+        "enter_issued_date": "Уақыты бітетін күнін таңдаңыз",
     }
 };

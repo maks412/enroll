@@ -402,6 +402,7 @@ export default {
         method: "set",
         action: "setAllData"
       },
+      file:''
     };
   },
   async created() {
