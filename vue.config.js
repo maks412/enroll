@@ -12,7 +12,7 @@ module.exports = {
             }
         }
     },
-    chainWebpack: config => {
+    /*chainWebpack: config => {
         config.module
             .rule("eslint")
             .use("eslint-loader")
@@ -20,7 +20,7 @@ module.exports = {
                 options.configFile = path.resolve(__dirname, ".eslintrc.js");
                 return options;
             });
-    },
+    },*/
     css: {
         loaderOptions: {
             postcss: {
@@ -33,5 +33,6 @@ module.exports = {
             }
         }
     },
-    transpileDependencies: ["vuetify"]
+    transpileDependencies: ["vuetify"],
+    lintOnSave: false
 };

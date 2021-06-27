@@ -2,8 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "@/core/services/store";
-import ApiService from "@/core/services/api.service";
-// import MockService from "@/core/mock/mock.service";
+
 import { VERIFY_AUTH } from "@/core/services/store/auth.module";
 import { RESET_LAYOUT_CONFIG } from "@/core/services/store/config.module";
 
@@ -17,6 +16,9 @@ window.PerfectScrollbar = PerfectScrollbar;
 import ClipboardJS from "clipboard";
 window.ClipboardJS = ClipboardJS;
 
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
 // Vue 3rd party plugins
 import i18n from "@/core/plugins/vue-i18n";
 import vuetify from "@/core/plugins/vuetify";
@@ -25,17 +27,10 @@ import "@/core/plugins/bootstrap-vue";
 import "@/core/plugins/perfect-scrollbar";
 import "@/core/plugins/highlight-js";
 import "@/core/plugins/inline-svg";
-import "@/core/plugins/apexcharts";
 import "@/core/plugins/treeselect";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
 import "@/core/plugins/formvalidation";
-
-// API service init
-ApiService.init();
-
-// Remove this to disable mock API
-// MockService.init();
 
 router.beforeEach((to, from, next) => {
     // Ensure we checked auth before each page load.

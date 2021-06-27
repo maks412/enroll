@@ -10,11 +10,11 @@
           2021 &nbsp;&copy;&nbsp;
         </span>
         <a
-          href="http://keenthemes.com/metronic"
+          href="http://sdu.edu.kz"
           target="_blank"
           class="text-dark-75 text-hover-primary"
         >
-          Automation
+          Suleyman Demirel University
         </a>
       </div>
       <!-- <div class="nav nav-dark">

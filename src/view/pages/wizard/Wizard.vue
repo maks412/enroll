@@ -1,4 +1,3 @@
-<!-- Wizard demo pages -->
 <template>
   <transition name="fade-in-up">
     <router-view></router-view>
@@ -6,7 +5,7 @@
 </template>
 
 <script>
-export default {
-  components: {}
-};
+  export default {
+    components: {}
+  };
 </script>

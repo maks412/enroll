@@ -1,47 +1,26 @@
 <template>
   <div class="d-flex flex-column flex-root">
-    <!-- begin:: Header Mobile -->
     <KTHeaderMobile></KTHeaderMobile>
-    <!-- end:: Header Mobile -->
-
     <Loader v-if="loaderEnabled" v-bind:logo="loaderLogo"></Loader>
-
-    <!-- begin::Body -->
     <div class="d-flex flex-row flex-column-fluid page">
       <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
-        <!-- begin:: Header -->
         <KTHeader></KTHeader>
-        <!-- end:: Header -->
-
-        <!-- begin:: Content -->
         <div
           id="kt_content"
           class="content d-flex flex-column flex-column-fluid"
         >
-          <!-- begin:: Content Head -->
-
-          <!-- begin:: Content Body -->
-          <!-- <div class="card card-custom card-transparent"> -->
           <div class="card-body p-0">
             <div class="row justify-content-center py-0 px-0 py-lg-0 px-lg-10">
-              <!-- Begin of TEXT -->
               <div class="col-xl-12 col-xxl-7">
-                <div
-                  class="card card-custom card-shadowless rounded-top-0 after_register_p"
-                >
+                <div class="card card-custom card-shadowless rounded-top-0 after_register_p">
                   <div class="pb-13 pt-lg-0 pt-5">
-                    <h3
-                      class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
-                    >
+                    <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
                       Registration Requirements
                     </h3>
-                    <span class="text-muted font-weight-bold font-size-h4"
-                      >Basic Information to Registration
+                    <span class="text-muted font-weight-bold font-size-h4">
+                      Basic Information to Registration
                     </span>
                   </div>
-                  <!-- End of TEXT -->
-
-                  <!-- Begin FORM -->
                   <div>
                     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
                       <b-form-group
@@ -223,7 +202,6 @@
                       ></b-button>
                     </b-form>
                   </div>
-                  <!-- END FORM -->
                 </div>
               </div>
             </div>
@@ -253,6 +231,8 @@ import {
   ADD_BODY_CLASSNAME,
   REMOVE_BODY_CLASSNAME,
 } from "@/core/services/store/htmlclass.module.js";
+
+var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
 
 export default {
   name: "Layout",
@@ -369,7 +349,7 @@ export default {
   async created() {
     var data_created = new FormData();
     data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch("./backend/Get/get_require.php", {
+    fetch(url + "/backend/Get/get_require.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -400,7 +380,7 @@ export default {
       //alert(JSON.stringify(this.form));
       var data_send = new FormData();
       data_send.append("json", JSON.stringify(this.form));
-      fetch("./backend/Set/set_require.php", {
+      fetch(url + "/backend/Set/set_require.php", {
         method: "POST",
         headers: {
           Accept: "application/json",

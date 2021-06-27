@@ -1,4 +1,6 @@
-import ApiService from "@/core/services/api.service";
+/* eslint-disable */ 
+
+//import ApiService from "@/core/services/api.service";
 import JwtService from "@/core/services/jwt.service";
 
 // action types
@@ -14,10 +16,12 @@ export const SET_AUTH = "setUser";
 export const SET_PASSWORD = "setPassword";
 export const SET_ERROR = "setError";
 
+var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+
 const state = {
     user: {},
     errors: null,
-    isAuthenticated: !!JwtService.getToken()
+    isAuthenticated: JwtService.getToken()
 };
 
 const getters = {
@@ -36,21 +40,18 @@ const actions = {
     [LOGIN](context, credentials) {
 
         return new Promise(resolve => {
-            console.log(credentials);
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
-            fetch("./backend/login.php", {
+            fetch(url + "/backend/login.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                 },
                 body: data
             }).then((response) => response.json()).then((res) => {
-                console.log(res);
                 context.commit(SET_AUTH, res);
                 resolve(data);
             });
-            console.log(context);
         });
     },
     [LOGOUT](context) {
@@ -61,14 +62,13 @@ const actions = {
             var data = new FormData();
             data.append("json", JSON.stringify(credentials));
             console.log(credentials);
-            fetch("http://localhost/Portal/enroll/backend/Base/register.php", {
+            fetch(url + "/backend/register.php", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                 },
                 body: data
             }).then((response) => response.json()).then((res) => {
-                console.log(res);
                 context.commit(SET_AUTH, res);
                 resolve(data);
             }).catch(({ response }) => {
@@ -77,6 +77,7 @@ const actions = {
         });
     },
     [VERIFY_AUTH](context) {
+        /*
         if (JwtService.getToken()) {
             ApiService.setHeader();
             ApiService.get("verify")
@@ -88,15 +89,17 @@ const actions = {
                 });
         } else {
             context.commit(PURGE_AUTH);
-        }
+        }*/
     },
     [UPDATE_PASSWORD](context, payload) {
+        /*
         const password = payload;
 
         return ApiService.put("password", password).then(({ data }) => {
             context.commit(SET_PASSWORD, data);
             return data;
         });
+        */
     }
 };
 

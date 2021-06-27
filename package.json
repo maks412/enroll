@@ -14,6 +14,7 @@
         "@mdi/font": "^3.6.95",
         "@popperjs/core": "^2.4.0",
         "@riophae/vue-treeselect": "^0.4.0",
+        "@vue/cli-plugin-eslint": "^4.5.13",
         "animate.css": "^4.1.0",
         "apexcharts": "^3.19.0",
         "axios": "^0.21.1",
@@ -36,6 +37,7 @@
         "vue": "^2.6.11",
         "vue-apexcharts": "^1.5.3",
         "vue-axios": "^2.1.4",
+        "vue-cookies": "^1.7.4",
         "vue-cropperjs": "^4.1.0",
         "vue-highlight.js": "^3.1.0",
         "vue-i18n": "^8.17.4",
@@ -48,7 +50,6 @@
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^4.5.9",
-        "@vue/cli-plugin-eslint": "^4.5.9",
         "@vue/cli-service": "^4.5.9",
         "@vue/eslint-config-prettier": "^4.0.1",
         "babel-eslint": "^10.0.3",
