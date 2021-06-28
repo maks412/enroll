@@ -460,6 +460,8 @@ export default {
         mod: "page2",
         method: "set",
         action: "setAllData",
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
       },
       file: "",
     };
@@ -468,7 +470,13 @@ export default {
     var data_created = new FormData();
     data_created.append(
       "json",
-      JSON.stringify({ mod: "page2", method: "get", action: "getAllData" })
+      JSON.stringify({
+        mod: "page2",
+        method: "get",
+        action: "getAllData",
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
+      })
     );
     fetch("./backend/middle.php", {
       method: "POST",
@@ -562,71 +570,71 @@ export default {
     },
 
     press_country: function () {
-      get_address(0, "country", this.form.country);
+      this.get_address(0, "country", this.form.country);
     },
     press_province: function () {
-      get_address(1, "province", this.form.province);
+      this.get_address(1, "province", this.form.province);
     },
     press_region: function () {
-      get_address(2, "region", this.form.region);
+      this.get_address(2, "region", this.form.region);
     },
     press_city: function () {
-      get_address(3, "city", this.form.city);
+      this.get_address(3, "city", this.form.city);
+    },
+
+    get_address: function (index, type1, value) {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          mod: "page2",
+          method: "get",
+          action: "getAddress",
+          type: index,
+          pid: value,
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (type1 == "country") {
+            this.form.province = res.province.selected_id;
+            this.province = res.province.list;
+            this.form.region = res.region.selected_id;
+            this.region = res.region.list;
+            this.form.city = res.city.selected_id;
+            this.city = res.city.list;
+            this.form.school = res.school.selected_id;
+            this.school = res.school.list;
+          }
+          if (type1 == "province") {
+            this.form.region = res.region.selected_id;
+            this.region = res.region.list;
+            this.form.city = res.city.selected_id;
+            this.city = res.city.list;
+            this.form.school = res.school.selected_id;
+            this.school = res.school.list;
+          }
+          if (type1 == "region") {
+            this.form.city = res.city.selected_id;
+            this.city = res.city.list;
+            this.form.school = res.school.selected_id;
+            this.school = res.school.list;
+          }
+          if (type1 == "city") {
+            this.form.school = res.school.selected_id;
+            this.school = res.school.list;
+          }
+        });
     },
   },
 };
-
-function get_address(index, type, value) {
-  var data_created = new FormData();
-  data_created.append(
-    "json",
-    JSON.stringify({
-      mod: "page2",
-      method: "get",
-      action: "getAddress",
-      type: index,
-      pid: value,
-    })
-  );
-  fetch(url + "/backend/middle.php", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Access-Token": this.$cookies.get("token"),
-      "Access-Email": this.$cookies.get("email"),
-    },
-    body: data_created,
-  })
-    .then((response) => response.json())
-    .then((res) => {
-      if (type == "country") {
-        this.form.province = res.province.selected_id;
-        this.province = res.province.list;
-        this.form.region = res.region.selected_id;
-        this.region = res.region.list;
-        this.form.city = res.city.selected_id;
-        this.city = res.city.list;
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
-      }
-      if (type == "province") {
-        this.form.region = res.region.selected_id;
-        this.region = res.region.list;
-        this.form.city = res.city.selected_id;
-        this.city = res.city.list;
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
-      }
-      if (type == "region") {
-        this.form.city = res.city.selected_id;
-        this.city = res.city.list;
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
-      }
-      if (type == "city") {
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
-      }
-    });
-}
 </script>
