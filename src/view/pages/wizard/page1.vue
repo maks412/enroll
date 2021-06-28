@@ -563,7 +563,11 @@ export default {
     submit: function (e) {
       e.preventDefault();
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify(this.form));
+      data_created.append("json", JSON.stringify({
+        data: this.form,
+        token: this.$cookies.get('token'),
+        email: this.$cookies.get('email')
+      }));
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -574,14 +578,13 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 0) {
-              Swal.fire({
-                title: "",
-                text: res.message,
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false,
-              });
-            
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              heightAuto: false,
+            })
           }
           if (res.code == 1) {
             Swal.fire({
@@ -592,18 +595,21 @@ export default {
             });
             this.$router.push({ name: "/home/2" });
           }
-          
         });
     },
     loadData() {
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify({ mod: "page1", method: "get", action: "getAllData" }));
+      data_created.append("json", JSON.stringify({ 
+        mod: "page1", 
+        method: "get", 
+        action: "getAllData",
+        token: this.$cookies.get('token'),
+        email: this.$cookies.get('email')
+      }));
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
-          Accept: "application/json",
-          'Access-Token': this.$cookies.get('token'),
-          'Access-Email': this.$cookies.get('email')
+          Accept: "application/json"
         },
         body: data_created,
       })
