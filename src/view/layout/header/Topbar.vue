@@ -4,10 +4,7 @@
     <!--begin: Language bar -->
     <div class="topbar-item">
       <span class="symbol symbol-35" :class="'symbol-light-'+status_color">
-        <span
-          class="symbol-label font-size-h5 font-weight-bold"
-          style="width: fit-content; padding: 0 5px; margin-right: 20px"
-        >
+        <span  class="symbol-label font-size-h6 font-weight-bold">
           {{status}}
         </span>
       </span>
@@ -160,10 +157,18 @@ export default {
   }, 
 }
 
+var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+
 function get_user(){
     var data_created = new FormData();
-      data_created.append("json", JSON.stringify({ mod: "user",method: "get", action: "getAllData"}));
-      fetch("./backend/middle.php", {
+      data_created.append("json", JSON.stringify({ 
+        mod: "user",
+        method: "get", 
+        action: "getAllData",
+        token: this.$cookies.get('token'),
+        email: this.$cookies.get('email')
+      }));
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
