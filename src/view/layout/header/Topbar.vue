@@ -1,16 +1,12 @@
 <template>
-  <!-- begin:: Header Topbar -->
   <div class="topbar">
-    <!--begin: Language bar -->
-    <div class="topbar-item">
-      <span class="symbol symbol-35" :class="'symbol-light-'+status_color">
+    <div class="topbar-item mr-4">
+      <span class="btn" :class="'btn-light-'+status_color">
         <span  class="symbol-label font-size-h6 font-weight-bold">
           {{status}}
         </span>
       </span>
     </div>
-
-    <!-- mask koooos language -->
 
     <div class="topbar-item">
       <b-dropdown
@@ -53,9 +49,9 @@
             <!-- <inline-svg src="media/svg/icons/Media/Equalizer.svg" /> -->
 
             <span
-              class="text-dark-50 font-weight-bolder font-size-base d-md-inline mr-3"
+              class="text-dark-50 font-weight-bolder font-size-base d-md-inline mr-4 ml-4"
             >
-              {{ currentUser.email }}
+              {{ userEmail }}
             </span>
           </span>
         </div>
@@ -97,13 +93,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import KTSearchDefault from "@/view/layout/extras/dropdown/SearchDefault.vue";
-// import KTDropdownNotification from "@/view/layout/extras/dropdown/DropdownNotification.vue";
+
 import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAction.vue";
-// import KTDropdownMyCart from "@/view/layout/extras/dropdown/DropdownMyCart.vue";
 import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
-// import KTQuickUser from "@/view/layout/extras/offcanvas/QuickUser.vue";
-// import KTQuickPane l from "@/view/layout/extras/offcanvas/QuickPanel.vue";
 import i18nService from "@/core/services/i18n.service.js";
 
 export default {
@@ -119,14 +111,8 @@ export default {
     };
   },
   components: {
-    // KTSearchDefault,
-    // KTDropdownNotification,
-
-    // KTDropdownMyCart,
     KTDropdownLanguage,
-    // KTQuickUser,
-    KTDropdownQuickAction,
-    // KTQuickPanel
+    KTDropdownQuickAction
   },
   methods: {
     onLanguageChanged() {
@@ -143,30 +129,30 @@ export default {
 
     getFullName() {
       return (
-        this.currentUserPersonalInfo.name +
-        " " +
-        this.currentUserPersonalInfo.surname
+        this.currentUserPersonalInfo.name + " " + this.currentUserPersonalInfo.surname
       );
     },
+    userEmail(){
+      return this.$cookies.get('email')
+    }
   },
 
   async created(){
-
-      get_user();
-    
-  }, 
+    var cookie = this.$cookies
+    get_user(cookie);
+  }
 }
 
 var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
 
-function get_user(){
+function get_user(cookie){
     var data_created = new FormData();
       data_created.append("json", JSON.stringify({ 
         mod: "user",
         method: "get", 
         action: "getAllData",
-        token: this.$cookies.get('token'),
-        email: this.$cookies.get('email')
+        token: cookie.get('token'),
+        email: cookie.get('email')
       }));
       fetch(url + "/backend/middle.php", {
         method: "POST",
@@ -187,7 +173,6 @@ function get_user(){
           if(res.status == "Confirmed") this.status_color = "success";
 
           this.back_special = res.speciality;
-          /////////////
         });
   }
 </script>

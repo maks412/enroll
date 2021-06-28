@@ -19,6 +19,10 @@ export const getToken = () => {
   return readCookie('token') != null ? true : false
 };
 
+export const getEmail = () => {
+  return readCookie('email') != null ? readCookie('email') : ''
+}
+
 export const saveToken = token => {
   window.localStorage.setItem(ID_TOKEN_KEY, token);
 };
@@ -28,4 +32,4 @@ export const destroyToken = () => {
   delete_cookie('email');
 };
 
-export default { getToken, saveToken, destroyToken };
+export default { getToken, saveToken, destroyToken, getEmail };

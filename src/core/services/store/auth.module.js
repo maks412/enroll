@@ -19,7 +19,9 @@ export const SET_ERROR = "setError";
 var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
 
 const state = {
-    user: {},
+    user: {
+        email: JwtService.getEmail()
+    },
     errors: null,
     isAuthenticated: JwtService.getToken()
 };
