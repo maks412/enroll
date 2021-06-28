@@ -571,9 +571,7 @@ export default {
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
-          Accept: "application/json",
-          'Access-Token': this.$cookies.get('token'),
-          'Access-Email': this.$cookies.get('email')
+          Accept: "application/json"
         },
         body: data_created,
       })
