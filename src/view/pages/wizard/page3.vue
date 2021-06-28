@@ -348,6 +348,8 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
+
 export default {
   data() {
     return {
@@ -405,16 +407,18 @@ export default {
       "json",
       JSON.stringify({ mod: "page3", method: "get", action: "getAllData" })
     );
-    fetch("./backend/middle.php", {
+    fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
+        "Access-Token": this.$cookies.get("token"),
+        "Access-Email": this.$cookies.get("email"),
       },
       body: data_created,
     })
       .then((response) => response.json())
       .then((res) => {
-        this.register_address_country_options =res.register_country.list;
+        this.register_address_country_options = res.register_country.list;
         this.current_address_country_options = res.current_country.list;
 
         this.form.phone = res.phone;
@@ -466,10 +470,12 @@ export default {
       e.preventDefault();
       var data_created = new FormData();
       data_created.append("json", JSON.stringify(this.form));
-      fetch("./backend/middle.php", {
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
+          "Access-Token": this.$cookies.get("token"),
+          "Access-Email": this.$cookies.get("email"),
         },
         body: data_created,
       })
@@ -578,10 +584,12 @@ export default {
           pid: value,
         })
       );
-      fetch("./backend/middle.php", {
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
+          'Access-Token': this.$cookies.get('token'),
+          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })

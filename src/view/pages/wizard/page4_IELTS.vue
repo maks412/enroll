@@ -44,13 +44,12 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page5.eng_test_info')}}<br />
-                      
+                      {{ $t("page5.eng_test_info") }}<br />
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page5.eng_certificate')}}</label>
+                          <label>{{ $t("page5.eng_certificate") }}</label>
                           <b-form-select
                             v-model="form.english_certificate"
                             :options="english_certificate_options"
@@ -62,7 +61,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label> {{$t('page5.certificate_num')}}</label>
+                          <label> {{ $t("page5.certificate_num") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -74,7 +73,7 @@
 
                     <div class="row">
                       <div class="col-xl-6">
-                        <label>{{$t('page5.upload_certificate')}}</label>
+                        <label>{{ $t("page5.upload_certificate") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.certificate_upload"
@@ -88,7 +87,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -104,7 +108,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        {{$t('common.previous')}}
+                        {{ $t("common.previous") }}
                       </button>
                     </div>
                     <div>
@@ -113,13 +117,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        {{$t('common.submit')}}
+                        {{ $t("common.submit") }}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        {{$t('common.next_step')}}
+                        {{ $t("common.next_step") }}
                       </button>
                     </div>
                   </div>
@@ -147,6 +151,8 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
+
 export default {
   data() {
     return {
@@ -161,19 +167,25 @@ export default {
         method: "set",
         action: "setAllData",
       },
-      file:''
+      file: "",
     };
   },
   async created() {
     var data_created = new FormData();
     data_created.append(
       "json",
-      JSON.stringify({ mod: "page4_ielts", method: "get", action: "getAllData" })
+      JSON.stringify({
+        mod: "page4_ielts",
+        method: "get",
+        action: "getAllData",
+      })
     );
-    fetch("./backend/middle.php", {
+    fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
+        "Access-Token": this.$cookies.get("token"),
+        "Access-Email": this.$cookies.get("email"),
       },
       body: data_created,
     })
@@ -214,10 +226,12 @@ export default {
       e.preventDefault();
       var data_created = new FormData();
       data_created.append("json", JSON.stringify(this.form));
-      fetch("./backend/middle.php", {
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
+          'Access-Token': this.$cookies.get('token'),
+          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })

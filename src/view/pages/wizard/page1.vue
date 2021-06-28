@@ -572,6 +572,8 @@ export default {
         method: "POST",
         headers: {
           Accept: "application/json",
+          'Access-Token': this.$cookies.get('token'),
+          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })

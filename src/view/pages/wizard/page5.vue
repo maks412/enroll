@@ -372,6 +372,8 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
+var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+
 export default {
   data() {
     return {
@@ -408,10 +410,12 @@ export default {
   async created() {
     var data_created = new FormData();
     data_created.append("json", JSON.stringify({ mod: "page5", method: "get", action: "getAllData" }));
-    fetch("./backend/middle.php", {
+    fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
+        'Access-Token': this.$cookies.get('token'),
+        'Access-Email': this.$cookies.get('email')
       },
       body: data_created,
     })
@@ -451,10 +455,12 @@ export default {
       e.preventDefault();
       var data_created = new FormData();
       data_created.append("json", JSON.stringify(this.form));
-      fetch("./backend/middle.php", {
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
+          'Access-Token': this.$cookies.get('token'),
+          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })
