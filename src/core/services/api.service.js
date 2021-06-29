@@ -5,19 +5,19 @@ import JwtService from "@/core/services/jwt.service";
 import VueCookies from 'vue-cookies'
 
 var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
-/**
- * Service to call HTTP request via Axios
- */
+    /**
+     * Service to call HTTP request via Axios
+     */
 const ApiService = {
     init() {
         Vue.use(VueAxios, axios);
         Vue.axios.defaults.baseURL = "http://localhost";
     },
 
-    fetchit(resource, params, method = 'POST'){
+    fetchit(resource, params, method = 'POST') {
         var data = new FormData();
         var baseit = url + resource;
-        
+
         data.append("json", JSON.stringify({
             data: params,
             email: VueCookies.get('email'),

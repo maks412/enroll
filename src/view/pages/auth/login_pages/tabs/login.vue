@@ -96,6 +96,7 @@ export default {
         },
         body: data
       }).then((response) => response.json()).then((res) => {
+        
         if (res.CODE != null && res.CODE == "101") {
           this.$cookies.set('email', res.email);
           this.$cookies.set('token', res.token);

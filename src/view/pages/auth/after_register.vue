@@ -12,9 +12,13 @@
           <div class="card-body p-0">
             <div class="row justify-content-center py-0 px-0 py-lg-0 px-lg-10">
               <div class="col-xl-12 col-xxl-7">
-                <div class="card card-custom card-shadowless rounded-top-0 after_register_p">
+                <div
+                  class="card card-custom card-shadowless rounded-top-0 after_register_p"
+                >
                   <div class="pb-13 pt-lg-0 pt-5">
-                    <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
+                    <h3
+                      class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
+                    >
                       Registration Requirements
                     </h3>
                     <span class="text-muted font-weight-bold font-size-h4">
@@ -43,7 +47,13 @@
                         Choose Education Program
                       </p>
                       <div class="form-group">
-                        <b-tabs pills card fill v-model="form.tabDegree" @input="change_speciality">
+                        <b-tabs
+                          pills
+                          card
+                          fill
+                          v-model="form.tabDegree"
+                          @input="change_speciality"
+                        >
                           <template>
                             <b-tab
                               v-for="(d, index) in degree"
@@ -232,7 +242,7 @@ import {
   REMOVE_BODY_CLASSNAME,
 } from "@/core/services/store/htmlclass.module.js";
 
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
   name: "Layout",
@@ -344,17 +354,31 @@ export default {
       show: true,
       Interview_div: "inline",
       Admin_Interview_div: "none",
+
+      token: this.$cookies.get('token'),
+      email: this.$cookies.get('email'),
+
+      mod: "set_require",
+      method: "set",
+      action: "getAllData",
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ action: "getAllData" }));
-    fetch(url + "/backend/Get/get_require.php", {
+    data_created.append(
+      "json",
+      JSON.stringify({
+        mod: "get_require",
+        method: "get",
+        action: "getAllData",
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
+      })
+    );
+    fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        'Access-Token': this.$cookies.get('token'),
-        'Access-Email': this.$cookies.get('email')
       },
       body: data_created,
     })
@@ -374,6 +398,8 @@ export default {
         if (res.degree.value == "B") this.form.tabDegree = 0;
         if (res.degree.value == "M") this.form.tabDegree = 1;
         if (res.degree.value == "D") this.form.tabDegree = 2;
+
+        this.$cookies.set('token', res.token);
       });
   },
   methods: {
@@ -382,12 +408,12 @@ export default {
       //alert(JSON.stringify(this.form));
       var data_send = new FormData();
       data_send.append("json", JSON.stringify(this.form));
-      fetch(url + "/backend/Set/set_require.php", {
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          'Access-Token': this.$cookies.get('token'),
-          'Access-Email': this.$cookies.get('email')
+          "Access-Token": this.$cookies.get("token"),
+          "Access-Email": this.$cookies.get("email"),
         },
         body: data_send,
       })
@@ -419,7 +445,6 @@ export default {
       if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";
     },
     change_speciality: function () {
-      
       //a4 - second higher education
       //a6 - shortoned
       //a8 - full
@@ -433,8 +458,7 @@ export default {
         this.show_speciality = this.speciality.D;
       }
     },
-    change_bach_speciality: function(){
-      
+    change_bach_speciality: function () {
       this.OnChange_paid();
       if (this.form.tab_bachDegree == 0) {
         this.show_speciality = this.speciality.B.a8;
@@ -445,7 +469,7 @@ export default {
       if (this.form.tab_bachDegree == 2) {
         this.show_speciality = this.speciality.B.a4;
       }
-    }
+    },
   },
 };
 </script>
