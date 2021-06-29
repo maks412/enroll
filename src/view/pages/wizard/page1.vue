@@ -474,7 +474,7 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+import ApiService from '@/core/services/api.service.js'
 
 export default {
   data() {
@@ -598,21 +598,11 @@ export default {
         });
     },
     loadData() {
-      var data_created = new FormData();
-      data_created.append("json", JSON.stringify({ 
+      ApiService.fetchit("/backend/middle.php", {
         mod: "page1", 
         method: "get", 
-        action: "getAllData",
-        token: this.$cookies.get('token'),
-        email: this.$cookies.get('email')
-      }));
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json"
-        },
-        body: data_created,
-      })
+        action: "getAllData"
+      }, 'POST')
         .then((response) => response.json())
         .then((res) => {
           this.form.citizenship = res.citizenship;
