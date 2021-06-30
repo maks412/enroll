@@ -524,7 +524,7 @@ export default {
           pid: value,
         })
       );
-      fetch("./backend/middle.php", {
+      fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",

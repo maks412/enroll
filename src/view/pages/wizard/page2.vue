@@ -478,7 +478,7 @@ export default {
         email: this.$cookies.get("email"),
       })
     );
-    fetch("./backend/middle.php", {
+    fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",

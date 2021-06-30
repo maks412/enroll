@@ -476,6 +476,8 @@ import Swal from "sweetalert2";
 
 import ApiService from '@/core/services/api.service.js'
 
+var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+
 export default {
   data() {
     return {
@@ -530,7 +532,7 @@ export default {
       file:''
     };
   },
-  created() {
+  async created() {
     this.loadData();
   },
   name: "Wizard-4",
@@ -597,14 +599,23 @@ export default {
           }
         });
     },
+
     loadData() {
-      ApiService.fetchit("/backend/middle.php", {
-        mod: "page1", 
-        method: "get", 
-        action: "getAllData"
-      }, 'POST')
-        .then((response) => response.json())
+      var data_created = new FormData();
+      data_created.append("json", JSON.stringify({
+        data: {mod: "page1", method: "get", action: "getAllData"},
+        token: this.$cookies.get('token'),
+        email: this.$cookies.get('email')
+      }));
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
+        body: data_created,
+      }).then((response) => response.json())
         .then((res) => {
+          console.log(res);
           this.form.citizenship = res.citizenship;
           this.form.birthday = res.birthday;
           this.form.gender = res.gender;
