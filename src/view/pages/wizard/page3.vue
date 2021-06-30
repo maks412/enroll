@@ -483,8 +483,6 @@ export default {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Access-Token": this.$cookies.get("token"),
-          "Access-Email": this.$cookies.get("email"),
         },
         body: data_created,
       })
@@ -521,7 +519,7 @@ export default {
       this.get_address(2, "region", this.form.current_address_region);
     },
 
-    get_address: function (index, type, value) {
+    get_address: function (index, type1, value) {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -546,21 +544,21 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          if (type == "country") {
+          if (type1 == "country") {
             this.form.current_address_province = res.province.selected_id;
-            this.current_address_province = res.province.list;
+            this.current_address_province_options = res.province.list;
             this.form.current_address_region = res.region.selected_id;
             this.current_address_region_options = res.region.list;
             this.form.current_address_city = res.city.selected_id;
             this.current_address_city_options = res.city.list;
           }
-          if (type == "province") {
+          if (type1 == "province") {
             this.form.current_address_region = res.region.selected_id;
             this.current_address_region_options = res.region.list;
             this.form.current_address_city = res.city.selected_id;
             this.current_address_city_options = res.city.list;
           }
-          if (type == "region") {
+          if (type1 == "region") {
             this.form.current_address_city = res.city.selected_id;
             this.current_address_city_options = res.city.list;
           }
@@ -574,7 +572,7 @@ export default {
         this.form.register_address_country
       );
     },
-    press_register_rovince: function () {
+    press_register_province: function () {
       this.get_register_address(
         1,
         "province",
@@ -605,8 +603,6 @@ export default {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Access-Token": this.$cookies.get("token"),
-          "Access-Email": this.$cookies.get("email"),
         },
         body: data_created,
       })
@@ -614,7 +610,7 @@ export default {
         .then((res) => {
           if (type == "country") {
             this.form.register_address_province = res.province.selected_id;
-            this.register_address_province = res.province.list;
+            this.register_address_province_options = res.province.list;
             this.form.register_address_region = res.region.selected_id;
             this.register_address_region_options = res.region.list;
             this.form.register_address_city = res.city.selected_id;

@@ -44,7 +44,7 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page6.upload_med_doc')}}
+                      {{ $t("page6.upload_med_doc") }}
                     </h4>
 
                     <div>
@@ -61,7 +61,10 @@
                             variant="dark"
                             class="ml-1"
                           >
-                            + {{ $t('common.more_files',{num:names.length - 1}) }}
+                            +
+                            {{
+                              $t("common.more_files", { num: names.length - 1 })
+                            }}
                           </b-badge>
                         </template></b-form-file
                       >
@@ -72,12 +75,12 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page6.upload_achievements')}}
+                      {{ $t("page6.upload_achievements") }}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page6.spt_certificate_no')}}</label>
+                          <label>{{ $t("page6.spt_certificate_no") }}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -87,7 +90,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page6.spt_score')}}</label>
+                          <label>{{ $t("page6.spt_score") }}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -99,7 +102,7 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>{{$t('page6.upload_spt_certificate')}}</label>
+                        <label>{{ $t("page6.upload_spt_certificate") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.spt_upload"
@@ -113,7 +116,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -123,7 +131,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page6.inf_certificate_no')}}</label>
+                          <label>{{ $t("page6.inf_certificate_no") }}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -133,7 +141,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page6.inf_score')}}</label>
+                          <label>{{ $t("page6.inf_score") }}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
@@ -145,7 +153,7 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>{{$t('page6.upload_inf_certificate')}}</label>
+                        <label>{{ $t("page6.upload_inf_certificate") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.infomatrix_upload"
@@ -159,7 +167,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -171,12 +184,12 @@
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page6.upload_payment_doc')}}
+                      {{ $t("page6.upload_payment_doc") }}
                     </h4>
 
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>{{$t('page6.upload_stud_fee')}}</label>
+                        <label>{{ $t("page6.upload_stud_fee") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.student_fee"
@@ -190,7 +203,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -199,7 +217,7 @@
                     <hr />
                     <div class="row">
                       <div class="col-xl-8">
-                        <label>{{$t('page6.upload_tut_fee')}}</label>
+                        <label>{{ $t("page6.upload_tut_fee") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.tuition_fee"
@@ -213,7 +231,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -222,9 +245,7 @@
                     <hr />
                     <div class="row">
                       <div class="col-xl-8">
-                        <label
-                          >{{$t('page6.upload_eng')}}</label
-                        >
+                        <label>{{ $t("page6.upload_eng") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.eng_course"
@@ -238,7 +259,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -250,12 +276,14 @@
                   <!-- STEP 4 -->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page6.enter_add_doc_info')}}
+                      {{ $t("page6.enter_add_doc_info") }}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page6.creative_exam_referrence')}}</label>
+                          <label>{{
+                            $t("page6.creative_exam_referrence")
+                          }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -264,9 +292,9 @@
                         </div>
                       </div>
                       <div class="col-xl-6">
-                        <label
-                          >{{$t('page6.upload_creative_exam_referrence')}}</label
-                        >
+                        <label>{{
+                          $t("page6.upload_creative_exam_referrence")
+                        }}</label>
                         <b-form-file
                           multiple
                           v-model="form.creative_exam"
@@ -280,7 +308,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -290,7 +323,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page6.ped_test')}}</label>
+                          <label>{{ $t("page6.ped_test") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -299,9 +332,7 @@
                         </div>
                       </div>
                       <div class="col-xl-6">
-                        <label
-                          >{{$t('page6.upload_ped_test')}}</label
-                        >
+                        <label>{{ $t("page6.upload_ped_test") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.eng_course"
@@ -315,7 +346,13 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1}) }} More files
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
+                              More files
                             </b-badge>
                           </template></b-form-file
                         >
@@ -329,7 +366,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        {{$t('common.previous')}}
+                        {{ $t("common.previous") }}
                       </button>
                     </div>
                     <div>
@@ -338,13 +375,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        {{$t('common.submit')}}
+                        {{ $t("common.submit") }}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        {{$t('common.next_step')}}
+                        {{ $t("common.next_step") }}
                       </button>
                     </div>
                   </div>
@@ -372,16 +409,19 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
   data() {
     return {
       tabs: [
-        { title: this.$t('page6.med_doc'), desc:this.$t('page6.med_doc_d') },
-        { title: this.$t('page6.achievements'), desc: this.$t('page6.achievements_d') },
-        { title: this.$t('page6.payments'), desc: this.$t('page6.payments_d') },
-        { title: this.$t('page6.add_docs'), desc: this.$t('page6.add_docs_d') },
+        { title: this.$t("page6.med_doc"), desc: this.$t("page6.med_doc_d") },
+        {
+          title: this.$t("page6.achievements"),
+          desc: this.$t("page6.achievements_d"),
+        },
+        { title: this.$t("page6.payments"), desc: this.$t("page6.payments_d") },
+        { title: this.$t("page6.add_docs"), desc: this.$t("page6.add_docs_d") },
       ],
 
       form: {
@@ -402,20 +442,25 @@ export default {
 
         mod: "page5",
         method: "set",
-        action: "setAllData"
+        action: "setAllData",
       },
-      file:''
+      file: "",
     };
   },
   async created() {
     var data_created = new FormData();
-    data_created.append("json", JSON.stringify({ mod: "page5", method: "get", action: "getAllData" }));
+    data_created.append(
+      "json",
+      JSON.stringify({
+        data: { mod: "page5", method: "get", action: "getAllData" },
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
+      })
+    );
     fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        'Access-Token': this.$cookies.get('token'),
-        'Access-Email': this.$cookies.get('email')
       },
       body: data_created,
     })
@@ -454,27 +499,31 @@ export default {
     submit: function (e) {
       e.preventDefault();
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify(this.form));
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: this.form,
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          'Access-Token': this.$cookies.get('token'),
-          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 0) {
-              Swal.fire({
-                title: "",
-                text: res.message,
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false,
-              });
-            
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              heightAuto: false,
+            });
           }
           if (res.code == 1) {
             Swal.fire({
@@ -485,7 +534,6 @@ export default {
             });
             this.$router.push({ name: "/home/2" });
           }
-          
         });
     },
   },

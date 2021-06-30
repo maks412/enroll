@@ -175,17 +175,15 @@ export default {
     data_created.append(
       "json",
       JSON.stringify({
-        mod: "page4_ielts",
-        method: "get",
-        action: "getAllData",
+        data: { mod: "page4_ielts", method: "get", action: "getAllData" },
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
       })
     );
     fetch(url + "/backend/middle.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Access-Token": this.$cookies.get("token"),
-        "Access-Email": this.$cookies.get("email"),
       },
       body: data_created,
     })
@@ -225,13 +223,18 @@ export default {
     submit: function (e) {
       e.preventDefault();
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify(this.form));
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: this.form,
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          'Access-Token': this.$cookies.get('token'),
-          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })
