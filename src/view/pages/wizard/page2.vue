@@ -460,8 +460,7 @@ export default {
         mod: "page2",
         method: "set",
         action: "setAllData",
-        token: this.$cookies.get("token"),
-        email: this.$cookies.get("email"),
+        
       },
       file: "",
     };
@@ -471,9 +470,7 @@ export default {
     data_created.append(
       "json",
       JSON.stringify({
-        mod: "page2",
-        method: "get",
-        action: "getAllData",
+        data: { mod: "page2", method: "get", action: "getAllData" },
         token: this.$cookies.get("token"),
         email: this.$cookies.get("email"),
       })
@@ -536,7 +533,14 @@ export default {
     submit: function (e) {
       e.preventDefault();
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify(this.form));
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: this.form,
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
