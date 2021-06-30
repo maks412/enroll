@@ -6,7 +6,10 @@ export const locale = {
         "next_step": "Next step",
         "choose_file": "Choose a file or drop it here...",
         "drop_file": "Drop file here ...",
-        "more_files": "{num} More files"
+        "more_files": "{num} More files",
+        "yes": "Yes",
+        "no": "No",
+        "next": "Next"
     },
     aside: {
         "main_info": "Main Info",
@@ -127,8 +130,6 @@ export const locale = {
         "registered_address": "Registered Address",
         "mobile_phone": "Mobile Phone",
         "need_stud_house": "Do you need student house?",
-        "yes": "Yes",
-        "no": "No",
         "relative_information": "Relative Information",
         "enter_rel_info": "Enter your Relative Information",
         "relative_type": "Relative Type",
@@ -201,5 +202,19 @@ export const locale = {
         "check2": "I undertake to provide the original certificate / diploma, UNT certificate (if available), 6 photos of size 3 * 4, medical certificate 086 with fluorography, an identity card / passport before 08.20.2020 to the admission committee of the SDU.",
         "check3": "I confirm that all information on this site has been filled in correctly and reliably.",
         "check4": "I have been informed of the mandatory consent of the parents (legal representative) of the applicant under the age of 18) to conclude and sign the “Contract for the provision of paid / free educational services with the institution“ Suleyman Demirel University ”until 08.20.2021.",
+    },
+    after_reg: {
+        "reg_requirements": "Registration Requirements",
+        "basic_info": "Basic Information to Registration",
+        "choose_citizenship": "Choose Citizenship",
+        "choose_edu_prog": "Choose Education Program",
+        "choose_edu_type": "Choose Education Type",
+        "choose_spec": "Choose Speciality",
+        "choose_tui": "Choose Tuition Payment",
+        "have_ielts": "Do you have SDU English Entrance exam certificate or IELTS?",
+        "stud_interview": "Have you passed international students interview?",
+        "admission_interview": "Have you passed admission interview?",
+        "grant": "State Grant",
+        "paid": "Paid"
     }
 };

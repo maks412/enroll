@@ -6,7 +6,9 @@ export const locale = {
         "next_step": "Келесі",
         "choose_file": "Файл таңдаңыз ...",
         "drop_file": "Құжатты өшіру",
-        "more_files": "{num} құжаттар"
+        "more_files": "{num} құжаттар",
+        "yes": "Иә",
+        "no": "Жоқ",
     },
     aside: {
         "main_info": "Негізгі ақпарат",
@@ -127,8 +129,6 @@ export const locale = {
         "registered_address": "Тіркелген мекен-жай",
         "mobile_phone": "Ұлы телефон",
         "need_stud_house": "Сізге жатақана керек пе?",
-        "yes": "Иә",
-        "no": "Жоқ",
         "relative_information": "Туыс туралы ақпарат",
         "enter_rel_info": "Туыс туралы ақпарат енгізіңіз",
         "relative_type": "Туыс түрі",
