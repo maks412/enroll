@@ -364,9 +364,9 @@ export default {
         this.$t("page3.brother"),
       ],
       fields: [
-        this.$t("page3.relative_type"),
-        this.$t("page3.full_name"),
-        this.$t("page3.contact"),
+        {relative_type: this.$t("page3.relative_type")},
+        {full_name: this.$t("page3.full_name")},
+        {contact: this.$t("page3.contact")},
       ],
       rel_type: "",
       rel_name: "",
