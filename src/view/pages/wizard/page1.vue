@@ -43,13 +43,13 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page1.enter_acc_details')}}
+                      {{ $t("page1.enter_acc_details") }}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <!-- citizenship -->
                         <div class="form-group">
-                          <label>{{$t('page1.citizenship')}}</label>
+                          <label>{{ $t("page1.citizenship") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -58,16 +58,16 @@
                             disabled
                           />
                           <span class="form-text text-muted"
-                            ><a href="/#/after_register"
-                              >{{$t('page1.change_citizenship')}}</a
-                            ></span
+                            ><a href="/#/after_register">{{
+                              $t("page1.change_citizenship")
+                            }}</a></span
                           >
                         </div>
                       </div>
                       <!-- END citizenship -->
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.f_name')}}</label>
+                          <label>{{ $t("page1.f_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -75,30 +75,30 @@
                             v-model="form.fname"
                             required
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_f_name')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_f_name")
+                          }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.native_name')}}</label>
+                          <label>{{ $t("page1.native_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
                             v-model="form.nname"
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_n_f_name')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_n_f_name")
+                          }}</span>
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.last_name')}}</label>
+                          <label>{{ $t("page1.last_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -106,45 +106,45 @@
                             v-model="form.lname"
                             required
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_l_name')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_l_name")
+                          }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.native_last_name')}}</label>
+                          <label>{{ $t("page1.native_last_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nsurname"
                             v-model="form.nlname"
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_n_l_name')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_n_l_name")
+                          }}</span>
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.patronymic')}}</label>
+                          <label>{{ $t("page1.patronymic") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="patronymic"
                             v-model="form.patronymic"
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_patronymic')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_patronymic")
+                          }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
-                        <label>{{$t('page1.upload_pic')}}</label>
+                        <label>{{ $t("page1.upload_pic") }}</label>
                         <b-form-file
                           v-model="form.photo"
                           :state="Boolean(file)"
@@ -174,13 +174,13 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page1.enter_acc_details')}}
+                      {{ $t("page1.enter_acc_details") }}
                     </h4>
 
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.date_of_birth')}}</label>
+                          <label>{{ $t("page1.date_of_birth") }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -202,14 +202,14 @@
                               </b-input-group-append>
                             </b-input-group>
                           </div>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_date_of_birth')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_date_of_birth")
+                          }}</span>
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.nationality')}}</label>
+                          <label>{{ $t("page1.nationality") }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.nationality"
@@ -218,16 +218,16 @@
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_nationality')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_nationality")
+                          }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.gender')}}</label>
+                          <label>{{ $t("page1.gender") }}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.gender"
@@ -237,14 +237,14 @@
                               required
                             ></b-form-radio-group>
                           </b-form-group>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.choose_gender')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.choose_gender")
+                          }}</span>
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.married_status')}}</label>
+                          <label>{{ $t("page1.married_status") }}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.married"
@@ -255,16 +255,16 @@
                               required
                             ></b-form-radio-group>
                           </b-form-group>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.choose_married_status')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.choose_married_status")
+                          }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.social_status')}}</label>
+                          <label>{{ $t("page1.social_status") }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.social_status"
@@ -272,14 +272,14 @@
                               required
                             ></b-form-select>
                           </b-form-group>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.choose_social_status')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.choose_social_status")
+                          }}</span>
                         </div>
                       </div>
 
                       <div class="col-xl-6">
-                        <label>{{$t('page1.upload_status_document')}}</label>
+                        <label>{{ $t("page1.upload_status_document") }}</label>
                         <b-form-file
                           multiple
                           v-model="form.social_status_upload"
@@ -293,7 +293,12 @@
                               variant="dark"
                               class="ml-1"
                             >
-                              + {{ $t('common.more_files',{num:names.length - 1})}}
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
                             </b-badge>
                           </template></b-form-file
                         >
@@ -305,11 +310,11 @@
                   <!--begin: Wizard Step 3-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page1.enter_acc_details')}}
+                      {{ $t("page1.enter_acc_details") }}
                     </h4>
                     <div class="col-xl-6">
                       <div class="form-group">
-                        <label>{{$t('page1.doc_type')}}</label>
+                        <label>{{ $t("page1.doc_type") }}</label>
                         <b-form-group v-slot="{ ariaDescribedby }">
                           <b-form-radio-group
                             v-model="form.document_type"
@@ -320,15 +325,15 @@
                             required
                           ></b-form-radio-group>
                         </b-form-group>
-                        <span class="form-text text-muted"
-                          >{{$t('page1.choose_doc_type')}}</span
-                        >
+                        <span class="form-text text-muted">{{
+                          $t("page1.choose_doc_type")
+                        }}</span>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.iin')}}</label>
+                          <label>{{ $t("page1.iin") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -336,44 +341,44 @@
                             v-model="form.IIN"
                             required
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_iin')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_iin")
+                          }}</span>
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.doc_no')}}</label>
+                          <label>{{ $t("page1.doc_no") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.document_no"
                             required
                           />
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_doc_no')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_doc_no")
+                          }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.issued_by')}}</label>
+                          <label>{{ $t("page1.issued_by") }}</label>
                           <b-form-select
                             v-model="form.issued_by"
                             :options="issued_options"
                             required
                             size="lg"
                           ></b-form-select>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.select_issued_by')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.select_issued_by")
+                          }}</span>
                         </div>
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{$t('page1.issued_date')}}</label>
+                          <label>{{ $t("page1.issued_date") }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -395,9 +400,9 @@
                               </b-input-group-append>
                             </b-input-group>
                           </div>
-                          <span class="form-text text-muted"
-                            >{{$t('page1.enter_issued_date')}}</span
-                          >
+                          <span class="form-text text-muted">{{
+                            $t("page1.enter_issued_date")
+                          }}</span>
                         </div>
                       </div>
                     </div>
@@ -416,7 +421,10 @@
                             class="ml-1"
                             required
                           >
-                            + {{ $t('common.more_files',{num:names.length - 1})}}
+                            +
+                            {{
+                              $t("common.more_files", { num: names.length - 1 })
+                            }}
                           </b-badge>
                         </template></b-form-file
                       >
@@ -431,7 +439,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        {{$t('common.previous')}}
+                        {{ $t("common.previous") }}
                       </button>
                     </div>
                     <div>
@@ -440,13 +448,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        {{$t('common.submit')}}
+                        {{ $t("common.submit") }}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        {{$t('common.next_step')}}
+                        {{ $t("common.next_step") }}
                       </button>
                     </div>
                   </div>
@@ -474,9 +482,9 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
-import ApiService from '@/core/services/api.service.js'
+import ApiService from "@/core/services/api.service.js";
 
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
   data() {
@@ -527,9 +535,9 @@ export default {
 
         mod: "page1",
         method: "set",
-        action: "setAllData"
+        action: "setAllData",
       },
-      file:''
+      file: "",
     };
   },
   async created() {
@@ -565,15 +573,18 @@ export default {
     submit: function (e) {
       e.preventDefault();
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify({
-        data: this.form,
-        token: this.$cookies.get('token'),
-        email: this.$cookies.get('email')
-      }));
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: this.form,
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
-          Accept: "application/json"
+          Accept: "application/json",
         },
         body: data_created,
       })
@@ -586,7 +597,7 @@ export default {
               icon: "error",
               confirmButtonClass: "btn btn-secondary",
               heightAuto: false,
-            })
+            });
           }
           if (res.code == 1) {
             Swal.fire({
@@ -602,18 +613,22 @@ export default {
 
     loadData() {
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify({
-        data: {mod: "page1", method: "get", action: "getAllData"},
-        token: this.$cookies.get('token'),
-        email: this.$cookies.get('email')
-      }));
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { mod: "page1", method: "get", action: "getAllData" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
-          Accept: "application/json"
+          Accept: "application/json",
         },
         body: data_created,
-      }).then((response) => response.json())
+      })
+        .then((response) => response.json())
         .then((res) => {
           console.log(res);
           this.form.citizenship = res.citizenship;
@@ -623,7 +638,7 @@ export default {
           this.form.document_type = res.document_type;
           this.form.IIN = res.IIN;
           this.form.document_no = res.document_no;
-          this.form.issued_by = res.issued_by;
+          this.form.issued_by = res.issued_by.selected_id;
           this.form.issued_date = res.issued_date;
           this.form.fname = res.fname;
           this.form.lname = res.lname;
@@ -631,6 +646,7 @@ export default {
           this.form.nlname = res.nlname;
           this.form.patronymic = res.patronymic;
 
+          this.issued_options = res.issued_by.list;
           this.nationality = res.nationality.list;
           this.social_status = res.social_status.list;
           this.form.nationality = res.nationality.selected_id;

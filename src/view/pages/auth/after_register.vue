@@ -237,6 +237,7 @@ import HtmlClass from "@/core/services/htmlclass.service";
 import KTStickyToolbar from "@/view/layout/extras/StickyToolbar.vue";
 import KTScrollTop from "@/view/layout/extras/ScrollTop";
 import Loader from "@/view/content/Loader.vue";
+import TokenService from "@/core/services/jwt.service.js";
 import {
   ADD_BODY_CLASSNAME,
   REMOVE_BODY_CLASSNAME,
@@ -263,7 +264,7 @@ export default {
   },
   mounted() {
     // check if current user is authenticated
-    if (!this.isAuthenticated) {
+    if (!TokenService.getToken()) {
       this.$router.push({ name: "login" });
     }
 
