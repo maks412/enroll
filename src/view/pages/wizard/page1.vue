@@ -503,8 +503,8 @@ export default {
         { text: this.$t("page1.married"), value: "married" },
       ],
       document_options: [
-        { text: this.$t("page1.id"), value: "ID" },
-        { text: this.$t("page1.passport"), value: "passport" },
+        { text: this.$t("page1.id"), value: "22" },
+        { text: this.$t("page1.passport"), value: "7" },
       ],
       issued_options: [
         { text: this.$t("page1.ministry"), value: "ministry" },
