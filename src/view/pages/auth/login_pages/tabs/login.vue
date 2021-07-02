@@ -109,11 +109,11 @@ export default {
           })
 
           if(res.AFTER_REG == '1'){
-            
+            location.replace('/after_register');
           }
           else{
-            this.$router.push("/after_register");
-            //location.reload();
+            //this.$router.push("/after_register");
+            location.reload();
           }
         }else{
           Swal.fire({
