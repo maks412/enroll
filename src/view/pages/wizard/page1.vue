@@ -152,6 +152,8 @@
                           :drop-placeholder="$t('common.drop_file')"
                           @change="previewImage"
                         ></b-form-file>
+
+                        
                       </div>
 
                       <div class="col-xl-6">
@@ -483,10 +485,13 @@ import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
 import ApiService from "@/core/services/api.service.js";
+import compress from "compress-base64";
+import Button from '../vue-bootstrap/Button.vue';
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
+  components: { Button },
   data() {
     return {
       tabs: [
@@ -513,9 +518,8 @@ export default {
       nationality: [],
       social_status: [],
       preview: null,
-      image: null,
+      photo: null,
       form: {
-        photo: null,
         citizenship: "",
         birthday: "",
         nationality: null,
@@ -609,6 +613,27 @@ export default {
             this.$router.push({ name: "/home/2" });
           }
         });
+
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { method: "upload", action: "setImage", docid: "7", upload: this.photo },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+        });
     },
 
     loadData() {
@@ -630,7 +655,6 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
           this.form.citizenship = res.citizenship;
           this.form.birthday = res.birthday;
           this.form.gender = res.gender;
@@ -652,7 +676,7 @@ export default {
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
 
-          this.form.photo = res.photo;
+          // this.photo = res.photo;
         });
     },
 
@@ -661,78 +685,34 @@ export default {
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
-          console.log("onload1");
-          //const imgElement = document.createElement("img");
-          //imgElement.src = event.target.result;
-          this.preview = event.target.result;
-          // imgElement.onload = function (e) {
-          //   const canvas = document.createElement("canvas");
-          //   const MAX_WIDTH = 400;
-
-          //   const scaleSize = MAX_WIDTH / e.target.width;
-          //   canvas.width = MAX_WIDTH;
-          //   canvas.height = e.target.height * scaleSize;
-
-          //   const ctx = canvas.getContext("2d");
-
-          //   ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
-
-          //   const srcEncoded = ctx.canvas.toDataURL(e.target, "image/jpeg");
-          //   // you can send srcEncoded to the server
-          //   //this.form.photo = srcEncoded;
-          //   this.form.photo = base64ToFile(srcEncoded);
-          //   console.log("this.form.photo");
-          //   pickFile();
-          //   //console.log(srcEncoded);
-          // };
+          compress(event.target.result, {
+            width: 400,
+            type: "image/jpg", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            this.preview = result;
+            this.dataURLtoFile(result);
+            console.log(this.photo);
+          });
         };
-
-        //this.preview = e.target.result;
-
-        this.image = input.files[0];
         reader.readAsDataURL(input.files[0]);
       }
+    },
 
-      // const reader = new FileReader();
+    dataURLtoFile: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
 
-      // reader.readAsDataURL(event.target.result);
-      // console.log("start");
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.photo = new File([u8arr], { type: mime });
     },
   },
 };
-
-// function base64ToFile(dataURI) {
-//   var byteString, mimestring;
-
-//   if (dataURI.split(",")[0].indexOf("base64") !== -1) {
-//     byteString = atob(dataURI.split(",")[1]);
-//   } else {
-//     byteString = decodeURI(dataURI.split(",")[1]);
-//   }
-//   mimestring = dataURI.split(",")[0].split(":")[1].split(";")[0];
-
-//   var content = new Array();
-//   for (var i = 0; i < byteString.length; i++) {
-//     content[i] = byteString.charCodeAt(i);
-//   }
-//   //var uarray = new Uint8Array(content);
-//   var newFile = new File([new Uint8Array(content)], "sdu.jpeg", {
-//     type: mimestring,
-//   });
-//   // Copy props set by the dropzone in the original file
-//   this.form.photo = newFile;
-//   return newFile;
-// }
-
-// function pickFile() {
-//   let input = this.form.photo;
-//   let file = input.files;
-//   if (file && file[0]) {
-//     let reader = new FileReader();
-//     reader.onload = (e) => {
-//       this.preview = e.target.result;
-//     };
-//     reader.readAsDataURL(file[0]);
-//   }
-// }
 </script>

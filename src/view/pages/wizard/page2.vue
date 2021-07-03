@@ -459,6 +459,10 @@ export default {
 
         this.form.country = res.country.selected_id;
         this.country = res.country.list;
+        this.form.province = res.province.selected_id;
+        this.province = res.province.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
       });
   },
   name: "Wizard-4",

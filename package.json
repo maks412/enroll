@@ -22,6 +22,7 @@
         "bootstrap": "^4.5.0",
         "bootstrap-vue": "^2.13.0",
         "clipboard": "^2.0.6",
+        "compress-base64": "^1.0.2",
         "core-js": "^3.6.5",
         "deepmerge": "^4.2.2",
         "highlight.js": "^9.18.1",
