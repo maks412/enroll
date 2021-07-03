@@ -146,7 +146,7 @@
                       <div class="col-xl-6">
                         <label>{{ $t("page1.upload_pic") }}</label>
                         <b-form-file
-                          v-model="form.photo"
+                          v-model="photo"
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
                           :drop-placeholder="$t('common.drop_file')"
@@ -618,11 +618,12 @@ export default {
       data_created.append(
         "json",
         JSON.stringify({
-          data: { method: "upload", action: "setImage", docid: "7", upload: this.photo },
+          data: { method: "upload", action: "setImage", docid: "22", upload: this.photo },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
+      data_created.append("file", this.photo);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -681,7 +682,9 @@ export default {
     },
 
     previewImage: function (e) {
+      console.log(this.photo);
       var input = e.target;
+
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
@@ -693,6 +696,7 @@ export default {
             quality: 0.8,
           }).then((result) => {
             this.preview = result;
+            //this.photo = result;
             this.dataURLtoFile(result);
             console.log(this.photo);
           });
@@ -711,7 +715,7 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photo = new File([u8arr], { type: mime });
+      this.photo = new Blob([u8arr], { type: mime });
     },
   },
 };
