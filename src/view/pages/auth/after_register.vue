@@ -235,6 +235,7 @@ import HtmlClass from "@/core/services/htmlclass.service";
 import KTStickyToolbar from "@/view/layout/extras/StickyToolbar.vue";
 import KTScrollTop from "@/view/layout/extras/ScrollTop";
 import Loader from "@/view/content/Loader.vue";
+import TokenService from "@/core/services/jwt.service.js";
 import {
   ADD_BODY_CLASSNAME,
   REMOVE_BODY_CLASSNAME,
@@ -261,7 +262,7 @@ export default {
   },
   mounted() {
     // check if current user is authenticated
-    if (!this.isAuthenticated) {
+    if (!TokenService.getToken()) {
       this.$router.push({ name: "login" });
     }
 
@@ -353,8 +354,8 @@ export default {
       Interview_div: "inline",
       Admin_Interview_div: "none",
 
-      token: this.$cookies.get('token'),
-      email: this.$cookies.get('email'),
+      token: this.$cookies.get("token"),
+      email: this.$cookies.get("email"),
 
       mod: "set_require",
       method: "set",
@@ -366,9 +367,7 @@ export default {
     data_created.append(
       "json",
       JSON.stringify({
-        mod: "get_require",
-        method: "get",
-        action: "getAllData",
+        data: { mod: "get_require", method: "get", action: "getAllData" },
         token: this.$cookies.get("token"),
         email: this.$cookies.get("email"),
       })
@@ -397,7 +396,7 @@ export default {
         if (res.degree.value == "M") this.form.tabDegree = 1;
         if (res.degree.value == "D") this.form.tabDegree = 2;
 
-        this.$cookies.set('token', res.token);
+        this.$cookies.set("token", res.token);
       });
   },
   methods: {
@@ -405,13 +404,18 @@ export default {
       evt.preventDefault();
       //alert(JSON.stringify(this.form));
       var data_send = new FormData();
-      data_send.append("json", JSON.stringify(this.form));
+      data_send.append(
+        "json",
+        JSON.stringify({
+          data: this.form,
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Access-Token": this.$cookies.get("token"),
-          "Access-Email": this.$cookies.get("email"),
         },
         body: data_send,
       })

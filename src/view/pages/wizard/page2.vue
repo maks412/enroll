@@ -86,43 +86,6 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page2.region") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.region"
-                              :options="region"
-                              required
-                              size="lg"
-                              v-on:change="press_region"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_region")
-                          }}</span>
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>{{ $t("page2.city") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.city"
-                              :options="city"
-                              required
-                              size="lg"
-                              v-on:change="press_city"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_city")
-                          }}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
                           <label>{{ $t("page2.school") }}</label>
                           <b-form-group>
                             <b-form-select
@@ -427,8 +390,6 @@ export default {
       ],
       country: [],
       province: [],
-      region: [],
-      city: [],
       school: [],
       attestat_type: [],
       preparation_course: [],
@@ -442,8 +403,6 @@ export default {
       form: {
         country: null,
         province: null,
-        region: null,
-        city: null,
         school: null,
         language: "",
         foreign_language: null,
@@ -611,28 +570,10 @@ export default {
           if (type1 == "country") {
             this.form.province = res.province.selected_id;
             this.province = res.province.list;
-            this.form.region = res.region.selected_id;
-            this.region = res.region.list;
-            this.form.city = res.city.selected_id;
-            this.city = res.city.list;
             this.form.school = res.school.selected_id;
             this.school = res.school.list;
           }
           if (type1 == "province") {
-            this.form.region = res.region.selected_id;
-            this.region = res.region.list;
-            this.form.city = res.city.selected_id;
-            this.city = res.city.list;
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
-          if (type1 == "region") {
-            this.form.city = res.city.selected_id;
-            this.city = res.city.list;
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
-          if (type1 == "city") {
             this.form.school = res.school.selected_id;
             this.school = res.school.list;
           }
