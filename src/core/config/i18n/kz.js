@@ -9,6 +9,8 @@ export const locale = {
         "more_files": "{num} құжаттар",
         "yes": "Иә",
         "no": "Жоқ",
+        "reset": "Қалпына келтіру",
+        "upload": "Жүктеу"
     },
     aside: {
         "main_info": "Негізгі ақпарат",

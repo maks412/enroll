@@ -152,8 +152,16 @@
                           :drop-placeholder="$t('common.drop_file')"
                           @change="previewImage"
                         ></b-form-file>
-
-                        
+                        <div class="d-flex justify-content-between mt-3" v-if="form.photo!=null">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.photo=null;preview=null"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
 
                       <div class="col-xl-6">
@@ -304,6 +312,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.social_status_upload!=null && form.social_status_upload.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.social_status_upload=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -430,6 +448,16 @@
                           </b-badge>
                         </template></b-form-file
                       >
+                      <div class="d-flex justify-content-between mt-3" v-if="form.documents!=null && form.documents.length>0">
+                        <button
+                          class="btn btn-primary"
+                          @click="form.documents=[]"
+                          >{{$t('common.reset')}}</button>
+                          <button
+                          class="btn btn-primary"
+                          @click="upload()"
+                          >{{$t('common.upload')}}</button>
+                      </div>
                     </div>
                   </div>
                   <!--end: Wizard Step 3-->

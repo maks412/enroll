@@ -9,7 +9,9 @@ export const locale = {
         "more_files": "{num} More files",
         "yes": "Yes",
         "no": "No",
-        "next": "Next"
+        "next": "Next",
+        "reset": "Reset",
+        "upload": "Upload"
     },
     aside: {
         "main_info": "Main Info",

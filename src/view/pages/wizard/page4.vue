@@ -81,6 +81,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.grant_cert!=null && form.grant_cert.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.grant_cert=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                   </div>
