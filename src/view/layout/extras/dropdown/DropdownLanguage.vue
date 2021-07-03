@@ -24,6 +24,7 @@
 
 <script>
 import i18nService from "@/core/services/i18n.service.js";
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
   name: "KTDropdownLanguage",
@@ -36,6 +37,27 @@ export default {
     selectedLanguage(e) {
       const el = e.target.closest(".navi-link");
       const lang = el.getAttribute("data-lang");
+      
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { mod: "lang_set", method: "set", action: "setLang", LANG: lang },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          ///escho kod kos
+        });
 
       i18nService.setActiveLanguage(lang);
 
