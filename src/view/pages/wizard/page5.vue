@@ -68,6 +68,16 @@
                           </b-badge>
                         </template></b-form-file
                       >
+                      <div class="d-flex justify-content-between mt-3" v-if="form.certificate75!=null && form.certificate75.length>0">
+                        <button
+                          class="btn btn-primary"
+                          @click="form.certificate75=[]"
+                          >{{$t('common.reset')}}</button>
+                          <button
+                          class="btn btn-primary"
+                          @click="upload()"
+                          >{{$t('common.upload')}}</button>
+                      </div>
                     </div>
                   </div>
                   <!--end: Wizard Step 1-->
@@ -125,6 +135,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.spt_upload!=null && form.spt_upload.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.spt_upload=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                     <hr />
@@ -176,6 +196,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.infomatrix_number!=null && form.infomatrix_number.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.infomatrix_number=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -212,6 +242,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.student_fee!=null && form.student_fee.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.student_fee=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                     <hr />
@@ -240,6 +280,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.tuition_fee!=null && form.tuition_fee.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.tuition_fee=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                     <hr />
@@ -268,6 +318,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.eng_course!=null && form.eng_course.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.eng_course=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -317,6 +377,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.creative_exam!=null && form.creative_exam.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.creative_exam=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
 
@@ -356,6 +426,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
+                        <div class="d-flex justify-content-between mt-3" v-if="form.eng_course!=null && form.eng_course.length>0">
+                          <button
+                            class="btn btn-primary"
+                            @click="form.eng_course=[]"
+                            >{{$t('common.reset')}}</button>
+                            <button
+                            class="btn btn-primary"
+                            @click="upload()"
+                            >{{$t('common.upload')}}</button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -19,17 +19,17 @@
                     <h3
                       class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                     >
-                      Registration Requirements
+                      {{$t('after_reg.reg_requirements')}}
                     </h3>
                     <span class="text-muted font-weight-bold font-size-h4">
-                      Basic Information to Registration
+                      {{$t('after_reg.basic_info')}}
                     </span>
                   </div>
                   <div>
                     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
                       <b-form-group
                         id="citizenship"
-                        label="Choose Citizenship"
+                        :label="$t('after_reg.choose_citizenship')"
                         label-for="citizenship_label"
                       >
                         <b-form-select
@@ -44,7 +44,7 @@
                       <!-- Begin of Degree -->
 
                       <p id="citizenship__BV_label_">
-                        Choose Education Program
+                        {{$t('after_reg.choose_edu_prog')}}
                       </p>
                       <div class="form-group">
                         <b-tabs
@@ -62,7 +62,7 @@
                             >
                               <b-card-text v-if="index == 0">
                                 <p id="citizenship__BV_label_">
-                                  Choose Education Type
+                                  {{$t('after_reg.choose_edu_type')}}
                                 </p>
                                 <div class="form-group">
                                   <b-tabs
@@ -88,7 +88,7 @@
                       <!-- Begin of Speciality -->
                       <b-form-group
                         id="citizenship"
-                        label="Choose Speciality"
+                        :label="$t('after_reg.choose_spec')"
                         label-for="citizenship_label"
                       >
                         <b-form-select
@@ -103,7 +103,7 @@
                       <!-- Begin of Payment -->
                       <b-form-group
                         id="citizenship"
-                        label="Choose Tuition Payment"
+                        :label="$t('after_reg.choose_tui')"
                         label-for="citizenship_label"
                       >
                         <b-form-select
@@ -119,7 +119,7 @@
                       <!-- Begin IELTS -->
                       <div>
                         <b-form-group
-                          label="Do you have SDU English Entrance exam certificate or IELTS?"
+                          :label="$t('after_reg.have_ielts')"
                           label-size="lg"
                           class="font-weight-bold"
                         >
@@ -131,9 +131,9 @@
                             :options="options"
                             name="radio-options"
                           >
-                            <b-form-radio value="yes">yes</b-form-radio>
+                            <b-form-radio value="yes">{{$t('common.yes')}}</b-form-radio>
                             <b-form-radio value="no"
-                              >no</b-form-radio
+                              >{{$t('common.no')}}</b-form-radio
                             ></b-form-radio-group
                           >
                           <div style="display: inline; margin-left: 5%">
@@ -141,8 +141,7 @@
                               v-if="form.IELTS == 'no'"
                               target="blank"
                               href="https://docs.google.com/forms/d/e/1FAIpQLSfvl1BmV_dPhTNZ2THgJKbZhgfwp771DFDqmU75B50TI99WEA/viewform?ts=60d04f1d&edit_requested=true"
-                              >If you don't have, please follow this
-                              link</b-link
+                              >{{$t('after_reg.follow_link')}}</b-link
                             >
                           </div>
                         </b-form-group>
@@ -152,7 +151,7 @@
                       <!-- Begin Interview -->
                       <div :style="{ display: Interview_div }">
                         <b-form-group
-                          label="Have you passed international students interview?"
+                          :label="$t('after_reg.stud_interview')"
                           label-size="lg"
                           class="font-weight-bold"
                         >
@@ -164,9 +163,9 @@
                             :options="options"
                             name="radio-options"
                           >
-                            <b-form-radio value="yes">yes</b-form-radio>
+                            <b-form-radio value="yes">{{$t('common.yes')}}</b-form-radio>
                             <b-form-radio value="no"
-                              >no</b-form-radio
+                              >{{$t('common.no')}}</b-form-radio
                             ></b-form-radio-group
                           >
                           <div style="display: inline; margin-left: 5%">
@@ -174,8 +173,7 @@
                               v-if="form.Interview == 'no'"
                               target="blank"
                               href="https://docs.google.com/forms/d/e/1FAIpQLSftZA82vom7qPFNrAtTDdNlPLpED4NMk9pE04xLgtaFWetiAQ/viewform"
-                              >If you didn't pass, please follow this
-                              link</b-link
+                              >{{$t('after_reg.follow_link')}}</b-link
                             >
                           </div>
                         </b-form-group>
@@ -184,7 +182,7 @@
                       <!-- Begin admin_Interview -->
                       <div :style="{ display: Admin_Interview_div }">
                         <b-form-group
-                          label="Have you passed admission interview?"
+                          :label="$t('after_reg.admission_interview')"
                           label-size="lg"
                           class="font-weight-bold"
                         >
@@ -196,9 +194,9 @@
                             :options="options"
                             name="radio-options"
                           >
-                            <b-form-radio value="yes">yes</b-form-radio>
+                            <b-form-radio value="yes">{{$t('common.yes')}}</b-form-radio>
                             <b-form-radio value="no"
-                              >no</b-form-radio
+                              >{{$t('common.no')}}</b-form-radio
                             ></b-form-radio-group
                           >
                         </b-form-group>
@@ -208,7 +206,7 @@
                         type="submit"
                         variant="primary"
                         style="float: right"
-                        >Next <b-icon-chevron-right></b-icon-chevron-right
+                        >{{$t('common.next')}} <b-icon-chevron-right></b-icon-chevron-right
                       ></b-button>
                     </b-form>
                   </div>
@@ -348,7 +346,7 @@ export default {
         degree: null,
       },
       country: [],
-      payment: ["State Grant", "Paid"],
+      payment: [this.$t('after_reg.grant'), this.$t('after_reg.paid')],
       speciality: {},
       show_speciality: [],
       degree: [],
