@@ -19,10 +19,10 @@
                     <h3
                       class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                     >
-                      {{$t('after_reg.reg_requirements')}}
+                      {{ $t("after_reg.reg_requirements") }}
                     </h3>
                     <span class="text-muted font-weight-bold font-size-h4">
-                      {{$t('after_reg.basic_info')}}
+                      {{ $t("after_reg.basic_info") }}
                     </span>
                   </div>
                   <div>
@@ -44,7 +44,7 @@
                       <!-- Begin of Degree -->
 
                       <p id="citizenship__BV_label_">
-                        {{$t('after_reg.choose_edu_prog')}}
+                        {{ $t("after_reg.choose_edu_prog") }}
                       </p>
                       <div class="form-group">
                         <b-tabs
@@ -62,7 +62,7 @@
                             >
                               <b-card-text v-if="index == 0">
                                 <p id="citizenship__BV_label_">
-                                  {{$t('after_reg.choose_edu_type')}}
+                                  {{ $t("after_reg.choose_edu_type") }}
                                 </p>
                                 <div class="form-group">
                                   <b-tabs
@@ -131,17 +131,19 @@
                             :options="options"
                             name="radio-options"
                           >
-                            <b-form-radio value="yes">{{$t('common.yes')}}</b-form-radio>
-                            <b-form-radio value="no"
-                              >{{$t('common.no')}}</b-form-radio
-                            ></b-form-radio-group
+                            <b-form-radio value="yes">{{
+                              $t("common.yes")
+                            }}</b-form-radio>
+                            <b-form-radio value="no">{{
+                              $t("common.no")
+                            }}</b-form-radio></b-form-radio-group
                           >
                           <div style="display: inline; margin-left: 5%">
                             <b-link
                               v-if="form.IELTS == 'no'"
                               target="blank"
                               href="https://docs.google.com/forms/d/e/1FAIpQLSfvl1BmV_dPhTNZ2THgJKbZhgfwp771DFDqmU75B50TI99WEA/viewform?ts=60d04f1d&edit_requested=true"
-                              >{{$t('after_reg.follow_link')}}</b-link
+                              >{{ $t("after_reg.follow_link") }}</b-link
                             >
                           </div>
                         </b-form-group>
@@ -163,17 +165,19 @@
                             :options="options"
                             name="radio-options"
                           >
-                            <b-form-radio value="yes">{{$t('common.yes')}}</b-form-radio>
-                            <b-form-radio value="no"
-                              >{{$t('common.no')}}</b-form-radio
-                            ></b-form-radio-group
+                            <b-form-radio value="yes">{{
+                              $t("common.yes")
+                            }}</b-form-radio>
+                            <b-form-radio value="no">{{
+                              $t("common.no")
+                            }}</b-form-radio></b-form-radio-group
                           >
                           <div style="display: inline; margin-left: 5%">
                             <b-link
                               v-if="form.Interview == 'no'"
                               target="blank"
                               href="https://docs.google.com/forms/d/e/1FAIpQLSftZA82vom7qPFNrAtTDdNlPLpED4NMk9pE04xLgtaFWetiAQ/viewform"
-                              >{{$t('after_reg.follow_link')}}</b-link
+                              >{{ $t("after_reg.follow_link") }}</b-link
                             >
                           </div>
                         </b-form-group>
@@ -194,10 +198,12 @@
                             :options="options"
                             name="radio-options"
                           >
-                            <b-form-radio value="yes">{{$t('common.yes')}}</b-form-radio>
-                            <b-form-radio value="no"
-                              >{{$t('common.no')}}</b-form-radio
-                            ></b-form-radio-group
+                            <b-form-radio value="yes">{{
+                              $t("common.yes")
+                            }}</b-form-radio>
+                            <b-form-radio value="no">{{
+                              $t("common.no")
+                            }}</b-form-radio></b-form-radio-group
                           >
                         </b-form-group>
                       </div>
@@ -206,7 +212,8 @@
                         type="submit"
                         variant="primary"
                         style="float: right"
-                        >{{$t('common.next')}} <b-icon-chevron-right></b-icon-chevron-right
+                        >{{ $t("common.next") }}
+                        <b-icon-chevron-right></b-icon-chevron-right
                       ></b-button>
                     </b-form>
                   </div>
@@ -344,19 +351,19 @@ export default {
         speciality: null,
         payment: null,
         degree: null,
+
+        mod: "set_require",
+        method: "set",
+        action: "getAllData",
       },
       country: [],
-      payment: [this.$t('after_reg.grant'), this.$t('after_reg.paid')],
+      payment: [this.$t("after_reg.grant"), this.$t("after_reg.paid")],
       speciality: {},
       show_speciality: [],
       degree: [],
       show: true,
       Interview_div: "inline",
       Admin_Interview_div: "none",
-
-      mod: "set_require",
-      method: "set",
-      action: "getAllData",
     };
   },
   async created() {

@@ -625,10 +625,10 @@ export default {
 
     previewImage: function (e) {
       var input = e.target;
-
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
+          console.log(event.target.result);
           compress(event.target.result, {
             width: 400,
             type: "image/jpg", // default
