@@ -267,7 +267,6 @@
                               v-model="form.married"
                               :options="gender_married"
                               :aria-describedby="ariaDescribedby"
-                              name="radio-inline"
                               size="lg"
                               required
                             ></b-form-radio-group>
