@@ -354,9 +354,6 @@ export default {
       Interview_div: "inline",
       Admin_Interview_div: "none",
 
-      token: this.$cookies.get("token"),
-      email: this.$cookies.get("email"),
-
       mod: "set_require",
       method: "set",
       action: "getAllData",

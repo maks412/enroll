@@ -81,15 +81,22 @@
                             </b-badge>
                           </template></b-form-file
                         >
-                        <div class="d-flex justify-content-between mt-3" v-if="form.grant_cert!=null && form.grant_cert.length>0">
+                        <div
+                          class="d-flex justify-content-between mt-3"
+                          v-if="
+                            form.grant_cert != null &&
+                            form.grant_cert.length > 0
+                          "
+                        >
                           <button
                             class="btn btn-primary"
-                            @click="form.grant_cert=[]"
-                            >{{$t('common.reset')}}</button>
-                            <button
-                            class="btn btn-primary"
-                            @click="upload()"
-                            >{{$t('common.upload')}}</button>
+                            @click="form.grant_cert = []"
+                          >
+                            {{ $t("common.reset") }}
+                          </button>
+                          <button class="btn btn-primary" @click="upload()">
+                            {{ $t("common.upload") }}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -251,6 +258,33 @@ export default {
             });
             this.$router.push({ name: "/home/2" });
           }
+        });
+    },
+    upload: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            method: "upload",
+            action: "setImage",
+            upload: this.photo,
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      data_created.append("file", this.photo);
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
         });
     },
   },

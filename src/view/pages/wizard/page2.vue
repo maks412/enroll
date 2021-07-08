@@ -239,7 +239,8 @@
                         <label>{{ $t("page2.upload_attestat") }}</label>
                         <b-form-file
                           multiple
-                          v-model="form.attestat_upload"
+                          @change="previewImage"
+                          v-model="attestat_upload"
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
                           :drop-placeholder="$t('common.drop_file')"
@@ -259,15 +260,41 @@
                             </b-badge>
                           </template></b-form-file
                         >
-                        <div class="d-flex justify-content-between mt-3" v-if="form.attestat_upload!=null && form.attestat_upload.length>0">
+                        <div
+                          class="d-flex justify-content-between mt-3"
+                          v-if="
+                            attestat_upload != null &&
+                            attestat_upload.length > 0
+                          "
+                        >
                           <button
                             class="btn btn-primary"
-                            @click="form.attestat_upload=[]"
-                            >{{$t('common.reset')}}</button>
-                            <button
-                            class="btn btn-primary"
-                            @click="upload()"
-                            >{{$t('common.upload')}}</button>
+                            @click="attestat_upload = []"
+                          >
+                            {{ $t("common.reset") }}
+                          </button>
+                          <button class="btn btn-primary" @click="upload()">
+                            {{ $t("common.upload") }}
+                          </button>
+                        </div>
+
+                        <div
+                
+                          :v-for="p in previews"
+                          :key="index"
+                        >
+                          <div class="col-xl-6">
+                            <img
+                              :src="p"
+                              class="img-fluid"
+                              style="
+                                padding: 20px;
+                                width: 50%;
+                                display: block;
+                                margin: auto;
+                              "
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -409,7 +436,8 @@ export default {
       attestat_series: [],
       //preparation_province: [],
       //preparation_country: [],
-
+      attestat_upload: [],
+      previews: [],
       form: {
         country: null,
         province: null,
@@ -421,7 +449,7 @@ export default {
         attestat_number: "",
         attestat_score: "",
         attestat_given_date: null,
-        attestat_upload: null,
+
         preparation_course: null,
         //preparation_country: null,
         //preparation_province: null,
@@ -474,7 +502,6 @@ export default {
         this.country = res.country.list;
         this.form.province = res.province.selected_id;
         this.province = res.province.list;
-        
       });
   },
   name: "Wizard-4",
@@ -540,7 +567,7 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            this.$router.push({ name: "/home/2" });
+            this.$router.push({ name: "/home/3" });
           }
         });
     },
@@ -593,6 +620,75 @@ export default {
             this.form.school = res.school.selected_id;
             this.school = res.school.list;
           }
+        });
+    },
+
+    previewImage: function (e) {
+      var input = e.target;
+
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/jpg", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            console.log(result);
+            this.previews.push(result);
+            console.log(this.previews);
+            //this.photo = result;
+            this.dataURLtoFile(result);
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
+    dataURLtoFile: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.photos.push(new Blob([u8arr], { type: mime }));
+    },
+
+    upload: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            mod: "page2",
+            method: "setUpload",
+            action: "setImage",
+            upload: this.photo,
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      for (let i = 0; i < this.attestat_upload.length; i++) {
+        data_created.append("file", this.attestat_upload[i]);
+      }
+      //data_created.append("file", this.attestat_upload);
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
         });
     },
   },

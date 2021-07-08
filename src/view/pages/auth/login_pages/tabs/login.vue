@@ -109,7 +109,7 @@ export default {
           })
 
           if(res.AFTER_REG == '1'){
-            location.replace('/after_register');
+            location.replace('/#/after_register');
           }
           else{
             //this.$router.push("/after_register");
