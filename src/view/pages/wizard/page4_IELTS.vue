@@ -76,7 +76,8 @@
                         <label>{{ $t("page5.upload_certificate") }}</label>
                         <b-form-file
                           multiple
-                          v-model="form.certificate_upload"
+                          v-model="certificate_upload"
+                          @change="previewImage"
                           :state="Boolean(file)"
                           :placeholder="$t('page5.choose_certificate')"
                           :drop-placeholder="$t('common.drop_files')"
@@ -96,16 +97,16 @@
                             </b-badge>
                           </template></b-form-file
                         >
-                        <div
+                         <div
                           class="d-flex justify-content-between mt-3"
-                          v-if="
-                            form.certificate_upload != null &&
-                            form.certificate_upload.length > 0
-                          "
+                          v-if="certificate_upload != null"
                         >
                           <button
                             class="btn btn-primary"
-                            @click="form.certificate_upload = []"
+                            @click="
+                              certificate_upload = null;
+                              preview = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -113,6 +114,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <img
+                          :src="preview"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
                     </div>
                   </div>
@@ -167,6 +180,7 @@ import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
 import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
+import compress from "compress-base64";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -175,10 +189,12 @@ export default {
     return {
       tabs: [""],
       english_certificate_options: ["IELTS", "TOEFL", "SDU Language Test"],
+      certificate_upload: null,
+      preview: null,
       form: {
         english_certificate: null,
         certificate_number: "",
-        certificate_upload: null,
+        
 
         mod: "page4_ielts",
         method: "set",
@@ -278,21 +294,57 @@ export default {
         });
     },
 
+    previewImage: function (e) {
+      var input = e.target;
+
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/jpg", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            this.preview = result;
+            //this.photo = result;
+            this.dataURLtoFile(result);
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
+    dataURLtoFile: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.certificate_upload = new Blob([u8arr], { type: mime });
+    },
+
     upload: function () {
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
           data: {
-            method: "upload",
+            mod: "page4_IELTS",
+            method: "setUpload",
             action: "setImage",
-            upload: this.photo,
+            upload: this.certificate_upload,
           },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
-      data_created.append("file", this.photo);
+      data_created.append("file", this.certificate_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -301,9 +353,7 @@ export default {
         body: data_created,
       })
         .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-        });
+        .then((res) => {});
     },
   },
 };

@@ -239,7 +239,7 @@
                         <label>{{ $t("page2.upload_attestat") }}</label>
                         <b-form-file
                           multiple
-                          @change="Image"
+                          @change="previewImage"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
@@ -269,7 +269,8 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="attestat_upload = []"
+                            @click="attestat_upload = [];photos = [];previews = []"
+                            
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -278,8 +279,8 @@
                           </button>
                         </div>
 
-                        <div :v-for="p in previews" :key="index">
-                          <div class="col-xl-6">
+                       
+                          <div class="col-xl-6" v-if="previews.length > 0" :v-for="(p, index) in previews" :key="index">
                             <img
                               :src="p"
                               class="img-fluid"
@@ -290,7 +291,7 @@
                                 margin: auto;
                               "
                             />
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -435,6 +436,7 @@ export default {
       //preparation_country: [],
       attestat_upload: [],
       previews: [],
+      photos: [],
       form: {
         country: null,
         province: null,
@@ -637,31 +639,39 @@ export default {
           }
         });
     },
-    Image: function () {
-      this.previewImage(this.attestat_upload[0]);
-    },
+    
     previewImage: function (e) {
-      console.log("start");
-      var input = e.target;
-      if (input.files) {
-        var reader = new FileReader();
-        reader.onload = (event) => {
-          compress(event.target.result, {
-            width: 400,
-            type: "image/jpg", // default
-            max: 200, // max size
-            min: 20, // min size
-            quality: 0.8,
-          }).then((result) => {
-            console.log(result);
-            this.previews.push(result);
-            console.log(this.previews);
-            //this.photo = result;
-            this.dataURLtoFile(result);
-          });
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
+      setTimeout(() => {
+        console.log(this.attestat_upload.length);
+        for (let i = 0; i < this.attestat_upload.length; i++) {
+          console.log("start");
+          var input = e.target;
+          if (input.files) {
+            var reader = new FileReader();
+            reader.onload = (event) => {
+              compress(event.target.result, {
+                width: 400,
+                type: "image/jpg", // default
+                max: 200, // max size
+                min: 20, // min size
+                quality: 0.8,
+              }).then((result) => {
+                console.log(result);
+                this.previews.push(result);
+                console.log(this.previews);
+                //this.photo = result;
+                this.dataURLtoFile(result);
+              });
+            };
+
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+        console.log("asfd");
+        console.log(this.photos);
+      }, 2000);
+      
+      
     },
 
     dataURLtoFile: function (dataurl) {
@@ -686,14 +696,14 @@ export default {
             mod: "page2",
             method: "setUpload",
             action: "setImage",
-            upload: this.photo,
+            upload: this.photos,
           },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
-      for (let i = 0; i < this.attestat_upload.length; i++) {
-        data_created.append("file", this.attestat_upload[i]);
+      for (let i = 0; i < this.photos.length; i++) {
+        data_created.append("file", this.photos[i]);
       }
       //data_created.append("file", this.attestat_upload);
       fetch(url + "/backend/middle.php", {
