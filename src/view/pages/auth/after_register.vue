@@ -354,7 +354,7 @@ export default {
 
         mod: "set_require",
         method: "set",
-        action: "getAllData",
+        action: "setAllData",
       },
       country: [],
       payment: [this.$t("after_reg.grant"), this.$t("after_reg.paid")],
