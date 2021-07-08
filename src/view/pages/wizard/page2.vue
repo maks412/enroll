@@ -239,7 +239,7 @@
                         <label>{{ $t("page2.upload_attestat") }}</label>
                         <b-form-file
                           multiple
-                          @change="previewImage"
+                          @change="Image"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
@@ -278,11 +278,7 @@
                           </button>
                         </div>
 
-                        <div
-                
-                          :v-for="p in previews"
-                          :key="index"
-                        >
+                        <div :v-for="p in previews" :key="index">
                           <div class="col-xl-6">
                             <img
                               :src="p"
@@ -411,6 +407,7 @@ import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
 import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
+import compress from "compress-base64";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -587,20 +584,38 @@ export default {
 
     get_address: function (index, type1, value) {
       var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: {
-            mod: "page2",
-            method: "get",
-            action: "getAddress",
-            type: index,
-            pid: value,
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
+      if (index == 1) {
+        data_created.append(
+          "json",
+          JSON.stringify({
+            data: {
+              mod: "page2",
+              method: "get",
+              action: "getAddress",
+              type: index,
+              pid: value,
+              country: this.form.country,
+            },
+            token: this.$cookies.get("token"),
+            email: this.$cookies.get("email"),
+          })
+        );
+      } else {
+        data_created.append(
+          "json",
+          JSON.stringify({
+            data: {
+              mod: "page2",
+              method: "get",
+              action: "getAddress",
+              type: index,
+              pid: value,
+            },
+            token: this.$cookies.get("token"),
+            email: this.$cookies.get("email"),
+          })
+        );
+      }
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -622,13 +637,15 @@ export default {
           }
         });
     },
-
+    Image: function () {
+      this.previewImage(this.attestat_upload[0]);
+    },
     previewImage: function (e) {
+      console.log("start");
       var input = e.target;
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
-          console.log(event.target.result);
           compress(event.target.result, {
             width: 400,
             type: "image/jpg", // default
