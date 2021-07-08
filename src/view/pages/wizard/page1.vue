@@ -152,8 +152,6 @@
                           :drop-placeholder="$t('common.drop_file')"
                           @change="previewImage"
                         ></b-form-file>
-
-                        
                       </div>
 
                       <div class="col-xl-6">
@@ -486,7 +484,7 @@ import Swal from "sweetalert2";
 
 import ApiService from "@/core/services/api.service.js";
 import compress from "compress-base64";
-import Button from '../vue-bootstrap/Button.vue';
+import Button from "../vue-bootstrap/Button.vue";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -618,7 +616,12 @@ export default {
       data_created.append(
         "json",
         JSON.stringify({
-          data: { method: "upload", action: "setImage", docid: "22", upload: this.photo },
+          data: {
+            method: "upload",
+            action: "setImage",
+            // docid: "22",
+            upload: this.photo,
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -677,8 +680,29 @@ export default {
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
 
-          // this.photo = res.photo;
         });
+
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { method: "get", action: "getImage", mod: "upload" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      }).then((response) => response.json())
+        .then((res) => {
+        this.photo = res.url;
+        this.preview = url+ "/" + res.url;
+        console.log(res.url);
+      });
     },
 
     previewImage: function (e) {

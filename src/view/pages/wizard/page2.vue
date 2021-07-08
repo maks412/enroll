@@ -457,12 +457,14 @@ export default {
         this.form.preparation_course = res.preparation_course.selected_id;
         this.preparation_course = res.preparation_course.list;
 
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+
         this.form.country = res.country.selected_id;
         this.country = res.country.list;
         this.form.province = res.province.selected_id;
         this.province = res.province.list;
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
+        
       });
   },
   name: "Wizard-4",
