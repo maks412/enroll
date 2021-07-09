@@ -357,12 +357,7 @@ export default {
         { title: "page3.contact_details" },
         { title: "page3.relative_information" },
       ],
-      relative_type_options: [
-        this.$t("page3.mother"),
-        this.$t("page3.father"),
-        this.$t("page3.sister"),
-        this.$t("page3.brother"),
-      ],
+      
       fields: [
         {relative_type: this.$t("page3.relative_type")},
         {full_name: this.$t("page3.full_name")},
@@ -379,6 +374,8 @@ export default {
       register_address_province_options: [],
       register_address_region_options: [],
       register_address_city_options: [],
+
+      relative_type_options: [],
       form: {
         phone: "",
         current_address_country: "",
@@ -439,6 +436,10 @@ export default {
 
         this.form.student_house = res.student_house;
         this.form.items = res.relatives;
+
+        this.rel_type = res.relative_type.selected_id;
+        this.relative_type_options = res.relative_type.list;
+
       });
   },
   name: "Wizard-4",

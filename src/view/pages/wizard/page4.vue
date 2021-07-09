@@ -278,7 +278,7 @@ export default {
 
     previewImage: function (e) {
       var input = e.target;
-
+      
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
