@@ -41,11 +41,11 @@ export const locale = {
         "change_citizenship": "Change Citizenship",
         "f_name": "First Name",
         "enter_f_name": "Please enter your first name",
-        "native_name": "Native Name",
+        "native_name": "Name in cyrillic",
         "enter_n_f_name": "Please enter your native name",
         "last_name": "Last Name",
         "enter_l_name": "Please enter your last name",
-        "native_last_name": "Native Surname",
+        "native_last_name": "Surname in cyrillic",
         "enter_n_l_name": "Please enter your native last name",
         "patronymic": "Patronymic",
         "enter_patronymic": "Please enter your father's name",
@@ -78,7 +78,8 @@ export const locale = {
         "married": "Married",
         "id": "Identity Card",
         "passport": "Passport",
-        "ministry": "Ministry"
+        "ministry": "Ministry",
+        "documents": "Upload your documents both sides in one image",
     },
     page2: {
         "school_info": "School Information",
@@ -142,7 +143,9 @@ export const locale = {
         "mother": "Mother",
         "father": "Father",
         "sister": "Sister",
-        "brother": "Brother"
+        "brother": "Brother",
+        "yes": "yes",
+        "no": "no"
     },
     page4: {
         "grant_info": "Grant Information",
@@ -185,11 +188,11 @@ export const locale = {
         "upload_eng": "Upload your English Language Course Receipt",
         "choose_eng": "Choose English Language Course...",
         "enter_add_doc_info": "Enter Your Addtional Documents Information",
-        "creative_exam_referrence": "Creative Exam Reference",
-        "upload_creative_exam_referrence": "Upload your Creative Exam Reference(if journal 6B03201)",
+        "creative_exam_referrence": "Creative Exam Result",
+        "upload_creative_exam_referrence": "Upload your Creative Exam Result(if journal 6B03201)",
         "choose_creative_exam": "Choose Creative Exam...",
-        "ped_test": "Pedagogical Test Reference",
-        "upload_ped_test": "Upload your Pedagogical Test Reference(If pedagog)",
+        "ped_test": "Pedagogical Test Reesult",
+        "upload_ped_test": "Upload your Pedagogical Test Result(If pedagog)",
         "choose_ped_test": "Choose Pedagogical Test...",
     },
     page7: {
@@ -217,6 +220,7 @@ export const locale = {
         "stud_interview": "Have you passed international students interview?",
         "admission_interview": "Have you passed admission interview?",
         "grant": "State Grant",
-        "paid": "Paid"
+        "paid": "Paid",
+        "follow_link": "To pass an exam follow this link",
     }
 };

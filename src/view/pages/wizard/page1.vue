@@ -440,6 +440,7 @@
                       </div>
                     </div>
                     <div>
+                      <label>{{ $t("page1.documents") }}</label>
                       <b-form-file
                         multiple
                         v-model="form.documents"
@@ -707,7 +708,7 @@ export default {
       data_created.append(
         "json",
         JSON.stringify({
-          data: { method: "getUpload", action: "getImage", mod: "page1" },
+          data: { method: "get", action: "getImage", mod: "getUpload" },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })

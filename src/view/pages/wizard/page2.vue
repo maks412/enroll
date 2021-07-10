@@ -693,19 +693,18 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            mod: "page2",
+            docid: "7",
             method: "setUpload",
             action: "setImage",
-            upload: this.photos,
           },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
       for (let i = 0; i < this.photos.length; i++) {
-        data_created.append("file", this.photos[i]);
+        data_created.append("file[]", this.photos[i]);
       }
-      //data_created.append("file", this.attestat_upload);
+      //data_created.append("file[]", this.photos);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {

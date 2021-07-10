@@ -249,7 +249,7 @@
                           <label>{{ $t("page3.relative_type") }}</label>
                           <b-form-group>
                             <b-form-select
-                              v-model="rel_type"
+                              v-model="form.rel_type"
                               :options="relative_type_options"
                               size="lg"
                             ></b-form-select>
@@ -357,13 +357,13 @@ export default {
         { title: "page3.contact_details" },
         { title: "page3.relative_information" },
       ],
-      
+
       fields: [
-        {relative_type: this.$t("page3.relative_type")},
-        {full_name: this.$t("page3.full_name")},
-        {contact: this.$t("page3.contact")},
+        { relative_type: this.$t("page3.relative_type") },
+        { full_name: this.$t("page3.full_name") },
+        { contact: this.$t("page3.contact") },
       ],
-      rel_type: "",
+      
       rel_name: "",
       rel_cont: "",
       current_address_country_options: [],
@@ -377,6 +377,7 @@ export default {
 
       relative_type_options: [],
       form: {
+        rel_type: null,
         phone: "",
         current_address_country: "",
         current_address_province: "",
@@ -417,6 +418,9 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
+        this.relative_type_options = res.relative_type.list;
+        this.form.rel_type = res.relative_type.selected_id;
+
         this.register_address_country_options = res.register_country.list;
         this.current_address_country_options = res.current_country.list;
 
@@ -437,9 +441,7 @@ export default {
         this.form.student_house = res.student_house;
         this.form.items = res.relatives;
 
-        this.rel_type = res.relative_type.selected_id;
-        this.relative_type_options = res.relative_type.list;
-
+        
       });
   },
   name: "Wizard-4",
@@ -639,13 +641,14 @@ export default {
         : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
     add_relative() {
-      if (this.rel_type != "" && this.rel_name != "" && this.rel_cont != "") {
+      if (this.form.rel_type != "" && this.rel_name != "" && this.rel_cont != "") {
         this.form.items.push({
-          relative_type: this.rel_type,
+          
+          relative_type: this.relative_type_options[this.form.rel_type].text,
           full_name: this.rel_name,
           contact: this.rel_cont,
         });
-        this.rel_type = "";
+        this.form.rel_type = "";
         this.rel_name = "";
         this.rel_cont = "";
       }
