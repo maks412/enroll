@@ -11,7 +11,7 @@ export const locale = {
         "no": "No",
         "next": "Next",
         "reset": "Reset",
-        "upload": "Upload"
+        "upload": "Crop and Upload"
     },
     aside: {
         "main_info": "Main Info",

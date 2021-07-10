@@ -37,11 +37,7 @@
                 <!--begin: Wizard Form-->
                 <form class="form mt-0 mt-lg-10" id="kt_form">
                   <!--begin: Wizard Step 1-->
-                  <div
-                    class="pb-5"
-                    data-wizard-type="step-content"
-                    data-wizard-state="current"
-                  >
+                  <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                     <h4 class="mb-10 font-weight-bold text-dark">
                       {{ $t("page1.enter_acc_details") }}
                     </h4>
@@ -145,43 +141,24 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <label>{{ $t("page1.upload_pic") }}</label>
-                        <b-form-file
-                          v-model="photo"
-                          :state="Boolean(file)"
-                          :placeholder="$t('common.choose_file')"
-                          :drop-placeholder="$t('common.drop_file')"
-                          @change="previewImage"
-                        ></b-form-file>
-                        <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="photo != null"
-                        >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              photo = null;
-                              preview = null;
-                            "
-                          >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button class="btn btn-primary" @click="upload()">
-                            {{ $t("common.upload") }}
-                          </button>
+                        <div class="custom-file mb-3">
+                          <input type="file" class="custom-file-input" id="customFile" @change="croppie">
+                          <label class="custom-file-label" for="customFile">Choose an image</label>
                         </div>
+                        <vue-croppie @update="update" ref="croppieRef" :enableOrientation="true" :boundary="{ width: '100%', height: 500 }" :viewport="{ width: 300, height: 300, type: 'square' }"> </vue-croppie>
                       </div>
-
                       <div class="col-xl-6">
-                        <img
-                          :src="preview"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
+                        <div>
+                          <img
+                            v-if="croppieImage != ''"
+                            :src="croppieImage"
+                            class="img-fluid rounded"
+                            style="width: 200px; height: 200px;"
+                            />
+                        </div>
+                        <button type="button" class="btn btn-primary mt-2" @click="upload()">
+                          {{ $t("common.upload") }}
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -542,6 +519,9 @@ export default {
   components: { Button },
   data() {
     return {
+      croppieImage: '',
+      cropped: null,
+
       tabs: [
         { title: "page1.personal_info", desc: "page1.personal_info_d" },
         { title: "page1.additional_info", desc: "page1.additional_info_d" },
@@ -766,6 +746,7 @@ export default {
     },
 
     upload: function () {
+      this.crop()
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -773,14 +754,14 @@ export default {
           data: {
             mod: "page1",
             method: "setUpload",
-            action: "setImage",
-            upload: this.photo,
+            action: "setProfileImage",
+            image: this.cropped,
           },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
-      data_created.append("file", this.photo);
+
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -793,6 +774,36 @@ export default {
           
         });
     },
+
+    croppie (e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+
+      var reader = new FileReader();
+      reader.onload = e => {
+        this.$refs.croppieRef.bind({
+          url: e.target.result
+        });
+      };
+
+      reader.readAsDataURL(files[0]);
+    },
+    crop() {
+      // Options can be updated.
+      // Current option will return a base64 version of the uploaded image with a size of 600px X 450px.
+      let options = {
+        type: 'base64',
+        size: { width: 600, height: 450 },
+        format: 'jpeg'
+      };
+      this.$refs.croppieRef.result(options, output => {
+        this.cropped = this.croppieImage = output;
+      });
+    },
+
+    update(){
+      this.crop()
+    }
   },
 };
 </script>
