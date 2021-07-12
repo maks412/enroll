@@ -438,20 +438,20 @@ export default {
 
         //Current
         this.current_address_country_options = res.current_country.list;
-        this.current_address_province_options = res.current_address_province.list;
+        this.current_address_province_options =
+          res.current_address_province.list;
         this.current_address_region_options = res.current_address_region.list;
         this.current_address_city_options = res.current_address_city.list;
 
-        this.form.current_address_country =
-          res.current_address_country.selected_id;
+        this.form.current_address_country = res.current_country.selected_id;
         this.form.current_address_province =
           res.current_address_province.selected_id;
+        this.form.current_address_region = res.current_address_region.selected_id;
         this.form.current_address_city = res.current_address_city.selected_id;
-        this.form.current_address = res.current_address.selected_id;
+        this.form.current_address = res.current_address;
 
         this.form.student_house = res.student_house;
         this.form.items = res.relatives;
-        
       });
   },
 
@@ -657,8 +657,10 @@ export default {
         this.rel_name != "" &&
         this.rel_cont != ""
       ) {
-        var index = this.relative_type_options.findIndex(x => x.value == this.form.rel_type);
-        
+        var index = this.relative_type_options.findIndex(
+          (x) => x.value == this.form.rel_type
+        );
+
         this.form.items.push({
           relative_type: this.relative_type_options[index].text,
           full_name: this.rel_name,
