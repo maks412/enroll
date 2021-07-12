@@ -11,7 +11,9 @@ export const locale = {
         "no": "No",
         "next": "Next",
         "reset": "Reset",
-        "upload": "Upload"
+        "uploadwithCrop": "Crop and Upload",
+        'upload': 'Upload',
+        'deleteProfileImage': 'Delete Image'
     },
     aside: {
         "main_info": "Main Info",

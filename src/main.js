@@ -19,6 +19,11 @@ window.ClipboardJS = ClipboardJS;
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
+import VueCroppie from 'vue-croppie';
+import 'croppie/croppie.css' // import the croppie css manually
+
+Vue.use(VueCroppie);
+
 // Vue 3rd party plugins
 import i18n from "@/core/plugins/vue-i18n";
 import vuetify from "@/core/plugins/vuetify";

@@ -58,7 +58,7 @@
                             <b-tab
                               v-for="(d, index) in degree"
                               :key="index"
-                              :title="d"
+                              :title="d.text"
                             >
                               <b-card-text v-if="index == 0">
                                 <p id="citizenship__BV_label_">
@@ -73,9 +73,9 @@
                                     type="is-toggle"
                                     @input="change_bach_speciality"
                                   >
-                                    <b-tab title="Full" active></b-tab>
-                                    <b-tab title="Shortened"></b-tab>
-                                    <b-tab title="Second Higher"></b-tab>
+                                    <b-tab :title="'Full'" active></b-tab>
+                                    <b-tab :title="'Shortened'"></b-tab>
+                                    <b-tab :title="'Second Higher'"></b-tab>
                                   </b-tabs>
                                 </div>
                                 <!-- END of Degree -->
@@ -124,7 +124,7 @@
                           class="font-weight-bold"
                         >
                           <b-form-radio-group
-                            buttons="true"
+                            :buttons="true"
                             button-variant="outline-primary"
                             id="radio-group-1"
                             v-model="form.IELTS"
@@ -158,7 +158,7 @@
                           class="font-weight-bold"
                         >
                           <b-form-radio-group
-                            buttons="true"
+                            :buttons="true"
                             button-variant="outline-primary"
                             id="radio-group-2"
                             v-model="form.Interview"
@@ -191,7 +191,7 @@
                           class="font-weight-bold"
                         >
                           <b-form-radio-group
-                            buttons="true"
+                            :buttons="true"
                             button-variant="outline-primary"
                             id="radio-group-2"
                             v-model="form.admin_Interview"
@@ -247,6 +247,8 @@ import {
   ADD_BODY_CLASSNAME,
   REMOVE_BODY_CLASSNAME,
 } from "@/core/services/store/htmlclass.module.js";
+
+import Swal from "sweetalert2";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -364,6 +366,7 @@ export default {
       show: true,
       Interview_div: "inline",
       Admin_Interview_div: "none",
+      options: null
     };
   },
   async created() {
@@ -426,7 +429,17 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 1) {
-            this.$router.push({ path: "/home/1" });
+            this.$cookies.set('token', res.token);
+
+            Swal.fire({
+              title: 'Successfully saved!',
+              text: res.message,
+              icon: 'success',
+              confirmButtonText: 'Got it!'
+            })
+
+            location.replace('/#/home/1')
+            //this.$router.push({ path: "/home/1" });
           }
         });
     },

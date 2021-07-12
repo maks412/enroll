@@ -98,6 +98,8 @@ import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAc
 import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
 import i18nService from "@/core/services/i18n.service.js";
 
+var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+
 export default {
   name: "KTTopbar",
   data() {
@@ -138,30 +140,23 @@ export default {
   },
 
   async created(){
-    var cookie = this.$cookies
-    get_user(cookie);
-  }
-}
-
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
-
-function get_user(cookie){
     var data_created = new FormData();
-      data_created.append("json", JSON.stringify({ 
-        mod: "user",
-        method: "get", 
-        action: "getAllData",
-        token: cookie.get('token'),
-        email: cookie.get('email')
-      }));
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
+    data_created.append(
+      "json",
+      JSON.stringify({
+        data: { mod: "user", method: "get", action: "getAllData" },
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
       })
-        .then((response) => response.json())
+    );
+
+    fetch(url + "/backend/middle.php", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: data_created,
+    }).then((response) => response.json())
         .then((res) => {
           this.currentUser.email = res.email;
           this.status = res.status;
@@ -175,4 +170,5 @@ function get_user(cookie){
           this.back_special = res.speciality;
         });
   }
+}
 </script>

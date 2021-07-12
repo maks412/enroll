@@ -224,10 +224,10 @@
                                 name="radio-options"
                                 size="lg"
                               >
-                                <b-form-radio value="yes">{{
+                                <b-form-radio value="1" id="yes">{{
                                   $t("page3.yes")
                                 }}</b-form-radio>
-                                <b-form-radio value="no">{{
+                                <b-form-radio value="0">{{
                                   $t("page3.no")
                                 }}</b-form-radio></b-form-radio-group
                               >
@@ -363,7 +363,7 @@ export default {
         { full_name: this.$t("page3.full_name") },
         { contact: this.$t("page3.contact") },
       ],
-      
+
       rel_name: "",
       rel_cont: "",
       current_address_country_options: [],
@@ -399,6 +399,7 @@ export default {
       options: [],
     };
   },
+
   async created() {
     var data_created = new FormData();
     data_created.append(
@@ -418,32 +419,42 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
+        this.form.phone = res.phone;
         this.relative_type_options = res.relative_type.list;
         this.form.rel_type = res.relative_type.selected_id;
 
+        this.form.register_address_country = res.register_country.selected_id;
         this.register_address_country_options = res.register_country.list;
-        this.current_address_country_options = res.current_country.list;
+        this.register_address_province_options =
+          res.register_address_province.list;
+        this.form.register_address_province =
+          res.register_address_province.selected_id;
+        this.register_address_region_options = res.register_address_region.list;
+        this.form.register_address_region =
+          res.register_address_region.selected_id;
+        this.register_address_city_options = res.register_address_city.list;
+        this.form.register_address_city = res.register_address_city.selected_id;
+        this.form.register_address = res.register_address;
 
-        this.form.phone = res.phone;
+        //Current
+        this.current_address_country_options = res.current_country.list;
+        this.current_address_province_options = res.current_address_province.list;
+        this.current_address_region_options = res.current_address_region.list;
+        this.current_address_city_options = res.current_address_city.list;
+
         this.form.current_address_country =
           res.current_address_country.selected_id;
         this.form.current_address_province =
           res.current_address_province.selected_id;
         this.form.current_address_city = res.current_address_city.selected_id;
         this.form.current_address = res.current_address.selected_id;
-        this.form.register_address_country =
-          res.register_address_country.selected_id;
-        this.form.register_address_province =
-          res.register_address_province.selected_id;
-        this.form.register_address_city = res.register_address_city.selected_id;
-        this.form.register_address = res.register_address.selected_id;
 
         this.form.student_house = res.student_house;
         this.form.items = res.relatives;
-
         
       });
   },
+
   name: "Wizard-4",
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
@@ -641,10 +652,15 @@ export default {
         : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
     add_relative() {
-      if (this.form.rel_type != "" && this.rel_name != "" && this.rel_cont != "") {
+      if (
+        this.form.rel_type != "" &&
+        this.rel_name != "" &&
+        this.rel_cont != ""
+      ) {
+        var index = this.relative_type_options.findIndex(x => x.value == this.form.rel_type);
+        
         this.form.items.push({
-          
-          relative_type: this.relative_type_options[this.form.rel_type].text,
+          relative_type: this.relative_type_options[index].text,
           full_name: this.rel_name,
           contact: this.rel_cont,
         });
