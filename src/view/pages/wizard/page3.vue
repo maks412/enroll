@@ -347,6 +347,7 @@ import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
 import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
+import { createLogger } from 'vuex';
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -446,12 +447,13 @@ export default {
         this.form.current_address_country = res.current_country.selected_id;
         this.form.current_address_province =
           res.current_address_province.selected_id;
-        this.form.current_address_region = res.current_address_region.selected_id;
+        this.form.current_address_region =
+          res.current_address_region.selected_id;
         this.form.current_address_city = res.current_address_city.selected_id;
         this.form.current_address = res.current_address;
 
         this.form.student_house = res.student_house;
-        this.form.items = res.relatives;
+        //this.form.items = res.relatives;
       });
   },
 
@@ -660,7 +662,8 @@ export default {
         var index = this.relative_type_options.findIndex(
           (x) => x.value == this.form.rel_type
         );
-
+        console.log(index);
+        
         this.form.items.push({
           relative_type: this.relative_type_options[index].text,
           full_name: this.rel_name,
