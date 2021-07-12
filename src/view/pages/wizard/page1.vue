@@ -298,7 +298,8 @@
                         <label>{{ $t("page1.upload_status_document") }}</label>
                         <b-form-file
                           multiple
-                          v-model="form.social_status_upload"
+                          id="social_status"
+                          v-model="social_status_upload"
                           :state="Boolean(file)"
                           :placeholder="$t('page1.choose_status_document')"
                           :drop-placeholder="$t('common.drop_file')"
@@ -321,17 +322,17 @@
                         <div
                           class="d-flex justify-content-between mt-3"
                           v-if="
-                            form.social_status_upload != null &&
-                            form.social_status_upload.length > 0
+                            social_status_upload != null &&
+                            social_status_upload.length > 0
                           "
                         >
                           <button
                             class="btn btn-primary"
-                            @click="form.social_status_upload = []"
+                            @click="social_status_upload = []"
                           >
                             {{ $t("common.reset") }}
                           </button>
-                          <button class="btn btn-primary" @click="upload()">
+                          <button class="btn btn-primary" @click="upload_multi()">
                             {{ $t("common.upload") }}
                           </button>
                         </div>
@@ -443,7 +444,8 @@
                       <label>{{ $t("page1.documents") }}</label>
                       <b-form-file
                         multiple
-                        v-model="form.documents"
+                        id="documents"
+                        v-model="documents_upload"
                         :state="Boolean(file)"
                         :placeholder="$t('common.choose_file')"
                         :drop-placeholder="$t('common.drop_file')"
@@ -465,12 +467,12 @@
                       <div
                         class="d-flex justify-content-between mt-3"
                         v-if="
-                          form.documents != null && form.documents.length > 0
+                          documents_upload != null && documents_upload.length > 0
                         "
                       >
                         <button
                           class="btn btn-primary"
-                          @click="form.documents = []"
+                          @click="documents_upload = []"
                         >
                           {{ $t("common.reset") }}
                         </button>
@@ -567,6 +569,8 @@ export default {
       social_status: [],
       preview: null,
       photo: null,
+      social_status_upload: [],
+      documents_upload: [],
       form: {
         citizenship: "",
         birthday: "",
@@ -791,6 +795,80 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           
+        });
+    },
+
+    previewImage_multi: function (e) {
+      var id = e.target.id;
+      
+      setTimeout(() => {
+        if(id == "social_status") var n = this.social_status_upload.length;
+        if(id == "documents") var n = this.documents_upload.length;
+        for (let i = 0; i < n; i++) {
+          var input = e.target;
+          if (input.files) {
+            var reader = new FileReader();
+            reader.onload = (event) => {
+              compress(event.target.result, {
+                width: 400,
+                type: "image/jpg", // default
+                max: 200, // max size
+                min: 20, // min size
+                quality: 0.8,
+              }).then((result) => {
+                this.dataURLtoFile_multi(result, id);
+              });
+            };
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      }, 2000);
+      
+      
+    },
+
+    dataURLtoFile_multi: function (dataurl, id) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      if(id == "social_status") this.social_status_upload.push(new Blob([u8arr], { type: mime }));
+      if(id == "documents") this.documents_upload.push(new Blob([u8arr], { type: mime }));
+    },
+
+    upload_multi: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "7",
+            method: "setUpload",
+            action: "setImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      for (let i = 0; i < this.photos.length; i++) {
+        data_created.append("file[]", this.photos[i]);
+      }
+      //data_created.append("file[]", this.photos);
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
         });
     },
   },
