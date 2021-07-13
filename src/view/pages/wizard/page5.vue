@@ -612,7 +612,12 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.country = res.country.selected_id;
+        this.form.spt_number = res.spt_number;
+        this.form.spt_point = res.spt_point;
+        this.form.infomatrix_number = res.infomatrix_number;
+        this.form.infomatrix_point = res.infomatrix_point;
+        this.form.creative_exam_text = res.creative_exam_text;
+        this.form.pedagogical_test_text = res.pedagogical_test_text;
       });
   },
   name: "Wizard-4",
