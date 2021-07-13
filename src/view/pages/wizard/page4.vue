@@ -271,7 +271,7 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            this.$router.push({ name: "/home/2" });
+            location.replace("/#/home/4_ielts");
           }
         });
     },

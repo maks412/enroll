@@ -520,7 +520,8 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            this.$router.push({ name: "/home/2" });
+            
+            location.replace("/#/home/4");
           }
         });
     },
@@ -663,9 +664,10 @@ export default {
           (x) => x.value == this.form.rel_type
         );
         console.log(index);
-        
+        console.log(this.form.rel_type);
         this.form.items.push({
           relative_type: this.relative_type_options[index].text,
+          relative_id: this.relative_type_options[index].value,
           full_name: this.rel_name,
           contact: this.rel_cont,
         });

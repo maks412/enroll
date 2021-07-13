@@ -566,7 +566,7 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            this.$router.push({ name: "/home/3" });
+            location.replace("/#/home/3");
           }
         });
     },
