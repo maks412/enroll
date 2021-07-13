@@ -37,7 +37,11 @@
                 <!--begin: Wizard Form-->
                 <form class="form mt-0 mt-lg-10" id="kt_form">
                   <!--begin: Wizard Step 1-->
-                  <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
+                  <div
+                    class="pb-5"
+                    data-wizard-type="step-content"
+                    data-wizard-state="current"
+                  >
                     <h4 class="mb-10 font-weight-bold text-dark">
                       {{ $t("page1.enter_acc_details") }}
                     </h4>
@@ -142,10 +146,29 @@
                       <div class="col-xl-6">
                         <label>{{ $t("page1.upload_pic") }}</label>
                         <div class="custom-file mb-3">
-                          <input type="file" class="custom-file-input" accept="image/png, image/gif, image/jpeg" id="customFile" @change="croppie">
-                          <label class="custom-file-label" for="customFile">Choose an image</label>
+                          <input
+                            type="file"
+                            class="custom-file-input"
+                            accept="image/png, image/gif, image/jpeg"
+                            id="customFile"
+                            @change="croppie"
+                          />
+                          <label class="custom-file-label" for="customFile"
+                            >Choose an image</label
+                          >
                         </div>
-                        <vue-croppie @update="update" ref="croppieRef" :enableOrientation="true" :boundary="{ width: '100%', height: 500 }" :viewport="{ width: 300, height: 300, type: 'square' }"> </vue-croppie>
+                        <vue-croppie
+                          @update="update"
+                          ref="croppieRef"
+                          :enableOrientation="true"
+                          :boundary="{ width: '100%', height: 500 }"
+                          :viewport="{
+                            width: 300,
+                            height: 300,
+                            type: 'square',
+                          }"
+                        >
+                        </vue-croppie>
                       </div>
                       <div class="col-xl-6">
                         <div>
@@ -153,14 +176,23 @@
                             v-if="croppieImage != ''"
                             :src="croppieImage"
                             class="img-fluid rounded"
-                            style="width: 200px; height: 200px;"
-                            />
+                            style="width: 200px; height: 200px"
+                          />
                         </div>
-                        <button type="button" class="btn btn-primary mt-2" @click="upload()">
+                        <button
+                          type="button"
+                          class="btn btn-primary mt-2"
+                          @click="upload()"
+                        >
                           {{ $t("common.uploadwithCrop") }}
                         </button>
 
-                        <button type="button" class="btn btn-danger mt-2 ml-2" @click="deleteProfile()" v-if="croppieImage != null">
+                        <button
+                          type="button"
+                          class="btn btn-danger mt-2 ml-2"
+                          @click="deleteProfile()"
+                          v-if="croppieImage != null"
+                        >
                           {{ $t("common.deleteProfileImage") }}
                         </button>
                       </div>
@@ -277,24 +309,49 @@
 
                       <div class="col-xl-6">
                         <label>{{ $t("page1.upload_status_document") }}</label>
-                        <div class="custom-file mb-3">
-                          <input accept="image/png, image/gif, image/jpeg" type="file" class="custom-file-input" id="socialStatusFile" @change="social_status_doc">
-                          <label class="custom-file-label" for="socialStatusFile">{{ social_status_upload_image_name }}</label>
-                        </div>
 
+                        <b-form-file
+                          multiple
+                          id="social_status"
+                          @change="previewImage_multi"
+                          accept="image/png, image/gif, image/jpeg"
+                          v-model="social_status_upload"
+                          :state="Boolean(file)"
+                          :placeholder="$t('page1.choose_status_document')"
+                          :drop-placeholder="$t('common.drop_file')"
+                          ><template slot="file-name" slot-scope="{ names }">
+                            <b-badge variant="dark">{{ names[0] }}</b-badge>
+                            <b-badge
+                              v-if="names.length > 1"
+                              variant="dark"
+                              class="ml-1"
+                            >
+                              +
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
+                            </b-badge>
+                          </template></b-form-file
+                        >
                         <div
                           class="d-flex justify-content-between mt-3"
                           v-if="
-                            social_status_upload_image != null"
+                            social_status_upload != null &&
+                            social_status_upload.length > 0
+                          "
                         >
                           <button
                             class="btn btn-primary"
-                            @click="social_status_upload_image = null; social_status_upload_image_name = 'Choose an image'"
+                            @click="social_status_upload = []"
                           >
                             {{ $t("common.reset") }}
                           </button>
-
-                          <button class="btn btn-primary" @click="upload_social_status_doc()">
+                          <button
+                            class="btn btn-primary"
+                            @click="upload_multi_social()"
+                          >
                             {{ $t("common.upload") }}
                           </button>
                         </div>
@@ -404,24 +461,75 @@
                     </div>
                     <div>
                       <label>{{ $t("page1.documents") }}</label>
-                      <div class="custom-file mb-3">
-                        <input accept="image/png, image/gif, image/jpeg" type="file" class="custom-file-input" id="documents" @change="docfiles_upload">
-                        <label class="custom-file-label" for="documents">{{ document_image_name }}</label>
-                      </div>
-
+                      <b-form-file
+                        accept="image/*"
+                        multiple
+                        id="documents"
+                        @change="previewImage_multi"
+                        v-model="documents_upload_preview"
+                        :state="Boolean(file)"
+                        :placeholder="$t('common.choose_file')"
+                        :drop-placeholder="$t('common.drop_file')"
+                        ><template slot="file-name" slot-scope="{ names }">
+                          <b-badge variant="dark">{{ names[0] }}</b-badge>
+                          <b-badge
+                            v-if="names.length > 1"
+                            variant="dark"
+                            class="ml-1"
+                            required
+                          >
+                            +
+                            {{
+                              $t("common.more_files", { num: names.length - 1 })
+                            }}
+                          </b-badge>
+                        </template></b-form-file
+                      >
                       <div
                         class="d-flex justify-content-between mt-3"
-                        v-if="document_image != null "
+                        v-if="
+                          documents_upload_preview != null &&
+                          documents_upload_preview.length > 0
+                        "
                       >
                         <button
                           class="btn btn-primary"
-                          @click="document_image = null; document_image_name = 'Choose an image'"
+                          @click="
+                            documents_upload = [];
+                            documents_upload_preview = [];
+                            documents_upload_preview_slide = [];
+                          "
                         >
                           {{ $t("common.reset") }}
                         </button>
-                        <button class="btn btn-primary" @click="upload_document()">
+                        <button
+                          class="btn btn-primary"
+                          @click="upload_multi_documents()"
+                        >
                           {{ $t("common.upload") }}
                         </button>
+                      </div>
+
+                      <div class="col-xl-6 mt-5">
+                        <b-carousel
+                          id="carousel-1"
+                          :interval="2000"
+                          controls
+                          indicators
+                        >
+                          <b-carousel-slide
+                            :v-if="documents_upload_preview_slide.length > 0"
+                            v-for="(image, i) in documents_upload_preview_slide"
+                            :key="i"
+                          >
+                            <template #img>
+                              <img
+                                class="d-block img-fluid w-100"
+                                :src="image"
+                                :alt="i"
+                              /> </template
+                          ></b-carousel-slide>
+                        </b-carousel>
                       </div>
                     </div>
                   </div>
@@ -487,14 +595,14 @@ export default {
   components: { Button },
   data() {
     return {
-      croppieImage: '',
+      croppieImage: "",
       cropped: null,
 
       social_status_upload_image: null,
-      social_status_upload_image_name: 'Choose an image',
+      social_status_upload_image_name: "Choose an image",
 
       document_image: null,
-      document_image_name: 'Choose an image',
+      document_image_name: "Choose an image",
 
       tabs: [
         { title: "page1.personal_info", desc: "page1.personal_info_d" },
@@ -523,6 +631,9 @@ export default {
       photo: null,
       social_status_upload: [],
       documents_upload: [],
+      documents_upload_preview: [],
+      documents_upload_preview_slide: [],
+
       form: {
         citizenship: "",
         birthday: "",
@@ -678,7 +789,8 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          this.croppieImage = res.image == 'data:image/jpeg;base64,' ? null : res.image;
+          this.croppieImage =
+            res.image == "data:image/jpeg;base64," ? null : res.image;
         });
     },
 
@@ -719,7 +831,7 @@ export default {
       this.photo = new Blob([u8arr], { type: mime });
     },
 
-    upload_social_status_doc(){
+    upload_social_status_doc() {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -751,13 +863,13 @@ export default {
             confirmButtonClass: "btn btn-secondary",
           });
 
-          this.social_status_upload_image = null
-          this.social_status_upload_image_name = 'Choose an image'
+          this.social_status_upload_image = null;
+          this.social_status_upload_image_name = "Choose an image";
         });
     },
 
     upload: function () {
-      this.crop()
+      this.crop();
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -790,26 +902,26 @@ export default {
           });
 
           this.$refs.croppieRef.bind({
-            url: null
+            url: null,
           });
-          this.cropped = null
+          this.cropped = null;
         });
     },
 
-    docfiles_upload(e){
+    docfiles_upload(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
       var reader = new FileReader();
-      reader.onload = e => {
-        this.document_image = e.target.result
+      reader.onload = (e) => {
+        this.document_image = e.target.result;
       };
 
       reader.readAsDataURL(files[0]);
-      this.document_image_name = files[0].name
+      this.document_image_name = files[0].name;
     },
 
-    upload_document(){
+    upload_document() {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -841,18 +953,22 @@ export default {
             confirmButtonClass: "btn btn-secondary",
           });
 
-          this.document_image = null
-          this.document_image_name = 'Choose an image'
+          this.document_image = null;
+          this.document_image_name = "Choose an image";
         });
     },
 
-    deleteProfile(){
-      this.croppieImage = null
+    deleteProfile() {
+      this.croppieImage = null;
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { method: "setUpload", action: "delProfileImage", mod: "page1" },
+          data: {
+            method: "setUpload",
+            action: "delProfileImage",
+            mod: "page1",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -876,27 +992,27 @@ export default {
         });
     },
 
-    social_status_doc(e){
+    social_status_doc(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
       var reader = new FileReader();
-      reader.onload = e => {
-        this.social_status_upload_image = e.target.result
+      reader.onload = (e) => {
+        this.social_status_upload_image = e.target.result;
       };
 
       reader.readAsDataURL(files[0]);
-      this.social_status_upload_image_name = files[0].name
+      this.social_status_upload_image_name = files[0].name;
     },
 
-    croppie (e) {
+    croppie(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
       var reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.$refs.croppieRef.bind({
-          url: e.target.result
+          url: e.target.result,
         });
       };
 
@@ -906,18 +1022,124 @@ export default {
       // Options can be updated.
       // Current option will return a base64 version of the uploaded image with a size of 600px X 450px.
       let options = {
-        type: 'base64',
+        type: "base64",
         size: { width: 600, height: 450 },
-        format: 'jpeg'
+        format: "jpeg",
       };
-      this.$refs.croppieRef.result(options, output => {
+      this.$refs.croppieRef.result(options, (output) => {
         this.cropped = this.croppieImage = output;
       });
     },
 
-    update(){
-      this.crop()
-    }
+    update() {
+      this.crop();
+    },
+
+    previewImage_multi: function (e) {
+      var id = e.target.id;
+      this.documents_upload_preview_slide = [];
+      this.documents_upload = [];
+
+      setTimeout(() => {
+        if (id == "social_status") var n = this.social_status_upload.length;
+        if (id == "documents") var n = this.documents_upload_preview.length;
+        for (let i = 0; i < n; i++) {
+          var input = e.target;
+          if (input.files) {
+            var reader = new FileReader();
+            reader.onload = (event) => {
+              compress(event.target.result, {
+                width: 400,
+                type: "image/jpg", // default
+                max: 200, // max size
+                min: 20, // min size
+                quality: 0.8,
+              }).then((result) => {
+                this.documents_upload_preview_slide.push(result);
+                this.dataURLtoFile_multi(result, id);
+              });
+            };
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      }, 3000);
+    },
+    dataURLtoFile_multi: function (dataurl, id) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      if (id == "social_status")
+        this.social_status_upload.push(new Blob([u8arr], { type: mime }));
+      if (id == "documents")
+        this.documents_upload.push(new Blob([u8arr], { type: mime }));
+    },
+
+    upload_multi_documents: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "7",
+            method: "setUpload",
+            action: "setImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      for (let i = 0; i < this.documents_upload.length; i++) {
+        data_created.append("file[]", this.documents_upload[i]);
+      }
+      //data_created.append("file[]", this.photos);
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+        });
+    },
+
+    upload_multi_social: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "7",
+            method: "setUpload",
+            action: "setImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      for (let i = 0; i < this.social_status_upload.length; i++) {
+        data_created.append("file[]", this.social_status_upload[i]);
+      }
+      //data_created.append("file[]", this.photos);
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+        });
+    },
   },
 };
 </script>
