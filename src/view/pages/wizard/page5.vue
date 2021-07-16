@@ -71,10 +71,7 @@
                       >
                       <div
                         class="d-flex justify-content-between mt-3"
-                        v-if="
-                          certificate75 != null &&
-                          certificate75.length > 0
-                        "
+                        v-if="certificate75 != null && certificate75.length > 0"
                       >
                         <button
                           class="btn btn-primary"
@@ -85,6 +82,38 @@
                         <button class="btn btn-primary" @click="upload_multi()">
                           {{ $t("common.upload") }}
                         </button>
+                      </div>
+                    </div>
+
+                    <div
+                      class="text-center"
+                      style="display: flex; flex-wrap: wrap"
+                    >
+                      <div
+                        :v-if="previews.length > 0"
+                        v-for="(image, i) in previews"
+                        :key="i"
+                        class="m-5"
+                        style="display: block"
+                      >
+                        <img
+                          :src="image"
+                          class="img-thumbnail"
+                          style="width: 15em; display: block"
+                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="30"
+                          height="30"
+                          fill="currentColor"
+                          class="bi bi-x-square-fill m-1"
+                          viewBox="0 0 16 16"
+                          @click="remove_upload(i)"
+                        >
+                          <path
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                          />
+                        </svg>
                       </div>
                     </div>
                   </div>
@@ -150,7 +179,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="spt_upload = null"
+                            @click="
+                              spt_upload = null;
+                              preview_spt = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -161,7 +193,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                        <img
+                          :src="preview_spt"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
+                    
                     </div>
                     <hr />
                     <div class="row">
@@ -215,11 +258,11 @@
                         >
                         <div
                           class="d-flex justify-content-between mt-3"
-                          v-if="infomatrix_number != null"
+                          v-if="infomatrix_upload != null"
                         >
                           <button
                             class="btn btn-primary"
-                            @click="infomatrix_number = null"
+                            @click="infomatrix_upload = null; preview_infomatrix = null"
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -230,7 +273,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                        <img
+                          :src="preview_infomatrix"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
+                      
                     </div>
                   </div>
                   <!--end: Wizard Step 2-->
@@ -273,7 +327,7 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="student_fee = null"
+                            @click="student_fee = null; preview_studentFee = null"
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -284,7 +338,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                        <img
+                          :src="preview_studentFee"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
+                      
                     </div>
                     <hr />
                     <div class="row">
@@ -319,7 +384,7 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="tuition_fee = null"
+                            @click="tuition_fee = null; preview_tuitionFee = null"
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -330,7 +395,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                                                <img
+                          :src="preview_tuitionFee"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
+                      
                     </div>
                     <hr />
                     <div class="row">
@@ -365,7 +441,7 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="eng_course = null"
+                            @click="eng_course = null; preview_engCourse = null"
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -376,7 +452,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                        <img
+                          :src="preview_engCourse"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
+                      
                     </div>
                   </div>
                   <!--end: Wizard Step 3-->
@@ -432,7 +519,7 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="creative_exam = null"
+                            @click="creative_exam = null; preview_creativeExam = null"
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -443,7 +530,18 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                                                <img
+                          :src="preview_creativeExam"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
                       </div>
+                      
                     </div>
 
                     <div class="row">
@@ -462,7 +560,7 @@
                         <b-form-file
                           @change="previewImage"
                           id="upload_pedTest"
-                          v-model="eng_course"
+                          v-model="pedagogical_test"
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_ped_test')"
                           :drop-placeholder="$t('common.drop_file')"
@@ -485,11 +583,11 @@
                         >
                         <div
                           class="d-flex justify-content-between mt-3"
-                          v-if="eng_course != null"
+                          v-if="pedagogical_test != null"
                         >
                           <button
                             class="btn btn-primary"
-                            @click="eng_course = null"
+                            @click="pedagogical_test = null; preview_pedTest = null"
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -500,7 +598,20 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
+                        
+                        <img
+                          :src="preview_pedTest"
+                          class="img-fluid"
+                          style="
+                            padding: 20px;
+                            width: 50%;
+                            display: block;
+                            margin: auto;
+                          "
+                        />
+                      
                       </div>
+                      
                     </div>
                   </div>
                   <!--begin: Wizard Actions -->
@@ -569,6 +680,7 @@ export default {
         { title: this.$t("page6.add_docs"), desc: this.$t("page6.add_docs_d") },
       ],
       certificate75: [],
+      previews: [],
       photos: [],
       spt_upload: null,
       infomatrix_upload: null,
@@ -577,7 +689,15 @@ export default {
       eng_course: null,
       creative_exam: null,
       pedagogical_test: null,
-      
+
+      preview_spt: null,
+      preview_infomatrix: null,
+      preview_studentFee: null,
+      preview_tuitionFee: null,
+      preview_engCourse: null,
+      preview_creativeExam: null,
+      preview_pedTest: null,
+
       form: {
         spt_number: null,
         spt_point: null,
@@ -690,6 +810,7 @@ export default {
 
     previewImage: function (e) {
       var input = e.target;
+      var id = e.target.id;
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
@@ -700,8 +821,30 @@ export default {
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
-            //this.preview = result;
-            this.dataURLtoFile(result, e.target.id);
+            if (id == "upload_spt") {
+              this.preview_spt = result;
+            }
+            if (id == "upload_infomatrix") {
+              this.preview_infomatrix = result;
+            }
+            if (id == "upload_studentFee") {
+              this.preview_studentFee = result;
+            }
+            if (id == "upload_tuitionFee") {
+              this.preview_tuitionFee = result;
+            }
+            if (id == "upload_engCourse") {
+              this.preview_engCourse = result;
+            }
+            if (id == "upload_creativeExam") {
+              this.preview_creativeExam = result;
+            }
+            if (id == "upload_pedTest") {
+              this.preview_pedTest = result;
+            }
+            
+            //console.log(preview + id);
+            this.dataURLtoFile(result, id);
           });
         };
         reader.readAsDataURL(input.files[0]);
@@ -775,13 +918,13 @@ export default {
     },
 
     previewImage_multi: function (e) {
-      setTimeout(() => {
-        for (let i = 0; i < this.certificate75.length; i++) {
-          console.log("start");
-          var input = e.target;
-          if (input.files) {
-            var reader = new FileReader();
-            reader.onload = (event) => {
+      let slide = this.previews;
+      var input = e.target;
+      if (input.files) {
+        let fileToDataURL = (file) => {
+          var reader = new FileReader();
+          return new Promise(function () {
+            reader.onload = function (event) {
               compress(event.target.result, {
                 width: 400,
                 type: "image/jpg", // default
@@ -789,17 +932,16 @@ export default {
                 min: 20, // min size
                 quality: 0.8,
               }).then((result) => {
-                // this.previews.push(result);
+                slide.push(result);
                 this.dataURLtoFile_multi(result);
               });
             };
-
-            reader.readAsDataURL(input.files[i]);
-          }
-        }
-      }, 2000);
-      
-      
+            reader.readAsDataURL(file);
+          });
+        };
+        var filesArray = Array.prototype.slice.call(input.files);
+        Promise.all(filesArray.map(fileToDataURL));
+      }
     },
 
     dataURLtoFile_multi: function (dataurl) {
@@ -844,6 +986,11 @@ export default {
         .then((res) => {
           console.log(res);
         });
+    },
+    remove_upload: function (i) {
+      this.photos.splice(i, 1);
+      this.previews.splice(i, 1);
+      this.certificate75.splice(i, 1);
     },
   },
 };

@@ -193,7 +193,7 @@ export const locale = {
         "creative_exam_referrence": "Creative Exam Result",
         "upload_creative_exam_referrence": "Upload your Creative Exam Result(if journal 6B03201)",
         "choose_creative_exam": "Choose Creative Exam...",
-        "ped_test": "Pedagogical Test Reesult",
+        "ped_test": "Pedagogical Test Result",
         "upload_ped_test": "Upload your Pedagogical Test Result(If pedagog)",
         "choose_ped_test": "Choose Pedagogical Test...",
     },

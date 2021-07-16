@@ -282,27 +282,37 @@
                           </button>
                         </div>
 
-                        <div class="col-xl-6 mt-5">
-                        <b-carousel
-                          id="carousel-1"
-                          :interval="2000"
-                          controls
-                          indicators
+                        <div
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <b-carousel-slide
+                          <div
                             :v-if="previews.length > 0"
                             v-for="(image, i) in previews"
                             :key="i"
+                            class="m-5"
+                            style="display: block"
                           >
-                            <template #img>
-                              <img
-                                class="d-block img-fluid w-100"
-                                :src="image"
-                                :alt="i"
-                              /> </template
-                          ></b-carousel-slide>
-                        </b-carousel>
-                      </div>
+                            <img
+                              :src="image"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload(i)"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -446,7 +456,7 @@ export default {
       //preparation_province: [],
       //preparation_country: [],
       attestat_upload: [],
-      
+
       photos: [],
       form: {
         country: null,
@@ -653,6 +663,7 @@ export default {
 
     previewImage: function (e) {
       var input = e.target;
+      let slide = this.previews;
       if (input.files) {
         let fileToDataURL = (file) => {
           var reader = new FileReader();
@@ -665,7 +676,7 @@ export default {
                 min: 20, // min size
                 quality: 0.8,
               }).then((result) => {
-                this.previews.push(result);
+                slide.push(result);
                 this.dataURLtoFile(result);
               });
             };
@@ -708,7 +719,6 @@ export default {
       for (let i = 0; i < this.photos.length; i++) {
         data_created.append("file[]", this.photos[i]);
       }
-      //data_created.append("file[]", this.photos);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -721,6 +731,11 @@ export default {
           console.log(res);
         });
     },
+    remove_upload: function(i){
+      this.photos.splice(i, 1);
+      this.previews.splice(i, 1);
+      this.attestat_upload.splice(i, 1);
+    }
   },
 };
 </script>
