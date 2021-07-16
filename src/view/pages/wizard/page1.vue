@@ -313,9 +313,9 @@
                         <b-form-file
                           multiple
                           id="social_status"
-                          @change="previewImage_multi"
+                          @change="previewImage_multi_social"
                           accept="image/png, image/gif, image/jpeg"
-                          v-model="social_status_upload"
+                          v-model="social_status_upload_preview"
                           :state="Boolean(file)"
                           :placeholder="$t('page1.choose_status_document')"
                           :drop-placeholder="$t('common.drop_file')"
@@ -338,13 +338,17 @@
                         <div
                           class="d-flex justify-content-between mt-3"
                           v-if="
-                            social_status_upload != null &&
-                            social_status_upload.length > 0
+                            social_status_upload_preview != null &&
+                            social_status_upload_preview.length > 0
                           "
                         >
                           <button
                             class="btn btn-primary"
-                            @click="social_status_upload = []"
+                            @click="
+                              social_status_upload = [];
+                              social_status_upload_preview = [];
+                              social_status_upload_preview_slide = [];
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -354,6 +358,35 @@
                           >
                             {{ $t("common.upload") }}
                           </button>
+                        </div>
+                      </div>
+                      <div class="text-center" style="display: flex; flex-wrap: wrap">
+                        <div
+                          :v-if="social_status_upload_preview_slide.length > 0"
+                          v-for="(image, i) in social_status_upload_preview_slide"
+                          :key="i"
+                          class="m-5"
+                          style="display: block"
+                        >
+                          <img
+                            :src="image"
+                            class="img-thumbnail"
+                            style="width: 15em; display: block"
+                            
+                          />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="currentColor"
+                            class="bi bi-x-square-fill m-1"
+                            viewBox="0 0 16 16"
+                            @click = "remove_upload_social(i)"
+                          >
+                            <path
+                              d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                            />
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -465,7 +498,7 @@
                         accept="image/*"
                         multiple
                         id="documents"
-                        @change="previewImage_multi"
+                        @change="previewImage_multi_documents"
                         v-model="documents_upload_preview"
                         :state="Boolean(file)"
                         :placeholder="$t('common.choose_file')"
@@ -510,26 +543,34 @@
                         </button>
                       </div>
 
-                      <div class="col-xl-6 mt-5">
-                        <b-carousel
-                          id="carousel-1"
-                          :interval="2000"
-                          controls
-                          indicators
+                      <div class="text-center" style="display: flex; flex-wrap: wrap">
+                        <div
+                          :v-if="documents_upload_preview_slide.length > 0"
+                          v-for="(image, i) in documents_upload_preview_slide"
+                          :key="i"
+                          class="m-5"
+                          style="display: block"
                         >
-                          <b-carousel-slide
-                            :v-if="documents_upload_preview_slide.length > 0"
-                            v-for="(image, i) in documents_upload_preview_slide"
-                            :key="i"
+                          <img
+                            :src="image"
+                            class="img-thumbnail"
+                            style="width: 15em; display: block"
+                            
+                          />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="currentColor"
+                            class="bi bi-x-square-fill m-1"
+                            viewBox="0 0 16 16"
+                            @click = "remove_upload_documents(i)"
                           >
-                            <template #img>
-                              <img
-                                class="d-block img-fluid w-100"
-                                :src="image"
-                                :alt="i"
-                              /> </template
-                          ></b-carousel-slide>
-                        </b-carousel>
+                            <path
+                              d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -626,13 +667,16 @@ export default {
         { text: this.$t("page1.passport"), value: "passport" },
       ],
       nationality: [],
-      social_status: [],
       preview: null,
       photo: null,
       social_status_upload: [],
       documents_upload: [],
       documents_upload_preview: [],
       documents_upload_preview_slide: [],
+
+      social_status: [],
+      social_status_upload_preview: [],
+      social_status_upload_preview_slide: [],
 
       form: {
         citizenship: "",
@@ -1035,19 +1079,18 @@ export default {
       this.crop();
     },
 
-    previewImage_multi: function (e) {
+    previewImage_multi_documents: function (e) {
       var id = e.target.id;
       this.documents_upload_preview_slide = [];
       this.documents_upload = [];
-
-      setTimeout(() => {
-        if (id == "social_status") var n = this.social_status_upload.length;
-        if (id == "documents") var n = this.documents_upload_preview.length;
-        for (let i = 0; i < n; i++) {
-          var input = e.target;
-          if (input.files) {
-            var reader = new FileReader();
-            reader.onload = (event) => {
+      var n = this.documents_upload_preview.length;
+      let slide = this.documents_upload_preview_slide;
+      var input = e.target;
+      if (input.files) {
+        let fileToDataURL = (file) => {
+          var reader = new FileReader();
+          return new Promise(function () {
+            reader.onload = function (event) {
               compress(event.target.result, {
                 width: 400,
                 type: "image/jpg", // default
@@ -1055,14 +1098,46 @@ export default {
                 min: 20, // min size
                 quality: 0.8,
               }).then((result) => {
-                this.documents_upload_preview_slide.push(result);
+                slide.push(result);
                 this.dataURLtoFile_multi(result, id);
               });
             };
-            reader.readAsDataURL(input.files[i]);
-          }
-        }
-      }, 3000);
+            reader.readAsDataURL(file);
+          });
+        };
+        var filesArray = Array.prototype.slice.call(input.files);
+        Promise.all(filesArray.map(fileToDataURL));
+      }
+    },
+    previewImage_multi_social: function (e) {
+      var id = e.target.id;
+      this.social_status_upload_preview_slide = [];
+      this.social_status_upload = [];
+      var n = this.social_status_upload_preview.length;
+      let slide = this.social_status_upload_preview_slide;
+      var input = e.target;
+      if (input.files) {
+        let fileToDataURL = (file) => {
+          var reader = new FileReader();
+          return new Promise(function () {
+            reader.onload = function (event) {
+              compress(event.target.result, {
+                width: 400,
+                type: "image/jpg", // default
+                max: 200, // max size
+                min: 20, // min size
+                quality: 0.8,
+              }).then((result) => {
+                slide.push(result);
+                this.dataURLtoFile_multi(result, id);
+              });
+            };
+            reader.readAsDataURL(file);
+          });
+        };
+        var filesArray = Array.prototype.slice.call(input.files);
+        Promise.all(filesArray.map(fileToDataURL));
+      }
     },
     dataURLtoFile_multi: function (dataurl, id) {
       var arr = dataurl.split(","),
@@ -1127,7 +1202,6 @@ export default {
       for (let i = 0; i < this.social_status_upload.length; i++) {
         data_created.append("file[]", this.social_status_upload[i]);
       }
-      //data_created.append("file[]", this.photos);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1140,6 +1214,16 @@ export default {
           console.log(res);
         });
     },
+    remove_upload_documents: function(i){
+      this.documents_upload.splice(i, 1);
+      this.documents_upload_preview.splice(i, 1);
+      this.documents_upload_preview_slide.splice(i, 1);
+    },
+    remove_upload_social: function(i){
+      this.social_status_upload.splice(i, 1);
+      this.social_status_upload_preview.splice(i, 1);
+      this.social_status_upload_preview_slide.splice(i, 1);
+    }
   },
 };
 </script>

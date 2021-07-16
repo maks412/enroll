@@ -269,8 +269,11 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="attestat_upload = [];photos = [];previews = []"
-                            
+                            @click="
+                              attestat_upload = [];
+                              photos = [];
+                              previews = [];
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -279,20 +282,27 @@
                           </button>
                         </div>
 
-                       
-                          <div class="col-xl-6" v-if="previews.length > 0" :v-for="(p, index) in previews" :key="index">
-                            <img
-                              :src="p"
-                              class="img-fluid"
-                              style="
-                                padding: 20px;
-                                width: 50%;
-                                display: block;
-                                margin: auto;
-                              "
-                            />
-                          
-                        </div>
+                        <div class="col-xl-6 mt-5">
+                        <b-carousel
+                          id="carousel-1"
+                          :interval="2000"
+                          controls
+                          indicators
+                        >
+                          <b-carousel-slide
+                            :v-if="previews.length > 0"
+                            v-for="(image, i) in previews"
+                            :key="i"
+                          >
+                            <template #img>
+                              <img
+                                class="d-block img-fluid w-100"
+                                :src="image"
+                                :alt="i"
+                              /> </template
+                          ></b-carousel-slide>
+                        </b-carousel>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -432,10 +442,11 @@ export default {
       language_options: [],
       foreign_language: [],
       attestat_series: [],
+      previews: [],
       //preparation_province: [],
       //preparation_country: [],
       attestat_upload: [],
-      previews: [],
+      
       photos: [],
       form: {
         country: null,
@@ -639,16 +650,14 @@ export default {
           }
         });
     },
-    
+
     previewImage: function (e) {
-      setTimeout(() => {
-        console.log(this.attestat_upload.length);
-        for (let i = 0; i < this.attestat_upload.length; i++) {
-          console.log("start");
-          var input = e.target;
-          if (input.files) {
-            var reader = new FileReader();
-            reader.onload = (event) => {
+      var input = e.target;
+      if (input.files) {
+        let fileToDataURL = (file) => {
+          var reader = new FileReader();
+          return new Promise(function () {
+            reader.onload = function (event) {
               compress(event.target.result, {
                 width: 400,
                 type: "image/jpg", // default
@@ -656,22 +665,17 @@ export default {
                 min: 20, // min size
                 quality: 0.8,
               }).then((result) => {
-                console.log(result);
                 this.previews.push(result);
-                console.log(this.previews);
-                //this.photo = result;
                 this.dataURLtoFile(result);
               });
             };
+            reader.readAsDataURL(file);
+          });
+        };
 
-            reader.readAsDataURL(input.files[i]);
-          }
-        }
-        console.log("asfd");
-        console.log(this.photos);
-      }, 2000);
-      
-      
+        var filesArray = Array.prototype.slice.call(input.files);
+        Promise.all(filesArray.map(fileToDataURL));
+      }
     },
 
     dataURLtoFile: function (dataurl) {
