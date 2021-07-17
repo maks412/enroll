@@ -311,7 +311,6 @@
                         <label>{{ $t("page1.upload_status_document") }}</label>
 
                         <b-form-file
-                          multiple
                           id="social_status"
                           @change="previewImage_multi_social"
                           accept="image/png, image/gif, image/jpeg"
@@ -335,30 +334,6 @@
                             </b-badge>
                           </template></b-form-file
                         >
-                        <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="
-                            social_status_upload_preview != null &&
-                            social_status_upload_preview.length > 0
-                          "
-                        >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              social_status_upload = [];
-                              social_status_upload_preview = [];
-                              social_status_upload_preview_slide = [];
-                            "
-                          >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload_multi_social()"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
-                        </div>
                       </div>
                       <div class="text-center" style="display: flex; flex-wrap: wrap">
                         <div
@@ -496,7 +471,6 @@
                       <label>{{ $t("page1.documents") }}</label>
                       <b-form-file
                         accept="image/*"
-                        multiple
                         id="documents"
                         @change="previewImage_multi_documents"
                         v-model="documents_upload_preview"
@@ -518,30 +492,6 @@
                           </b-badge>
                         </template></b-form-file
                       >
-                      <div
-                        class="d-flex justify-content-between mt-3"
-                        v-if="
-                          documents_upload_preview != null &&
-                          documents_upload_preview.length > 0
-                        "
-                      >
-                        <button
-                          class="btn btn-primary"
-                          @click="
-                            documents_upload = [];
-                            documents_upload_preview = [];
-                            documents_upload_preview_slide = [];
-                          "
-                        >
-                          {{ $t("common.reset") }}
-                        </button>
-                        <button
-                          class="btn btn-primary"
-                          @click="upload_multi_documents()"
-                        >
-                          {{ $t("common.upload") }}
-                        </button>
-                      </div>
 
                       <div class="text-center" style="display: flex; flex-wrap: wrap">
                         <div
@@ -670,11 +620,11 @@ export default {
       preview: null,
       photo: null,
       social_status_upload: [],
-      documents_upload: [],
+      documents_upload: null,
       documents_upload_preview: [],
       documents_upload_preview_slide: [],
 
-      social_status: [],
+      social_status: null,
       social_status_upload_preview: [],
       social_status_upload_preview_slide: [],
 
@@ -1081,9 +1031,6 @@ export default {
 
     previewImage_multi_documents: function (e) {
       var id = e.target.id;
-      this.documents_upload_preview_slide = [];
-      this.documents_upload = [];
-      var n = this.documents_upload_preview.length;
       let slide = this.documents_upload_preview_slide;
       var input = e.target;
       if (input.files) {
@@ -1093,7 +1040,7 @@ export default {
             reader.onload = function (event) {
               compress(event.target.result, {
                 width: 400,
-                type: "image/jpg", // default
+                type: "image/*", // default
                 max: 200, // max size
                 min: 20, // min size
                 quality: 0.8,
@@ -1111,9 +1058,6 @@ export default {
     },
     previewImage_multi_social: function (e) {
       var id = e.target.id;
-      this.social_status_upload_preview_slide = [];
-      this.social_status_upload = [];
-      var n = this.social_status_upload_preview.length;
       let slide = this.social_status_upload_preview_slide;
       var input = e.target;
       if (input.files) {
@@ -1123,7 +1067,7 @@ export default {
             reader.onload = function (event) {
               compress(event.target.result, {
                 width: 400,
-                type: "image/jpg", // default
+                type: "image/*", // default
                 max: 200, // max size
                 min: 20, // min size
                 quality: 0.8,
@@ -1140,6 +1084,7 @@ export default {
       }
     },
     dataURLtoFile_multi: function (dataurl, id) {
+      console.log("aaa");
       var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]),
@@ -1149,12 +1094,15 @@ export default {
         u8arr[n] = bstr.charCodeAt(n);
       }
       if (id == "social_status")
-        this.social_status_upload.push(new Blob([u8arr], { type: mime }));
+        this.social_status_upload = new Blob([u8arr], { type: mime });
+        this.upload_multi_social();
       if (id == "documents")
-        this.documents_upload.push(new Blob([u8arr], { type: mime }));
+        this.documents_upload = new Blob([u8arr], { type: mime });
+        this.upload_multi_documents();
     },
 
     upload_multi_documents: function () {
+      console.log("sdfs");
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -1168,10 +1116,7 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      for (let i = 0; i < this.documents_upload.length; i++) {
-        data_created.append("file[]", this.documents_upload[i]);
-      }
-      //data_created.append("file[]", this.photos);
+      data_created.append("file", this.documents_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1181,7 +1126,9 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
+          if(res.code == 1){
+            this.documents_upload = null;
+          }
         });
     },
 
@@ -1199,9 +1146,9 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      for (let i = 0; i < this.social_status_upload.length; i++) {
-        data_created.append("file[]", this.social_status_upload[i]);
-      }
+     
+      data_created.append("file", this.social_status_upload);
+      
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1211,16 +1158,18 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
+          if(res.code == 1){
+            this.social_status_upload = null;
+          }
         });
     },
     remove_upload_documents: function(i){
-      this.documents_upload.splice(i, 1);
+      
       this.documents_upload_preview.splice(i, 1);
       this.documents_upload_preview_slide.splice(i, 1);
     },
     remove_upload_social: function(i){
-      this.social_status_upload.splice(i, 1);
+      
       this.social_status_upload_preview.splice(i, 1);
       this.social_status_upload_preview_slide.splice(i, 1);
     }
