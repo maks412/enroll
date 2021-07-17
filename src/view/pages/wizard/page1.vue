@@ -1026,42 +1026,15 @@ export default {
     },
 
     previewImage_multi_documents: function (e) {
+      var input = e.target;
       var id = e.target.id;
       let slide = this.documents_upload_preview_slide;
-      var input = e.target;
-      if (input.files) {
-        let fileToDataURL = (file) => {
-          var reader = new FileReader();
-          return new Promise(function () {
-            reader.onload = function (event) {
-              compress(event.target.result, {
-                width: 400,
-                type: "image/*", // default
-                max: 200, // max size
-                min: 20, // min size
-                quality: 0.8,
-              }).then((result) => {
-                slide.push(result);
-                this.dataURLtoFile_multi(result, id);
-              });
-            };
-            reader.readAsDataURL(file);
-          });
-        };
-        var filesArray = Array.prototype.slice.call(input.files);
-        Promise.all(filesArray.map(fileToDataURL));
-      }
-    },
-    previewImage_multi_social: function (e) {
-      var input = e.target;
-      var id = e.target.id;
-      let slide = this.social_status_upload_preview_slide;
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
           compress(event.target.result, {
             width: 400,
-            type: "image/jpg", // default
+            type: "image/*", // default
             max: 200, // max size
             min: 20, // min size
             quality: 0.8,
@@ -1075,7 +1048,7 @@ export default {
 
 
       // var id = e.target.id;
-      // let slide = this.social_status_upload_preview_slide;
+      // let slide = this.documents_upload_preview_slide;
       // var input = e.target;
       // if (input.files) {
       //   let fileToDataURL = (file) => {
@@ -1099,6 +1072,33 @@ export default {
       //   var filesArray = Array.prototype.slice.call(input.files);
       //   Promise.all(filesArray.map(fileToDataURL));
       // }
+    },
+    previewImage_multi_social: function (e) {
+      var id = e.target.id;
+      let slide = this.social_status_upload_preview_slide;
+      var input = e.target;
+      if (input.files) {
+        let fileToDataURL = (file) => {
+          var reader = new FileReader();
+          return new Promise(function () {
+            reader.onload = function (event) {
+              compress(event.target.result, {
+                width: 400,
+                type: "image/*", // default
+                max: 200, // max size
+                min: 20, // min size
+                quality: 0.8,
+              }).then((result) => {
+                slide.push(result);
+                this.dataURLtoFile_multi(result, id);
+              });
+            };
+            reader.readAsDataURL(file);
+          });
+        };
+        var filesArray = Array.prototype.slice.call(input.files);
+        Promise.all(filesArray.map(fileToDataURL));
+      }
     },
     dataURLtoFile_multi: function (dataurl, id) {
       console.log("aaa");
