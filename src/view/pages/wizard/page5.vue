@@ -204,7 +204,6 @@
                           "
                         />
                       </div>
-                    
                     </div>
                     <hr />
                     <div class="row">
@@ -262,7 +261,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="infomatrix_upload = null; preview_infomatrix = null"
+                            @click="
+                              infomatrix_upload = null;
+                              preview_infomatrix = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -284,7 +286,6 @@
                           "
                         />
                       </div>
-                      
                     </div>
                   </div>
                   <!--end: Wizard Step 2-->
@@ -327,7 +328,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="student_fee = null; preview_studentFee = null"
+                            @click="
+                              student_fee = null;
+                              preview_studentFee = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -349,7 +353,6 @@
                           "
                         />
                       </div>
-                      
                     </div>
                     <hr />
                     <div class="row">
@@ -384,7 +387,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="tuition_fee = null; preview_tuitionFee = null"
+                            @click="
+                              tuition_fee = null;
+                              preview_tuitionFee = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -395,7 +401,7 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
-                                                <img
+                        <img
                           :src="preview_tuitionFee"
                           class="img-fluid"
                           style="
@@ -406,7 +412,6 @@
                           "
                         />
                       </div>
-                      
                     </div>
                     <hr />
                     <div class="row">
@@ -441,7 +446,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="eng_course = null; preview_engCourse = null"
+                            @click="
+                              eng_course = null;
+                              preview_engCourse = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -463,7 +471,6 @@
                           "
                         />
                       </div>
-                      
                     </div>
                   </div>
                   <!--end: Wizard Step 3-->
@@ -519,7 +526,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="creative_exam = null; preview_creativeExam = null"
+                            @click="
+                              creative_exam = null;
+                              preview_creativeExam = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -530,7 +540,7 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
-                                                <img
+                        <img
                           :src="preview_creativeExam"
                           class="img-fluid"
                           style="
@@ -541,7 +551,6 @@
                           "
                         />
                       </div>
-                      
                     </div>
 
                     <div class="row">
@@ -587,7 +596,10 @@
                         >
                           <button
                             class="btn btn-primary"
-                            @click="pedagogical_test = null; preview_pedTest = null"
+                            @click="
+                              pedagogical_test = null;
+                              preview_pedTest = null;
+                            "
                           >
                             {{ $t("common.reset") }}
                           </button>
@@ -598,7 +610,7 @@
                             {{ $t("common.upload") }}
                           </button>
                         </div>
-                        
+
                         <img
                           :src="preview_pedTest"
                           class="img-fluid"
@@ -609,9 +621,7 @@
                             margin: auto;
                           "
                         />
-                      
                       </div>
-                      
                     </div>
                   </div>
                   <!--begin: Wizard Actions -->
@@ -842,7 +852,7 @@ export default {
             if (id == "upload_pedTest") {
               this.preview_pedTest = result;
             }
-            
+
             //console.log(preview + id);
             this.dataURLtoFile(result, id);
           });
@@ -879,10 +889,39 @@ export default {
 
     upload: function (id) {
       var data_created = new FormData();
+      if (id == "upload_spt") {
+        let doc = "16";
+        data_created.append("file", this.spt_upload);
+      }
+      if (id == "upload_infomatrix") {
+        let doc = "44";
+        data_created.append("file", this.infomatrix_upload);
+      }
+      if (id == "upload_studentFee") {
+        let doc = "36";
+        data_created.append("file", this.student_fee);
+      }
+      if (id == "upload_tuitionFee") {
+        let doc = "35";
+        data_created.append("file", this.tuition_fee);
+      }
+      if (id == "upload_engCourse") {
+        let doc = "";
+        data_created.append("file", this.eng_course);
+      }
+      if (id == "upload_creativeExam") {
+        let doc = "";
+        data_created.append("file", this.creative_exam);
+      }
+      if (id == "upload_pedTest") {
+        let doc = "";
+        data_created.append("file", this.pedagogical_test);
+      }
       data_created.append(
         "json",
         JSON.stringify({
           data: {
+            docid: doc,
             mod: "page1",
             method: "setUpload",
             action: "setImage",
@@ -892,19 +931,6 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      if (id == "upload_spt") data_created.append("file", this.spt_upload);
-      if (id == "upload_infomatrix")
-        data_created.append("file", this.infomatrix_upload);
-      if (id == "upload_studentFee")
-        data_created.append("file", this.student_fee);
-      if (id == "upload_tuitionFee")
-        data_created.append("file", this.tuition_fee);
-      if (id == "upload_engCourse")
-        data_created.append("file", this.eng_course);
-      if (id == "upload_creativeExam")
-        data_created.append("file", this.creative_exam);
-      if (id == "upload_pedTest")
-        data_created.append("file", this.pedagogical_test);
 
       fetch(url + "/backend/middle.php", {
         method: "POST",
@@ -963,6 +989,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
+            docid: "34",
             mod: "page2",
             method: "setUpload",
             action: "setImage",

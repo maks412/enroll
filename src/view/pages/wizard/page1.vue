@@ -1160,7 +1160,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "7",
+            docid: this.form.document_type,
             method: "setUpload",
             action: "setImage",
           },
@@ -1191,7 +1191,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "7",
+            docid: "",
             method: "setUpload",
             action: "setImage",
           },

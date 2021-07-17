@@ -317,6 +317,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
+            docid: "30",
             mod: "page1",
             method: "setUpload",
             action: "setImage",

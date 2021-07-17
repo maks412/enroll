@@ -331,10 +331,14 @@ export default {
 
     upload: function () {
       var data_created = new FormData();
+      if(this.form.english_certificate == "IELTS") var doc = "48";
+      if(this.form.english_certificate == "TOEFL") var doc = "49";
+      if(this.form.english_certificate == "SDU Language Test") var doc = "";
       data_created.append(
         "json",
         JSON.stringify({
           data: {
+            docid: doc,
             mod: "page4_IELTS",
             method: "setUpload",
             action: "setImage",

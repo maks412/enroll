@@ -708,7 +708,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "7",
+            docid: "1",
             method: "setUpload",
             action: "setImage",
           },
