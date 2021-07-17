@@ -789,9 +789,7 @@ export default {
     },
 
     previewImage: function (e) {
-      console.log(this.photo);
       var input = e.target;
-
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
@@ -803,9 +801,7 @@ export default {
             quality: 0.8,
           }).then((result) => {
             this.preview = result;
-            //this.photo = result;
             this.dataURLtoFile(result);
-            console.log(this.photo);
           });
         };
         reader.readAsDataURL(input.files[0]);
@@ -1057,31 +1053,52 @@ export default {
       }
     },
     previewImage_multi_social: function (e) {
+      var input = e.target;
       var id = e.target.id;
       let slide = this.social_status_upload_preview_slide;
-      var input = e.target;
       if (input.files) {
-        let fileToDataURL = (file) => {
-          var reader = new FileReader();
-          return new Promise(function () {
-            reader.onload = function (event) {
-              compress(event.target.result, {
-                width: 400,
-                type: "image/*", // default
-                max: 200, // max size
-                min: 20, // min size
-                quality: 0.8,
-              }).then((result) => {
-                slide.push(result);
-                this.dataURLtoFile_multi(result, id);
-              });
-            };
-            reader.readAsDataURL(file);
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/jpg", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
+            this.dataURLtoFile_multi(result, id);
           });
         };
-        var filesArray = Array.prototype.slice.call(input.files);
-        Promise.all(filesArray.map(fileToDataURL));
+        reader.readAsDataURL(input.files[0]);
       }
+
+
+      // var id = e.target.id;
+      // let slide = this.social_status_upload_preview_slide;
+      // var input = e.target;
+      // if (input.files) {
+      //   let fileToDataURL = (file) => {
+      //     var reader = new FileReader();
+      //     return new Promise(function () {
+      //       reader.onload = function (event) {
+      //         compress(event.target.result, {
+      //           width: 400,
+      //           type: "image/*", // default
+      //           max: 200, // max size
+      //           min: 20, // min size
+      //           quality: 0.8,
+      //         }).then((result) => {
+      //           slide.push(result);
+      //           this.dataURLtoFile_multi(result, id);
+      //         });
+      //       };
+      //       reader.readAsDataURL(file);
+      //     });
+      //   };
+      //   var filesArray = Array.prototype.slice.call(input.files);
+      //   Promise.all(filesArray.map(fileToDataURL));
+      // }
     },
     dataURLtoFile_multi: function (dataurl, id) {
       console.log("aaa");
