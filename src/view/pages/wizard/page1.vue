@@ -1133,7 +1133,7 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      data_created.append("file", this.documents_upload);
+      data_created.append("file[]", this.documents_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
