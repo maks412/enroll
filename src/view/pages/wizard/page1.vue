@@ -621,7 +621,7 @@ export default {
       photo: null,
       social_status_upload: [],
       documents_upload: null,
-      documents_upload_preview: [],
+      documents_upload_preview: null,
       documents_upload_preview_slide: [],
 
       social_status: null,
@@ -1181,12 +1181,9 @@ export default {
         });
     },
     remove_upload_documents: function(i){
-      
-      this.documents_upload_preview.splice(i, 1);
       this.documents_upload_preview_slide.splice(i, 1);
     },
     remove_upload_social: function(i){
-      
       this.social_status_upload_preview.splice(i, 1);
       this.social_status_upload_preview_slide.splice(i, 1);
     }
