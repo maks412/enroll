@@ -335,10 +335,15 @@
                           </template></b-form-file
                         >
                       </div>
-                      <div class="text-center" style="display: flex; flex-wrap: wrap">
+                      <div
+                        class="text-center"
+                        style="display: flex; flex-wrap: wrap"
+                      >
                         <div
                           :v-if="social_status_upload_preview_slide.length > 0"
-                          v-for="(image, i) in social_status_upload_preview_slide"
+                          v-for="(
+                            image, i
+                          ) in social_status_upload_preview_slide"
                           :key="i"
                           class="m-5"
                           style="display: block"
@@ -347,7 +352,6 @@
                             :src="image"
                             class="img-thumbnail"
                             style="width: 15em; display: block"
-                            
                           />
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -356,7 +360,7 @@
                             fill="currentColor"
                             class="bi bi-x-square-fill m-1"
                             viewBox="0 0 16 16"
-                            @click = "remove_upload_social(i)"
+                            @click="remove_upload_social(i)"
                           >
                             <path
                               d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -493,7 +497,10 @@
                         </template></b-form-file
                       >
 
-                      <div class="text-center" style="display: flex; flex-wrap: wrap">
+                      <div
+                        class="text-center"
+                        style="display: flex; flex-wrap: wrap"
+                      >
                         <div
                           :v-if="documents_upload_preview_slide.length > 0"
                           v-for="(image, i) in documents_upload_preview_slide"
@@ -505,7 +512,6 @@
                             :src="image"
                             class="img-thumbnail"
                             style="width: 15em; display: block"
-                            
                           />
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -514,7 +520,7 @@
                             fill="currentColor"
                             class="bi bi-x-square-fill m-1"
                             viewBox="0 0 16 16"
-                            @click = "remove_upload_documents(i)"
+                            @click="remove_upload_documents(i)"
                           >
                             <path
                               d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -1045,59 +1051,26 @@ export default {
         };
         reader.readAsDataURL(input.files[0]);
       }
-
-
-      // var id = e.target.id;
-      // let slide = this.documents_upload_preview_slide;
-      // var input = e.target;
-      // if (input.files) {
-      //   let fileToDataURL = (file) => {
-      //     var reader = new FileReader();
-      //     return new Promise(function () {
-      //       reader.onload = function (event) {
-      //         compress(event.target.result, {
-      //           width: 400,
-      //           type: "image/*", // default
-      //           max: 200, // max size
-      //           min: 20, // min size
-      //           quality: 0.8,
-      //         }).then((result) => {
-      //           slide.push(result);
-      //           this.dataURLtoFile_multi(result, id);
-      //         });
-      //       };
-      //       reader.readAsDataURL(file);
-      //     });
-      //   };
-      //   var filesArray = Array.prototype.slice.call(input.files);
-      //   Promise.all(filesArray.map(fileToDataURL));
-      // }
     },
     previewImage_multi_social: function (e) {
+      var input = e.target;
       var id = e.target.id;
       let slide = this.social_status_upload_preview_slide;
-      var input = e.target;
       if (input.files) {
-        let fileToDataURL = (file) => {
-          var reader = new FileReader();
-          return new Promise(function () {
-            reader.onload = function (event) {
-              compress(event.target.result, {
-                width: 400,
-                type: "image/*", // default
-                max: 200, // max size
-                min: 20, // min size
-                quality: 0.8,
-              }).then((result) => {
-                slide.push(result);
-                this.dataURLtoFile_multi(result, id);
-              });
-            };
-            reader.readAsDataURL(file);
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/*", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
+            this.dataURLtoFile_multi(result, id);
           });
         };
-        var filesArray = Array.prototype.slice.call(input.files);
-        Promise.all(filesArray.map(fileToDataURL));
+        reader.readAsDataURL(input.files[0]);
       }
     },
     dataURLtoFile_multi: function (dataurl, id) {
@@ -1110,12 +1083,14 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      if (id == "social_status")
+      if (id == "social_status") {
         this.social_status_upload = new Blob([u8arr], { type: mime });
         this.upload_multi_social();
-      if (id == "documents")
+      }
+      if (id == "documents") {
         this.documents_upload = new Blob([u8arr], { type: mime });
         this.upload_multi_documents();
+      }
     },
 
     upload_multi_documents: function () {
@@ -1143,13 +1118,14 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          if(res.code == 1){
+          if (res.code == 1) {
             this.documents_upload = null;
           }
         });
     },
 
     upload_multi_social: function () {
+      console.log("social");
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -1163,9 +1139,9 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-     
+
       data_created.append("file", this.social_status_upload);
-      
+
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1175,18 +1151,18 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          if(res.code == 1){
+          if (res.code == 1) {
             this.social_status_upload = null;
           }
         });
     },
-    remove_upload_documents: function(i){
+    remove_upload_documents: function (i) {
       this.documents_upload_preview_slide.splice(i, 1);
     },
-    remove_upload_social: function(i){
+    remove_upload_social: function (i) {
       this.social_status_upload_preview.splice(i, 1);
       this.social_status_upload_preview_slide.splice(i, 1);
-    }
+    },
   },
 };
 </script>

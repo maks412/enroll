@@ -238,7 +238,7 @@
                       <div class="col-xl-6">
                         <label>{{ $t("page2.upload_attestat") }}</label>
                         <b-form-file
-                          multiple
+                          
                           @change="previewImage"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
@@ -260,27 +260,6 @@
                             </b-badge>
                           </template></b-form-file
                         >
-                        <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="
-                            attestat_upload != null &&
-                            attestat_upload.length > 0
-                          "
-                        >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              attestat_upload = [];
-                              photos = [];
-                              previews = [];
-                            "
-                          >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button class="btn btn-primary" @click="upload()">
-                            {{ $t("common.upload") }}
-                          </button>
-                        </div>
 
                         <div
                           class="text-center"
@@ -455,9 +434,9 @@ export default {
       previews: [],
       //preparation_province: [],
       //preparation_country: [],
-      attestat_upload: [],
+      attestat_upload: null,
 
-      photos: [],
+      photos: null,
       form: {
         country: null,
         province: null,
@@ -665,27 +644,20 @@ export default {
       var input = e.target;
       let slide = this.previews;
       if (input.files) {
-        let fileToDataURL = (file) => {
-          var reader = new FileReader();
-          return new Promise(function () {
-            reader.onload = function (event) {
-              compress(event.target.result, {
-                width: 400,
-                type: "image/jpg", // default
-                max: 200, // max size
-                min: 20, // min size
-                quality: 0.8,
-              }).then((result) => {
-                slide.push(result);
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/*", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
                 this.dataURLtoFile(result);
-              });
-            };
-            reader.readAsDataURL(file);
           });
         };
-
-        var filesArray = Array.prototype.slice.call(input.files);
-        Promise.all(filesArray.map(fileToDataURL));
+        reader.readAsDataURL(input.files[0]);
       }
     },
 
@@ -699,7 +671,8 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photos.push(new Blob([u8arr], { type: mime }));
+      this.photos = new Blob([u8arr], { type: mime });
+      this.upload();
     },
 
     upload: function () {
@@ -716,9 +689,8 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      for (let i = 0; i < this.photos.length; i++) {
-        data_created.append("file[]", this.photos[i]);
-      }
+      data_created.append("file[]", this.photos);
+      
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -732,9 +704,9 @@ export default {
         });
     },
     remove_upload: function(i){
-      this.photos.splice(i, 1);
+      // this.photos.splice(i, 1);
       this.previews.splice(i, 1);
-      this.attestat_upload.splice(i, 1);
+      this.attestat_upload = null;
     }
   },
 };

@@ -81,35 +81,36 @@
                             </b-badge>
                           </template></b-form-file
                         >
+
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="grant_cert != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              grant_cert = null;
-                              preview = null;
-                            "
+                          <div
+                            v-if="preview"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button class="btn btn-primary" @click="upload()">
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload()"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <img
-                          :src="preview"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                   </div>
@@ -174,7 +175,6 @@ export default {
       tabs: [""],
       preview: null,
       grant_cert: null,
-
       form: {
         grant_cert_text: null,
 
@@ -278,7 +278,6 @@ export default {
 
     previewImage: function (e) {
       var input = e.target;
-      
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
@@ -290,7 +289,6 @@ export default {
             quality: 0.8,
           }).then((result) => {
             this.preview = result;
-            //this.photo = result;
             this.dataURLtoFile(result);
           });
         };
@@ -304,11 +302,11 @@ export default {
         bstr = atob(arr[1]),
         n = bstr.length,
         u8arr = new Uint8Array(n);
-
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
       this.grant_cert = new Blob([u8arr], { type: mime });
+      this.upload();
     },
 
     upload: function () {
@@ -338,6 +336,9 @@ export default {
         .then((response) => response.json())
         .then((res) => {});
     },
+    remove_upload: function(){
+      this.preview = null;
+    }
   },
 };
 </script>

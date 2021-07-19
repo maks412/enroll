@@ -49,7 +49,6 @@
 
                     <div>
                       <b-form-file
-                        multiple
                         v-model="certificate75"
                         @change="previewImage_multi"
                         :state="Boolean(file)"
@@ -108,7 +107,7 @@
                           fill="currentColor"
                           class="bi bi-x-square-fill m-1"
                           viewBox="0 0 16 16"
-                          @click="remove_upload(i)"
+                          @click="remove_upload_multi(i)"
                         >
                           <path
                             d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -174,35 +173,34 @@
                           </template></b-form-file
                         >
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="spt_upload != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              spt_upload = null;
-                              preview_spt = null;
-                            "
+                          <div
+                            v-if="preview_spt"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_spt')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_spt"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_spt')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <img
-                          :src="preview_spt"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                     <hr />
@@ -255,36 +253,36 @@
                             </b-badge>
                           </template></b-form-file
                         >
+
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="infomatrix_upload != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              infomatrix_upload = null;
-                              preview_infomatrix = null;
-                            "
+                          <div
+                            v-if="preview_infomatrix"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_infomatrix')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_infomatrix"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_infomatrix')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <img
-                          :src="preview_infomatrix"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                   </div>
@@ -322,36 +320,36 @@
                             </b-badge>
                           </template></b-form-file
                         >
+
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="student_fee != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              student_fee = null;
-                              preview_studentFee = null;
-                            "
+                          <div
+                            v-if="preview_studentFee"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_studentFee')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_studentFee"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_studentFee')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <img
-                          :src="preview_studentFee"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                     <hr />
@@ -381,36 +379,36 @@
                             </b-badge>
                           </template></b-form-file
                         >
+
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="tuition_fee != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              tuition_fee = null;
-                              preview_tuitionFee = null;
-                            "
+                          <div
+                            v-if="preview_tuitionFee"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_tuitionFee')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_tuitionFee"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_tuitionFee')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <img
-                          :src="preview_tuitionFee"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                     <hr />
@@ -441,35 +439,34 @@
                           </template></b-form-file
                         >
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="eng_course != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              eng_course = null;
-                              preview_engCourse = null;
-                            "
+                          <div
+                            v-if="preview_engCourse"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_engCourse')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_engCourse"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_engCourse')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <img
-                          :src="preview_engCourse"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                   </div>
@@ -521,35 +518,34 @@
                           </template></b-form-file
                         >
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="creative_exam != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              creative_exam = null;
-                              preview_creativeExam = null;
-                            "
+                          <div
+                            v-if="preview_creativeExam"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_creativeExam')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_creativeExam"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_creativeExam')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <img
-                          :src="preview_creativeExam"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
 
@@ -591,36 +587,34 @@
                           </template></b-form-file
                         >
                         <div
-                          class="d-flex justify-content-between mt-3"
-                          v-if="pedagogical_test != null"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <button
-                            class="btn btn-primary"
-                            @click="
-                              pedagogical_test = null;
-                              preview_pedTest = null;
-                            "
+                          <div
+                            v-if="preview_pedTest"
+                            class="m-5"
+                            style="display: block"
                           >
-                            {{ $t("common.reset") }}
-                          </button>
-                          <button
-                            class="btn btn-primary"
-                            @click="upload('upload_pedTest')"
-                          >
-                            {{ $t("common.upload") }}
-                          </button>
+                            <img
+                              :src="preview_pedTest"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload('upload_pedTest')"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-
-                        <img
-                          :src="preview_pedTest"
-                          class="img-fluid"
-                          style="
-                            padding: 20px;
-                            width: 50%;
-                            display: block;
-                            margin: auto;
-                          "
-                        />
                       </div>
                     </div>
                   </div>
@@ -689,9 +683,9 @@ export default {
         { title: this.$t("page6.payments"), desc: this.$t("page6.payments_d") },
         { title: this.$t("page6.add_docs"), desc: this.$t("page6.add_docs_d") },
       ],
-      certificate75: [],
+      certificate75: null,
       previews: [],
-      photos: [],
+      photos: null,
       spt_upload: null,
       infomatrix_upload: null,
       student_fee: null,
@@ -852,8 +846,6 @@ export default {
             if (id == "upload_pedTest") {
               this.preview_pedTest = result;
             }
-
-            //console.log(preview + id);
             this.dataURLtoFile(result, id);
           });
         };
@@ -885,6 +877,8 @@ export default {
         this.creative_exam = new Blob([u8arr], { type: mime });
       if (id == "upload_pedTest")
         this.pedagogical_test = new Blob([u8arr], { type: mime });
+
+      this.upload(id);
     },
 
     upload: function (id) {
@@ -944,29 +938,23 @@ export default {
     },
 
     previewImage_multi: function (e) {
-      let slide = this.previews;
       var input = e.target;
+      let slide = this.previews;
       if (input.files) {
-        let fileToDataURL = (file) => {
-          var reader = new FileReader();
-          return new Promise(function () {
-            reader.onload = function (event) {
-              compress(event.target.result, {
-                width: 400,
-                type: "image/jpg", // default
-                max: 200, // max size
-                min: 20, // min size
-                quality: 0.8,
-              }).then((result) => {
-                slide.push(result);
-                this.dataURLtoFile_multi(result);
-              });
-            };
-            reader.readAsDataURL(file);
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/*", // default
+            max: 200, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
+            this.dataURLtoFile_multi(result);
           });
         };
-        var filesArray = Array.prototype.slice.call(input.files);
-        Promise.all(filesArray.map(fileToDataURL));
+        reader.readAsDataURL(input.files[0]);
       }
     },
 
@@ -980,7 +968,8 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photos.push(new Blob([u8arr], { type: mime }));
+      this.photos = new Blob([u8arr], { type: mime });
+      this.upload_multi();
     },
 
     upload_multi: function () {
@@ -999,9 +988,9 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      for (let i = 0; i < this.photos.length; i++) {
-        data_created.append("file", this.photos[i]);
-      }
+      
+      data_created.append("file", this.photos);
+      
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1014,10 +1003,40 @@ export default {
           console.log(res);
         });
     },
-    remove_upload: function (i) {
-      this.photos.splice(i, 1);
+    remove_upload_multi: function (i) {
+      //this.photos.splice(i, 1);
       this.previews.splice(i, 1);
-      this.certificate75.splice(i, 1);
+      this.certificate75 = null;
+    },
+    remove_upload: function (id) {
+      if (id == "upload_spt") {
+        this.preview_spt = null;
+        spt_upload = null;
+      }
+      if (id == "upload_infomatrix") {
+        this.preview_infomatrix = null;
+        infomatrix_upload = null;
+      }
+      if (id == "upload_studentFee") {
+        this.preview_studentFee = null;
+        student_fee = null;
+      }
+      if (id == "upload_tuitionFee") {
+        this.preview_tuitionFee = null;
+        tuition_fee = null;
+      }
+      if (id == "upload_engCourse") {
+        this.preview_engCourse = null;
+        eng_course = null;
+      }
+      if (id == "upload_creativeExam") {
+        this.preview_creativeExam = null;
+        creative_exam = null;
+      }
+      if (id == "upload_pedTest") {
+        this.preview_pedTest = null;
+        pedagogical_test = null;
+      }
     },
   },
 };
