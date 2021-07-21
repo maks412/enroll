@@ -774,6 +774,8 @@ export default {
           this.social_status = res.social_status.list;
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
+
+          this.getUpload();
         });
       //Get Profile
       var data_created = new FormData();
@@ -797,12 +799,16 @@ export default {
           this.croppieImage =
             res.image == "data:image/jpeg;base64," ? null : res.image;
         });
-      //Get Uploads
+      
+    },
+
+    getUpload: function(){
+      //Get Uploads Documents
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { docid: "7", method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: { docid: this.form.document_type, method: "setUpload", action: "getImages", mod: "setUpload" },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -819,6 +825,32 @@ export default {
           for(var i = 0; i < res.response.length; i++){
             this.delids.documents.push(res.response[i].delid);
             this.documents_upload_preview_slide.push(url+"/"+res.response[i].doc_path);
+          }
+        });
+
+
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          //DOCID NEEDED
+          data: { docid: "", method: "setUpload", action: "getImages", mod: "setUpload" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for(var i = 0; i < res.response.length; i++){
+            this.delids.social_status.push(res.response[i].delid);
+            this.social_status_upload_preview_slide.push(url+"/"+res.response[i].doc_path);
           }
         });
     },
@@ -1060,8 +1092,15 @@ export default {
     },
 
     previewImage_multi_documents: function (e) {
-      console.log(this.delids.documents.length);
-      if (this.delids.documents.length >= 2) return 0;
+      if (this.delids.documents.length >= 2) {
+        Swal.fire({
+            title: "",
+            text: "Maximum imeges uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
       var input = e.target;
       var id = e.target.id;
       let slide = this.documents_upload_preview_slide;
@@ -1083,6 +1122,15 @@ export default {
       }
     },
     previewImage_multi_social: function (e) {
+      if (this.delids.social_status.length >= 1) {
+        Swal.fire({
+            title: "",
+            text: "Maximum imeges uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
       var input = e.target;
       var id = e.target.id;
       let slide = this.social_status_upload_preview_slide;

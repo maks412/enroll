@@ -500,6 +500,8 @@ export default {
         this.country = res.country.list;
         this.form.province = res.province.selected_id;
         this.province = res.province.list;
+
+        this.getUpload();
       });
   },
   name: "Wizard-4",
@@ -566,6 +568,33 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             location.replace("/#/home/3");
+          }
+        });
+    },
+
+    getUpload: function(){
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { docid: "1", method: "setUpload", action: "getImages", mod: "setUpload" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for(var i = 0; i < res.response.length; i++){
+            this.delids.push(res.response[i].delid);
+            this.previews.push(url+"/"+res.response[i].doc_path);
           }
         });
     },
@@ -640,6 +669,15 @@ export default {
     },
 
     previewImage: function (e) {
+      if (this.delids.length >= 2) {
+        Swal.fire({
+            title: "",
+            text: "Maximum imeges uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
       var input = e.target;
       let slide = this.previews;
       if (input.files) {

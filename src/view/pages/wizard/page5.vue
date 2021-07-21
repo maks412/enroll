@@ -963,6 +963,15 @@ export default {
     },
 
     previewImage_multi: function (e) {
+      if (this.delids.delid_multi.length >= 8) {
+        Swal.fire({
+            title: "",
+            text: "Maximum imeges uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
       var input = e.target;
       let slide = this.previews;
       if (input.files) {

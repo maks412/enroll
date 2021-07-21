@@ -208,6 +208,8 @@ export default {
         this.form.grant_cert_text = res.grant_cert_text;
         this.form.grant_cert = res.grant_cert;
       });
+
+      this.getUpload();
   },
   name: "Wizard-4",
   mounted() {
@@ -277,7 +279,43 @@ export default {
         });
     },
 
+    getUpload: function(){
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { docid: "30", method: "setUpload", action: "getImages", mod: "setUpload" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for(var i = 0; i < res.response.length; i++){
+            this.delids = res.response[i].delid;
+            this.preview = url+"/"+res.response[i].doc_path;
+          }
+        });
+    },
+
     previewImage: function (e) {
+      if (this.delids) {
+        Swal.fire({
+            title: "",
+            text: "Maximum imeges uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
       var input = e.target;
       if (input.files) {
         var reader = new FileReader();
@@ -363,6 +401,7 @@ export default {
         .then((res) => {
           if (res.code == 1) {
             this.preview = null;
+            this.delids = null;
           }
         });
       

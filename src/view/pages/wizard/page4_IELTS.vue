@@ -226,8 +226,12 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.english_certificate = res.english_certificate;
-        this.form.certificate_number = res.certificate_number;
+        this.form.english_certificate = res.result.docid;
+        this.form.certificate_number = res.result.cert_no;
+
+        this.delids = res.result.docid;
+        this.preview = url+"/"+res.result.doc_path;
+
       });
   },
   name: "Wizard-4",
@@ -299,6 +303,15 @@ export default {
     },
 
     previewImage: function (e) {
+      if (this.delids.length >= 1) {
+        Swal.fire({
+            title: "",
+            text: "Maximum imeges uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
       var input = e.target;
       if (input.files) {
         var reader = new FileReader();
@@ -387,6 +400,7 @@ export default {
         .then((res) => {
           if (res.code == 1) {
             this.preview = null;
+            this.delids = null;
           }
         });
     },
