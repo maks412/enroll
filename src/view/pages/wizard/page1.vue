@@ -631,8 +631,13 @@ export default {
       documents_upload_preview_slide: [],
 
       social_status: null,
-      social_status_upload_preview: [],
+      social_status_upload_preview: null,
       social_status_upload_preview_slide: [],
+
+      delids: {
+        social_status: [],
+        documents: [],
+      },
 
       form: {
         citizenship: "",
@@ -858,7 +863,6 @@ export default {
             icon: "success",
             confirmButtonClass: "btn btn-secondary",
           });
-
           this.social_status_upload_image = null;
           this.social_status_upload_image_name = "Choose an image";
         });
@@ -1120,12 +1124,12 @@ export default {
         .then((res) => {
           if (res.code == 1) {
             this.documents_upload = null;
+            this.delids.documents.push(res.docid);
           }
         });
     },
 
     upload_multi_social: function () {
-      console.log("social");
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -1153,15 +1157,69 @@ export default {
         .then((res) => {
           if (res.code == 1) {
             this.social_status_upload = null;
+            this.delids.social_status.push(res.docid);
           }
         });
     },
     remove_upload_documents: function (i) {
-      this.documents_upload_preview_slide.splice(i, 1);
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delids.documents[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            console.log("deleteee"+res.code);
+            this.documents_upload_preview = null;
+            this.documents_upload_preview_slide.splice(i, 1);
+          }
+        });
     },
     remove_upload_social: function (i) {
-      this.social_status_upload_preview.splice(i, 1);
-      this.social_status_upload_preview_slide.splice(i, 1);
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delids.social_status[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.social_status_upload_preview = null;
+            this.social_status_upload_preview_slide.splice(i, 1);
+          }
+        });
+      
     },
   },
 };

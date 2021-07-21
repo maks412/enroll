@@ -432,8 +432,7 @@ export default {
       foreign_language: [],
       attestat_series: [],
       previews: [],
-      //preparation_province: [],
-      //preparation_country: [],
+      delids: [],
       attestat_upload: null,
 
       photos: null,
@@ -700,13 +699,39 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
+          this.photos = null;
+          this.delids.push(res.docid);
         });
     },
     remove_upload: function(i){
-      // this.photos.splice(i, 1);
-      this.previews.splice(i, 1);
-      this.attestat_upload = null;
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delids[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.previews.splice(i, 1);
+            this.attestat_upload = null;
+          }
+        });
+      
     }
   },
 };

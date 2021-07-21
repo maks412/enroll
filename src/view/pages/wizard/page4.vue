@@ -175,6 +175,7 @@ export default {
       tabs: [""],
       preview: null,
       grant_cert: null,
+      delids: null,
       form: {
         grant_cert_text: null,
 
@@ -334,10 +335,38 @@ export default {
         body: data_created,
       })
         .then((response) => response.json())
-        .then((res) => {});
+        .then((res) => {
+          this.delids = res.docid;
+        });
     },
     remove_upload: function(){
-      this.preview = null;
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delids,
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.preview = null;
+          }
+        });
+      
     }
   },
 };

@@ -714,6 +714,18 @@ export default {
         method: "set",
         action: "setAllData",
       },
+
+      delids: {
+        delid_multi: [],
+        delid_spt: null,
+        delid_infomatrix: null,
+        delid_studentFee: null,
+        delid_tuitionFee: null,
+        delid_engCourse: null,
+        delid_creativeExam: null,
+        delid_pedTest: null,
+      },
+
       file: "",
     };
   },
@@ -911,6 +923,7 @@ export default {
         let doc = "";
         data_created.append("file", this.pedagogical_test);
       }
+      var delid = null;
       data_created.append(
         "json",
         JSON.stringify({
@@ -934,7 +947,17 @@ export default {
         body: data_created,
       })
         .then((response) => response.json())
-        .then((res) => {});
+        .then((res) => {
+          delid = res.docid;
+        });
+
+      if (id == "upload_spt") this.delids.delid_spt = delid;
+      if (id == "upload_infomatrix") this.delids.delid_infomatrix = delid;
+      if (id == "upload_studentFee") this.delids.delid_studentFee = delid;
+      if (id == "upload_tuitionFee") this.delids.delid_tuitionFee = delid;
+      if (id == "upload_engCourse") this.delids.delid_engCourse = delid;
+      if (id == "upload_creativeExam") this.delids.delid_creativeExam = delid;
+      if (id == "upload_pedTest") this.delids.delid_pedTest = delid;
     },
 
     previewImage_multi: function (e) {
@@ -988,9 +1011,9 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
-      
+
       data_created.append("file", this.photos);
-      
+
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1000,43 +1023,101 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
+          this.delids.delid_multi.push(res.docid);
         });
     },
     remove_upload_multi: function (i) {
-      //this.photos.splice(i, 1);
-      this.previews.splice(i, 1);
-      this.certificate75 = null;
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delids.delid_multi[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.previews.splice(i, 1);
+            this.certificate75 = null;
+          }
+        });
     },
     remove_upload: function (id) {
-      if (id == "upload_spt") {
-        this.preview_spt = null;
-        spt_upload = null;
-      }
-      if (id == "upload_infomatrix") {
-        this.preview_infomatrix = null;
-        infomatrix_upload = null;
-      }
-      if (id == "upload_studentFee") {
-        this.preview_studentFee = null;
-        student_fee = null;
-      }
-      if (id == "upload_tuitionFee") {
-        this.preview_tuitionFee = null;
-        tuition_fee = null;
-      }
-      if (id == "upload_engCourse") {
-        this.preview_engCourse = null;
-        eng_course = null;
-      }
-      if (id == "upload_creativeExam") {
-        this.preview_creativeExam = null;
-        creative_exam = null;
-      }
-      if (id == "upload_pedTest") {
-        this.preview_pedTest = null;
-        pedagogical_test = null;
-      }
+      if (id == "upload_spt") var delid = this.delids.delid_spt;
+      if (id == "upload_infomatrix") var delid = this.delids.delid_infomatrix;
+      if (id == "upload_studentFee") var delid = this.delids.delid_studentFee;
+      if (id == "upload_tuitionFee") var delid = this.delids.delid_tuitionFee;
+      if (id == "upload_engCourse") var delid = this.delids.delid_engCourse;
+      if (id == "upload_creativeExam")
+        var delid = this.delids.delid_creativeExam;
+      if (id == "upload_pedTest") var delid = this.delids.delid_pedTest;
+
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: delid,
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            if (id == "upload_spt") {
+              this.preview_spt = null;
+              this.spt_upload = null;
+            }
+            if (id == "upload_infomatrix") {
+              this.preview_infomatrix = null;
+              this.infomatrix_upload = null;
+            }
+            if (id == "upload_studentFee") {
+              this.preview_studentFee = null;
+              this.student_fee = null;
+            }
+            if (id == "upload_tuitionFee") {
+              this.preview_tuitionFee = null;
+              this.tuition_fee = null;
+            }
+            if (id == "upload_engCourse") {
+              this.preview_engCourse = null;
+              this.eng_course = null;
+            }
+            if (id == "upload_creativeExam") {
+              this.preview_creativeExam = null;
+              this.creative_exam = null;
+            }
+            if (id == "upload_pedTest") {
+              this.preview_pedTest = null;
+              this.pedagogical_test = null;
+            }
+          }
+        });
     },
   },
 };
