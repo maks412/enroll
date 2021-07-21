@@ -201,7 +201,7 @@ export default {
         certificate_number: "",
 
         mod: "page4_ielts",
-        method: "set",
+        method: "setUpload",
         action: "setAllData",
       },
       file: "",
@@ -272,6 +272,7 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
+      data_created.append("file[]", this.certificate_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -291,6 +292,7 @@ export default {
             });
           }
           if (res.code == 1) {
+            this.delids = res.docid;
             Swal.fire({
               title: "",
               text: res.message,
@@ -342,7 +344,6 @@ export default {
         u8arr[n] = bstr.charCodeAt(n);
       }
       this.certificate_upload = new Blob([u8arr], { type: mime });
-      this.upload();
     },
 
     upload: function () {
