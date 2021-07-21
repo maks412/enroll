@@ -775,7 +775,7 @@ export default {
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
         });
-
+      //Get Profile
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -796,6 +796,30 @@ export default {
         .then((res) => {
           this.croppieImage =
             res.image == "data:image/jpeg;base64," ? null : res.image;
+        });
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { docid: "7", method: "setUpload", action: "getImages", mod: "setUpload" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for(var i = 0; i < res.response.length; i++){
+            this.delids.documents.push(res.response[i].delid);
+            this.documents_upload_preview_slide.push(url+"/"+res.response[i].doc_path);
+          }
         });
     },
 
@@ -1036,6 +1060,8 @@ export default {
     },
 
     previewImage_multi_documents: function (e) {
+      console.log(this.delids.documents.length);
+      if (this.delids.documents.length >= 2) return 0;
       var input = e.target;
       var id = e.target.id;
       let slide = this.documents_upload_preview_slide;
@@ -1078,7 +1104,6 @@ export default {
       }
     },
     dataURLtoFile_multi: function (dataurl, id) {
-      console.log("aaa");
       var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]),
@@ -1145,7 +1170,6 @@ export default {
       );
 
       data_created.append("file", this.social_status_upload);
-
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1158,6 +1182,7 @@ export default {
           if (res.code == 1) {
             this.social_status_upload = null;
             this.delids.social_status.push(res.docid);
+            console.log(this.delids.social_status);
           }
         });
     },
@@ -1185,7 +1210,7 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 1) {
-            console.log("deleteee"+res.code);
+            console.log("deleteee" + res.code);
             this.documents_upload_preview = null;
             this.documents_upload_preview_slide.splice(i, 1);
           }
@@ -1219,7 +1244,6 @@ export default {
             this.social_status_upload_preview_slide.splice(i, 1);
           }
         });
-      
     },
   },
 };

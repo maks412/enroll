@@ -894,42 +894,44 @@ export default {
     },
 
     upload: function (id) {
+      var doc = null;
       var data_created = new FormData();
       if (id == "upload_spt") {
-        let doc = "16";
-        data_created.append("file", this.spt_upload);
+        doc = "16";
+        data_created.append("file[]", this.spt_upload);
       }
       if (id == "upload_infomatrix") {
-        let doc = "44";
-        data_created.append("file", this.infomatrix_upload);
+        doc = "44";
+        data_created.append("file[]", this.infomatrix_upload);
       }
       if (id == "upload_studentFee") {
-        let doc = "36";
-        data_created.append("file", this.student_fee);
+        doc = "36";
+        data_created.append("file[]", this.student_fee);
       }
       if (id == "upload_tuitionFee") {
-        let doc = "35";
-        data_created.append("file", this.tuition_fee);
+        doc = "35";
+        data_created.append("file[]", this.tuition_fee);
       }
       if (id == "upload_engCourse") {
-        let doc = "";
-        data_created.append("file", this.eng_course);
+        doc = "";
+        data_created.append("file[]", this.eng_course);
       }
       if (id == "upload_creativeExam") {
-        let doc = "";
-        data_created.append("file", this.creative_exam);
+        doc = "";
+        data_created.append("file[]", this.creative_exam);
       }
       if (id == "upload_pedTest") {
-        let doc = "";
-        data_created.append("file", this.pedagogical_test);
+        doc = "";
+        data_created.append("file[]", this.pedagogical_test);
       }
+      console.log(doc);
       var delid = null;
       data_created.append(
         "json",
         JSON.stringify({
           data: {
             docid: doc,
-            mod: "page1",
+            mod: "page5",
             method: "setUpload",
             action: "setImage",
             upload: this.grant_cert,
@@ -1002,7 +1004,7 @@ export default {
         JSON.stringify({
           data: {
             docid: "34",
-            mod: "page2",
+            mod: "page5",
             method: "setUpload",
             action: "setImage",
             upload: this.photos,
@@ -1012,7 +1014,7 @@ export default {
         })
       );
 
-      data_created.append("file", this.photos);
+      data_created.append("file[]", this.photos);
 
       fetch(url + "/backend/middle.php", {
         method: "POST",

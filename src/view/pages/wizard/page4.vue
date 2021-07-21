@@ -320,13 +320,12 @@ export default {
             mod: "page1",
             method: "setUpload",
             action: "setImage",
-            upload: this.grant_cert,
           },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
-      data_created.append("file", this.grant_cert);
+      data_created.append("file[]", this.grant_cert);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {

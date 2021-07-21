@@ -188,14 +188,17 @@ export default {
   data() {
     return {
       tabs: [""],
-      english_certificate_options: ["IELTS", "TOEFL", "SDU Language Test"],
+      english_certificate_options: [
+        { text: "IELTS", value: "8" },
+        { text: "TOEFL", value: "49" },
+        { text: "SDU Language Test", value: "" },
+      ],
       certificate_upload: null,
       preview: null,
       delids: null,
       form: {
         english_certificate: null,
         certificate_number: "",
-        
 
         mod: "page4_ielts",
         method: "set",
@@ -331,24 +334,22 @@ export default {
 
     upload: function () {
       var data_created = new FormData();
-      if(this.form.english_certificate == "IELTS") var doc = "48";
-      if(this.form.english_certificate == "TOEFL") var doc = "49";
-      if(this.form.english_certificate == "SDU Language Test") var doc = "";
+      
+      console.log(this.form.english_certificate);
       data_created.append(
         "json",
         JSON.stringify({
           data: {
-            docid: doc,
-            mod: "page4_IELTS",
+            docid: this.form.english_certificate,
+            mod: "page4_ielts",
             method: "setUpload",
             action: "setImage",
-            upload: this.certificate_upload,
           },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
       );
-      data_created.append("file", this.certificate_upload);
+      data_created.append("file[]", this.certificate_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -361,7 +362,7 @@ export default {
           this.delids = res.docid;
         });
     },
-    remove_upload: function(){
+    remove_upload: function () {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -388,7 +389,7 @@ export default {
             this.preview = null;
           }
         });
-    }
+    },
   },
 };
 </script>
