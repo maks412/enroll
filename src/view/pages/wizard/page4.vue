@@ -310,7 +310,7 @@ export default {
       if (this.delids) {
         Swal.fire({
             title: "",
-            text: "Maximum imeges uploaded",
+            text: "Maximum images uploaded",
             icon: "error",
             confirmButtonClass: "btn btn-secondary",
           });

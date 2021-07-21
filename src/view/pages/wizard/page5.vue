@@ -827,6 +827,39 @@ export default {
     previewImage: function (e) {
       var input = e.target;
       var id = e.target.id;
+      if (id == "upload_spt" && this.preview_spt) {
+        Swal.fire({
+            title: "",
+            text: "Maximum images uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
+      if (id == "upload_infomatrix" && this.preview_infomatrix) {
+        Swal.fire({
+            title: "",
+            text: "Maximum images uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
+      if (id == "upload_studentFee") {
+        this.preview_studentFee = result;
+      }
+      if (id == "upload_tuitionFee") {
+        this.preview_tuitionFee = result;
+      }
+      if (id == "upload_engCourse") {
+        this.preview_engCourse = result;
+      }
+      if (id == "upload_creativeExam") {
+        this.preview_creativeExam = result;
+      }
+      if (id == "upload_pedTest") {
+        this.preview_pedTest = result;
+      }
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
@@ -965,12 +998,12 @@ export default {
     previewImage_multi: function (e) {
       if (this.delids.delid_multi.length >= 8) {
         Swal.fire({
-            title: "",
-            text: "Maximum imeges uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum imeges uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       let slide = this.previews;

@@ -303,10 +303,10 @@ export default {
     },
 
     previewImage: function (e) {
-      if (this.delids.length >= 1) {
+      if (this.delids) {
         Swal.fire({
             title: "",
-            text: "Maximum imeges uploaded",
+            text: "Maximum images uploaded",
             icon: "error",
             confirmButtonClass: "btn btn-secondary",
           });

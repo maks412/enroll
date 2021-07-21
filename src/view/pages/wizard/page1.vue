@@ -1095,7 +1095,7 @@ export default {
       if (this.delids.documents.length >= 2) {
         Swal.fire({
             title: "",
-            text: "Maximum imeges uploaded",
+            text: "Maximum images uploaded",
             icon: "error",
             confirmButtonClass: "btn btn-secondary",
           });
