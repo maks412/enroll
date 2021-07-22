@@ -231,6 +231,7 @@ export default {
 
         this.delids = res.result.docid;
         this.preview = url+"/"+res.result.doc_path;
+        if(res.result.doc_path == "0") this.preview = null;
 
       });
   },
@@ -299,8 +300,8 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/5')
+            //var url2 = window.location.origin;
+            //window.location.replace(url2 + '/home/5')
           }
         });
     },
@@ -378,33 +379,36 @@ export default {
         });
     },
     remove_upload: function () {
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: {
-            delid: this.delids,
-            method: "setUpload",
-            action: "delImage",
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.code == 1) {
-            this.preview = null;
-            this.delids = null;
-          }
-        });
+      // var data_created = new FormData();
+      // data_created.append(
+      //   "json",
+      //   JSON.stringify({
+      //     data: {
+      //       delid: this.delids,
+      //       method: "setUpload",
+      //       action: "delImage",
+      //     },
+      //     token: this.$cookies.get("token"),
+      //     email: this.$cookies.get("email"),
+      //   })
+      // );
+      // fetch(url + "/backend/middle.php", {
+      //   method: "POST",
+      //   headers: {
+      //     Accept: "application/json",
+      //   },
+      //   body: data_created,
+      // })
+      //   .then((response) => response.json())
+      //   .then((res) => {
+      //     if (res.code == 1) {
+      //       this.preview = null;
+      //       this.delids = null;
+      //     }
+      //   });
+      this.preview = null;
+      this.delids = null;
+      this.certificate_upload = null;
     },
   },
 };
