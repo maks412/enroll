@@ -161,11 +161,11 @@ export default {
           this.currentUser.email = res.email;
           this.status = res.status;
 
-          if(res.status == "Not applied") this.status_color = "danger";
-          if(res.status == "Applied") this.status_color = "warning";
-          if(res.status == "Accepted") this.status_color = "info";
-          if(res.status == "Rejected") this.status_color = "primary";
-          if(res.status == "Confirmed") this.status_color = "success";
+          if(res.status == "NOT APPLIED") this.status_color = "danger";
+          if(res.status == "APPLIED") this.status_color = "warning";
+          if(res.status == "ACCEPTED") this.status_color = "info";
+          if(res.status == "REJECTED") this.status_color = "primary";
+          if(res.status == "CONFIRMED") this.status_color = "success";
 
           this.back_special = res.speciality;
         });

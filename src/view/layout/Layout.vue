@@ -91,7 +91,11 @@ export default {
   },
   mounted() {
     // check if current user is authenticated
-    if (!this.isAuthenticated) {
+    //if (!this.isAuthenticated) {
+    //  this.$router.push({ name: "login" });
+    //}
+
+    if (!this.$cookies.isKey('token') && !this.$cookies.isKey('email')) {
       this.$router.push({ name: "login" });
     }
 

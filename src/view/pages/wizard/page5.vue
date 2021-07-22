@@ -828,7 +828,8 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            location.replace("/#/home/6");
+            var url2 = window.location.origin;
+            window.location.replace(url2 + '/home/6')
           }
         });
     },
@@ -1167,7 +1168,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "34",
+            docid: "33",
             mod: "page5",
             method: "setUpload",
             action: "setImage",
@@ -1217,6 +1218,7 @@ export default {
         .then((res) => {
           if (res.code == 1) {
             this.previews.splice(i, 1);
+            this.delids.delid_multi.slice(i,1);
             this.certificate75 = null;
           }
         });

@@ -567,7 +567,8 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            location.replace("/#/home/3");
+            var url2 = window.location.origin;
+            window.location.replace(url2 + '/home/3')
           }
         });
     },

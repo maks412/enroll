@@ -278,6 +278,7 @@
                       </div>
                     </div>
                     <button
+                      type="button"
                       style="float: right"
                       class="btn btn-primary text-uppercase px-3 py-1"
                       v-on:click="add_relative"
@@ -289,6 +290,7 @@
                       <b-table hover :items="form.items" :fields="fields">
                       </b-table>
                       <button
+                        type="button"
                         style="float: right"
                         class="btn btn-primary text-uppercase px-4 py-1"
                         v-on:click="delete_relative"
@@ -347,7 +349,7 @@ import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
 import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
-import { createLogger } from 'vuex';
+import { createLogger } from "vuex";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -365,8 +367,8 @@ export default {
         { contact: this.$t("page3.contact") },
       ],
 
-      rel_name: "",
-      rel_cont: "",
+      rel_name: null,
+      rel_cont: null,
       current_address_country_options: [],
       current_address_province_options: [],
       current_address_region_options: [],
@@ -453,7 +455,7 @@ export default {
         this.form.current_address = res.current_address;
 
         this.form.student_house = res.student_house;
-        //this.form.items = res.relatives;
+        this.form.items = res.relatives;
       });
   },
 
@@ -520,8 +522,8 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            
-            location.replace("/#/home/4");
+            var url2 = window.location.origin;
+            window.location.replace(url2 + "/home/4");
           }
         });
     },
@@ -655,16 +657,10 @@ export default {
         : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
     add_relative() {
-      if (
-        this.form.rel_type != "" &&
-        this.rel_name != "" &&
-        this.rel_cont != ""
-      ) {
+      if (this.form.rel_type && this.rel_name && this.rel_cont) {
         var index = this.relative_type_options.findIndex(
           (x) => x.value == this.form.rel_type
         );
-        console.log(index);
-        console.log(this.form.rel_type);
         this.form.items.push({
           relative_type: this.relative_type_options[index].text,
           relative_id: this.relative_type_options[index].value,

@@ -366,7 +366,10 @@ export default {
       show: true,
       Interview_div: "inline",
       Admin_Interview_div: "none",
-      options: null
+      options: null,
+
+
+      onSubmitStatus: false
     };
   },
   async created() {
@@ -438,10 +441,18 @@ export default {
               confirmButtonText: 'Got it!'
             })
 
-            location.replace('/#/home/1')
-            //this.$router.push({ path: "/home/1" });
+            this.onSubmitStatus = true
+          }
+        })
+        .then(() => {
+          if (this.onSubmitStatus) {
+            var url2 = window.location.origin;
+            window.location.replace(url2 + '/home/1')
+            return
           }
         });
+
+      return 
     },
     onReset(evt) {
       evt.preventDefault();

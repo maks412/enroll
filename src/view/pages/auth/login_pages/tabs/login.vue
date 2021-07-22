@@ -64,6 +64,7 @@
 <script>
 import Swal from "sweetalert2";
 var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+import { mapGetters } from "vuex";
 
 export default {
   props: [
@@ -83,7 +84,11 @@ export default {
       }
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters([
+      "isAuthenticated"
+    ]),
+  },
   methods: {
     loginIt(){
       var data = new FormData();
@@ -109,7 +114,9 @@ export default {
           })
 
           if(res.AFTER_REG == '1'){
-            location.replace('/#/after_register');
+            this.$router.push({
+              name: 'after_register'
+            })
           }
           else{
             //this.$router.push("/after_register");
@@ -133,5 +140,12 @@ export default {
       });
     }
   },
+  mounted(){
+    if (this.$cookies.isKey('token') && this.$cookies.isKey('email')) {
+        this.$router.push({ name: "wizard-1" });
+        //location.reload();
+        return false
+    }
+  }
 };
 </script>

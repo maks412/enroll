@@ -37,7 +37,8 @@
       >
         <span class="svg-icon svg-icon-xl">
           <!--begin::Svg Icon | path:svg/icons/General/User.svg-->
-          <inline-svg class="svg-icon" src="media/svg/icons/General/User.svg" />
+          <inline-svg class="svg-icon" src="/media/svg/icons/General/User.svg" />
+          <!-- <img src="/metronic/theme/html/demo2/dist/assets/media/svg/icons/General/User.svg"/> -->
           <!--end::Svg Icon-->
         </span>
       </button>

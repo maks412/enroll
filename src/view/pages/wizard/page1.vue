@@ -664,8 +664,9 @@ export default {
       file: "",
     };
   },
-  async created() {
+  created() {
     this.loadData();
+    this.getUpload();
   },
   name: "Wizard-4",
   mounted() {
@@ -730,7 +731,8 @@ export default {
               icon: "success",
               confirmButtonClass: "btn btn-secondary",
             });
-            location.replace("/#/home/2");
+            var url2 = window.location.origin;
+            window.location.replace(url2 + '/home/2')
           }
         });
     },
@@ -774,8 +776,6 @@ export default {
           this.social_status = res.social_status.list;
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
-
-          this.getUpload();
         });
       //Get Profile
       var data_created = new FormData();
@@ -822,9 +822,11 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          for(var i = 0; i < res.response.length; i++){
-            this.delids.documents.push(res.response[i].delid);
-            this.documents_upload_preview_slide.push(url+"/"+res.response[i].doc_path);
+          if (Array.isArray(res.response)) {
+            res.response.forEach(el => {
+              this.delids.documents.push(el.delid);
+              this.documents_upload_preview_slide.push(url+"/"+el.doc_path);
+            });
           }
         });
 
@@ -848,9 +850,11 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          for(var i = 0; i < res.response.length; i++){
-            this.delids.social_status.push(res.response[i].delid);
-            this.social_status_upload_preview_slide.push(url+"/"+res.response[i].doc_path);
+          if (Array.isArray(res.response)) {
+            res.response.forEach(el => {
+              this.delids.social_status.push(el.delid);
+              this.social_status_upload_preview_slide.push(url+"/"+el.doc_path);
+            });
           }
         });
     },
