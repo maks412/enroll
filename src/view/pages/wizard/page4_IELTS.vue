@@ -202,7 +202,7 @@ export default {
 
         mod: "page4_ielts",
         method: "setUpload",
-        action: "setImage",
+        action: "setEngCert",
       },
       file: "",
     };
