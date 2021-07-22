@@ -223,6 +223,15 @@ export default {
       ) {
         this.apply();
       }
+      else{
+        Swal.fire({
+                title: "",
+                text: "Please accept all terms",
+                icon: "error",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false,
+              });
+      }
     },
 
     apply() {
