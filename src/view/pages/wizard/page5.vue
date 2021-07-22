@@ -668,6 +668,7 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 import compress from "compress-base64";
+import { createLogger } from "vuex";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -755,6 +756,14 @@ export default {
         this.form.creative_exam_text = res.creative_exam_text;
         this.form.pedagogical_test_text = res.pedagogical_test_text;
       });
+    this.getUpload_multi();
+    this.getUpload("16", "upload_spt");
+    this.getUpload("44", "upload_infomatrix");
+    this.getUpload("36", "upload_studentFee");
+    this.getUpload("35", "upload_tuitionFee");
+    this.getUpload("25", "upload_engCourse");
+    this.getUpload("27", "upload_creativeExam");
+    this.getUpload("38", "upload_pedTest");
   },
   name: "Wizard-4",
   mounted() {
@@ -824,41 +833,161 @@ export default {
         });
     },
 
+    getUpload_multi: function () {
+      //Get Uploads Documents
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "33",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for (var i = 0; i < res.response.length; i++) {
+            this.delids.delid_multi.push(res.response[i].delid);
+            this.previews.push(url + "/" + res.response[i].doc_path);
+          }
+        });
+    },
+
+    getUpload: function (doc_id, id) {
+      //Get Uploads Documents
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: doc_id,
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for (var i = 0; i < res.response.length; i++) {
+            if (id == "upload_spt") {
+              this.delids.delid_spt = res.response[i].delid;
+              this.preview_spt = url + "/" + res.response[i].doc_path;
+            }
+            if (id == "upload_infomatrix") {
+              this.delids.delid_infomatrix = res.response[i].delid;
+              this.preview_infomatrix = url + "/" + res.response[i].doc_path;
+            }
+            if (id == "upload_studentFee") {
+              this.delids.delid_studentFee = res.response[i].delid;
+              this.preview_studentFee = url + "/" + res.response[i].doc_path;
+            }
+            if (id == "upload_tuitionFee") {
+              this.delids.delid_tuitionFee = res.response[i].delid;
+              this.preview_tuitionFee = url + "/" + res.response[i].doc_path;
+            }
+            if (id == "upload_engCourse") {
+              this.delids.delid_engCourse = res.response[i].delid;
+              this.preview_engCourse = url + "/" + res.response[i].doc_path;
+            }
+            if (id == "upload_creativeExam") {
+              this.delids.delid_creativeExam = res.response[i].delid;
+              this.preview_creativeExam = url + "/" + res.response[i].doc_path;
+            }
+            if (id == "upload_pedTest") {
+              this.delids.delid_pedTest = res.response[i].delid;
+              this.preview_pedTest = url + "/" + res.response[i].doc_path;
+            }
+          }
+        });
+    },
+
     previewImage: function (e) {
       var input = e.target;
       var id = e.target.id;
       if (id == "upload_spt" && this.preview_spt) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       if (id == "upload_infomatrix" && this.preview_infomatrix) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
-      if (id == "upload_studentFee") {
-        this.preview_studentFee = result;
+      if (id == "upload_studentFee" && this.preview_studentFee) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
-      if (id == "upload_tuitionFee") {
-        this.preview_tuitionFee = result;
+      if (id == "upload_tuitionFee" && this.preview_tuitionFee) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
-      if (id == "upload_engCourse") {
-        this.preview_engCourse = result;
+      if (id == "upload_engCourse" && this.preview_engCourse) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
-      if (id == "upload_creativeExam") {
-        this.preview_creativeExam = result;
+      if (id == "upload_creativeExam" && this.preview_creativeExam) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
-      if (id == "upload_pedTest") {
-        this.preview_pedTest = result;
+      if (id == "upload_pedTest" && this.preview_pedTest) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       if (input.files) {
         var reader = new FileReader();
@@ -870,27 +999,20 @@ export default {
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
-            if (id == "upload_spt") {
-              this.preview_spt = result;
-            }
-            if (id == "upload_infomatrix") {
-              this.preview_infomatrix = result;
-            }
-            if (id == "upload_studentFee") {
-              this.preview_studentFee = result;
-            }
-            if (id == "upload_tuitionFee") {
-              this.preview_tuitionFee = result;
-            }
-            if (id == "upload_engCourse") {
-              this.preview_engCourse = result;
-            }
-            if (id == "upload_creativeExam") {
-              this.preview_creativeExam = result;
-            }
-            if (id == "upload_pedTest") {
-              this.preview_pedTest = result;
-            }
+            if (id == "upload_spt") this.preview_spt = result;
+
+            if (id == "upload_infomatrix") this.preview_infomatrix = result;
+
+            if (id == "upload_studentFee") this.preview_studentFee = result;
+
+            if (id == "upload_tuitionFee") this.preview_tuitionFee = result;
+
+            if (id == "upload_engCourse") this.preview_engCourse = result;
+
+            if (id == "upload_creativeExam") this.preview_creativeExam = result;
+
+            if (id == "upload_pedTest") this.preview_pedTest = result;
+
             this.dataURLtoFile(result, id);
           });
         };
@@ -946,15 +1068,15 @@ export default {
         data_created.append("file[]", this.tuition_fee);
       }
       if (id == "upload_engCourse") {
-        doc = "";
+        doc = "25";
         data_created.append("file[]", this.eng_course);
       }
       if (id == "upload_creativeExam") {
-        doc = "";
+        doc = "27";
         data_created.append("file[]", this.creative_exam);
       }
       if (id == "upload_pedTest") {
-        doc = "";
+        doc = "38";
         data_created.append("file[]", this.pedagogical_test);
       }
       console.log(doc);
