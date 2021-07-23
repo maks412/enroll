@@ -119,8 +119,8 @@ export default {
             })
           }
           else{
-            //this.$router.push("/after_register");
-            location.reload();
+            var url2 = window.location.origin;
+            window.location.replace(url2)
           }
         }else{
           Swal.fire({
