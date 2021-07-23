@@ -82,7 +82,6 @@
                       </div>
                     </div>
                     <div class="row">
-                      
                       <div class="col-xl-6">
                         <div class="form-group">
                           <label>{{ $t("page1.last_name") }}</label>
@@ -99,7 +98,7 @@
                         </div>
                       </div>
                     </div>
-                  
+
                     <div class="row">
                       <div class="col-xl-6">
                         <label>{{ $t("page1.upload_pic") }}</label>
@@ -230,16 +229,11 @@
                           }}</span>
                         </div>
                       </div>
-                      
                     </div>
-                  </div>
-                  <!--end: Wizard Step 2-->
 
-                  <!--begin: Wizard Step 3-->
-                  <div class="pb-5" data-wizard-type="step-content">
-                    <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page1.enter_acc_details") }}
-                    </h4>
+                    <!--end: Wizard Step 2-->
+                    <hr>
+
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
@@ -272,7 +266,6 @@
                       </div>
                     </div>
                     <div class="row">
-                      
                       <div class="col-xl-6">
                         <div class="form-group">
                           <label>{{ $t("page1.issued_date") }}</label>
@@ -323,7 +316,9 @@
                           >
                             +
                             {{
-                              $t("common.more_files", { num: names.length - 1 })
+                              $t("common.more_files", {
+                                num: names.length - 1,
+                              })
                             }}
                           </b-badge>
                         </template></b-form-file
@@ -363,6 +358,8 @@
                     </div>
                   </div>
                   <!--end: Wizard Step 3-->
+
+                  
 
                   <!--begin: Wizard Actions -->
                   <div class="d-flex justify-content-between border-top pt-10">
@@ -564,7 +561,7 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/2')
+            window.location.replace(url2 + "/home/2");
           }
         });
     },
@@ -631,16 +628,20 @@ export default {
           this.croppieImage =
             res.image == "data:image/jpeg;base64," ? null : res.image;
         });
-      
     },
 
-    getUpload: function(){
+    getUpload: function () {
       //Get Uploads Documents
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { docid: this.form.document_type, method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: {
+            docid: this.form.document_type,
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -655,20 +656,24 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (Array.isArray(res.response)) {
-            res.response.forEach(el => {
+            res.response.forEach((el) => {
               this.delids.documents.push(el.delid);
-              this.documents_upload_preview_slide.push(url+"/"+el.doc_path);
+              this.documents_upload_preview_slide.push(url + "/" + el.doc_path);
             });
           }
         });
-
 
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
           //DOCID NEEDED
-          data: { docid: "", method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: {
+            docid: "",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -683,9 +688,11 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (Array.isArray(res.response)) {
-            res.response.forEach(el => {
+            res.response.forEach((el) => {
               this.delids.social_status.push(el.delid);
-              this.social_status_upload_preview_slide.push(url+"/"+el.doc_path);
+              this.social_status_upload_preview_slide.push(
+                url + "/" + el.doc_path
+              );
             });
           }
         });
@@ -930,12 +937,12 @@ export default {
     previewImage_multi_documents: function (e) {
       if (this.delids.documents.length >= 2) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       var id = e.target.id;
@@ -960,12 +967,12 @@ export default {
     previewImage_multi_social: function (e) {
       if (this.delids.social_status.length >= 1) {
         Swal.fire({
-            title: "",
-            text: "Maximum imeges uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum imeges uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       var id = e.target.id;

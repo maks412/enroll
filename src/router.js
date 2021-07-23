@@ -19,9 +19,15 @@ export default new Router({
                     import ("@/view/pages/wizard/Wizard.vue"),
                 children: [{
                         path: "IRO",
-                        name: "wizard-0",
+                        name: "wizard-8",
                         component: () =>
                             import ("@/view/pages/wizard/IRO.vue")
+                    },
+                    {
+                        path: "IRO_contact",
+                        name: "wizard-9",
+                        component: () =>
+                            import ("@/view/pages/wizard/IRO_contact.vue")
                     },
                     {
                         path: "1",

@@ -39,6 +39,7 @@ export const locale = {
         "doc_info": "Document Information",
         "doc_info_d": "IIN and Document type",
         "enter_acc_details": "Enter your Account Details",
+        "enter_doc_details": "Enter your Document Details",
         "citizenship": "Citizenship",
         "change_citizenship": "Change Citizenship",
         "f_name": "First Name",
