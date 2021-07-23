@@ -232,7 +232,6 @@ export default {
         this.delids = res.result.docid;
         this.preview = url+"/"+res.result.doc_path;
         if(res.result.doc_path == "") this.preview = null;
-
       });
   },
   name: "Wizard-4",
