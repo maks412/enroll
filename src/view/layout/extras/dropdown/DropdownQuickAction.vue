@@ -3,7 +3,7 @@
     <div class="d-flex flex-column flex-center py-5 bgi-size-cover bgi-no-repeat rounded">
       <h6 class="ml-3">{{ speciality }}</h6>
       <span class="form-text text-muted mb-4 ml-2 mr-2">
-        <a href="/#/after_register">Change Speciality</a>
+        <a href="/after_register">Change Speciality</a>
       </span>
       <button class="btn btn-light-primary btn-bold" @click="onLogout">
         Sign out

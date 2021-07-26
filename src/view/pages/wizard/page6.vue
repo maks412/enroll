@@ -44,13 +44,15 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page7.download_and_fill')}}<br />
-                      {{$t('page7.bring_to_SDU')}}
+                      {{ $t("page7.download_and_fill") }}<br />
+                      {{ $t("page7.bring_to_SDU") }}
                     </h4>
 
                     <div>
-                      <b-link target="blank" href="https://enroll.sdu.edu.kz/2021-2022contract.pdf"
-                        >{{$t('page7.contract_link')}}</b-link
+                      <b-link
+                        target="blank"
+                        href="https://enroll.sdu.edu.kz/2021-2022contract.pdf"
+                        >{{ $t("page7.contract_link") }}</b-link
                       >
                     </div>
                   </div>
@@ -59,13 +61,13 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{$t('page7.agree_terms')}}
+                      {{ $t("page7.agree_terms") }}
                     </h4>
 
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
                       <p class="text-justify">
-                        {{ $t('page7.check1') }}
+                        {{ $t("page7.check1") }}
                       </p>
                       <b-form-checkbox
                         v-model="checkbox1"
@@ -74,13 +76,13 @@
                         switch
                         size="lg"
                       >
-                        {{$t('page7.accept_terms')}}
+                        {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-                      <p class="text-justify">{{ $t('page7.check2') }}</p>
+                      <p class="text-justify">{{ $t("page7.check2") }}</p>
                       <b-form-checkbox
                         v-model="checkbox2"
                         value="true"
@@ -88,13 +90,13 @@
                         switch
                         size="lg"
                       >
-                        {{$t('page7.accept_terms')}}
+                        {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-                      <p class="text-justify">{{ $t('page7.check3') }}</p>
+                      <p class="text-justify">{{ $t("page7.check3") }}</p>
                       <b-form-checkbox
                         v-model="checkbox3"
                         value="true"
@@ -102,13 +104,13 @@
                         switch
                         size="lg"
                       >
-                        {{$t('page7.accept_terms')}}
+                        {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
                     </div>
                     <hr />
                     <div class="row">
                       <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-                      <p class="text-justify">{{ $t('page7.check4') }}</p>
+                      <p class="text-justify">{{ $t("page7.check4") }}</p>
                       <b-form-checkbox
                         v-model="checkbox4"
                         value="true"
@@ -116,7 +118,7 @@
                         switch
                         size="lg"
                       >
-                        {{$t('page7.accept_terms')}}
+                        {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
                     </div>
                   </div>
@@ -129,7 +131,7 @@
                         class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-prev"
                       >
-                        {{$t('common.previous')}}
+                        {{ $t("common.previous") }}
                       </button>
                     </div>
                     <div>
@@ -138,13 +140,13 @@
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
-                        {{$t('common.submit')}}
+                        {{ $t("common.submit") }}
                       </button>
                       <button
                         class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-next"
                       >
-                        {{$t('common.next_step')}}
+                        {{ $t("common.next_step") }}
                       </button>
                     </div>
                   </div>
@@ -172,12 +174,15 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
   data() {
     return {
-      tabs: [{ title: "page7.contact" }, { title: "page7.agreements", desc: "" }],
+      tabs: [
+        { title: "page7.contact" },
+        { title: "page7.agreements", desc: "" },
+      ],
       selected: [], // Must be an array reference!
       checkbox1: "",
       checkbox2: "",
@@ -222,42 +227,46 @@ export default {
         this.checkbox4 == "true"
       ) {
         this.apply();
-      }
-      else{
+      } else {
         Swal.fire({
-                title: "",
-                text: "Please accept all terms",
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false,
-              });
+          title: "",
+          text: "Please accept all terms",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+          heightAuto: false,
+        });
       }
     },
 
     apply() {
       var data_created = new FormData();
-      data_created.append("json", JSON.stringify({ mod: "page6", method: "set", action: "setStatus" }));
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { mod: "page6", method: "set", action: "setStatus" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          'Access-Token': this.$cookies.get('token'),
-          'Access-Email': this.$cookies.get('email')
         },
         body: data_created,
       })
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 0) {
-              Swal.fire({
-                title: "",
-                text: res.message,
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false,
-              });
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+              
+            });
           }
-          if (res.status == 1) {
+          if (res.code == 1) {
             Swal.fire({
               title: "",
               text: "The application has been successfully submitted!",

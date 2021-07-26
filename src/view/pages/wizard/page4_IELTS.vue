@@ -191,7 +191,7 @@ export default {
       english_certificate_options: [
         { text: "IELTS", value: "8" },
         { text: "TOEFL", value: "49" },
-        { text: "SDU Language Test", value: "" },
+        { text: "SDU Language Test", value: "39" },
       ],
       certificate_upload: null,
       preview: null,
@@ -306,7 +306,7 @@ export default {
     },
 
     previewImage: function (e) {
-      if (this.delids) {
+      if (this.preview) {
         Swal.fire({
             title: "",
             text: "Maximum images uploaded",

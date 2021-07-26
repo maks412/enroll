@@ -67,8 +67,7 @@ export default {
           return val.lang === lang;
         })
       );
-
-      window.location.reload();
+      //window.location.reload();
     },
     isActiveLanguage(current) {
       return this.activeLanguage === current;

@@ -58,7 +58,7 @@
                             disabled
                           />
                           <span class="form-text text-muted"
-                            ><a href="/#/after_register">{{
+                            ><a href="/after_register">{{
                               $t("page1.change_citizenship")
                             }}</a></span
                           >
@@ -666,7 +666,7 @@ export default {
   },
   created() {
     this.loadData();
-    this.getUpload();
+    //this.getUpload();
   },
   name: "Wizard-4",
   mounted() {
@@ -776,6 +776,8 @@ export default {
           this.social_status = res.social_status.list;
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
+
+          this.getUpload();
         });
       //Get Profile
       var data_created = new FormData();
@@ -826,8 +828,9 @@ export default {
             res.response.forEach(el => {
               this.delids.documents.push(el.delid);
               this.documents_upload_preview_slide.push(url+"/"+el.doc_path);
-            });
-          }
+              });
+            }
+          
         });
 
 
@@ -836,7 +839,7 @@ export default {
         "json",
         JSON.stringify({
           //DOCID NEEDED
-          data: { docid: "", method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: { docid: "5", method: "setUpload", action: "getImages", mod: "setUpload" },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -1175,7 +1178,6 @@ export default {
     },
 
     upload_multi_documents: function () {
-      console.log("sdfs");
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -1212,7 +1214,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "",
+            docid: "5",
             method: "setUpload",
             action: "setImage",
           },
@@ -1221,7 +1223,7 @@ export default {
         })
       );
 
-      data_created.append("file", this.social_status_upload);
+      data_created.append("file[]", this.social_status_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {

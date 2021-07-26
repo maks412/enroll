@@ -411,64 +411,6 @@
                         </div>
                       </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                      <div class="col-xl-8">
-                        <label>{{ $t("page6.upload_eng") }}</label>
-                        <b-form-file
-                          @change="previewImage"
-                          id="upload_engCourse"
-                          v-model="eng_course"
-                          :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_eng')"
-                          :drop-placeholder="$t('common.drop_file')"
-                          ><template slot="file-name" slot-scope="{ names }">
-                            <b-badge variant="dark">{{ names[0] }}</b-badge>
-                            <b-badge
-                              v-if="names.length > 1"
-                              variant="dark"
-                              class="ml-1"
-                            >
-                              +
-                              {{
-                                $t("common.more_files", {
-                                  num: names.length - 1,
-                                })
-                              }}
-                            </b-badge>
-                          </template></b-form-file
-                        >
-                        <div
-                          class="text-center"
-                          style="display: flex; flex-wrap: wrap"
-                        >
-                          <div
-                            v-if="preview_engCourse"
-                            class="m-5"
-                            style="display: block"
-                          >
-                            <img
-                              :src="preview_engCourse"
-                              class="img-thumbnail"
-                              style="width: 15em; display: block"
-                            />
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="30"
-                              height="30"
-                              fill="currentColor"
-                              class="bi bi-x-square-fill m-1"
-                              viewBox="0 0 16 16"
-                              @click="remove_upload('upload_engCourse')"
-                            >
-                              <path
-                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <!--end: Wizard Step 3-->
 
@@ -691,7 +633,6 @@ export default {
       infomatrix_upload: null,
       student_fee: null,
       tuition_fee: null,
-      eng_course: null,
       creative_exam: null,
       pedagogical_test: null,
 
@@ -699,7 +640,6 @@ export default {
       preview_infomatrix: null,
       preview_studentFee: null,
       preview_tuitionFee: null,
-      preview_engCourse: null,
       preview_creativeExam: null,
       preview_pedTest: null,
 
@@ -761,7 +701,6 @@ export default {
     this.getUpload("44", "upload_infomatrix");
     this.getUpload("36", "upload_studentFee");
     this.getUpload("35", "upload_tuitionFee");
-    this.getUpload("25", "upload_engCourse");
     this.getUpload("27", "upload_creativeExam");
     this.getUpload("38", "upload_pedTest");
   },
@@ -908,10 +847,6 @@ export default {
               this.delids.delid_tuitionFee = res.response[i].delid;
               this.preview_tuitionFee = url + "/" + res.response[i].doc_path;
             }
-            if (id == "upload_engCourse") {
-              this.delids.delid_engCourse = res.response[i].delid;
-              this.preview_engCourse = url + "/" + res.response[i].doc_path;
-            }
             if (id == "upload_creativeExam") {
               this.delids.delid_creativeExam = res.response[i].delid;
               this.preview_creativeExam = url + "/" + res.response[i].doc_path;
@@ -963,15 +898,6 @@ export default {
         });
         return 0;
       }
-      if (id == "upload_engCourse" && this.preview_engCourse) {
-        Swal.fire({
-          title: "",
-          text: "Maximum images uploaded",
-          icon: "error",
-          confirmButtonClass: "btn btn-secondary",
-        });
-        return 0;
-      }
       if (id == "upload_creativeExam" && this.preview_creativeExam) {
         Swal.fire({
           title: "",
@@ -1008,8 +934,6 @@ export default {
 
             if (id == "upload_tuitionFee") this.preview_tuitionFee = result;
 
-            if (id == "upload_engCourse") this.preview_engCourse = result;
-
             if (id == "upload_creativeExam") this.preview_creativeExam = result;
 
             if (id == "upload_pedTest") this.preview_pedTest = result;
@@ -1039,8 +963,6 @@ export default {
         this.student_fee = new Blob([u8arr], { type: mime });
       if (id == "upload_tuitionFee")
         this.tuition_fee = new Blob([u8arr], { type: mime });
-      if (id == "upload_engCourse")
-        this.eng_course = new Blob([u8arr], { type: mime });
       if (id == "upload_creativeExam")
         this.creative_exam = new Blob([u8arr], { type: mime });
       if (id == "upload_pedTest")
@@ -1067,10 +989,6 @@ export default {
       if (id == "upload_tuitionFee") {
         doc = "35";
         data_created.append("file[]", this.tuition_fee);
-      }
-      if (id == "upload_engCourse") {
-        doc = "25";
-        data_created.append("file[]", this.eng_course);
       }
       if (id == "upload_creativeExam") {
         doc = "27";
@@ -1113,7 +1031,6 @@ export default {
       if (id == "upload_infomatrix") this.delids.delid_infomatrix = delid;
       if (id == "upload_studentFee") this.delids.delid_studentFee = delid;
       if (id == "upload_tuitionFee") this.delids.delid_tuitionFee = delid;
-      if (id == "upload_engCourse") this.delids.delid_engCourse = delid;
       if (id == "upload_creativeExam") this.delids.delid_creativeExam = delid;
       if (id == "upload_pedTest") this.delids.delid_pedTest = delid;
     },
@@ -1228,7 +1145,6 @@ export default {
       if (id == "upload_infomatrix") var delid = this.delids.delid_infomatrix;
       if (id == "upload_studentFee") var delid = this.delids.delid_studentFee;
       if (id == "upload_tuitionFee") var delid = this.delids.delid_tuitionFee;
-      if (id == "upload_engCourse") var delid = this.delids.delid_engCourse;
       if (id == "upload_creativeExam")
         var delid = this.delids.delid_creativeExam;
       if (id == "upload_pedTest") var delid = this.delids.delid_pedTest;
@@ -1271,10 +1187,6 @@ export default {
             if (id == "upload_tuitionFee") {
               this.preview_tuitionFee = null;
               this.tuition_fee = null;
-            }
-            if (id == "upload_engCourse") {
-              this.preview_engCourse = null;
-              this.eng_course = null;
             }
             if (id == "upload_creativeExam") {
               this.preview_creativeExam = null;
