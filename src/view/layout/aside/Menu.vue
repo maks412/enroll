@@ -1,13 +1,13 @@
 <template>
   <ul class="menu-nav" style="margin: 20px 0">
     <router-link
-      v-for="(link,index) in links"
+      v-for="(link, index) in links"
       :key="index"
       :to="link.navigate_to"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
       <li
-        style="margin-top:10px"
+        style="margin-top: 10px"
         aria-haspopup="true"
         data-menu-toggle="hover"
         class="menu-item"
@@ -17,23 +17,22 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <div class="menu-icon menu_custom" :class="{'pad-1':index!=0}">{{index+1}}</div>
+          <div class="menu-icon menu_custom" :class="{ 'pad-1': index != 0 }">
+            {{ index + 1 }}
+          </div>
           <div>
-            <span class="menu-text" style="font-size: 15px; font-weight: 500"
-              >{{$t(link.name)}}</span
-            >
+            <span class="menu-text" style="font-size: 15px; font-weight: 500">{{
+              $t(link.name)
+            }}</span>
 
-            <span class="menu-text" style="font-size: 11px"
-              >{{$t(link.description)}}</span
-            >
+            <span class="menu-text" style="font-size: 11px">{{
+              $t(link.description)
+            }}</span>
           </div>
         </a>
       </li>
     </router-link>
-
-    
   </ul>
-  
 </template>
 
 
@@ -75,11 +74,27 @@ const links = [
     navigate_to: "/home/6"
   }
 ]
+const iro_links = [{
+    name: "aside.main_info",
+    description: "aside.main_info_d",
+    navigate_to: "/home/IRO"
+  },
+  {
+    name: "Additional Info",
+    description: "Setup Your Additional Information",
+    navigate_to: "/home/IRO_contact"
+  },
+  {
+    name: "aside.apply",
+    description: "aside.apply_d",
+    navigate_to: "/home/6"
+  }
+  ]
 export default {
   name: "KTMenu",
   data(){
     return{
-      links:links
+      links:iro_links
     };
   },
   methods: {
@@ -91,7 +106,7 @@ export default {
 </script>
 
 <style>
-.pad-1{
+.pad-1 {
   padding: 20px 20px 20px 18px;
 }
 </style>

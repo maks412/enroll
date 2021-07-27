@@ -30,19 +30,24 @@ export default {
   name: "KTDropdownLanguage",
   data() {
     return {
-      languages: i18nService.languages
+      languages: i18nService.languages,
     };
   },
   methods: {
     selectedLanguage(e) {
       const el = e.target.closest(".navi-link");
       const lang = el.getAttribute("data-lang");
-      
+
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { mod: "lang_set", method: "set", action: "setLang", LANG: lang },
+          data: {
+            mod: "lang_set",
+            method: "set",
+            action: "setLang",
+            LANG: lang,
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -56,27 +61,26 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          ///escho kod kos
+          if (res.code == 1) {
+            i18nService.setActiveLanguage(lang);
+            this.$emit(
+              "language-changed",
+              this.languages.find((val) => {
+                return val.lang === lang;
+              })
+            );
+            window.location.reload();
+          }
         });
-
-      i18nService.setActiveLanguage(lang);
-
-      this.$emit(
-        "language-changed",
-        this.languages.find(val => {
-          return val.lang === lang;
-        })
-      );
-      window.location.reload();
     },
     isActiveLanguage(current) {
       return this.activeLanguage === current;
-    }
+    },
   },
   computed: {
     activeLanguage() {
       return i18nService.getActiveLanguage();
-    }
-  }
+    },
+  },
 };
 </script>

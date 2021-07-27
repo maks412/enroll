@@ -135,6 +135,7 @@
                             class="form-control form-control-solid form-control-lg"
                             name="patronymic"
                             v-model="form.patronymic"
+                            required
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_patronymic")
@@ -152,6 +153,7 @@
                             accept="image/png, image/gif, image/jpeg"
                             id="customFile"
                             @change="croppie"
+                            required
                           />
                           <label class="custom-file-label" for="customFile"
                             >Choose an image</label
@@ -324,6 +326,7 @@
                               v-if="names.length > 1"
                               variant="dark"
                               class="ml-1"
+                              required
                             >
                               +
                               {{
