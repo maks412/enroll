@@ -94,7 +94,7 @@ export default {
   name: "KTMenu",
   data(){
     return{
-      links:iro_links
+      links:links
     };
   },
   methods: {
