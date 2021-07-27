@@ -18,13 +18,6 @@
               v-for="(tab, index) in tabs"
               :key="index"
             >
-              <!-- <div class="wizard-wrapper">
-                <div class="wizard-number">{{ index + 1 }}</div>
-                <div class="wizard-label">
-                  <div class="wizard-title">{{ tab.title }}</div>
-                  <div class="wizard-desc">{{ tab.desc }}</div>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -36,7 +29,7 @@
             <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
               <div class="col-xl-12 col-xxl-7">
                 <!--begin: Wizard Form-->
-                <form class="form mt-0 mt-lg-10" id="kt_form">
+                <form class="form mt-0 mt-lg-10" id="kt_form" @submit.prevent="submit">
                   <!--begin: Wizard Step 1-->
                   <div
                     class="pb-5"
@@ -143,7 +136,7 @@
                     </div>
                     <div>
                       <button
-                        v-on:click="submit"
+                        type="submit"
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
@@ -322,7 +315,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/jpg", // default
-            max: 400, // max size
+            max: 500, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {

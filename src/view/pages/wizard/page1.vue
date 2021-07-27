@@ -35,7 +35,7 @@
             <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
               <div class="col-xl-12 col-xxl-7">
                 <!--begin: Wizard Form-->
-                <form class="form mt-0 mt-lg-10" id="kt_form">
+                <form class="form mt-0 mt-lg-10" id="kt_form" @submit.prevent="submit">
                   <!--begin: Wizard Step 1-->
                   <div
                     class="pb-5"
@@ -56,6 +56,7 @@
                             name="fname"
                             v-model="form.citizenship"
                             disabled
+                            
                           />
                           <span class="form-text text-muted"
                             ><a href="/after_register">{{
@@ -90,6 +91,7 @@
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
                             v-model="form.nname"
+                            required
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_n_f_name")
@@ -121,6 +123,7 @@
                             class="form-control form-control-solid form-control-lg"
                             name="Nsurname"
                             v-model="form.nlname"
+                            required
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_n_l_name")
@@ -300,7 +303,6 @@
                             <b-form-select
                               v-model="form.social_status"
                               :options="social_status"
-                              required
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -326,7 +328,6 @@
                               v-if="names.length > 1"
                               variant="dark"
                               class="ml-1"
-                              required
                             >
                               +
                               {{
@@ -337,38 +338,41 @@
                             </b-badge>
                           </template></b-form-file
                         >
-                      </div>
-                      <div
-                        class="text-center"
-                        style="display: flex; flex-wrap: wrap"
-                      >
+
                         <div
-                          :v-if="social_status_upload_preview_slide.length > 0"
-                          v-for="(
-                            image, i
-                          ) in social_status_upload_preview_slide"
-                          :key="i"
-                          class="m-5"
-                          style="display: block"
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
                         >
-                          <img
-                            :src="image"
-                            class="img-thumbnail"
-                            style="width: 15em; display: block"
-                          />
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="30"
-                            height="30"
-                            fill="currentColor"
-                            class="bi bi-x-square-fill m-1"
-                            viewBox="0 0 16 16"
-                            @click="remove_upload_social(i)"
+                          <div
+                            :v-if="
+                              social_status_upload_preview_slide.length > 0
+                            "
+                            v-for="(
+                              image, i
+                            ) in social_status_upload_preview_slide"
+                            :key="i"
+                            class="m-5"
+                            style="display: block"
                           >
-                            <path
-                              d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                            <img
+                              :src="image"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
                             />
-                          </svg>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload_social(i)"
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -547,7 +551,8 @@
                     </div>
                     <div>
                       <button
-                        v-on:click="submit"
+                        type="submit"
+                        
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
@@ -633,7 +638,7 @@ export default {
       documents_upload_preview: null,
       documents_upload_preview_slide: [],
 
-      social_status: null,
+      social_status: [],
       social_status_upload_preview: null,
       social_status_upload_preview_slide: [],
 
@@ -735,7 +740,7 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/2')
+            window.location.replace(url2 + "/home/2");
           }
         });
     },
@@ -777,6 +782,7 @@ export default {
           this.issued_options = res.issued_by.list;
           this.nationality = res.nationality.list;
           this.social_status = res.social_status.list;
+          this.social_status.unshift({value: null, text: ""});
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
 
@@ -804,16 +810,20 @@ export default {
           this.croppieImage =
             res.image == "data:image/jpeg;base64," ? null : res.image;
         });
-      
     },
 
-    getUpload: function(){
+    getUpload: function () {
       //Get Uploads Documents
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { docid: this.form.document_type, method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: {
+            docid: this.form.document_type,
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -828,21 +838,24 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (Array.isArray(res.response)) {
-            res.response.forEach(el => {
+            res.response.forEach((el) => {
               this.delids.documents.push(el.delid);
-              this.documents_upload_preview_slide.push(url+"/"+el.doc_path);
-              });
-            }
-          
+              this.documents_upload_preview_slide.push(url + "/" + el.doc_path);
+            });
+          }
         });
-
 
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
           //DOCID NEEDED
-          data: { docid: "5", method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: {
+            docid: "5",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -857,9 +870,11 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (Array.isArray(res.response)) {
-            res.response.forEach(el => {
+            res.response.forEach((el) => {
               this.delids.social_status.push(el.delid);
-              this.social_status_upload_preview_slide.push(url+"/"+el.doc_path);
+              this.social_status_upload_preview_slide.push(
+                url + "/" + el.doc_path
+              );
             });
           }
         });
@@ -873,7 +888,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 400, // max size
+            max: 500, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1105,12 +1120,12 @@ export default {
       console.log(1);
       if (this.delids.documents.length >= 2) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       var id = e.target.id;
@@ -1121,7 +1136,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 400, // max size
+            max: 500, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1134,15 +1149,14 @@ export default {
       }
     },
     previewImage_multi_social: function (e) {
-      
       if (this.delids.social_status.length >= 1) {
         Swal.fire({
-            title: "",
-            text: "Maximum imeges uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum imeges uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       var id = e.target.id;
@@ -1153,7 +1167,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 400, // max size
+            max: 500, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {

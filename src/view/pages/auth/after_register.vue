@@ -73,9 +73,9 @@
                                     type="is-toggle"
                                     @input="change_bach_speciality"
                                   >
-                                    <b-tab :title="'Full'" active></b-tab>
-                                    <b-tab :title="'Shortened'"></b-tab>
-                                    <b-tab :title="'Second Higher'"></b-tab>
+                                    <b-tab :title="$t('after_reg.full')" active></b-tab>
+                                    <b-tab :title="$t('after_reg.shortened')"></b-tab>
+                                    <b-tab :title="$t('after_reg.second_higher')"></b-tab>
                                   </b-tabs>
                                 </div>
                                 <!-- END of Degree -->
@@ -212,7 +212,7 @@
                         type="submit"
                         variant="primary"
                         style="float: right"
-                        >{{ $t("common.next") }}
+                        >{{ $t("common.next_step") }}
                         <b-icon-chevron-right></b-icon-chevron-right
                       ></b-button>
                     </b-form>
@@ -412,7 +412,7 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      //alert(JSON.stringify(this.form));
+      
       var data_send = new FormData();
       data_send.append(
         "json",
@@ -468,12 +468,12 @@ export default {
       });
     },
     OnChange: function () {
-      if (this.form.citizenship == "Kazakhstan") this.Interview_div = "none";
+      if (this.form.citizenship == "208") this.Interview_div = "none";
       else this.Interview_div = "inline";
     },
     OnChange_paid: function () {
       if (this.form.tab_bachDegree == 1 || this.form.tab_bachDegree == 2) {
-        if (this.form.payment != "Paid") this.Admin_Interview_div = "none";
+        if (this.form.payment != "Paid" || this.form.payment != "Ақылы") this.Admin_Interview_div = "none";
         else this.Admin_Interview_div = "inline";
       }
       if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";

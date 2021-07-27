@@ -225,5 +225,8 @@ export const locale = {
         "grant": "State Grant",
         "paid": "Paid",
         "follow_link": "To pass an exam follow this link",
+        "full": "Full",
+        "shortened": "Shortened",
+        "second_higher": "Second Higher"
     }
 };
