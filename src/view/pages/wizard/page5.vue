@@ -922,7 +922,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/jpg", // default
-            max: 200, // max size
+            max: 400, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1053,7 +1053,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 200, // max size
+            max: 400, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {

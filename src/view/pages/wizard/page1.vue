@@ -477,7 +477,7 @@
                     <div>
                       <label>{{ $t("page1.documents") }}</label>
                       <b-form-file
-                        accept="image/*"
+                        accept="image/png, image/gif, image/jpg"
                         id="documents"
                         @change="previewImage_multi_documents"
                         v-model="documents_upload_preview"
@@ -872,8 +872,8 @@ export default {
         reader.onload = (event) => {
           compress(event.target.result, {
             width: 400,
-            type: "image/jpg", // default
-            max: 200, // max size
+            type: "image/*", // default
+            max: 400, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1102,6 +1102,7 @@ export default {
     },
 
     previewImage_multi_documents: function (e) {
+      console.log(1);
       if (this.delids.documents.length >= 2) {
         Swal.fire({
             title: "",
@@ -1120,10 +1121,11 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 200, // max size
+            max: 400, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
+            console.log(2);
             slide.push(result);
             this.dataURLtoFile_multi(result, id);
           });
@@ -1132,6 +1134,7 @@ export default {
       }
     },
     previewImage_multi_social: function (e) {
+      
       if (this.delids.social_status.length >= 1) {
         Swal.fire({
             title: "",
@@ -1150,7 +1153,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 200, // max size
+            max: 400, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1162,6 +1165,7 @@ export default {
       }
     },
     dataURLtoFile_multi: function (dataurl, id) {
+      console.log(3);
       var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]),
@@ -1181,6 +1185,7 @@ export default {
     },
 
     upload_multi_documents: function () {
+      console.log(4);
       var data_created = new FormData();
       data_created.append(
         "json",

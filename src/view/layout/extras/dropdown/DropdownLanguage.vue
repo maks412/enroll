@@ -62,6 +62,8 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 1) {
+            this.$cookies.set("token", res.token);
+
             i18nService.setActiveLanguage(lang);
             this.$emit(
               "language-changed",
