@@ -46,7 +46,7 @@
                           <b-form-select
                             v-model="form.english_certificate"
                             :options="english_certificate_options"
-                            required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="lg"
                           ></b-form-select>
                         </div>
@@ -59,6 +59,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.certificate_number"
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                         </div>
                       </div>
@@ -73,6 +74,7 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page5.choose_certificate')"
                           :drop-placeholder="$t('common.drop_files')"
+                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -112,6 +114,7 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload()"
+                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -180,6 +183,7 @@ var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 export default {
   data() {
     return {
+      status: this.$cookies.get("status"),
       tabs: [""],
       english_certificate_options: [
         { text: "IELTS", value: "8" },
@@ -371,33 +375,7 @@ export default {
         });
     },
     remove_upload: function () {
-      // var data_created = new FormData();
-      // data_created.append(
-      //   "json",
-      //   JSON.stringify({
-      //     data: {
-      //       delid: this.delids,
-      //       method: "setUpload",
-      //       action: "delImage",
-      //     },
-      //     token: this.$cookies.get("token"),
-      //     email: this.$cookies.get("email"),
-      //   })
-      // );
-      // fetch(url + "/backend/middle.php", {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //   },
-      //   body: data_created,
-      // })
-      //   .then((response) => response.json())
-      //   .then((res) => {
-      //     if (res.code == 1) {
-      //       this.preview = null;
-      //       this.delids = null;
-      //     }
-      //   });
+      
       this.preview = null;
       this.delids = null;
       this.certificate_upload = null;

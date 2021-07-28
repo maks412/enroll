@@ -107,8 +107,8 @@ export default {
       languageFlag: "",
       languages: i18nService.languages,
 
-      status: "Not applied",
-      status_color: "warning",
+      status: "NOT APPLIED",
+      status_color: "danger",
       back_special: ""
     };
   },
@@ -166,7 +166,7 @@ export default {
           if(res.status == "ACCEPTED") this.status_color = "info";
           if(res.status == "REJECTED") this.status_color = "primary";
           if(res.status == "CONFIRMED") this.status_color = "success";
-
+          this.$cookies.set("status", res.status);
           this.back_special = res.speciality;
         });
   }

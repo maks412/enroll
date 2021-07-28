@@ -56,6 +56,7 @@
                             v-model="form.current_address_country"
                             :options="current_address_country_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                             v-on:change="press_country"
                           ></b-form-select>
@@ -71,6 +72,7 @@
                             v-model="form.current_address_province"
                             :options="current_address_province_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                             v-on:change="press_province"
                           ></b-form-select>
@@ -87,6 +89,7 @@
                             v-model="form.current_address_region"
                             :options="current_address_region_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                             v-on:change="press_region"
                           ></b-form-select>
@@ -100,6 +103,7 @@
                             v-model="form.current_address_city"
                             :options="current_address_city_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                           ></b-form-select>
                         </div>
@@ -114,6 +118,8 @@
                             type="text"
                             class="form-control form-control-solid form-control-sm"
                             v-model="form.current_address"
+                            required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                         </div>
                       </div>
@@ -129,6 +135,7 @@
                             v-model="form.register_address_country"
                             :options="register_address_country_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                             v-on:change="press_register_country"
                           ></b-form-select>
@@ -145,6 +152,7 @@
                             v-model="form.register_address_province"
                             :options="register_address_province_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                             v-on:change="press_register_province"
                           ></b-form-select>
@@ -163,6 +171,7 @@
                             v-model="form.register_address_region"
                             :options="register_address_region_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                             v-on:change="press_register_region"
                           ></b-form-select>
@@ -179,6 +188,7 @@
                             v-model="form.register_address_city"
                             :options="register_address_city_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="sm"
                           ></b-form-select>
                         </div>
@@ -193,6 +203,8 @@
                             type="text"
                             class="form-control form-control-solid form-control-sm"
                             v-model="form.register_address"
+                            required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                         </div>
                       </div>
@@ -207,6 +219,8 @@
                             class="form-control form-control-solid form-control-lg"
                             @input="acceptNumber"
                             v-model="form.phone"
+                            required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                         </div>
                       </div>
@@ -223,6 +237,7 @@
                                 :options="options"
                                 name="radio-options"
                                 size="lg"
+                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               >
                                 <b-form-radio value="1" id="yes">{{
                                   $t("page3.yes")
@@ -252,6 +267,7 @@
                               v-model="form.rel_type"
                               :options="relative_type_options"
                               size="lg"
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             ></b-form-select>
                           </b-form-group>
                         </div>
@@ -263,6 +279,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="rel_name"
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                         </div>
                       </div>
@@ -273,6 +290,7 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="rel_cont"
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                         </div>
                       </div>
@@ -282,6 +300,7 @@
                       style="float: right"
                       class="btn btn-primary text-uppercase px-3 py-1"
                       v-on:click="add_relative"
+                      v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
                     >
                       {{ $t("page3.add_relative") }}
                     </button>
@@ -294,6 +313,7 @@
                         style="float: right"
                         class="btn btn-primary text-uppercase px-4 py-1"
                         v-on:click="delete_relative"
+                        v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
                       >
                         {{ $t("page3.delete_last") }}
                       </button>
@@ -356,6 +376,7 @@ var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 export default {
   data() {
     return {
+      status: this.$cookies.get("status"),
       tabs: [
         { title: "page3.contact_details" },
         { title: "page3.relative_information" },

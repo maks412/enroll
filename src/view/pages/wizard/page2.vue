@@ -55,6 +55,7 @@
                               v-model="form.country"
                               :options="country"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                               v-on:change="press_country"
                             ></b-form-select>
@@ -72,6 +73,7 @@
                               v-model="form.province"
                               :options="province"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                               v-on:change="press_province"
                             ></b-form-select>
@@ -92,6 +94,7 @@
                               v-model="form.school"
                               :options="school"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -108,6 +111,7 @@
                               v-model="form.language"
                               :options="language_options"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -124,6 +128,7 @@
                               v-model="form.foreign_language"
                               :options="foreign_language"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -150,6 +155,7 @@
                               v-model="form.attestat_type"
                               :options="attestat_type"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -166,6 +172,7 @@
                               v-model="form.attestat_series"
                               :options="attestat_series"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -185,6 +192,8 @@
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
                             v-model="form.attestat_number"
+                            required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page2.enter_attestat_no")
@@ -199,6 +208,8 @@
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
                             v-model="form.attestat_score"
+                            required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page2.enter_attestat_score")
@@ -217,6 +228,8 @@
                                 type="text"
                                 placeholder="YYYY-MM-DD"
                                 autocomplete="off"
+                                required
+                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -244,6 +257,8 @@
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
                           :drop-placeholder="$t('common.drop_file')"
+                          required
+                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -285,6 +300,7 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload(i)"
+                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -312,7 +328,7 @@
                             <b-form-select
                               v-model="form.preparation_course"
                               :options="preparation_course"
-                              required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -381,6 +397,8 @@ var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 export default {
   data() {
     return {
+      status: this.$cookies.get("status"),
+
       tabs: [
         { title: "page2.school_info", desc: "page2.school_info_d" },
         { title: "page2.attestat_info", desc: "page2.attestat_info_d" },

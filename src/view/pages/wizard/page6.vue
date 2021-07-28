@@ -75,6 +75,7 @@
                         unchecked-value="false"
                         switch
                         size="lg"
+                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                       >
                         {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
@@ -89,6 +90,7 @@
                         unchecked-value="false"
                         switch
                         size="lg"
+                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                       >
                         {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
@@ -103,6 +105,7 @@
                         unchecked-value="false"
                         switch
                         size="lg"
+                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                       >
                         {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
@@ -117,6 +120,7 @@
                         unchecked-value="false"
                         switch
                         size="lg"
+                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                       >
                         {{ $t("page7.accept_terms") }}
                       </b-form-checkbox>
@@ -179,6 +183,7 @@ var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 export default {
   data() {
     return {
+      status: this.$cookies.get("status"),
       tabs: [
         { title: "page7.contact" },
         { title: "page7.agreements", desc: "" },

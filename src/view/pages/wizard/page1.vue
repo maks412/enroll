@@ -75,6 +75,7 @@
                             name="fname"
                             v-model="form.fname"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_f_name")
@@ -92,6 +93,7 @@
                             name="Nname"
                             v-model="form.nname"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_n_f_name")
@@ -107,6 +109,7 @@
                             name="lname"
                             v-model="form.lname"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_l_name")
@@ -124,6 +127,7 @@
                             name="Nsurname"
                             v-model="form.nlname"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_n_l_name")
@@ -139,6 +143,7 @@
                             name="patronymic"
                             v-model="form.patronymic"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_patronymic")
@@ -157,6 +162,7 @@
                             id="customFile"
                             @change="croppie"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <label class="custom-file-label" for="customFile"
                             >Choose an image</label
@@ -225,6 +231,7 @@
                                 autocomplete="off"
                                 size="lg"
                                 required
+                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -250,6 +257,7 @@
                               v-model="form.nationality"
                               :options="nationality"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -270,6 +278,7 @@
                               :aria-describedby="ariaDescribedby"
                               size="lg"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -287,6 +296,7 @@
                               :aria-describedby="ariaDescribedby"
                               size="lg"
                               required
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -303,6 +313,7 @@
                             <b-form-select
                               v-model="form.social_status"
                               :options="social_status"
+                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -322,6 +333,7 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page1.choose_status_document')"
                           :drop-placeholder="$t('common.drop_file')"
+                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -367,6 +379,7 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload_social(i)"
+                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -395,6 +408,7 @@
                             name="radio-inline"
                             size="lg"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           ></b-form-radio-group>
                         </b-form-group>
                         <span class="form-text text-muted">{{
@@ -412,6 +426,7 @@
                             name="IIN"
                             v-model="form.IIN"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_iin")
@@ -426,6 +441,7 @@
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.document_no"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_doc_no")
@@ -441,6 +457,7 @@
                             v-model="form.issued_by"
                             :options="issued_options"
                             required
+                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                             size="lg"
                           ></b-form-select>
                           <span class="form-text text-muted">{{
@@ -460,6 +477,7 @@
                                 autocomplete="off"
                                 size="lg"
                                 required
+                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -488,6 +506,7 @@
                         :state="Boolean(file)"
                         :placeholder="$t('common.choose_file')"
                         :drop-placeholder="$t('common.drop_file')"
+                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                         ><template slot="file-name" slot-scope="{ names }">
                           <b-badge variant="dark">{{ names[0] }}</b-badge>
                           <b-badge
@@ -528,6 +547,7 @@
                             class="bi bi-x-square-fill m-1"
                             viewBox="0 0 16 16"
                             @click="remove_upload_documents(i)"
+                            v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
                           >
                             <path
                               d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -600,6 +620,8 @@ export default {
   components: { Button },
   data() {
     return {
+      status: this.$cookies.get("status"),
+      
       croppieImage: "",
       cropped: null,
 
