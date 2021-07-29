@@ -264,8 +264,8 @@ export default {
         .then((res) => {
           if (res.code == 0) {
             Swal.fire({
-              title: "",
-              text: res.message,
+              title: "Fill up this places!",
+              text: res.response.address+res.response.edu+res.response.main+res.response.relinfo,
               icon: "error",
               confirmButtonClass: "btn btn-secondary",
               
