@@ -80,12 +80,12 @@ const iro_links = [{
     navigate_to: "/home/IRO"
   },
   {
-    name: "Education",
+    name: "aside.education",
     description: "Setup Your Education Information",
     navigate_to: "/home/IRO_education"
   },
   {
-    name: "Contacts",
+    name: "aside.contact",
     description: "Setup Your Contact Information",
     navigate_to: "/home/IRO_contact"
   },
@@ -96,6 +96,44 @@ const iro_links = [{
     navigate_to: "/home/6"
   }
   ]
+
+  const degree_links = [{
+    name: "aside.main_info",
+    description: "aside.main_info_d",
+    navigate_to: "/home/1"
+  },
+  {
+    name: "aside.education",
+    description: "Setup Your Education Information",
+    navigate_to: "/home/degree_education"
+  },
+  {
+    name: "aside.contact",
+    description: "Setup Your Contact Information",
+    navigate_to: "/home/3"
+  },
+  {
+    name: "aside.grant_info",
+    description: "aside.grant_info_d",
+    navigate_to: "/home/4"
+  },
+  {
+    name: "aside.eng_tests",
+    description: "aside.eng_tests_d",
+    navigate_to: "/home/4_ielts"
+  },
+  {
+    name: "aside.documents",
+    description: "aside.documents_d",
+    navigate_to: "/home/degree_decuments"
+  },
+  {
+    name: "aside.apply",
+    description: "aside.apply_d",
+    navigate_to: "/home/6"
+  }
+  ]
+
   var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
   const link = []
 export default {

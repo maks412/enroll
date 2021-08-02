@@ -265,7 +265,11 @@ export default {
           if (res.code == 0) {
             var print_text = "";
             if(res.response.main.length > 0) print_text += "1) Main Info: " + res.response.main +" <br> ";
-            if(res.response.main.length > 0) print_text += "1) Main Info: " + res.response.main +" <br> ";
+            if(res.response.edu.length > 0) print_text += "2) Education: " + res.response.edu +" <br> ";
+            if(res.response.address.length > 0) print_text += "3) Contacts: " + res.response.address +" <br> ";
+            if(res.response.grantInfo.length > 0) print_text += "4) Grant Info: " + res.response.grantInfo +" <br> ";
+            if(res.response.langInfo.length > 0) print_text += "5) English Test: " + res.response.langInfo +" <br> ";
+            //if(res.response.docInfo.length > 0) print_text += "6) Documents: " + res.response.docInfo +" <br> ";
             Swal.fire({
               title: "Fill up this places!",
               html: print_text,
