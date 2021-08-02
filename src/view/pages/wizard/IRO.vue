@@ -58,7 +58,7 @@
                             disabled
                           />
                           <span class="form-text text-muted"
-                            ><a href="/#/after_register">{{
+                            ><a href="/after_register">{{
                               $t("page1.change_citizenship")
                             }}</a></span
                           >
@@ -433,7 +433,6 @@ export default {
       tabs: [
         { title: "page1.personal_info", desc: "page1.personal_info_d" },
         { title: "page1.additional_info", desc: "page1.additional_info_d" },
-        { title: "page1.doc_info", desc: "page1.doc_info_d" },
       ],
       gender_options: [
         { text: this.$t("page1.male"), value: "male" },
@@ -472,19 +471,12 @@ export default {
         citizenship: "",
         birthday: "",
         nationality: null,
-        social_status: null,
         gender: "",
-        married: "",
-        document_type: "",
-        IIN: "",
         document_no: "",
         issued_by: "",
         issued_date: "",
         fname: "",
         lname: "",
-        nname: "",
-        nlname: "",
-        patronymic: "",
 
         mod: "page1",
         method: "set",
@@ -561,7 +553,7 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + "/home/2");
+            window.location.replace(url2 + "/home/IRO_education");
           }
         });
     },
@@ -637,7 +629,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: this.form.document_type,
+            docid: "7",
             method: "setUpload",
             action: "getImages",
             mod: "setUpload",
@@ -659,40 +651,6 @@ export default {
             res.response.forEach((el) => {
               this.delids.documents.push(el.delid);
               this.documents_upload_preview_slide.push(url + "/" + el.doc_path);
-            });
-          }
-        });
-
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          //DOCID NEEDED
-          data: {
-            docid: "",
-            method: "setUpload",
-            action: "getImages",
-            mod: "setUpload",
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          if (Array.isArray(res.response)) {
-            res.response.forEach((el) => {
-              this.delids.social_status.push(el.delid);
-              this.social_status_upload_preview_slide.push(
-                url + "/" + el.doc_path
-              );
             });
           }
         });
@@ -964,63 +922,14 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
-    previewImage_multi_social: function (e) {
-      if (this.delids.social_status.length >= 1) {
-        Swal.fire({
-          title: "",
-          text: "Maximum imeges uploaded",
-          icon: "error",
-          confirmButtonClass: "btn btn-secondary",
-        });
-        return 0;
-      }
-      var input = e.target;
-      var id = e.target.id;
-      let slide = this.social_status_upload_preview_slide;
-      if (input.files) {
-        var reader = new FileReader();
-        reader.onload = (event) => {
-          compress(event.target.result, {
-            width: 400,
-            type: "image/*", // default
-            max: 200, // max size
-            min: 20, // min size
-            quality: 0.8,
-          }).then((result) => {
-            slide.push(result);
-            this.dataURLtoFile_multi(result, id);
-          });
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    },
-    dataURLtoFile_multi: function (dataurl, id) {
-      var arr = dataurl.split(","),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n);
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-      }
-      if (id == "social_status") {
-        this.social_status_upload = new Blob([u8arr], { type: mime });
-        this.upload_multi_social();
-      }
-      if (id == "documents") {
-        this.documents_upload = new Blob([u8arr], { type: mime });
-        this.upload_multi_documents();
-      }
-    },
 
     upload_multi_documents: function () {
-      console.log("sdfs");
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
           data: {
-            docid: this.form.document_type,
+            docid: "7",
             method: "setUpload",
             action: "setImage",
           },
@@ -1045,38 +954,7 @@ export default {
         });
     },
 
-    upload_multi_social: function () {
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: {
-            docid: "",
-            method: "setUpload",
-            action: "setImage",
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-
-      data_created.append("file", this.social_status_upload);
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.code == 1) {
-            this.social_status_upload = null;
-            this.delids.social_status.push(res.docid);
-            console.log(this.delids.social_status);
-          }
-        });
-    },
+    
     remove_upload_documents: function (i) {
       var data_created = new FormData();
       data_created.append(
@@ -1107,35 +985,7 @@ export default {
           }
         });
     },
-    remove_upload_social: function (i) {
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: {
-            delid: this.delids.social_status[i],
-            method: "setUpload",
-            action: "delImage",
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.code == 1) {
-            this.social_status_upload_preview = null;
-            this.social_status_upload_preview_slide.splice(i, 1);
-          }
-        });
-    },
+    
   },
 };
 </script>

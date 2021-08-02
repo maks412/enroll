@@ -447,7 +447,10 @@ export default {
         .then(() => {
           if (this.onSubmitStatus) {
             var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/1')
+            if(this.form.citizenship == "208"){
+              window.location.replace(url2 + '/home/1')}
+            else{
+               window.location.replace(url2 + '/home/IRO')}
             return
           }
         });

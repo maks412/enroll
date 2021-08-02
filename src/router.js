@@ -31,6 +31,12 @@ export default new Router({
                             import ("@/view/pages/wizard/IRO_contact.vue")
                     },
                     {
+                        path: "IRO_education",
+                        name: "wizard-9",
+                        component: () =>
+                            import ("@/view/pages/wizard/IRO_education.vue")
+                    },
+                    {
                         path: "1",
                         name: "wizard-1",
                         component: () =>

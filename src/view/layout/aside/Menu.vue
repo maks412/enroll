@@ -80,21 +80,29 @@ const iro_links = [{
     navigate_to: "/home/IRO"
   },
   {
-    name: "Additional Info",
-    description: "Setup Your Additional Information",
+    name: "Education",
+    description: "Setup Your Education Information",
+    navigate_to: "/home/IRO_education"
+  },
+  {
+    name: "Contacts",
+    description: "Setup Your Contact Information",
     navigate_to: "/home/IRO_contact"
   },
+  
   {
     name: "aside.apply",
     description: "aside.apply_d",
     navigate_to: "/home/6"
   }
   ]
+  var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
+  const link = []
 export default {
   name: "KTMenu",
   data(){
     return{
-      links:links
+      links:link
     };
   },
   methods: {
@@ -102,7 +110,34 @@ export default {
       return this.$route["path"].indexOf(match) !== -1;
     },
   },
+  async created() {
+
+    var data_created = new FormData();
+    data_created.append(
+      "json",
+      JSON.stringify({
+        data: { mod: "isIRO", method: "get", action: "getIRO" },
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
+      })
+    );
+    fetch(url + "/backend/middle.php", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: data_created,
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        if(res.iro)
+          this.links = iro_links;
+        else this.links = links;
+      });
+  },
 };
+
+
 </script>
 
 <style>

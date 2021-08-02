@@ -263,12 +263,14 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 0) {
+            var print_text = "";
+            if(res.response.main.length > 0) print_text += "1) Main Info: " + res.response.main +" <br> ";
+            if(res.response.main.length > 0) print_text += "1) Main Info: " + res.response.main +" <br> ";
             Swal.fire({
               title: "Fill up this places!",
-              text: res.response.address+res.response.edu+res.response.main+res.response.relinfo,
+              html: print_text,
               icon: "error",
               confirmButtonClass: "btn btn-secondary",
-              
             });
           }
           if (res.code == 1) {
