@@ -115,7 +115,10 @@ export const locale = {
         "upload_attestat": "Аттестасты жүктеңіз",
         "enter_prep_c_details": "Дайындық курсы туралы ақпаратты енгізіңіз",
         "preparation_course": "Дайындық курсы",
-        "choose_preparation_course": "Дайындық курсын таңдаңыз..."
+        "choose_preparation_course": "Дайындық курсын таңдаңыз...",
+        "upload_test": "Тест нәтижесін жүктеңіз (KT)",
+        "upload_diplom": "Бакалавр туралы дипломды қосымшамен жүктеңіз",
+        "upload_ref": "Емтихан туралы анықтаманың көшірмесін жүктеңіз"
     },
     page3: {
         "contact_details": "Байланыс ақпараты",

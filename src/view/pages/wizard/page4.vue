@@ -407,3 +407,9 @@ export default {
   },
 };
 </script>
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>

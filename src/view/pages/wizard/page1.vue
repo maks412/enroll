@@ -68,7 +68,7 @@
                       <!-- END citizenship -->
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.f_name") }}</label>
+                          <label class="required">{{ $t("page1.f_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -86,7 +86,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.native_name") }}</label>
+                          <label class="required">{{ $t("page1.native_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -102,7 +102,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.last_name") }}</label>
+                          <label class="required">{{ $t("page1.last_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -120,7 +120,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.native_last_name") }}</label>
+                          <label class="required">{{ $t("page1.native_last_name") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -153,7 +153,7 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
-                        <label>{{ $t("page1.upload_pic") }}</label>
+                        <label class="required">{{ $t("page1.upload_pic") }}</label>
                         <div class="custom-file mb-3">
                           <input
                             type="file"
@@ -221,7 +221,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.date_of_birth") }}</label>
+                          <label class="required">{{ $t("page1.date_of_birth") }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -251,7 +251,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.nationality") }}</label>
+                          <label class="required">{{ $t("page1.nationality") }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.nationality"
@@ -270,7 +270,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.gender") }}</label>
+                          <label class="required">{{ $t("page1.gender") }}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.gender"
@@ -288,7 +288,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.married_status") }}</label>
+                          <label class="required">{{ $t("page1.married_status") }}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.married"
@@ -399,7 +399,7 @@
                     </h4>
                     <div class="col-xl-6">
                       <div class="form-group">
-                        <label>{{ $t("page1.doc_type") }}</label>
+                        <label class="required">{{ $t("page1.doc_type") }}</label>
                         <b-form-group v-slot="{ ariaDescribedby }">
                           <b-form-radio-group
                             v-model="form.document_type"
@@ -419,7 +419,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.iin") }}</label>
+                          <label class="required">{{ $t("page1.iin") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -435,7 +435,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.doc_no") }}</label>
+                          <label class="required">{{ $t("page1.doc_no") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -452,7 +452,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.issued_by") }}</label>
+                          <label class="required">{{ $t("page1.issued_by") }}</label>
                           <b-form-select
                             v-model="form.issued_by"
                             :options="issued_options"
@@ -467,7 +467,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page1.issued_date") }}</label>
+                          <label class="required">{{ $t("page1.issued_date") }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -497,7 +497,7 @@
                       </div>
                     </div>
                     <div>
-                      <label>{{ $t("page1.documents") }}</label>
+                      <label class="required">{{ $t("page1.documents") }}</label>
                       <b-form-file
                         accept="image/png, image/gif, image/jpg"
                         id="documents"
@@ -1346,3 +1346,10 @@ export default {
   },
 };
 </script>
+
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>

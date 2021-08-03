@@ -17,8 +17,7 @@
               data-wizard-state="current"
               v-for="(tab, index) in tabs"
               :key="index"
-            >
-            </div>
+            ></div>
           </div>
         </div>
         <!--end: Wizard Nav -->
@@ -46,7 +45,9 @@
                           <b-form-select
                             v-model="form.english_certificate"
                             :options="english_certificate_options"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                             size="lg"
                           ></b-form-select>
                         </div>
@@ -59,7 +60,9 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.certificate_number"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -74,7 +77,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page5.choose_certificate')"
                           :drop-placeholder="$t('common.drop_files')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -114,7 +119,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload()"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -226,8 +233,8 @@ export default {
         this.form.certificate_number = res.result.cert_no;
 
         this.delids = res.result.docid;
-        this.preview = url+"/"+res.result.doc_path;
-        if(res.result.doc_path == "") this.preview = null;
+        this.preview = url + "/" + res.result.doc_path;
+        if (res.result.doc_path == "") this.preview = null;
       });
   },
   name: "Wizard-4",
@@ -296,20 +303,46 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/5')
+            window.location.replace(url2 + "/home/5");
           }
+        });
+    },
+
+    getDegree: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { mod: "page4_ielts", method: "get", action: "getDegree" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.english_certificate_options = [
+            { text: "IELTS", value: "8" },
+            { text: "Test Center Results", value: "?????" },
+          ];
         });
     },
 
     previewImage: function (e) {
       if (this.preview) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       if (input.files) {
@@ -346,7 +379,7 @@ export default {
     upload: function () {
       console.log("AAAAAAAAAAA");
       var data_created = new FormData();
-      
+
       console.log(this.form.english_certificate);
       data_created.append(
         "json",
@@ -374,7 +407,7 @@ export default {
           this.delids = res.docid;
         });
     },
-    remove_upload: function () { 
+    remove_upload: function () {
       this.preview = null;
       this.delids = null;
       this.certificate_upload = null;
@@ -382,3 +415,9 @@ export default {
   },
 };
 </script>
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>

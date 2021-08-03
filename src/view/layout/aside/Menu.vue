@@ -41,106 +41,108 @@ const links = [
   {
     name: "aside.main_info",
     description: "aside.main_info_d",
-    navigate_to: "/home/1"
+    navigate_to: "/home/1",
   },
   {
     name: "aside.education",
     description: "aside.education_d",
-    navigate_to: "/home/2"
+    navigate_to: "/home/2",
   },
   {
     name: "aside.contact",
     description: "aside.contact_d",
-    navigate_to: "/home/3"
+    navigate_to: "/home/3",
   },
   {
     name: "aside.grant_info",
     description: "aside.grant_info_d",
-    navigate_to: "/home/4"
+    navigate_to: "/home/4",
   },
   {
     name: "aside.eng_tests",
     description: "aside.eng_tests_d",
-    navigate_to: "/home/4_ielts"
+    navigate_to: "/home/4_ielts",
   },
   {
     name: "aside.documents",
     description: "aside.documents_d",
-    navigate_to: "/home/5"
+    navigate_to: "/home/5",
   },
   {
     name: "aside.apply",
     description: "aside.apply_d",
-    navigate_to: "/home/6"
-  }
-]
-const iro_links = [{
+    navigate_to: "/home/6",
+  },
+];
+const iro_links = [
+  {
     name: "aside.main_info",
     description: "aside.main_info_d",
-    navigate_to: "/home/IRO"
+    navigate_to: "/home/IRO",
   },
   {
     name: "aside.education",
     description: "Setup Your Education Information",
-    navigate_to: "/home/IRO_education"
+    navigate_to: "/home/IRO_education",
   },
   {
     name: "aside.contact",
     description: "Setup Your Contact Information",
-    navigate_to: "/home/IRO_contact"
+    navigate_to: "/home/IRO_contact",
   },
-  
-  {
-    name: "aside.apply",
-    description: "aside.apply_d",
-    navigate_to: "/home/6"
-  }
-  ]
 
-  const degree_links = [{
+  {
+    name: "aside.apply",
+    description: "aside.apply_d",
+    navigate_to: "/home/6",
+  },
+];
+
+const degree_links = [
+  {
     name: "aside.main_info",
     description: "aside.main_info_d",
-    navigate_to: "/home/1"
+    navigate_to: "/home/1",
   },
   {
     name: "aside.education",
     description: "Setup Your Education Information",
-    navigate_to: "/home/degree_education"
+    navigate_to: "/home/degree_education",
   },
   {
     name: "aside.contact",
     description: "Setup Your Contact Information",
-    navigate_to: "/home/3"
+    navigate_to: "/home/3",
   },
   {
     name: "aside.grant_info",
     description: "aside.grant_info_d",
-    navigate_to: "/home/4"
+    navigate_to: "/home/4",
   },
   {
     name: "aside.eng_tests",
     description: "aside.eng_tests_d",
-    navigate_to: "/home/4_ielts"
+    navigate_to: "/home/4_ielts",
   },
   {
     name: "aside.documents",
     description: "aside.documents_d",
-    navigate_to: "/home/degree_decuments"
+    navigate_to: "/home/degree_decuments",
   },
   {
     name: "aside.apply",
     description: "aside.apply_d",
-    navigate_to: "/home/6"
-  }
-  ]
+    navigate_to: "/home/6",
+  },
+];
 
-  var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
-  const link = []
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
+const link = [];
 export default {
   name: "KTMenu",
-  data(){
-    return{
-      links:link
+  data() {
+    return {
+      links: link,
     };
   },
   methods: {
@@ -149,7 +151,6 @@ export default {
     },
   },
   async created() {
-
     var data_created = new FormData();
     data_created.append(
       "json",
@@ -168,14 +169,33 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        if(res.iro)
-          this.links = iro_links;
+        if (res.iro) this.links = iro_links;
+        else this.links = links;
+      });
+
+    var data_created = new FormData();
+    data_created.append(
+      "json",
+      JSON.stringify({
+        data: { mod: "isDegree", method: "get", action: "getDegree" },
+        token: this.$cookies.get("token"),
+        email: this.$cookies.get("email"),
+      })
+    );
+    fetch(url + "/backend/middle.php", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: data_created,
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.degree) this.links = degree_links;
         else this.links = links;
       });
   },
 };
-
-
 </script>
 
 <style>

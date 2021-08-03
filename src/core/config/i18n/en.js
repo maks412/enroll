@@ -119,7 +119,10 @@ export const locale = {
         "enter_given_date": "Please enter your attestat given date",
         "upload_attestat": "Upload your attestat",
         "enter_prep_c_details": "Enter your Preparation Course Details",
-        "choose_preparation_course": "Please choose your preparation course"
+        "choose_preparation_course": "Please choose your preparation course",
+        "upload_test": "Upload your testing result(KT)",
+        "upload_diplom": "Upload Bachelor's degree diploma with supplement",
+        "upload_ref": "Upload copy of the examination reference"
     },
     page3: {
         "contact_details": "Contact Details",

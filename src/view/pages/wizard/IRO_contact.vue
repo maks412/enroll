@@ -49,7 +49,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{
+                          <label class="required">{{
                             $t("page3.registered_address_country")
                           }}</label>
                           <b-form-select
@@ -64,7 +64,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{
+                          <label class="required">{{
                             $t("page3.registered_address_province")
                           }}</label>
 
@@ -82,7 +82,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{
+                          <label class="required">{{
                             $t("page3.registered_address_region")
                           }}</label>
 
@@ -98,7 +98,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{
+                          <label class="required">{{
                             $t("page3.registered_address_city")
                           }}</label>
 
@@ -115,7 +115,7 @@
                     <div class="row">
                       <div class="col-xl-9">
                         <div class="form-group">
-                          <label>{{ $t("page3.registered_address") }}</label>
+                          <label class="required">{{ $t("page3.registered_address") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-sm"
@@ -128,7 +128,7 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page3.mobile_phone") }}</label>
+                          <label class="required">{{ $t("page3.mobile_phone") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -139,7 +139,7 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label>{{ $t("page3.need_stud_house") }}</label>
+                          <label class="required">{{ $t("page3.need_stud_house") }}</label>
                           <div>
                             <b-form-group>
                               <b-form-radio-group
@@ -606,3 +606,9 @@ export default {
   },
 };
 </script>
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>

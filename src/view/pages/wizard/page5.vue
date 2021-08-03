@@ -54,7 +54,9 @@
                         :state="Boolean(file)"
                         :placeholder="$t('common.choose_file')"
                         :drop-placeholder="$t('common.drop_file')"
-                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                        :disabled="
+                          status == 'ACCEPTED' || status == 'CONFIRMED'
+                        "
                         required
                         ><template slot="file-name" slot-scope="{ names }">
                           <b-badge variant="dark">{{ names[0] }}</b-badge>
@@ -134,7 +136,9 @@
                             type="number"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.spt_number"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -146,7 +150,9 @@
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
                             v-model="form.spt_point"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -161,7 +167,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_spt')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -200,7 +208,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload('upload_spt')"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -219,7 +229,9 @@
                             type="number"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.infomatrix_number"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -231,7 +243,9 @@
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
                             v-model="form.infomatrix_point"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -246,7 +260,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_inf')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -286,7 +302,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload('upload_infomatrix')"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -315,7 +333,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_stud_fee')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -355,7 +375,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload('upload_studentFee')"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -376,7 +398,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_tut_fee')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -416,7 +440,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload('upload_tuitionFee')"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -444,7 +470,9 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.creative_exam_text"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -459,7 +487,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_creative_exam')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -498,7 +528,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload('upload_creativeExam')"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -517,7 +549,9 @@
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.pedagogical_test_text"
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                         </div>
                       </div>
@@ -530,7 +564,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page6.choose_ped_test')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -570,7 +606,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload('upload_pedTest')"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -764,6 +802,8 @@ export default {
           email: this.$cookies.get("email"),
         })
       );
+      data_created.append("file_spt", this.spt_upload);
+      data_created.append("file_infomatrix", this.infomatrix_upload);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -977,10 +1017,14 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      if (id == "upload_spt")
+      if (id == "upload_spt") {
         this.spt_upload = new Blob([u8arr], { type: mime });
-      if (id == "upload_infomatrix")
+        return;
+      }
+      if (id == "upload_infomatrix") {
         this.infomatrix_upload = new Blob([u8arr], { type: mime });
+        return;
+      }
       if (id == "upload_studentFee")
         this.student_fee = new Blob([u8arr], { type: mime });
       if (id == "upload_tuitionFee")
@@ -1157,14 +1201,24 @@ export default {
         .then((res) => {
           if (res.code == 1) {
             this.previews.splice(i, 1);
-            this.delids.delid_multi.slice(i,1);
+            this.delids.delid_multi.slice(i, 1);
             this.certificate75 = null;
           }
         });
     },
     remove_upload: function (id) {
-      if (id == "upload_spt") var delid = this.delids.delid_spt;
-      if (id == "upload_infomatrix") var delid = this.delids.delid_infomatrix;
+      if (id == "upload_spt") {
+        //var delid = this.delids.delid_spt;
+        this.preview_spt = null;
+        this.spt_upload = null;
+        return;
+      }
+      if (id == "upload_infomatrix") {
+        //var delid = this.delids.delid_infomatrix;
+        this.preview_infomatrix = null;
+        this.infomatrix_upload = null;
+        return;
+      }
       if (id == "upload_studentFee") var delid = this.delids.delid_studentFee;
       if (id == "upload_tuitionFee") var delid = this.delids.delid_tuitionFee;
       if (id == "upload_creativeExam")
@@ -1224,3 +1278,9 @@ export default {
   },
 };
 </script>
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>

@@ -32,9 +32,21 @@ export default new Router({
                     },
                     {
                         path: "IRO_education",
-                        name: "wizard-9",
+                        name: "wizard-10",
                         component: () =>
                             import ("@/view/pages/wizard/IRO_education.vue")
+                    },
+                    {
+                        path: "degree_education",
+                        name: "wizard-11",
+                        component: () =>
+                            import ("@/view/pages/wizard/Degree_education.vue")
+                    },
+                    {
+                        path: "degree_documents",
+                        name: "wizard-12",
+                        component: () =>
+                            import ("@/view/pages/wizard/Degree_documents.vue")
                     },
                     {
                         path: "1",

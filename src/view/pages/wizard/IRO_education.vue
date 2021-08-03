@@ -54,7 +54,7 @@
 
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label> {{ $t("page5.certificate_num") }}</label>
+                          <label class="required"> {{ $t("page5.certificate_num") }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
@@ -67,7 +67,7 @@
 
                     <div class="row">
                       <div class="col-xl-6">
-                        <label>{{ $t("page5.upload_certificate") }}</label>
+                        <label class="required">{{ $t("page5.upload_certificate") }}</label>
                         <b-form-file
                           v-model="certificate_upload"
                           @change="previewImage"
@@ -579,3 +579,9 @@ export default {
   },
 };
 </script>
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>

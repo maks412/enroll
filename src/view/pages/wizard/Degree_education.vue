@@ -55,7 +55,9 @@
                               v-model="form.country"
                               :options="country"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                               v-on:change="press_country"
                             ></b-form-select>
@@ -73,7 +75,9 @@
                               v-model="form.province"
                               :options="province"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                               v-on:change="press_province"
                             ></b-form-select>
@@ -94,46 +98,14 @@
                               v-model="form.school"
                               :options="school"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted">{{
                             $t("page2.choose_school")
-                          }}</span>
-                        </div>
-                      </div>
-                      <div class="col-xl-3">
-                        <div class="form-group">
-                          <label>{{ $t("page2.language") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.language"
-                              :options="language_options"
-                              required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_language")
-                          }}</span>
-                        </div>
-                      </div>
-                      <div class="col-xl-3">
-                        <div class="form-group">
-                          <label>{{ $t("page2.f_language") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.foreign_language"
-                              :options="foreign_language"
-                              required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_f_language")
                           }}</span>
                         </div>
                       </div>
@@ -146,119 +118,20 @@
                     <h4 class="mb-10 font-weight-bold text-dark">
                       {{ $t("page2.enter_att_details") }}
                     </h4>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_type") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.attestat_type"
-                              :options="attestat_type"
-                              required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_attestat_type")
-                          }}</span>
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_series") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.attestat_series"
-                              :options="attestat_series"
-                              required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_attestat_series")
-                          }}</span>
-                        </div>
-                      </div>
-                    </div>
 
                     <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_no") }}</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            name="Nname"
-                            v-model="form.attestat_number"
-                            required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                          />
-                          <span class="form-text text-muted">{{
-                            $t("page2.enter_attestat_no")
-                          }}</span>
-                        </div>
-                      </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_score") }}</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-solid form-control-lg"
-                            name="lname"
-                            v-model="form.attestat_score"
-                            required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                          />
-                          <span class="form-text text-muted">{{
-                            $t("page2.enter_attestat_score")
-                          }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{ $t("page2.given_date") }}</label>
-                          <div>
-                            <b-input-group class="mb-3">
-                              <b-form-input
-                                v-model="form.attestat_given_date"
-                                type="text"
-                                placeholder="YYYY-MM-DD"
-                                autocomplete="off"
-                                required
-                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                              ></b-form-input>
-                              <b-input-group-append>
-                                <b-form-datepicker
-                                  v-model="form.attestat_given_date"
-                                  button-only
-                                  right
-                                  locale="en-US"
-                                  aria-controls="example-input"
-                                ></b-form-datepicker>
-                              </b-input-group-append>
-                            </b-input-group>
-                          </div>
-                          <span class="form-text text-muted">{{
-                            $t("page2.enter_given_date")
-                          }}</span>
-                        </div>
-                      </div>
-
-                      <div class="col-xl-6">
-                        <label class="required">{{ $t("page2.upload_attestat") }}</label>
+                      <div class="col-xl-12">
+                        <label class="required">{{ $t("page2.upload_diplom") }}</label>
                         <b-form-file
-                          
                           @change="previewImage"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
                           :drop-placeholder="$t('common.drop_file')"
                           required
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -300,7 +173,143 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload(i)"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <label class="required">{{ $t("page2.upload_test") }}</label>
+                        <b-form-file
+                          @change="test_previewImage"
+                          v-model="test_upload"
+                          :state="Boolean(file)"
+                          :placeholder="$t('common.choose_file')"
+                          :drop-placeholder="$t('common.drop_file')"
+                          required
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
+                          ><template slot="file-name" slot-scope="{ names }">
+                            <b-badge variant="dark">{{ names[0] }}</b-badge>
+                            <b-badge
+                              v-if="names.length > 1"
+                              variant="dark"
+                              class="ml-1"
+                            >
+                              +
+                              {{
+                                $t("page2.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
+                            </b-badge>
+                          </template></b-form-file
+                        >
+
+                        <div
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
+                        >
+                          <div
+                            :v-if="test_previews.length > 0"
+                            v-for="(image, i) in test_previews"
+                            :key="i"
+                            class="m-5"
+                            style="display: block"
+                          >
+                            <img
+                              :src="image"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="test_remove_upload(i)"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr v-if="degree_doc">
+                    <div class="row" v-if="degree_doc">
+                      <div class="col-xl-12">
+                        <label class="required">{{ $t("page2.upload_ref") }}</label>
+                        <b-form-file
+                          @change="ref_previewImage"
+                          v-model="ref_upload"
+                          :state="Boolean(file)"
+                          :placeholder="$t('common.choose_file')"
+                          :drop-placeholder="$t('common.drop_file')"
+                          required
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
+                          ><template slot="file-name" slot-scope="{ names }">
+                            <b-badge variant="dark">{{ names[0] }}</b-badge>
+                            <b-badge
+                              v-if="names.length > 1"
+                              variant="dark"
+                              class="ml-1"
+                            >
+                              +
+                              {{
+                                $t("page2.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
+                            </b-badge>
+                          </template></b-form-file
+                        >
+
+                        <div
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
+                        >
+                          <div
+                            :v-if="ref_previews.length > 0"
+                            v-for="(image, i) in ref_previews"
+                            :key="i"
+                            class="m-5"
+                            style="display: block"
+                          >
+                            <img
+                              :src="image"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="ref_remove_upload(i)"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -312,34 +321,6 @@
                     </div>
                   </div>
                   <!--end: Wizard Step 2-->
-
-                  <!--begin: Wizard Step 3-->
-                  <div class="pb-5" data-wizard-type="step-content">
-                    <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_prep_c_details") }}
-                    </h4>
-                    
-
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label>{{ $t("page2.preparation_course") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.preparation_course"
-                              :options="preparation_course"
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                              size="lg"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_preparation_course")
-                          }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--end: Wizard Step 3-->
 
                   <!--begin: Wizard Actions -->
                   <div class="d-flex justify-content-between border-top pt-10">
@@ -398,44 +379,30 @@ export default {
   data() {
     return {
       status: this.$cookies.get("status"),
-
+      degree_doc: false,
       tabs: [
         { title: "page2.school_info", desc: "page2.school_info_d" },
         { title: "page2.attestat_info", desc: "page2.attestat_info_d" },
-        {
-          title: "page2.preparation_course",
-          desc: "page2.preparation_course_d",
-        },
       ],
       country: [],
       province: [],
       school: [],
-      attestat_type: [],
-      preparation_course: [],
       nationality: [],
-      language_options: [],
-      foreign_language: [],
-      attestat_series: [],
       previews: [],
+      test_previews: [],
+      ref_previews: [],
       delids: [],
+      test_delids: [],
+      ref_delids: [],
       attestat_upload: null,
+      test_upload: null,
+      ref_upload: null,
 
       photos: null,
       form: {
         country: null,
         province: null,
         school: null,
-        language: "",
-        foreign_language: null,
-        attestat_type: "",
-        attestat_series: "",
-        attestat_number: "",
-        attestat_score: "",
-        attestat_given_date: null,
-
-        preparation_course: null,
-        //preparation_country: null,
-        //preparation_province: null,
 
         mod: "page2",
         method: "set",
@@ -463,21 +430,6 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.language = res.language.selected_id;
-        this.language_options = res.language.list;
-        this.form.foreign_language = res.foreign_language.selected_id;
-        this.foreign_language = res.foreign_language.list;
-        this.form.attestat_type = res.attestat_type.selected_id;
-        this.attestat_type = res.attestat_type.list;
-        this.form.attestat_series = res.attestat_series.selected_id;
-        this.attestat_series = res.attestat_series.list;
-        this.form.attestat_number = res.attestat_number;
-        this.form.attestat_score = res.attestat_score;
-        this.form.attestat_given_date = res.attestat_given_date;
-        //this.form.attestat_upload = res.attestat_upload;
-        this.form.preparation_course = res.preparation_course.selected_id;
-        this.preparation_course = res.preparation_course.list;
-
         this.form.school = res.school.selected_id;
         this.school = res.school.list;
 
@@ -487,6 +439,9 @@ export default {
         this.province = res.province.list;
 
         this.getUpload();
+        this.test_getUpload();
+        this.ref_getUpload();
+        this.getDegree();
       });
   },
   name: "Wizard-4",
@@ -553,18 +508,23 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/3')
+            window.location.replace(url2 + "/home/3");
           }
         });
     },
 
-    getUpload: function(){
+    getUpload: function () {
       //Get Uploads
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { docid: "1", method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: {
+            docid: "1",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -578,10 +538,102 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          for(var i = 0; i < res.response.length; i++){
+          for (var i = 0; i < res.response.length; i++) {
             this.delids.push(res.response[i].delid);
-            this.previews.push(url+"/"+res.response[i].doc_path);
+            this.previews.push(url + "/" + res.response[i].doc_path);
           }
+        });
+    },
+
+    test_getUpload: function () {
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "????",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for (var i = 0; i < res.response.length; i++) {
+            this.test_delids.push(res.response[i].delid);
+            this.test_previews.push(url + "/" + res.response[i].doc_path);
+          }
+        });
+    },
+
+    ref_getUpload: function () {
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "????",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for (var i = 0; i < res.response.length; i++) {
+            this.ref_delids.push(res.response[i].delid);
+            this.ref_previews.push(url + "/" + res.response[i].doc_path);
+          }
+        });
+    },
+
+    getDegree: function () {
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            method: "getDegree",
+            action: "get",
+            mod: "getDegree",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.degree_doc = res.degree;
         });
     },
 
@@ -657,12 +709,12 @@ export default {
     previewImage: function (e) {
       if (this.delids.length >= 2) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       let slide = this.previews;
@@ -677,7 +729,67 @@ export default {
             quality: 0.8,
           }).then((result) => {
             slide.push(result);
-                this.dataURLtoFile(result);
+            this.dataURLtoFile(result);
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
+    test_previewImage: function (e) {
+      if (this.test_delids.length >= 2) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
+      }
+      var input = e.target;
+      let slide = this.test_previews;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/*", // default
+            max: 500, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
+            this.test_dataURLtoFile(result);
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
+    ref_previewImage: function (e) {
+      if (this.ref_delids.length >= 2) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
+      }
+      var input = e.target;
+      let slide = this.ref_previews;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/*", // default
+            max: 500, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
+            this.ref_dataURLtoFile(result);
           });
         };
         reader.readAsDataURL(input.files[0]);
@@ -698,6 +810,32 @@ export default {
       this.upload();
     },
 
+    test_dataURLtoFile: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.test_photos = new Blob([u8arr], { type: mime });
+      this.test_upload();
+    },
+
+    ref_dataURLtoFile: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.ref_photos = new Blob([u8arr], { type: mime });
+      this.ref_upload();
+    },
+
     upload: function () {
       var data_created = new FormData();
       data_created.append(
@@ -713,7 +851,7 @@ export default {
         })
       );
       data_created.append("file[]", this.photos);
-      
+
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -727,7 +865,68 @@ export default {
           this.delids.push(res.docid);
         });
     },
-    remove_upload: function(i){
+
+    test_upload: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "?????",
+            method: "setUpload",
+            action: "setImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      data_created.append("file[]", this.test_photos);
+
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.test_photos = null;
+          this.test_delids.push(res.docid);
+        });
+    },
+
+    ref_upload: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "?????",
+            method: "setUpload",
+            action: "setImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      data_created.append("file[]", this.ref_photos);
+
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.ref_photos = null;
+          this.ref_delids.push(res.docid);
+        });
+    },
+
+    remove_upload: function (i) {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -755,8 +954,67 @@ export default {
             this.attestat_upload = null;
           }
         });
-      
-    }
+    },
+
+    test_remove_upload: function (i) {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.test_delids[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.test_previews.splice(i, 1);
+            this.test_upload = null;
+          }
+        });
+    },
+
+    ref_remove_upload: function (i) {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.ref_delids[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.ref_previews.splice(i, 1);
+            this.ref_upload = null;
+          }
+        });
+    },
   },
 };
 </script>
