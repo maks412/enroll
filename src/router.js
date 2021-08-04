@@ -43,7 +43,7 @@ export default new Router({
                             import ("@/view/pages/wizard/Degree_education.vue")
                     },
                     {
-                        path: "degree_documents",
+                        path: "degree_decuments",
                         name: "wizard-12",
                         component: () =>
                             import ("@/view/pages/wizard/Degree_documents.vue")

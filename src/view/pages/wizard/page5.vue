@@ -713,8 +713,8 @@ export default {
         pedagogical_test_text: null,
 
         mod: "page5",
-        method: "set",
-        action: "setAllData",
+        method: "setUpload",
+        action: "setDocuments",
       },
 
       delids: {
