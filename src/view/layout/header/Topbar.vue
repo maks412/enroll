@@ -1,9 +1,9 @@
 <template>
   <div class="topbar">
     <div class="topbar-item mr-4">
-      <span class="btn" :class="'btn-light-'+status_color">
-        <span  class="symbol-label font-size-h6 font-weight-bold">
-          {{status}}
+      <span class="btn" :class="'btn-light-' + status_color">
+        <span class="symbol-label font-size-h6 font-weight-bold">
+          {{ status }}
         </span>
       </span>
     </div>
@@ -32,7 +32,6 @@
       </b-dropdown>
     </div>
 
-
     <!--end: Language bar -->
     <!--begin: Quick Actions -->
     <b-dropdown
@@ -57,7 +56,9 @@
         </div>
       </template>
       <b-dropdown-text tag="div">
-        <KTDropdownQuickAction :speciality="back_special"></KTDropdownQuickAction>
+        <KTDropdownQuickAction
+          :speciality="back_special"
+        ></KTDropdownQuickAction>
       </b-dropdown-text>
     </b-dropdown>
     <!--end: Quick Actions -->
@@ -98,7 +99,7 @@ import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAc
 import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
 import i18nService from "@/core/services/i18n.service.js";
 
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
   name: "KTTopbar",
@@ -109,12 +110,12 @@ export default {
 
       status: "NOT APPLIED",
       status_color: "danger",
-      back_special: ""
+      back_special: "",
     };
   },
   components: {
     KTDropdownLanguage,
-    KTDropdownQuickAction
+    KTDropdownQuickAction,
   },
   methods: {
     onLanguageChanged() {
@@ -131,15 +132,17 @@ export default {
 
     getFullName() {
       return (
-        this.currentUserPersonalInfo.name + " " + this.currentUserPersonalInfo.surname
+        this.currentUserPersonalInfo.name +
+        " " +
+        this.currentUserPersonalInfo.surname
       );
     },
-    userEmail(){
-      return this.$cookies.get('email')
-    }
+    userEmail() {
+      return this.$cookies.get("email");
+    },
   },
 
-  async created(){
+  async created() {
     var data_created = new FormData();
     data_created.append(
       "json",
@@ -156,19 +159,26 @@ export default {
         Accept: "application/json",
       },
       body: data_created,
-    }).then((response) => response.json())
-        .then((res) => {
-          this.currentUser.email = res.email;
-          this.status = res.status;
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        this.currentUser.email = res.email;
+        if (i18nService.getActiveLanguage() == "kz") {
+          if (res.status == "NOT APPLIED") this.status = "ЖІБЕРІЛМЕГЕН";
+          if (res.status == "APPLIED") this.status = "ЖІБЕРІЛГЕН";
+          if (res.status == "ACCEPTED") this.status = "ТЕКСЕРІЛГЕН";
+          if (res.status == "REJECTED") this.status = "ҚАЙТАРЫЛҒАН";
+          if (res.status == "CONFIRMED") this.status = "ҚАБЫЛДАНҒАН";
+        } else this.status = res.status;
 
-          if(res.status == "NOT APPLIED") this.status_color = "danger";
-          if(res.status == "APPLIED") this.status_color = "warning";
-          if(res.status == "ACCEPTED") this.status_color = "info";
-          if(res.status == "REJECTED") this.status_color = "primary";
-          if(res.status == "CONFIRMED") this.status_color = "success";
-          this.$cookies.set("status", res.status);
-          this.back_special = res.speciality;
-        });
-  }
-}
+        if (res.status == "NOT APPLIED") this.status_color = "danger";
+        if (res.status == "APPLIED") this.status_color = "warning";
+        if (res.status == "ACCEPTED") this.status_color = "info";
+        if (res.status == "REJECTED") this.status_color = "primary";
+        if (res.status == "CONFIRMED") this.status_color = "success";
+        this.$cookies.set("status", res.status);
+        this.back_special = res.speciality;
+      });
+  },
+};
 </script>
