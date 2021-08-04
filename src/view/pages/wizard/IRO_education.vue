@@ -553,7 +553,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            delid: this.delids,
+            delid: this.delids_trans,
             method: "setUpload",
             action: "delImage",
           },
