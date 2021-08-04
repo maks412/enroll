@@ -144,7 +144,7 @@
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
                               v-if="names.length > 1"
-                              variant="dark"
+                              variant="dark" 
                               class="ml-1"
                             >
                               +

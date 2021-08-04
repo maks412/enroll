@@ -670,6 +670,7 @@ import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 import compress from "compress-base64";
 import { createLogger } from "vuex";
+import { LOGOUT } from "@/core/services/store/auth.module";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 

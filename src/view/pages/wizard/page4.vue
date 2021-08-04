@@ -70,7 +70,7 @@
                             >
                               {{
                                 $t("common.more_files", {
-                                  num: names.length - 1,
+                                   num: names.length - 1,
                                 })
                               }}
                             </b-badge>
@@ -162,6 +162,7 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 import compress from "compress-base64";
+import { LOGOUT } from "@/core/services/store/auth.module";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 

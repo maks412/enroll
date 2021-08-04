@@ -62,54 +62,7 @@
                         </div>
                       </div>
 
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{
-                            $t("page3.registered_address_province")
-                          }}</label>
-
-                          <b-form-select
-                            v-model="form.register_address_province"
-                            :options="register_address_province_options"
-                            required
-                            size="sm"
-                            v-on:change="press_register_province"
-                          ></b-form-select>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{
-                            $t("page3.registered_address_region")
-                          }}</label>
-
-                          <b-form-select
-                            v-model="form.register_address_region"
-                            :options="register_address_region_options"
-                            required
-                            size="sm"
-                            v-on:change="press_register_region"
-                          ></b-form-select>
-                        </div>
-                      </div>
-
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{
-                            $t("page3.registered_address_city")
-                          }}</label>
-
-                          <b-form-select
-                            v-model="form.register_address_city"
-                            :options="register_address_city_options"
-                            required
-                            size="sm"
-                          ></b-form-select>
-                        </div>
-                      </div>
+                      
                     </div>
 
                     <div class="row">
@@ -356,31 +309,14 @@ export default {
 
         this.form.register_address_country = res.register_country.selected_id;
         this.register_address_country_options = res.register_country.list;
-        this.register_address_province_options =
-          res.register_address_province.list;
-        this.form.register_address_province =
-          res.register_address_province.selected_id;
-        this.register_address_region_options = res.register_address_region.list;
-        this.form.register_address_region =
-          res.register_address_region.selected_id;
-        this.register_address_city_options = res.register_address_city.list;
-        this.form.register_address_city = res.register_address_city.selected_id;
+      
         this.form.register_address = res.register_address;
 
         //Current
         this.current_address_country_options = res.current_country.list;
-        this.current_address_province_options =
-          res.current_address_province.list;
-        this.current_address_region_options = res.current_address_region.list;
-        this.current_address_city_options = res.current_address_city.list;
+        
 
         this.form.current_address_country = res.current_country.selected_id;
-        this.form.current_address_province =
-          res.current_address_province.selected_id;
-        this.form.current_address_region =
-          res.current_address_region.selected_id;
-        this.form.current_address_city = res.current_address_city.selected_id;
-        this.form.current_address = res.current_address;
 
         this.form.student_house = res.student_house;
         this.form.items = res.relatives;

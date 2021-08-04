@@ -613,6 +613,7 @@ import Swal from "sweetalert2";
 import ApiService from "@/core/services/api.service.js";
 import compress from "compress-base64";
 import Button from "../vue-bootstrap/Button.vue";
+import { LOGOUT } from "@/core/services/store/auth.module";
 
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
@@ -753,6 +754,10 @@ export default {
               confirmButtonClass: "btn btn-secondary",
               heightAuto: false,
             });
+
+            if(res.message == "Session expired"){
+              
+            }
           }
           if (res.code == 1) {
             Swal.fire({
