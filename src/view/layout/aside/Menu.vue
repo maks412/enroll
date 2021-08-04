@@ -170,7 +170,7 @@ export default {
       .then((response) => response.json())
       .then((res) => {
         if (res.iro) this.links = iro_links;
-        else this.links = degree_links;
+        else this.links = links;
       });
 
     var data_created = new FormData();
@@ -192,7 +192,7 @@ export default {
       .then((response) => response.json())
       .then((res) => {
         if (res.degree) this.links = degree_links;
-        else this.links = degree_links;
+        else this.links = links;
       });
   },
 };
