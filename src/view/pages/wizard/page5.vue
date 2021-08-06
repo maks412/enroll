@@ -617,16 +617,16 @@
                           </div>
                         </div>
                       </div>
-
+                      <!-- collage result -->
                       <div class="row">
                         <div class="col-xl-12">
-                          <label>{{ $t("page6.upload_ped_test") }}</label>
+                          <label>{{ $t("page6.upload_college_int") }}</label>
                           <b-form-file
                             @change="previewImage"
-                            id="upload_pedTest"
+                            id="upload_college"
                             v-model="pedagogical_test"
                             :state="Boolean(file)"
-                            :placeholder="$t('page6.choose_ped_test')"
+                            :placeholder="$t('page6.choose_college_int')"
                             :drop-placeholder="$t('common.drop_file')"
                             :disabled="
                               status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -653,12 +653,12 @@
                             style="display: flex; flex-wrap: wrap"
                           >
                             <div
-                              v-if="preview_pedTest"
+                              v-if="preview_college"
                               class="m-5"
                               style="display: block"
                             >
                               <img
-                                :src="preview_pedTest"
+                                :src="preview_college"
                                 class="img-thumbnail"
                                 style="width: 15em; display: block"
                               />
@@ -669,7 +669,7 @@
                                 fill="currentColor"
                                 class="bi bi-x-square-fill m-1"
                                 viewBox="0 0 16 16"
-                                @click="remove_upload('upload_pedTest')"
+                                @click="remove_upload('upload_college')"
                                 v-if="
                                   status != 'ACCEPTED' && status != 'CONFIRMED'
                                 "
@@ -761,6 +761,7 @@ export default {
       tuition_fee: null,
       creative_exam: null,
       pedagogical_test: null,
+      college_upload: null,
 
       preview_spt: null,
       preview_infomatrix: null,
@@ -768,6 +769,7 @@ export default {
       preview_tuitionFee: null,
       preview_creativeExam: null,
       preview_pedTest: null,
+      preview_college: null,
 
       form: {
         spt_number: null,
@@ -791,6 +793,7 @@ export default {
         delid_engCourse: null,
         delid_creativeExam: null,
         delid_pedTest: null,
+        delid_college: null
       },
 
       file: "",
@@ -829,6 +832,7 @@ export default {
     this.getUpload("35", "upload_tuitionFee");
     this.getUpload("27", "upload_creativeExam");
     this.getUpload("38", "upload_pedTest");
+    this.getUpload("????", "upload_college");
   },
   name: "Wizard-4",
   mounted() {
@@ -983,6 +987,10 @@ export default {
               this.delids.delid_pedTest = res.response[i].delid;
               this.preview_pedTest = url + "/" + res.response[i].doc_path;
             }
+            if (id == "upload_college") {
+              this.delids.delid_college = res.response[i].delid;
+              this.preview_college = url + "/" + res.response[i].doc_path;
+            }
           }
         });
     },
@@ -1044,6 +1052,15 @@ export default {
         });
         return 0;
       }
+      if (id == "upload_college" && this.preview_college) {
+        Swal.fire({
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
+      }
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (event) => {
@@ -1065,6 +1082,8 @@ export default {
             if (id == "upload_creativeExam") this.preview_creativeExam = result;
 
             if (id == "upload_pedTest") this.preview_pedTest = result;
+
+            if (id == "upload_college") this.preview_college = result;
 
             this.dataURLtoFile(result, id);
           });
@@ -1099,6 +1118,8 @@ export default {
         this.creative_exam = new Blob([u8arr], { type: mime });
       if (id == "upload_pedTest")
         this.pedagogical_test = new Blob([u8arr], { type: mime });
+      if (id == "upload_college")
+        this.college_upload = new Blob([u8arr], { type: mime });
 
       this.upload(id);
     },
@@ -1130,7 +1151,11 @@ export default {
         doc = "38";
         data_created.append("file[]", this.pedagogical_test);
       }
-      console.log(doc);
+      if (id == "upload_college") {
+        doc = "?????";
+        data_created.append("file[]", this.college_upload);
+      }
+     
       var delid = null;
       data_created.append(
         "json",
@@ -1165,6 +1190,7 @@ export default {
       if (id == "upload_tuitionFee") this.delids.delid_tuitionFee = delid;
       if (id == "upload_creativeExam") this.delids.delid_creativeExam = delid;
       if (id == "upload_pedTest") this.delids.delid_pedTest = delid;
+      if (id == "upload_college") this.delids.delid_college = delid;
     },
 
     previewImage_multi: function (e) {
@@ -1290,6 +1316,7 @@ export default {
       if (id == "upload_creativeExam")
         var delid = this.delids.delid_creativeExam;
       if (id == "upload_pedTest") var delid = this.delids.delid_pedTest;
+      if (id == "upload_college") var delid = this.delids.delid_college;
 
       var data_created = new FormData();
       data_created.append(
@@ -1337,6 +1364,10 @@ export default {
             if (id == "upload_pedTest") {
               this.preview_pedTest = null;
               this.pedagogical_test = null;
+            }
+            if (id == "upload_college") {
+              this.preview_college = null;
+              this.college_upload = null;
             }
           }
         });

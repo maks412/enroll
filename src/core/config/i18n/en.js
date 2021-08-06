@@ -199,7 +199,9 @@ export const locale = {
         "choose_creative_exam": "Choose Creative Exam...",
         "ped_test": "Pedagogical Test Result",
         "upload_ped_test": "Upload your Pedagogical Test Result(If pedagog)",
+        "upload_college_int": "Upload after college interview result",
         "choose_ped_test": "Choose Pedagogical Test...",
+        "choose_college_int": "Choose Collage Interview...",
     },
     page7: {
         "contact": "Contract",
