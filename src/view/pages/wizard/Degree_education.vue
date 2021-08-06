@@ -552,7 +552,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "????",
+            docid: "31",
             method: "setUpload",
             action: "getImages",
             mod: "setUpload",
@@ -640,15 +640,7 @@ export default {
     press_country: function () {
       this.get_address(0, "country", this.form.country);
     },
-    press_province: function () {
-      this.get_address(1, "province", this.form.province);
-    },
-    press_region: function () {
-      this.get_address(2, "region", this.form.region);
-    },
-    press_city: function () {
-      this.get_address(3, "city", this.form.city);
-    },
+    
 
     get_address: function (index, type1, value) {
       var data_created = new FormData();
@@ -694,15 +686,10 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (type1 == "country") {
-            this.form.province = res.province.selected_id;
-            this.province = res.province.list;
             this.form.school = res.school.selected_id;
             this.school = res.school.list;
           }
-          if (type1 == "province") {
-            this.form.school = res.school.selected_id;
-            this.school = res.school.list;
-          }
+          
         });
     },
 
@@ -872,7 +859,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "?????",
+            docid: "31",
             method: "setUpload",
             action: "setImage",
           },

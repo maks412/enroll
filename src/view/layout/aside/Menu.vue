@@ -191,8 +191,10 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        if (res.degree) this.links = degree_links;
+        if (res.degree == "DR" || res.degree == "M" || res.second_higher) this.links = degree_links;
         else this.links = links;
+
+        this.$cookies.set("degree", res.degree);
       });
   },
 };
