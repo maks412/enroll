@@ -492,7 +492,7 @@ export default {
         this.show_speciality = this.speciality.M;
       }
       if (this.form.tabDegree == 2) {
-        this.show_speciality = this.speciality.D;
+        this.show_speciality = this.speciality.DR;
       }
     },
     change_bach_speciality: function () {
