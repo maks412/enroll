@@ -454,6 +454,7 @@ export default {
         this.form.school = res.school.selected_id;
         this.school = res.school.list;
         this.form.manid = res.manid;
+        this.form.degree_type = res.degree_type;
 
         this.getUpload();
         this.test_getUpload();
