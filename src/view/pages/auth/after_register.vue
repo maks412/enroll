@@ -73,9 +73,16 @@
                                     type="is-toggle"
                                     @input="change_bach_speciality"
                                   >
-                                    <b-tab :title="$t('after_reg.full')" active></b-tab>
-                                    <b-tab :title="$t('after_reg.shortened')"></b-tab>
-                                    <b-tab :title="$t('after_reg.second_higher')"></b-tab>
+                                    <b-tab
+                                      :title="$t('after_reg.full')"
+                                      active
+                                    ></b-tab>
+                                    <b-tab
+                                      :title="$t('after_reg.shortened')"
+                                    ></b-tab>
+                                    <b-tab
+                                      :title="$t('after_reg.second_higher')"
+                                    ></b-tab>
                                   </b-tabs>
                                 </div>
                                 <!-- END of Degree -->
@@ -368,8 +375,7 @@ export default {
       Admin_Interview_div: "none",
       options: null,
 
-
-      onSubmitStatus: false
+      onSubmitStatus: false,
     };
   },
   async created() {
@@ -393,26 +399,41 @@ export default {
       .then((res) => {
         this.form.citizenship = res.country.selected_id;
         this.country = res.country.list;
-        this.form.speciality = res.speciality.selected_id;
+        
         this.speciality = res.speciality.list;
-        this.form.IELTS = res.IELTS;
-        this.form.Interview = res.Interview;
-        this.form.admin_Interview = res.admin_Interview;
-        this.form.payment = res.payment;
-        this.show_speciality = this.speciality.B.a8;
+        
+        //this.show_speciality = this.speciality.B.a8;
 
         this.degree = res.degree.list;
-        if (res.degree.selected_id == "B") this.form.tabDegree = 0;
-        if (res.degree.selected_id == "M") this.form.tabDegree = 1;
-        if (res.degree.selected_id == "DR") this.form.tabDegree = 2;
+        if (res.degree.selected_id == "B") {
+          this.form.tabDegree = 0;
+          requestAnimationFrame(() => {
+            this.form.tabDegree = 0;
+          });
+        }
+        if (res.degree.selected_id == "M") {
+          this.form.tabDegree = 1;
+          requestAnimationFrame(() => {
+            this.form.tabDegree = 1;
+          });
+        }
+        if (res.degree.selected_id == "DR") {
+          this.form.tabDegree = 2;
+          requestAnimationFrame(() => {
+            this.form.tabDegree = 2;
+          });
+        }
 
+        this.change_speciality();
+        this.form.speciality = res.speciality.selected_id;
+        
         this.$cookies.set("token", res.token);
       });
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      
+
       var data_send = new FormData();
       data_send.append(
         "json",
@@ -432,30 +453,31 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           if (res.code == 1) {
-            this.$cookies.set('token', res.token);
+            this.$cookies.set("token", res.token);
 
             Swal.fire({
-              title: 'Successfully saved!',
+              title: "Successfully saved!",
               text: res.message,
-              icon: 'success',
-              confirmButtonText: 'Got it!'
-            })
+              icon: "success",
+              confirmButtonText: "Got it!",
+            });
 
-            this.onSubmitStatus = true
+            this.onSubmitStatus = true;
           }
         })
         .then(() => {
           if (this.onSubmitStatus) {
             var url2 = window.location.origin;
-            if(this.form.citizenship == "208"){
-              window.location.replace(url2 + '/home/1')}
-            else{
-               window.location.replace(url2 + '/home/IRO')}
-            return
+            if (this.form.citizenship == "208") {
+              window.location.replace(url2 + "/home/1");
+            } else {
+              window.location.replace(url2 + "/home/IRO");
+            }
+            return;
           }
         });
 
-      return 
+      return;
     },
     onReset(evt) {
       evt.preventDefault();
@@ -476,17 +498,17 @@ export default {
     },
     OnChange_paid: function () {
       if (this.form.tab_bachDegree == 1 || this.form.tab_bachDegree == 2) {
-        if (this.form.payment != "Paid" || this.form.payment != "Ақылы") this.Admin_Interview_div = "none";
+        if (this.form.payment != "Paid" || this.form.payment != "Ақылы")
+          this.Admin_Interview_div = "none";
         else this.Admin_Interview_div = "inline";
       }
       if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";
     },
     change_speciality: function () {
-      //a4 - second higher education
-      //a6 - shortoned
-      //a8 - full
+      
       if (this.form.tabDegree == 0) {
-        this.show_speciality = this.speciality.B.a8;
+        //this.show_speciality = this.speciality.B.a8;
+        this.change_bach_speciality();
       }
       if (this.form.tabDegree == 1) {
         this.show_speciality = this.speciality.M;
@@ -496,6 +518,9 @@ export default {
       }
     },
     change_bach_speciality: function () {
+      //a4 - second higher education
+      //a6 - shortoned
+      //a8 - full
       this.OnChange_paid();
       if (this.form.tab_bachDegree == 0) {
         this.show_speciality = this.speciality.B.a8;
