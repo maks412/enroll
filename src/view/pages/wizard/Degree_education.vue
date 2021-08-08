@@ -44,12 +44,38 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_school_details") }}
+                      {{ $t("page2.enter_university_details") }}
                     </h4>
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.country") }}</label>
+                          <label class="required">{{
+                            $t("page2.degree_type")
+                          }}</label>
+                          <b-form-group>
+                            <b-form-select
+                              v-model="form.degree_type"
+                              :options="degree_type"
+                              required
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
+                              size="lg"
+                            ></b-form-select>
+                          </b-form-group>
+                          <span class="form-text text-muted">{{
+                            $t("page2.choose_degree")
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label class="required">{{
+                            $t("page2.country")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.country"
@@ -67,32 +93,14 @@
                           }}</span>
                         </div>
                       </div>
-                      <div class="col-xl-6">
-                        <div class="form-group">
-                          <label class="required">{{ $t("page2.province") }}</label>
-                          <b-form-group>
-                            <b-form-select
-                              v-model="form.province"
-                              :options="province"
-                              required
-                              :disabled="
-                                status == 'ACCEPTED' || status == 'CONFIRMED'
-                              "
-                              size="lg"
-                              v-on:change="press_province"
-                            ></b-form-select>
-                          </b-form-group>
-                          <span class="form-text text-muted">{{
-                            $t("page2.choose_province")
-                          }}</span>
-                        </div>
-                      </div>
                     </div>
 
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.school") }}</label>
+                          <label class="required">{{
+                            $t("page2.university")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.school"
@@ -105,7 +113,7 @@
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted">{{
-                            $t("page2.choose_school")
+                            $t("page2.choose_university")
                           }}</span>
                         </div>
                       </div>
@@ -121,7 +129,9 @@
 
                     <div class="row">
                       <div class="col-xl-12">
-                        <label class="required">{{ $t("page2.upload_diplom") }}</label>
+                        <label class="required">{{
+                          $t("page2.upload_diplom")
+                        }}</label>
                         <b-form-file
                           @change="previewImage"
                           v-model="attestat_upload"
@@ -185,10 +195,12 @@
                         </div>
                       </div>
                     </div>
-                    <hr>
+                    <hr />
                     <div class="row">
                       <div class="col-xl-12">
-                        <label class="required">{{ $t("page2.upload_test") }}</label>
+                        <label class="required">{{
+                          $t("page2.upload_test")
+                        }}</label>
                         <b-form-file
                           @change="test_previewImage"
                           v-model="test_upload"
@@ -252,10 +264,12 @@
                         </div>
                       </div>
                     </div>
-                    <hr v-if="degree_doc">
+                    <hr v-if="degree_doc" />
                     <div class="row" v-if="degree_doc">
                       <div class="col-xl-12">
-                        <label class="required">{{ $t("page2.upload_ref") }}</label>
+                        <label class="required">{{
+                          $t("page2.upload_ref")
+                        }}</label>
                         <b-form-file
                           @change="ref_previewImage"
                           v-model="ref_upload"
@@ -385,7 +399,11 @@ export default {
         { title: "page2.attestat_info", desc: "page2.attestat_info_d" },
       ],
       country: [],
-      province: [],
+      degree_type: [
+        { text: "Bachelor", value: "B" },
+        { text: "Master", value: "M" },
+        { text: "Doctorate", value: "DR" },
+      ],
       school: [],
       nationality: [],
       previews: [],
@@ -401,8 +419,9 @@ export default {
       photos: null,
       form: {
         country: null,
-        province: null,
+        degree_type: null,
         school: null,
+        manid: null,
 
         mod: "page2",
         method: "set",
@@ -430,13 +449,11 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.school = res.school.selected_id;
-        this.school = res.school.list;
-
         this.form.country = res.country.selected_id;
         this.country = res.country.list;
-        this.form.province = res.province.selected_id;
-        this.province = res.province.list;
+        this.form.school = res.school.selected_id;
+        this.school = res.school.list;
+        this.form.manid = res.manid;
 
         this.getUpload();
         this.test_getUpload();
@@ -640,7 +657,6 @@ export default {
     press_country: function () {
       this.get_address(0, "country", this.form.country);
     },
-    
 
     get_address: function (index, type1, value) {
       var data_created = new FormData();
@@ -689,7 +705,6 @@ export default {
             this.form.school = res.school.selected_id;
             this.school = res.school.list;
           }
-          
         });
     },
 
@@ -1006,8 +1021,8 @@ export default {
 };
 </script>
 <style>
-  .required:after {
-    content:" *";
-    color: red;
-  }
+.required:after {
+  content: " *";
+  color: red;
+}
 </style>

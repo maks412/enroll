@@ -402,9 +402,9 @@ export default {
         this.show_speciality = this.speciality.B.a8;
 
         this.degree = res.degree.list;
-        if (res.degree.value == "B") this.form.tabDegree = 0;
-        if (res.degree.value == "M") this.form.tabDegree = 1;
-        if (res.degree.value == "D") this.form.tabDegree = 2;
+        if (res.degree.selected_id == "B") this.form.tabDegree = 0;
+        if (res.degree.selected_id == "M") this.form.tabDegree = 1;
+        if (res.degree.selected_id == "DR") this.form.tabDegree = 2;
 
         this.$cookies.set("token", res.token);
       });
