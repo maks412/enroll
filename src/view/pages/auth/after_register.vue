@@ -33,7 +33,6 @@
                         label-for="citizenship_label"
                       >
                         <b-form-select
-                          v-on:change="OnChange"
                           id="citizenship_select"
                           v-model="form.citizenship"
                           :options="country"
@@ -158,7 +157,7 @@
                       <!-- END IELTS -->
 
                       <!-- Begin Interview -->
-                      <div :style="{ display: Interview_div }">
+                      <div v-if="form.citizenship != 208">
                         <b-form-group
                           :label="$t('after_reg.stud_interview')"
                           label-size="lg"
@@ -492,15 +491,13 @@ export default {
         this.show = true;
       });
     },
-    OnChange: function () {
-      if (this.form.citizenship == "208") this.Interview_div = "none";
-      else this.Interview_div = "inline";
-    },
     OnChange_paid: function () {
+      
       if (this.form.tab_bachDegree == 1 || this.form.tab_bachDegree == 2) {
-        if (this.form.payment != "Paid" || this.form.payment != "Ақылы")
-          this.Admin_Interview_div = "none";
-        else this.Admin_Interview_div = "inline";
+        console.log(this.form.payment);
+        if (this.form.payment == "Paid" || this.form.payment == "Ақылы")
+          this.Admin_Interview_div = "inline";
+        else this.Admin_Interview_div = "none";
       }
       if (this.form.tab_bachDegree == 0) this.Admin_Interview_div = "none";
     },

@@ -56,7 +56,6 @@
                             name="fname"
                             v-model="form.citizenship"
                             disabled
-                            
                           />
                           <span class="form-text text-muted"
                             ><a href="/after_register">{{
@@ -68,14 +67,18 @@
                       <!-- END citizenship -->
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.f_name") }}</label>
+                          <label class="required">{{
+                            $t("page1.f_name")
+                          }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="fname"
                             v-model="form.fname"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_f_name")
@@ -86,14 +89,18 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.native_name") }}</label>
+                          <label class="required">{{
+                            $t("page1.native_name")
+                          }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
                             v-model="form.nname"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_n_f_name")
@@ -102,14 +109,18 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.last_name") }}</label>
+                          <label class="required">{{
+                            $t("page1.last_name")
+                          }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
                             v-model="form.lname"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_l_name")
@@ -120,14 +131,18 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.native_last_name") }}</label>
+                          <label class="required">{{
+                            $t("page1.native_last_name")
+                          }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             name="Nsurname"
                             v-model="form.nlname"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_n_l_name")
@@ -143,7 +158,9 @@
                             name="patronymic"
                             v-model="form.patronymic"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_patronymic")
@@ -153,7 +170,9 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
-                        <label class="required">{{ $t("page1.upload_pic") }}</label>
+                        <label class="required">{{
+                          $t("page1.upload_pic")
+                        }}</label>
                         <div class="custom-file mb-3">
                           <input
                             type="file"
@@ -162,7 +181,9 @@
                             id="customFile"
                             @change="croppie"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <label class="custom-file-label" for="customFile"
                             >Choose an image</label
@@ -221,7 +242,9 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.date_of_birth") }}</label>
+                          <label class="required">{{
+                            $t("page1.date_of_birth")
+                          }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -231,7 +254,9 @@
                                 autocomplete="off"
                                 size="lg"
                                 required
-                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                                :disabled="
+                                  status == 'ACCEPTED' || status == 'CONFIRMED'
+                                "
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -251,13 +276,17 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.nationality") }}</label>
+                          <label class="required">{{
+                            $t("page1.nationality")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.nationality"
                               :options="nationality"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -270,7 +299,9 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.gender") }}</label>
+                          <label class="required">{{
+                            $t("page1.gender")
+                          }}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.gender"
@@ -278,7 +309,9 @@
                               :aria-describedby="ariaDescribedby"
                               size="lg"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -288,7 +321,9 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.married_status") }}</label>
+                          <label class="required">{{
+                            $t("page1.married_status")
+                          }}</label>
                           <b-form-group v-slot="{ ariaDescribedby }">
                             <b-form-radio-group
                               v-model="form.married"
@@ -296,7 +331,9 @@
                               :aria-describedby="ariaDescribedby"
                               size="lg"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                             ></b-form-radio-group>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -313,7 +350,9 @@
                             <b-form-select
                               v-model="form.social_status"
                               :options="social_status"
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted">{{
@@ -333,7 +372,9 @@
                           :state="Boolean(file)"
                           :placeholder="$t('page1.choose_status_document')"
                           :drop-placeholder="$t('common.drop_file')"
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -379,7 +420,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload_social(i)"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -399,7 +442,9 @@
                     </h4>
                     <div class="col-xl-6">
                       <div class="form-group">
-                        <label class="required">{{ $t("page1.doc_type") }}</label>
+                        <label class="required">{{
+                          $t("page1.doc_type")
+                        }}</label>
                         <b-form-group v-slot="{ ariaDescribedby }">
                           <b-form-radio-group
                             v-model="form.document_type"
@@ -408,7 +453,9 @@
                             name="radio-inline"
                             size="lg"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           ></b-form-radio-group>
                         </b-form-group>
                         <span class="form-text text-muted">{{
@@ -426,7 +473,9 @@
                             name="IIN"
                             v-model="form.IIN"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_iin")
@@ -435,13 +484,17 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.doc_no") }}</label>
+                          <label class="required">{{
+                            $t("page1.doc_no")
+                          }}</label>
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                             v-model="form.document_no"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page1.enter_doc_no")
@@ -452,12 +505,16 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.issued_by") }}</label>
+                          <label class="required">{{
+                            $t("page1.issued_by")
+                          }}</label>
                           <b-form-select
                             v-model="form.issued_by"
                             :options="issued_options"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                             size="lg"
                           ></b-form-select>
                           <span class="form-text text-muted">{{
@@ -467,7 +524,9 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page1.issued_date") }}</label>
+                          <label class="required">{{
+                            $t("page1.issued_date")
+                          }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -477,7 +536,9 @@
                                 autocomplete="off"
                                 size="lg"
                                 required
-                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                                :disabled="
+                                  status == 'ACCEPTED' || status == 'CONFIRMED'
+                                "
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -497,7 +558,9 @@
                       </div>
                     </div>
                     <div>
-                      <label class="required">{{ $t("page1.documents") }}</label>
+                      <label class="required">{{
+                        $t("page1.documents")
+                      }}</label>
                       <b-form-file
                         accept="image/png, image/gif, image/jpg"
                         id="documents"
@@ -506,7 +569,9 @@
                         :state="Boolean(file)"
                         :placeholder="$t('common.choose_file')"
                         :drop-placeholder="$t('common.drop_file')"
-                        :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                        :disabled="
+                          status == 'ACCEPTED' || status == 'CONFIRMED'
+                        "
                         ><template slot="file-name" slot-scope="{ names }">
                           <b-badge variant="dark">{{ names[0] }}</b-badge>
                           <b-badge
@@ -572,7 +637,6 @@
                     <div>
                       <button
                         v-on:click="submit"
-                        
                         class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                         data-wizard-type="action-submit"
                       >
@@ -755,8 +819,7 @@ export default {
               heightAuto: false,
             });
 
-            if(res.message == "Session expired"){
-              
+            if (res.message == "Session expired") {
             }
           }
           if (res.code == 1) {
@@ -767,7 +830,9 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + "/home/2");
+            if (this.$cookies.get("degree") != "B") {
+              window.location.replace(url2 + "/home/degree_education");
+            } else window.location.replace(url2 + "/home/2");
           }
         });
     },
@@ -809,7 +874,7 @@ export default {
           this.issued_options = res.issued_by.list;
           this.nationality = res.nationality.list;
           this.social_status = res.social_status.list;
-          this.social_status.unshift({value: null, text: ""});
+          this.social_status.unshift({ value: null, text: "" });
           this.form.nationality = res.nationality.selected_id;
           this.form.social_status = res.social_status.selected_id;
 
@@ -1353,8 +1418,8 @@ export default {
 </script>
 
 <style>
-  .required:after {
-    content:" *";
-    color: red;
-  }
+.required:after {
+  content: " *";
+  color: red;
+}
 </style>

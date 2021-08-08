@@ -236,6 +236,13 @@ export default {
         this.delids = res.result.docid;
         this.preview = url + "/" + res.result.doc_path;
         if (res.result.doc_path == "") this.preview = null;
+
+        if(this.$cookies.get("degree") != "B"){
+          this.english_certificate_options = [
+            { text: "IELTS", value: "8" },
+            { text: "Test Center Results", value: "?????" },
+          ];
+        }
       });
   },
   name: "Wizard-4",
@@ -304,34 +311,10 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + "/home/5");
+            if (this.$cookies.get("degree") != "B")
+              window.location.replace(url2 + "/home/degree_decuments");
+            else window.location.replace(url2 + "/home/5");
           }
-        });
-    },
-
-    getDegree: function () {
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: { mod: "page4_ielts", method: "get", action: "getDegree" },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          this.english_certificate_options = [
-            { text: "IELTS", value: "8" },
-            { text: "Test Center Results", value: "?????" },
-          ];
         });
     },
 
@@ -378,7 +361,6 @@ export default {
     },
 
     upload: function () {
-      console.log("AAAAAAAAAAA");
       var data_created = new FormData();
 
       console.log(this.form.english_certificate);
@@ -417,8 +399,8 @@ export default {
 };
 </script>
 <style>
-  .required:after {
-    content:" *";
-    color: red;
-  }
+.required:after {
+  content: " *";
+  color: red;
+}
 </style>
