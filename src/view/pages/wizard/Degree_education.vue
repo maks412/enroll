@@ -459,7 +459,9 @@ export default {
         this.getUpload();
         this.test_getUpload();
         this.ref_getUpload();
-        this.getDegree();
+
+        if(this.$cookies.get("degree") == "DR") this.degree_doc = true;
+        else this.degree_doc = false;
       });
   },
   name: "Wizard-4",
@@ -627,33 +629,6 @@ export default {
         });
     },
 
-    getDegree: function () {
-      //Get Uploads
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: {
-            method: "getDegree",
-            action: "get",
-            mod: "getDegree",
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          this.degree_doc = res.degree;
-        });
-    },
 
     press_country: function () {
       this.get_address(0, "country", this.form.country);
