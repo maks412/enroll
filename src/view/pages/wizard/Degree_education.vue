@@ -44,8 +44,10 @@
                     data-wizard-state="current"
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_university_details") }}
+                      {{ $t("page2.enter_university_details") }}<br />
+                      <p style="color: grey; font-size: 70%">{{ $t("page2.long_load") }}</p>
                     </h4>
+                    
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">

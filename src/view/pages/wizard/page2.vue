@@ -49,13 +49,17 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.country") }}</label>
+                          <label class="required">{{
+                            $t("page2.country")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.country"
                               :options="country"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                               v-on:change="press_country"
                             ></b-form-select>
@@ -67,13 +71,17 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.province") }}</label>
+                          <label class="required">{{
+                            $t("page2.province")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.province"
                               :options="province"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                               v-on:change="press_province"
                             ></b-form-select>
@@ -88,13 +96,17 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.school") }}</label>
+                          <label class="required">{{
+                            $t("page2.school")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.school"
                               :options="school"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -111,7 +123,9 @@
                               v-model="form.language"
                               :options="language_options"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -128,7 +142,9 @@
                               v-model="form.foreign_language"
                               :options="foreign_language"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -149,13 +165,17 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_type") }}</label>
+                          <label class="required">{{
+                            $t("page2.attestat_type")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.attestat_type"
                               :options="attestat_type"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -166,13 +186,17 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_series") }}</label>
+                          <label class="required">{{
+                            $t("page2.attestat_series")
+                          }}</label>
                           <b-form-group>
                             <b-form-select
                               v-model="form.attestat_series"
                               :options="attestat_series"
                               required
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
@@ -186,14 +210,18 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_no") }}</label>
+                          <label class="required">{{
+                            $t("page2.attestat_no")
+                          }}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
                             name="Nname"
                             v-model="form.attestat_number"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page2.enter_attestat_no")
@@ -202,14 +230,18 @@
                       </div>
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.attestat_score") }}</label>
+                          <label class="required">{{
+                            $t("page2.attestat_score")
+                          }}</label>
                           <input
                             type="number"
                             class="form-control form-control-solid form-control-lg"
                             name="lname"
                             v-model="form.attestat_score"
                             required
-                            :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                            :disabled="
+                              status == 'ACCEPTED' || status == 'CONFIRMED'
+                            "
                           />
                           <span class="form-text text-muted">{{
                             $t("page2.enter_attestat_score")
@@ -220,7 +252,9 @@
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
-                          <label class="required">{{ $t("page2.given_date") }}</label>
+                          <label class="required">{{
+                            $t("page2.given_date")
+                          }}</label>
                           <div>
                             <b-input-group class="mb-3">
                               <b-form-input
@@ -229,7 +263,9 @@
                                 placeholder="YYYY-MM-DD"
                                 autocomplete="off"
                                 required
-                                :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                                :disabled="
+                                  status == 'ACCEPTED' || status == 'CONFIRMED'
+                                "
                               ></b-form-input>
                               <b-input-group-append>
                                 <b-form-datepicker
@@ -249,16 +285,19 @@
                       </div>
 
                       <div class="col-xl-6">
-                        <label class="required">{{ $t("page2.upload_attestat") }}</label>
+                        <label class="required">{{
+                          $t("page2.upload_attestat")
+                        }}</label>
                         <b-form-file
-                          
                           @change="previewImage"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
                           :placeholder="$t('common.choose_file')"
                           :drop-placeholder="$t('common.drop_file')"
                           required
-                          :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
                             <b-badge
@@ -300,7 +339,9 @@
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
                               @click="remove_upload(i)"
-                              v-if="status != 'ACCEPTED' && status != 'CONFIRMED'"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
                             >
                               <path
                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
@@ -318,7 +359,6 @@
                     <h4 class="mb-10 font-weight-bold text-dark">
                       {{ $t("page2.enter_prep_c_details") }}
                     </h4>
-                    
 
                     <div class="row">
                       <div class="col-xl-6">
@@ -328,13 +368,78 @@
                             <b-form-select
                               v-model="form.preparation_course"
                               :options="preparation_course"
-                              :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
                               size="lg"
                             ></b-form-select>
                           </b-form-group>
                           <span class="form-text text-muted">{{
                             $t("page2.choose_preparation_course")
                           }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <label>{{ $t("page2.upload_prep") }}</label>
+                        <b-form-file
+                          v-model="prep_cert"
+                          @change="previewImage_prep"
+                          :state="Boolean(file)"
+                          :disabled="
+                            status == 'ACCEPTED' || status == 'CONFIRMED'
+                          "
+                          :placeholder="$t('page2.choose_prep')"
+                          :drop-placeholder="$t('common.drop_files')"
+                          ><template slot="file-name" slot-scope="{ names }">
+                            <b-badge variant="dark">{{ names[0] }}</b-badge>
+                            <b-badge
+                              v-if="names.length > 1"
+                              variant="dark"
+                              class="ml-1"
+                            >
+                              {{
+                                $t("common.more_files", {
+                                  num: names.length - 1,
+                                })
+                              }}
+                            </b-badge>
+                          </template></b-form-file
+                        >
+
+                        <div
+                          class="text-center"
+                          style="display: flex; flex-wrap: wrap"
+                        >
+                          <div
+                            v-if="preview"
+                            class="m-5"
+                            style="display: block"
+                          >
+                            <img
+                              :src="preview"
+                              class="img-thumbnail"
+                              style="width: 15em; display: block"
+                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="30"
+                              fill="currentColor"
+                              class="bi bi-x-square-fill m-1"
+                              viewBox="0 0 16 16"
+                              @click="remove_upload_prep()"
+                              v-if="
+                                status != 'ACCEPTED' && status != 'CONFIRMED'
+                              "
+                            >
+                              <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"
+                              />
+                            </svg>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -420,6 +525,10 @@ export default {
       previews: [],
       delids: [],
       attestat_upload: null,
+
+      preview: null,
+      prep_cert: null,
+      delid: null,
 
       photos: null,
       form: {
@@ -554,18 +663,23 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            window.location.replace(url2 + '/home/3')
+            window.location.replace(url2 + "/home/3");
           }
         });
     },
 
-    getUpload: function(){
+    getUpload: function () {
       //Get Uploads
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
-          data: { docid: "1", method: "setUpload", action: "getImages", mod: "setUpload" },
+          data: {
+            docid: "1",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
           token: this.$cookies.get("token"),
           email: this.$cookies.get("email"),
         })
@@ -579,9 +693,9 @@ export default {
       })
         .then((response) => response.json())
         .then((res) => {
-          for(var i = 0; i < res.response.length; i++){
+          for (var i = 0; i < res.response.length; i++) {
             this.delids.push(res.response[i].delid);
-            this.previews.push(url+"/"+res.response[i].doc_path);
+            this.previews.push(url + "/" + res.response[i].doc_path);
           }
         });
     },
@@ -658,12 +772,12 @@ export default {
     previewImage: function (e) {
       if (this.delids.length >= 2) {
         Swal.fire({
-            title: "",
-            text: "Maximum images uploaded",
-            icon: "error",
-            confirmButtonClass: "btn btn-secondary",
-          });
-          return 0;
+          title: "",
+          text: "Maximum images uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
       }
       var input = e.target;
       let slide = this.previews;
@@ -678,11 +792,113 @@ export default {
             quality: 0.8,
           }).then((result) => {
             slide.push(result);
-                this.dataURLtoFile(result);
+            this.dataURLtoFile(result);
           });
         };
         reader.readAsDataURL(input.files[0]);
       }
+    },
+
+    previewImage_prep: function (e) {
+      if (this.delid) {
+        Swal.fire({
+            title: "",
+            text: "Maximum images uploaded",
+            icon: "error",
+            confirmButtonClass: "btn btn-secondary",
+          });
+          return 0;
+      }
+      var input = e.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/jpg", // default
+            max: 500, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            this.preview = result;
+            this.dataURLtoFile_prep(result);
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
+    dataURLtoFile_prep: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.prep_cert = new Blob([u8arr], { type: mime });
+      this.upload_prep();
+    },
+
+    upload_prep: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "????",
+            mod: "page2",
+            method: "setUpload",
+            action: "setImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      data_created.append("file[]", this.prep_cert);
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.delid = res.docid;
+        });
+    },
+
+    remove_upload_prep: function(){
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delid,
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.preview = null;
+            this.delid = null;
+          }
+        });
+      
     },
 
     dataURLtoFile: function (dataurl) {
@@ -714,7 +930,7 @@ export default {
         })
       );
       data_created.append("file[]", this.photos);
-      
+
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -728,7 +944,7 @@ export default {
           this.delids.push(res.docid);
         });
     },
-    remove_upload: function(i){
+    remove_upload: function (i) {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -756,14 +972,13 @@ export default {
             this.attestat_upload = null;
           }
         });
-      
-    }
+    },
   },
 };
 </script>
 <style>
-  .required:after {
-    content:" *";
-    color: red;
-  }
+.required:after {
+  content: " *";
+  color: red;
+}
 </style>

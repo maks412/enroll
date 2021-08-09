@@ -127,7 +127,10 @@ export const locale = {
         "choose_preparation_course": "Please choose your preparation course",
         "upload_test": "Upload your testing result(KT)",
         "upload_diplom": "Upload Bachelor's degree diploma with supplement",
-        "upload_ref": "Upload copy of the examination reference"
+        "upload_ref": "Upload copy of the examination reference",
+        "upload_prep": "Upload your Preparation Course Document",
+        "choose_prep": "Choose Preparation Course...",
+        "long_load": "Loading University list may take some time"
     },
     page3: {
         "contact_details": "Contact Details",
