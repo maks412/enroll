@@ -203,6 +203,7 @@ export default {
       form: {
         english_certificate: null,
         certificate_number: "",
+        doc_path: null,
 
         mod: "page4_ielts",
         method: "setUpload",
@@ -235,9 +236,13 @@ export default {
 
         this.delids = res.result.docid;
         this.preview = url + "/" + res.result.doc_path;
-        if (res.result.doc_path == "") this.preview = null;
+        this.form.doc_path = res.result.doc_path;
+        if (res.result.doc_path == "") {
+          this.preview = null;
+          this.form.doc_path = null;
+        }
 
-        if(this.$cookies.get("degree") != "B"){
+        if (this.$cookies.get("degree") != "B") {
           this.english_certificate_options = [
             { text: "IELTS", value: "8" },
             { text: "Test Center Results", value: "?????" },
@@ -394,6 +399,7 @@ export default {
       this.preview = null;
       this.delids = null;
       this.certificate_upload = null;
+      this.form.doc_path = null;
     },
   },
 };
