@@ -365,7 +365,7 @@ export default {
         action: "setAllData",
       },
       country: [],
-      payment: [this.$t("after_reg.grant"), this.$t("after_reg.paid")],
+      payment: [{text: this.$t("after_reg.grant"), value: 0}, {text: this.$t("after_reg.paid"), value: 1}],
       speciality: {},
       show_speciality: [],
       degree: [],
