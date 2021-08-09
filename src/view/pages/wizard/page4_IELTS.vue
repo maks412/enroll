@@ -195,7 +195,7 @@ export default {
       tabs: [""],
       english_certificate_options: [
         { text: "IELTS", value: "8" },
-        { text: "SDU Language Test", value: "39" },
+        { text: "SDU Language Test", value: "65" },
       ],
       certificate_upload: null,
       preview: null,
