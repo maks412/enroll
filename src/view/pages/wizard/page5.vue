@@ -558,7 +558,7 @@
                       <div class="col-xl-6">
                         <label>{{ $t("page6.upload_ped_test") }}</label>
                         <b-form-file
-                          @change="previewImage"
+                          @change="previewImage_multi_ped"
                           id="upload_pedTest"
                           v-model="pedagogical_test"
                           :state="Boolean(file)"
@@ -589,12 +589,14 @@
                           style="display: flex; flex-wrap: wrap"
                         >
                           <div
-                            v-if="preview_pedTest"
+                            :v-if="preview_pedTest.length > 0"
+                            v-for="(image, i) in preview_pedTest"
+                            :key="i"
                             class="m-5"
                             style="display: block"
                           >
                             <img
-                              :src="preview_pedTest"
+                              :src="image"
                               class="img-thumbnail"
                               style="width: 15em; display: block"
                             />
@@ -605,7 +607,7 @@
                               fill="currentColor"
                               class="bi bi-x-square-fill m-1"
                               viewBox="0 0 16 16"
-                              @click="remove_upload('upload_pedTest')"
+                              @click="remove_upload_multi_ped(i)"
                               v-if="
                                 status != 'ACCEPTED' && status != 'CONFIRMED'
                               "
@@ -624,7 +626,7 @@
                           <b-form-file
                             @change="previewImage"
                             id="upload_college"
-                            v-model="pedagogical_test"
+                            v-model="college_upload"
                             :state="Boolean(file)"
                             :placeholder="$t('page6.choose_college_int')"
                             :drop-placeholder="$t('common.drop_file')"
@@ -755,6 +757,7 @@ export default {
       certificate75: null,
       previews: [],
       photos: null,
+      photos_ped: null,
       spt_upload: null,
       infomatrix_upload: null,
       student_fee: null,
@@ -768,7 +771,7 @@ export default {
       preview_studentFee: null,
       preview_tuitionFee: null,
       preview_creativeExam: null,
-      preview_pedTest: null,
+      preview_pedTest: [],
       preview_college: null,
 
       form: {
@@ -792,8 +795,8 @@ export default {
         delid_tuitionFee: null,
         delid_engCourse: null,
         delid_creativeExam: null,
-        delid_pedTest: null,
-        delid_college: null
+        delid_pedTest: [],
+        delid_college: null,
       },
 
       file: "",
@@ -831,7 +834,7 @@ export default {
     this.getUpload("36", "upload_studentFee");
     this.getUpload("35", "upload_tuitionFee");
     this.getUpload("27", "upload_creativeExam");
-    this.getUpload("38", "upload_pedTest");
+    this.getUpload_multi_ped();
     this.getUpload("????", "upload_college");
   },
   name: "Wizard-4",
@@ -933,6 +936,38 @@ export default {
           for (var i = 0; i < res.response.length; i++) {
             this.delids.delid_multi.push(res.response[i].delid);
             this.previews.push(url + "/" + res.response[i].doc_path);
+          }
+        });
+    },
+
+    getUpload_multi_ped: function () {
+      //Get Uploads Documents
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "38",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for (var i = 0; i < res.response.length; i++) {
+            this.delids.delid_pedTest.push(res.response[i].delid);
+            this.preview_pedTest.push(url + "/" + res.response[i].doc_path);
           }
         });
     },
@@ -1155,7 +1190,7 @@ export default {
         doc = "?????";
         data_created.append("file[]", this.college_upload);
       }
-     
+
       var delid = null;
       data_created.append(
         "json",
@@ -1223,6 +1258,36 @@ export default {
       }
     },
 
+    previewImage_multi_ped: function (e) {
+      if (this.delids.delid_pedTest.length >= 2) {
+        Swal.fire({
+          title: "",
+          text: "Maximum imeges uploaded",
+          icon: "error",
+          confirmButtonClass: "btn btn-secondary",
+        });
+        return 0;
+      }
+      var input = e.target;
+      let slide = this.preview_pedTest;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          compress(event.target.result, {
+            width: 400,
+            type: "image/*", // default
+            max: 500, // max size
+            min: 20, // min size
+            quality: 0.8,
+          }).then((result) => {
+            slide.push(result);
+            this.dataURLtoFile_multi_ped(result);
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
     dataURLtoFile_multi: function (dataurl) {
       var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
@@ -1235,6 +1300,20 @@ export default {
       }
       this.photos = new Blob([u8arr], { type: mime });
       this.upload_multi();
+    },
+
+    dataURLtoFile_multi_ped: function (dataurl) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      this.photos_ped = new Blob([u8arr], { type: mime });
+      this.upload_multi_ped();
     },
 
     upload_multi: function () {
@@ -1268,6 +1347,39 @@ export default {
           this.delids.delid_multi.push(res.docid);
         });
     },
+
+    upload_multi_ped: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "38",
+            mod: "page5",
+            method: "setUpload",
+            action: "setImage",
+            upload: this.photos_ped,
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+
+      data_created.append("file[]", this.photos_ped);
+
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.delids.delid_pedTest.push(res.docid);
+        });
+    },
+
     remove_upload_multi: function (i) {
       var data_created = new FormData();
       data_created.append(
@@ -1298,6 +1410,38 @@ export default {
           }
         });
     },
+
+    remove_upload_multi_ped: function (i) {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            delid: this.delids.delid_pedTest[i],
+            method: "setUpload",
+            action: "delImage",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            this.preview_pedTest.splice(i, 1);
+            this.delids.delid_pedTest.slice(i, 1);
+            this.pedagogical_test = null;
+          }
+        });
+    },
+
     remove_upload: function (id) {
       if (id == "upload_spt") {
         //var delid = this.delids.delid_spt;
