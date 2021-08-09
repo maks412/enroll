@@ -781,6 +781,8 @@ export default {
         infomatrix_point: null,
         creative_exam_text: null,
         pedagogical_test_text: null,
+        spt_path: null,
+        infomatrix_path: null,
 
         mod: "page5",
         method: "setUpload",
@@ -827,6 +829,23 @@ export default {
         this.form.infomatrix_point = res.infomatrix_point;
         this.form.creative_exam_text = res.creative_exam_text;
         this.form.pedagogical_test_text = res.pedagogical_test_text;
+
+        //this.delids.delid_spt = res.response[i].delid;
+        this.preview_spt = url + "/" + res.response.spt_path;
+        //this.delids.delid_infomatrix = res.response[i].delid;
+        this.preview_infomatrix = url + "/" + res.response.infomatrix_path;
+
+        this.form.spt_path = res.spt_path;
+        this.form.infomatrix_path = res.infomatrix_path;
+
+        if (res.spt_path == "") {
+          this.preview_spt = null;
+          this.form.spt_path = null;
+        }
+        if (res.infomatrix_path == "") {
+          this.preview_infomatrix = null;
+          this.form.infomatrix_path = null;
+        }
       });
     this.getUpload_multi();
     this.getUpload("16", "upload_spt");
@@ -903,7 +922,7 @@ export default {
               confirmButtonClass: "btn btn-secondary",
             });
             var url2 = window.location.origin;
-            //window.location.replace(url2 + '/home/6')
+            window.location.replace(url2 + "/home/6");
           }
         });
     },
@@ -998,14 +1017,6 @@ export default {
         .then((response) => response.json())
         .then((res) => {
           for (var i = 0; i < res.response.length; i++) {
-            if (id == "upload_spt") {
-              this.delids.delid_spt = res.response[i].delid;
-              this.preview_spt = url + "/" + res.response[i].doc_path;
-            }
-            if (id == "upload_infomatrix") {
-              this.delids.delid_infomatrix = res.response[i].delid;
-              this.preview_infomatrix = url + "/" + res.response[i].doc_path;
-            }
             if (id == "upload_studentFee") {
               this.delids.delid_studentFee = res.response[i].delid;
               this.preview_studentFee = url + "/" + res.response[i].doc_path;
@@ -1447,12 +1458,14 @@ export default {
         //var delid = this.delids.delid_spt;
         this.preview_spt = null;
         this.spt_upload = null;
+        this.form.spt_path = null;
         return;
       }
       if (id == "upload_infomatrix") {
         //var delid = this.delids.delid_infomatrix;
         this.preview_infomatrix = null;
         this.infomatrix_upload = null;
+        this.form.infomatrix_path = null;
         return;
       }
       if (id == "upload_studentFee") var delid = this.delids.delid_studentFee;
