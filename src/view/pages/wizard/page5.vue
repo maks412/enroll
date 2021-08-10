@@ -783,6 +783,8 @@ export default {
         pedagogical_test_text: null,
         spt_path: null,
         infomatrix_path: null,
+        creative_path: null,
+        ped_path: [],
 
         mod: "page5",
         method: "setUpload",
@@ -830,13 +832,19 @@ export default {
         this.form.creative_exam_text = res.creative_exam_text;
         this.form.pedagogical_test_text = res.pedagogical_test_text;
 
-        //this.delids.delid_spt = res.response[i].delid;
         this.preview_spt = url + "/" + res.response.spt_path;
-        //this.delids.delid_infomatrix = res.response[i].delid;
         this.preview_infomatrix = url + "/" + res.response.infomatrix_path;
+        this.preview_creativeExam = url + "/" + res.response.creative_path;
+        //this.preview_pedTest = url + "/" + res.response.ped_path;
+        for (var i = 0; i < res.response.ped_path; i++) {
+            //this.delids.delid_pedTest.push(res.response[i].delid);
+            this.preview_pedTest.push(url + "/" + res.response.ped_path[i]);
+          }
 
         this.form.spt_path = res.spt_path;
         this.form.infomatrix_path = res.infomatrix_path;
+        this.form.creative_path = res.creative_path;
+        this.form.ped_path = res.ped_path;
 
         if (res.spt_path == "") {
           this.preview_spt = null;
@@ -846,14 +854,22 @@ export default {
           this.preview_infomatrix = null;
           this.form.infomatrix_path = null;
         }
+        if (res.creative_path == "") {
+          this.preview_creativeExam = null;
+          this.form.creative_path = null;
+        }
+        if (res.ped_path == "") {
+          this.preview_pedTest = null;
+          this.form.ped_path = null;
+        }
       });
     this.getUpload_multi();
-    this.getUpload("16", "upload_spt");
-    this.getUpload("44", "upload_infomatrix");
+    //this.getUpload("16", "upload_spt");
+    //this.getUpload("44", "upload_infomatrix");
     this.getUpload("36", "upload_studentFee");
     this.getUpload("35", "upload_tuitionFee");
-    this.getUpload("27", "upload_creativeExam");
-    this.getUpload_multi_ped();
+    //this.getUpload("27", "upload_creativeExam");
+    //this.getUpload_multi_ped();
     this.getUpload("????", "upload_college");
   },
   name: "Wizard-4",
@@ -896,6 +912,8 @@ export default {
       );
       data_created.append("file_spt", this.spt_upload);
       data_created.append("file_infomatrix", this.infomatrix_upload);
+      data_created.append("file_creative", this.creative_exam);
+      data_created.append("file_ped[]", this.photos_ped);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1160,8 +1178,10 @@ export default {
         this.student_fee = new Blob([u8arr], { type: mime });
       if (id == "upload_tuitionFee")
         this.tuition_fee = new Blob([u8arr], { type: mime });
-      if (id == "upload_creativeExam")
+      if (id == "upload_creativeExam") {
         this.creative_exam = new Blob([u8arr], { type: mime });
+        return;
+      }
       if (id == "upload_pedTest")
         this.pedagogical_test = new Blob([u8arr], { type: mime });
       if (id == "upload_college")
@@ -1189,14 +1209,14 @@ export default {
         doc = "35";
         data_created.append("file[]", this.tuition_fee);
       }
-      if (id == "upload_creativeExam") {
-        doc = "27";
-        data_created.append("file[]", this.creative_exam);
-      }
-      if (id == "upload_pedTest") {
-        doc = "38";
-        data_created.append("file[]", this.pedagogical_test);
-      }
+      // if (id == "upload_creativeExam") {
+      //   doc = "27";
+      //   data_created.append("file[]", this.creative_exam);
+      // }
+      // if (id == "upload_pedTest") {
+      //   doc = "38";
+      //   data_created.append("file[]", this.pedagogical_test);
+      // }
       if (id == "upload_college") {
         doc = "?????";
         data_created.append("file[]", this.college_upload);
@@ -1234,8 +1254,8 @@ export default {
       if (id == "upload_infomatrix") this.delids.delid_infomatrix = delid;
       if (id == "upload_studentFee") this.delids.delid_studentFee = delid;
       if (id == "upload_tuitionFee") this.delids.delid_tuitionFee = delid;
-      if (id == "upload_creativeExam") this.delids.delid_creativeExam = delid;
-      if (id == "upload_pedTest") this.delids.delid_pedTest = delid;
+      //if (id == "upload_creativeExam") this.delids.delid_creativeExam = delid;
+      //if (id == "upload_pedTest") this.delids.delid_pedTest = delid;
       if (id == "upload_college") this.delids.delid_college = delid;
     },
 
@@ -1324,7 +1344,7 @@ export default {
         u8arr[n] = bstr.charCodeAt(n);
       }
       this.photos_ped = new Blob([u8arr], { type: mime });
-      this.upload_multi_ped();
+      //this.upload_multi_ped();
     },
 
     upload_multi: function () {
@@ -1423,34 +1443,10 @@ export default {
     },
 
     remove_upload_multi_ped: function (i) {
-      var data_created = new FormData();
-      data_created.append(
-        "json",
-        JSON.stringify({
-          data: {
-            delid: this.delids.delid_pedTest[i],
-            method: "setUpload",
-            action: "delImage",
-          },
-          token: this.$cookies.get("token"),
-          email: this.$cookies.get("email"),
-        })
-      );
-      fetch(url + "/backend/middle.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data_created,
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.code == 1) {
-            this.preview_pedTest.splice(i, 1);
-            this.delids.delid_pedTest.slice(i, 1);
-            this.pedagogical_test = null;
-          }
-        });
+      this.preview_pedTest.splice(i, 1);
+      this.photos_ped.splice(i, 1);
+      this.form.ped_path.splice(i, 1);
+      this.pedagogical_test = null;
     },
 
     remove_upload: function (id) {
@@ -1468,11 +1464,22 @@ export default {
         this.form.infomatrix_path = null;
         return;
       }
+      if (id == "upload_creativeExam") {
+        this.preview_creativeExam = null;
+        this.creative_exam = null;
+        this.form.creative_path = null;
+        return;
+      }
+      //var delid = this.delids.delid_creativeExam;
+      if (id == "upload_pedTest") {
+        this.preview_pedTest = null;
+        this.pedagogical_test = null;
+        this.form.ped_path = null;
+        return;
+      } //var delid = this.delids.delid_pedTest;
       if (id == "upload_studentFee") var delid = this.delids.delid_studentFee;
       if (id == "upload_tuitionFee") var delid = this.delids.delid_tuitionFee;
-      if (id == "upload_creativeExam")
-        var delid = this.delids.delid_creativeExam;
-      if (id == "upload_pedTest") var delid = this.delids.delid_pedTest;
+
       if (id == "upload_college") var delid = this.delids.delid_college;
 
       var data_created = new FormData();
