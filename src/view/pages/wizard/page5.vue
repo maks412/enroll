@@ -871,7 +871,7 @@ export default {
     this.getUpload("35", "upload_tuitionFee");
     //this.getUpload("27", "upload_creativeExam");
     //this.getUpload_multi_ped();
-    this.getUpload("????", "upload_college");
+    this.getUpload("40", "upload_college");
   },
   name: "Wizard-4",
   mounted() {
@@ -914,8 +914,9 @@ export default {
       data_created.append("file_spt", this.spt_upload);
       data_created.append("file_infomatrix", this.infomatrix_upload);
       data_created.append("file_creative", this.creative_exam);
-      console.log(this.photos_ped);
-      data_created.append("file_ped[]", this.photos_ped);
+      //console.log(this.photos_ped);
+      data_created.append("file_ped[]", this.photos_ped[0]);
+      data_created.append("file_ped[]", this.photos_ped[1]);
       fetch(url + "/backend/middle.php", {
         method: "POST",
         headers: {
@@ -1220,7 +1221,7 @@ export default {
       //   data_created.append("file[]", this.pedagogical_test);
       // }
       if (id == "upload_college") {
-        doc = "?????";
+        doc = "40";
         data_created.append("file[]", this.college_upload);
       }
 
