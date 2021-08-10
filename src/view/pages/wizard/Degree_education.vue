@@ -45,9 +45,11 @@
                   >
                     <h4 class="mb-10 font-weight-bold text-dark">
                       {{ $t("page2.enter_university_details") }}<br />
-                      <p style="color: grey; font-size: 70%">{{ $t("page2.long_load") }}</p>
+                      <p style="color: grey; font-size: 70%">
+                        {{ $t("page2.long_load") }}
+                      </p>
                     </h4>
-                    
+
                     <div class="row">
                       <div class="col-xl-6">
                         <div class="form-group">
@@ -401,11 +403,8 @@ export default {
         { title: "page2.attestat_info", desc: "page2.attestat_info_d" },
       ],
       country: [],
-      degree_type: [
-        { text: "Bachelor", value: "B" },
-        { text: "Master", value: "M" },
-        { text: "Doctorate", value: "DR" },
-      ],
+
+      degree_type: [],
       school: [],
       nationality: [],
       previews: [],
@@ -457,12 +456,13 @@ export default {
         this.school = res.school.list;
         this.form.manid = res.manid;
         this.form.degree_type = res.degree_type;
+        this.degree_type = res.degree_type_options;
 
         this.getUpload();
         this.test_getUpload();
         this.ref_getUpload();
 
-        if(this.$cookies.get("degree") == "DR") this.degree_doc = true;
+        if (this.$cookies.get("degree") == "DR") this.degree_doc = true;
         else this.degree_doc = false;
       });
   },
@@ -630,7 +630,6 @@ export default {
           }
         });
     },
-
 
     press_country: function () {
       this.get_address(0, "country", this.form.country);
