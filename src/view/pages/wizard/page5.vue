@@ -756,8 +756,8 @@ export default {
       ],
       certificate75: null,
       previews: [],
-      photos: null,
-      photos_ped: null,
+      photos: [],
+      photos_ped: [],
       spt_upload: null,
       infomatrix_upload: null,
       student_fee: null,
@@ -832,13 +832,14 @@ export default {
         this.form.creative_exam_text = res.creative_exam_text;
         this.form.pedagogical_test_text = res.pedagogical_test_text;
 
-        this.preview_spt = url + "/" + res.response.spt_path;
-        this.preview_infomatrix = url + "/" + res.response.infomatrix_path;
-        this.preview_creativeExam = url + "/" + res.response.creative_path;
+        this.preview_spt = url + "/" + res.spt_path;
+        this.preview_infomatrix = url + "/" + res.infomatrix_path;
+        this.preview_creativeExam = url + "/" + res.creative_path;
         //this.preview_pedTest = url + "/" + res.response.ped_path;
-        for (var i = 0; i < res.response.ped_path; i++) {
+        for (var i = 0; i < res.ped_path.length; i++) {
             //this.delids.delid_pedTest.push(res.response[i].delid);
-            this.preview_pedTest.push(url + "/" + res.response.ped_path[i]);
+            this.preview_pedTest.push(url + "/" + res.ped_path[i]);
+            console.log(this.preview_pedTest[i]);
           }
 
         this.form.spt_path = res.spt_path;
@@ -859,8 +860,8 @@ export default {
           this.form.creative_path = null;
         }
         if (res.ped_path == "") {
-          this.preview_pedTest = null;
-          this.form.ped_path = null;
+          this.preview_pedTest = [];
+          this.form.ped_path = [];
         }
       });
     this.getUpload_multi();
@@ -913,6 +914,7 @@ export default {
       data_created.append("file_spt", this.spt_upload);
       data_created.append("file_infomatrix", this.infomatrix_upload);
       data_created.append("file_creative", this.creative_exam);
+      console.log(this.photos_ped);
       data_created.append("file_ped[]", this.photos_ped);
       fetch(url + "/backend/middle.php", {
         method: "POST",
@@ -984,7 +986,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "38",
+            docid: "66",
             method: "setUpload",
             action: "getImages",
             mod: "setUpload",
@@ -1047,10 +1049,10 @@ export default {
               this.delids.delid_creativeExam = res.response[i].delid;
               this.preview_creativeExam = url + "/" + res.response[i].doc_path;
             }
-            if (id == "upload_pedTest") {
-              this.delids.delid_pedTest = res.response[i].delid;
-              this.preview_pedTest = url + "/" + res.response[i].doc_path;
-            }
+            // if (id == "upload_pedTest") {
+            //   this.delids.delid_pedTest = res.response[i].delid;
+            //   this.preview_pedTest = url + "/" + res.response[i].doc_path;
+            // }
             if (id == "upload_college") {
               this.delids.delid_college = res.response[i].delid;
               this.preview_college = url + "/" + res.response[i].doc_path;
@@ -1290,7 +1292,8 @@ export default {
     },
 
     previewImage_multi_ped: function (e) {
-      if (this.delids.delid_pedTest.length >= 2) {
+      
+      if (this.form.ped_path.length >= 2 || this.preview_pedTest.length >= 2) {
         Swal.fire({
           title: "",
           text: "Maximum imeges uploaded",
@@ -1299,6 +1302,7 @@ export default {
         });
         return 0;
       }
+      console.log("sttart");
       var input = e.target;
       let slide = this.preview_pedTest;
       if (input.files) {
@@ -1311,6 +1315,7 @@ export default {
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
+            console.log("slide");
             slide.push(result);
             this.dataURLtoFile_multi_ped(result);
           });
@@ -1329,7 +1334,7 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photos = new Blob([u8arr], { type: mime });
+      this.photos.push(new Blob([u8arr], { type: mime }));
       this.upload_multi();
     },
 
@@ -1343,7 +1348,7 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photos_ped = new Blob([u8arr], { type: mime });
+      this.photos_ped.push(new Blob([u8arr], { type: mime }));
       //this.upload_multi_ped();
     },
 
@@ -1385,7 +1390,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "38",
+            docid: "66",
             mod: "page5",
             method: "setUpload",
             action: "setImage",
@@ -1444,8 +1449,8 @@ export default {
 
     remove_upload_multi_ped: function (i) {
       this.preview_pedTest.splice(i, 1);
-      this.photos_ped.splice(i, 1);
-      this.form.ped_path.splice(i, 1);
+      if(this.photos_ped) this.photos_ped.splice(i, 1);
+      if(this.form.ped_path) this.form.ped_path.splice(i, 1);
       this.pedagogical_test = null;
     },
 
