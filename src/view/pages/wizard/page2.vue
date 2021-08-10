@@ -597,6 +597,7 @@ export default {
         this.province = res.province.list;
 
         this.getUpload();
+        this.getUpload_prep();
       });
   },
   name: "Wizard-4",
@@ -696,6 +697,38 @@ export default {
           for (var i = 0; i < res.response.length; i++) {
             this.delids.push(res.response[i].delid);
             this.previews.push(url + "/" + res.response[i].doc_path);
+          }
+        });
+    },
+
+    getUpload_prep: function () {
+      //Get Uploads
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: {
+            docid: "40",
+            method: "setUpload",
+            action: "getImages",
+            mod: "setUpload",
+          },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          for (var i = 0; i < res.response.length; i++) {
+            this.delid = (res.response[i].delid);
+            this.preview = (url + "/" + res.response[i].doc_path);
           }
         });
     },
@@ -847,7 +880,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "????",
+            docid: "40",
             mod: "page2",
             method: "setUpload",
             action: "setImage",
