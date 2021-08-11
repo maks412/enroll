@@ -606,7 +606,7 @@ export default {
         "json",
         JSON.stringify({
           data: {
-            docid: "????",
+            docid: "42",
             method: "setUpload",
             action: "getImages",
             mod: "setUpload",
@@ -716,7 +716,7 @@ export default {
     },
 
     test_previewImage: function (e) {
-      if (this.test_delids.length >= 2) {
+      if (this.test_delids.length >= 1) {
         Swal.fire({
           title: "",
           text: "Maximum images uploaded",
@@ -746,7 +746,7 @@ export default {
     },
 
     ref_previewImage: function (e) {
-      if (this.ref_delids.length >= 2) {
+      if (this.ref_delids.length >= 1) {
         Swal.fire({
           title: "",
           text: "Maximum images uploaded",
@@ -799,7 +799,7 @@ export default {
         u8arr[n] = bstr.charCodeAt(n);
       }
       this.test_photos = new Blob([u8arr], { type: mime });
-      this.test_upload();
+      this.test_upload_file();
     },
 
     ref_dataURLtoFile: function (dataurl) {
@@ -812,7 +812,7 @@ export default {
         u8arr[n] = bstr.charCodeAt(n);
       }
       this.ref_photos = new Blob([u8arr], { type: mime });
-      this.ref_upload();
+      this.ref_upload_file();
     },
 
     upload: function () {
@@ -845,7 +845,7 @@ export default {
         });
     },
 
-    test_upload: function () {
+    test_upload_file: function () {
       var data_created = new FormData();
       data_created.append(
         "json",
@@ -875,13 +875,13 @@ export default {
         });
     },
 
-    ref_upload: function () {
+    ref_upload_file: function () {
       var data_created = new FormData();
       data_created.append(
         "json",
         JSON.stringify({
           data: {
-            docid: "?????",
+            docid: "42",
             method: "setUpload",
             action: "setImage",
           },
