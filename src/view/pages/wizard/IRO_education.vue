@@ -259,6 +259,8 @@ export default {
       preview_trans: null,
       delids: null,
       delids_trans: null,
+      doc_path: null,
+      
       form: {
         english_certificate: null,
         certificate_number: "",
@@ -294,7 +296,11 @@ export default {
 
         this.delids = res.result.docid;
         this.preview = url+"/"+res.result.doc_path;
-        if(res.result.doc_path == "") this.preview = null;
+        this.form.doc_path = res.result.doc_path;
+        if (res.result.doc_path == "") {
+          this.preview = null;
+          this.form.doc_path = null;
+        }
 
         this.getUpload();
       });
