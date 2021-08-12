@@ -82,8 +82,10 @@ export const locale = {
     },
     page2: {
         "school_info": "Мектеп ақпараты",
+        "university_info": "Университет ақпараты",
         "school_info_d": "Мектеп",
         "attestat_info": "Аттестат ақпараты",
+        "diplom_info": "Диплом ақпараты",
         "attestat_info_d": "",
         "preparation_course_d": "",
         "enter_school_details": "Мектеп туралы ақпарат енгізіңіз",
@@ -107,6 +109,7 @@ export const locale = {
         "f_language": "Шет тілі",
         "choose_f_language": "Шет тілін таңдаңыз...",
         "enter_att_details": "Аттестат ақпаратын таңдаңыз",
+        "enter_diplom_details": "Диплом ақпаратын таңдаңыз",
         "attestat_type": "Аттестат түрі",
         "choose_attestat_type": "Аттестат түрін таңдаңыз...",
         "attestat_series": "Аттестат сериясы",
@@ -122,7 +125,7 @@ export const locale = {
         "preparation_course": "Дайындық курсы",
         "choose_preparation_course": "Дайындық курсын таңдаңыз...",
         "upload_test": "Тест нәтижесін жүктеңіз (KT)",
-        "upload_diplom": "Бакалавр туралы дипломды қосымшамен жүктеңіз",
+        "upload_diplom": "Дипломды қосымшамен жүктеңіз",
         "upload_ref": "Емтихан туралы анықтаманың көшірмесін жүктеңіз",
         "long_load": "Университет тізімін жүктеу біраз уақыт алуы мүмкін"
     },
@@ -204,6 +207,12 @@ export const locale = {
         "choose_ped_test": "Педогогикалық тесті таңдаңыз...",
         "upload_college_int": "Колледжден кейінгі сұхпат натижесін жүктеңіз",
         "choose_college_int": "Колледжден кейінгі сұхпат...",
+        "upload_interview": "Cұхпат натижесін жүктеңіз",
+        "choose_interview": "Cұхпат натижесі...",
+        "interview_info": "Cұхпат ақпараты",
+        "transcript_info": "Транскрипт ақпараты",
+        "upload_transcript": "Транскрипт жүктеңіз",
+
     },
     page7: {
         "contact": "Келісім шарт",

@@ -128,7 +128,7 @@
                   <!--begin: Wizard Step 2-->
                   <div class="pb-5" data-wizard-type="step-content">
                     <h4 class="mb-10 font-weight-bold text-dark">
-                      {{ $t("page2.enter_att_details") }}
+                      {{ $t("page2.enter_diplom_details") }}
                     </h4>
 
                     <div class="row">
@@ -399,8 +399,8 @@ export default {
       status: this.$cookies.get("status"),
       degree_doc: false,
       tabs: [
-        { title: "page2.school_info", desc: "page2.school_info_d" },
-        { title: "page2.attestat_info", desc: "page2.attestat_info_d" },
+        { title: "page2.university_info", desc: "page2.university" },
+        { title: "page2.diplom_info", desc: "page2.attestat_info_d" },
       ],
       country: [],
 
@@ -462,8 +462,8 @@ export default {
         this.test_getUpload();
         this.ref_getUpload();
 
-        if (this.$cookies.get("degree") == "DR") this.degree_doc = true;
-        else this.degree_doc = false;
+        // if (this.$cookies.get("degree") == "DR") this.degree_doc = true;
+        // else this.degree_doc = false;
       });
   },
   name: "Wizard-4",

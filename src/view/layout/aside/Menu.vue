@@ -136,6 +136,39 @@ const degree_links = [
   },
 ];
 
+const degree_links_dr = [
+  {
+    name: "aside.main_info",
+    description: "aside.main_info_d",
+    navigate_to: "/home/1",
+  },
+  {
+    name: "aside.education",
+    description: "Setup Your Education Information",
+    navigate_to: "/home/degree_education",
+  },
+  {
+    name: "aside.contact",
+    description: "Setup Your Contact Information",
+    navigate_to: "/home/3",
+  },
+  {
+    name: "aside.eng_tests",
+    description: "aside.eng_tests_d",
+    navigate_to: "/home/4_ielts",
+  },
+  {
+    name: "aside.documents",
+    description: "aside.documents_d",
+    navigate_to: "/home/degree_decuments",
+  },
+  {
+    name: "aside.apply",
+    description: "aside.apply_d",
+    navigate_to: "/home/6",
+  },
+];
+
 var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 const link = [];
 export default {
@@ -143,12 +176,39 @@ export default {
   data() {
     return {
       links: iro_links,
-      isIRO: false
+      isIRO: false,
     };
   },
   methods: {
     hasActiveChildren(match) {
       return this.$route["path"].indexOf(match) !== -1;
+    },
+
+    non_IRO: function () {
+      var data_created = new FormData();
+      data_created.append(
+        "json",
+        JSON.stringify({
+          data: { mod: "isDegree", method: "get", action: "getDegree" },
+          token: this.$cookies.get("token"),
+          email: this.$cookies.get("email"),
+        })
+      );
+      fetch(url + "/backend/middle.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data_created,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.degree == "M" || res.second_higher) this.links = degree_links;
+          else if (res.degree == "DR") this.links = degree_links_dr;
+          else this.links = links;
+
+          this.$cookies.set("degree", res.degree);
+        });
     },
   },
   async created() {
@@ -170,41 +230,13 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        if (res.iro){
+        if (res.iro) {
           this.links = iro_links;
           this.isIRO = true;
-        } 
-        else {
-          this.links = links;
+        } else {
           this.isIRO = false;
+          this.non_IRO();
         }
-      });
-
-    var data_created = new FormData();
-    data_created.append(
-      "json",
-      JSON.stringify({
-        data: { mod: "isDegree", method: "get", action: "getDegree" },
-        token: this.$cookies.get("token"),
-        email: this.$cookies.get("email"),
-      })
-    );
-    fetch(url + "/backend/middle.php", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: data_created,
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.degree == "DR" || res.degree == "M" || res.second_higher) this.links = degree_links;
-        else {
-          if(this.isIRO) this.links = iro_links;
-          else this.links = links;
-        }
-
-        this.$cookies.set("degree", res.degree);
       });
   },
 };

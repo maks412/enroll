@@ -229,6 +229,29 @@
                           }}</span>
                         </div>
                       </div>
+
+                      <div class="col-xl-6">
+                        <div class="form-group">
+                          <label class="required">{{
+                            $t("page1.married_status")
+                          }}</label>
+                          <b-form-group v-slot="{ ariaDescribedby }">
+                            <b-form-radio-group
+                              v-model="form.married"
+                              :options="gender_married"
+                              :aria-describedby="ariaDescribedby"
+                              size="lg"
+                              required
+                              :disabled="
+                                status == 'ACCEPTED' || status == 'CONFIRMED'
+                              "
+                            ></b-form-radio-group>
+                          </b-form-group>
+                          <span class="form-text text-muted">{{
+                            $t("page1.choose_married_status")
+                          }}</span>
+                        </div>
+                      </div>
                     </div>
 
                     <!--end: Wizard Step 2-->
@@ -260,7 +283,7 @@
                             required
                           />
                           <span class="form-text text-muted">{{
-                            $t("page1.enter_doc_no")
+                            $t("page1.select_issued_by")
                           }}</span>
                         </div>
                       </div>
@@ -477,6 +500,7 @@ export default {
         issued_date: "",
         fname: "",
         lname: "",
+        married: "",
 
         mod: "page1",
         method: "set",
