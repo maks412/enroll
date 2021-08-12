@@ -240,12 +240,12 @@ export default {
           this.form.doc_path = null;
         }
 
-        if (this.$cookies.get("degree") != "B") {
-          this.english_certificate_options = [
-            { text: "IELTS", value: "8" },
-            { text: "Test Center Results", value: "?????" },
-          ];
-        }
+        // if (this.$cookies.get("degree") != "B") {
+        //   this.english_certificate_options = [
+        //     { text: "IELTS", value: "8" },
+        //     { text: "Test Center Results", value: "?????" },
+        //   ];
+        // }
       });
   },
   name: "Wizard-4",
