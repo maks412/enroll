@@ -1232,7 +1232,6 @@ export default {
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
-            console.log(2);
             slide.push(result);
             this.dataURLtoFile_multi(result, id);
           });

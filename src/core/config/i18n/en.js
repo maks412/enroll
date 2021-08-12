@@ -82,7 +82,7 @@ export const locale = {
         "id": "Identity Card",
         "passport": "Passport",
         "ministry": "Ministry",
-        "documents": "Upload your documents both sides in one image",
+        "documents": "Upload your documents",
     },
     page2: {
         "school_info": "School Information",

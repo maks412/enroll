@@ -78,7 +78,7 @@ export const locale = {
         "id": "Жеке куәлік",
         "passport": "Паспорт",
         "ministry": "Министрлік",
-        "documents": "Құжаттың екі жағын да бір суретте сақтаңыз",
+        "documents": "Құжатты сақтаңыз",
     },
     page2: {
         "school_info": "Мектеп ақпараты",

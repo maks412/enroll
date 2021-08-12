@@ -143,6 +143,7 @@ export default {
   data() {
     return {
       links: iro_links,
+      isIRO: false
     };
   },
   methods: {
@@ -169,8 +170,14 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        if (res.iro) this.links = iro_links;
-        else this.links = links;
+        if (res.iro){
+          this.links = iro_links;
+          this.isIRO = true;
+        } 
+        else {
+          this.links = links;
+          this.isIRO = false;
+        }
       });
 
     var data_created = new FormData();
@@ -192,7 +199,10 @@ export default {
       .then((response) => response.json())
       .then((res) => {
         if (res.degree == "DR" || res.degree == "M" || res.second_higher) this.links = degree_links;
-        else this.links = links;
+        else {
+          if(this.isIRO) this.links = iro_links;
+          else this.links = links;
+        }
 
         this.$cookies.set("degree", res.degree);
       });
