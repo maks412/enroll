@@ -235,7 +235,7 @@ export default {
         this.delids = res.result.docid;
         this.preview = url + "/" + res.result.doc_path;
         this.form.doc_path = res.result.doc_path;
-        if (res.result.doc_path == "") {
+        if (res.result.doc_path == null) {
           this.preview = null;
           this.form.doc_path = null;
         }
