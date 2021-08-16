@@ -279,7 +279,7 @@
                           <input
                             type="text"
                             class="form-control form-control-solid form-control-lg"
-                            v-model="form.issued_by"
+                            v-model="form.issued_by_for"
                             required
                           />
                           <span class="form-text text-muted">{{
@@ -496,7 +496,7 @@ export default {
         nationality: null,
         gender: "",
         document_no: "",
-        issued_by: "",
+        issued_by_for: "",
         issued_date: "",
         fname: "",
         lname: "",
