@@ -19,7 +19,8 @@
     <div class="form-group">
       <div class="d-flex justify-content-between mt-n5">
         <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
-        <a class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5 clickable" @click="$emit('showForm','forgot')">Forgot Password ?</a>
+        <!-- FORGOT DELETED!! -->
+        <!-- <a class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5 clickable" @click="$emit('showForm','forgot')">Forgot Password ?</a> -->
       </div>
       <div label-for="example-input-2">
         <input
