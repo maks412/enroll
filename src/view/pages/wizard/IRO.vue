@@ -608,7 +608,7 @@ export default {
           this.form.document_type = res.document_type;
           this.form.IIN = res.IIN;
           this.form.document_no = res.document_no;
-          this.form.issued_by = res.issued_by.selected_id;
+          this.form.issued_by_for = res.issued_by_for;
           this.form.issued_date = res.issued_date;
           this.form.fname = res.fname;
           this.form.lname = res.lname;
