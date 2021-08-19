@@ -321,10 +321,7 @@ export default {
     return {
       status: this.$cookies.get("status"),
       tabs: [""],
-      english_certificate_options: [
-        { text: "IELTS", value: "8" },
-        { text: "SDU Language Test", value: "39" },
-      ],
+      english_certificate_options: [],
       certificate_upload: null,
       transcript_upload: null,
       preview: null,
@@ -368,8 +365,9 @@ export default {
     })
       .then((response) => response.json())
       .then((res) => {
-        this.form.english_certificate = res.result.docid;
+        this.form.english_certificate = res.cert_types.selected_id;
         this.form.certificate_number = res.result.cert_no;
+        this.english_certificate_options = res.cert_types.list;
 
         this.delids = res.result.docid;
         this.preview = url+"/"+res.result.doc_path;
