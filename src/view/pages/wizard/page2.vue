@@ -587,6 +587,7 @@ export default {
         //this.form.attestat_upload = res.attestat_upload;
         this.form.preparation_course = res.preparation_course.selected_id;
         this.preparation_course = res.preparation_course.list;
+        this.preparation_course.unshift({ value: null, text: "" });
 
         this.form.school = res.school.selected_id;
         this.school = res.school.list;
