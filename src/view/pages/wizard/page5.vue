@@ -1302,7 +1302,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 500, // max size
+            max: 5000, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1332,7 +1332,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 500, // max size
+            max: 700, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1354,7 +1354,6 @@ export default {
         });
         return 0;
       }
-      console.log("sttart");
       var input = e.target;
       let slide = this.preview_pedTest;
       if (input.files) {
@@ -1363,7 +1362,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 500, // max size
+            max: 700, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
@@ -1386,7 +1385,8 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photos.push(new Blob([u8arr], { type: mime }));
+      //this.photos.push(new Blob([u8arr], { type: mime }));
+      this.certificate75 = new Blob([u8arr], { type: mime });
       this.upload_multi();
     },
 
@@ -1400,7 +1400,8 @@ export default {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      this.photos_college.push(new Blob([u8arr], { type: mime }));
+      //this.photos_college.push(new Blob([u8arr], { type: mime }));
+      this.college_upload = new Blob([u8arr], { type: mime });
       this.upload_multi_college();
     },
 

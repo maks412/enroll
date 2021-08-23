@@ -555,7 +555,6 @@ export default {
         doc = "38";
         data_created.append("file[]", this.pedagogical_test);
       }
-      console.log(doc);
       var delid = null;
       data_created.append(
         "json",
@@ -610,7 +609,7 @@ export default {
           compress(event.target.result, {
             width: 400,
             type: "image/*", // default
-            max: 500, // max size
+            max: 5000, // max size
             min: 20, // min size
             quality: 0.8,
           }).then((result) => {
