@@ -6,48 +6,66 @@
       </h3>
       <span class="text-muted font-weight-bold font-size-h4">
         Already have an account?
-        <a id="kt_login_signup" class="text-primary font-weight-bolder clickable" @click="$emit('showForm', 'signin')">Sign In</a>
+        <a
+          id="kt_login_signup"
+          class="text-primary font-weight-bolder clickable"
+          @click="$emit('showForm', 'signin')"
+          >Sign In</a
+        >
       </span>
     </div>
     <div class="form-group">
       <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-      <input 
-        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" 
+      <input
+        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
         type="email"
         name="email"
         v-model="form.email"
-        required />
+        required
+      />
     </div>
     <div class="form-group">
-      <label class="font-size-h6 font-weight-bolder text-dark"
-        >Password</label
-      >
+      <label class="font-size-h6 font-weight-bolder text-dark">Password</label>
       <input
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
         placeholder=""
         name="password"
         type="password"
         v-model="form.password"
-        required />
+        required
+      />
     </div>
     <div class="form-group">
-      <label class="font-size-h6 font-weight-bolder text-dark">Confirm password</label>
+      <label class="font-size-h6 font-weight-bolder text-dark"
+        >Confirm password</label
+      >
       <input
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
         placeholder=""
         name="confpassword"
         type="password"
         v-model="form.confpassword"
-        required />
+        required
+      />
     </div>
 
-    <div class="alert alert-custom alert-notice  fade show" :class="status.code == 1 ? 'alert-light-success' : 'alert-light-danger'" v-if="status.message != ''" role="alert">
+    <div
+      class="alert alert-custom alert-notice fade show"
+      :class="status.code == 1 ? 'alert-light-success' : 'alert-light-danger'"
+      v-if="status.message != ''"
+      role="alert"
+    >
       <div class="alert-icon"><i class="flaticon-warning"></i></div>
       <div class="alert-text">{{ status.message }}</div>
       <div class="alert-close">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true"><i class="ki ki-close"></i></span>
-          </button>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
       </div>
     </div>
     <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
@@ -61,54 +79,73 @@
   </form>
 </template>
 <style lang="scss">
-  @import "@/assets/sass/pages/login/login-1.scss";
+@import "@/assets/sass/pages/login/login-1.scss";
 
-  .clickable{
-    cursor: pointer;
-  }
+.clickable {
+  cursor: pointer;
+}
 </style>
 
 <script>
+import Swal from "sweetalert2";
 import { mapGetters } from "vuex";
-var url = 'https://enroll.sdu.edu.kz' // window.location.origin;
+var url = "https://enroll.sdu.edu.kz"; // window.location.origin;
 
 export default {
-  props: [
-    'show_hide'
-  ],
+  props: ["show_hide"],
   name: "register",
   data() {
     return {
       form: {
         email: null,
         password: null,
-        confpassword: null
+        confpassword: null,
       },
       status: {
         code: null,
-        message: ''
-      }
+        message: "",
+      },
     };
   },
   computed: {},
   methods: {
-    registerStudent(){
+    registerStudent() {
       var data = new FormData();
       data.append("json", JSON.stringify(this.form));
 
       fetch(url + "/backend/register.php", {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Accept': 'application/json',
+          Accept: "application/json",
         },
-        body: data
-      }).then((response) => response.json()).then((res) => {
-        this.status = res
-        this.$emit('showForm', 'signin')
-      }).catch(({ response }) => {
-        console.log(response);
-      });
-    }
+        body: data,
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.code == 1) {
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "success",
+              confirmButtonClass: "btn btn-secondary",
+            });
+
+            this.status = res;
+            this.$emit("showForm", "signin");
+          }
+          if(res.code == 0){
+            Swal.fire({
+              title: "",
+              text: res.message,
+              icon: "error",
+              confirmButtonClass: "btn btn-secondary",
+            });
+          }
+        })
+        .catch(({ response }) => {
+          console.log(response);
+        });
+    },
   },
 };
 </script>
