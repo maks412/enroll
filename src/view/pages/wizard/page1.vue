@@ -370,7 +370,7 @@
                           accept="image/png, image/gif, image/jpeg"
                           v-model="social_status_upload_preview"
                           :state="Boolean(file)"
-                          :placeholder="$t('page1.choose_status_document')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -567,7 +567,7 @@
                         @change="previewImage_multi_documents"
                         v-model="documents_upload_preview"
                         :state="Boolean(file)"
-                        :placeholder="$t('common.choose_file')"
+                        :placeholder="$t('upload_format')"
                         :drop-placeholder="$t('common.drop_file')"
                         :disabled="
                           status == 'ACCEPTED' || status == 'CONFIRMED'

@@ -59,7 +59,7 @@
                           @change="previewImage"
                           :state="Boolean(file)"
                           :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
-                          :placeholder="$t('page4.choose_certificate')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_files')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>

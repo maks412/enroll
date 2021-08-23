@@ -292,7 +292,7 @@
                           @change="previewImage"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('common.choose_file')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           required
                           :disabled="
@@ -391,7 +391,7 @@
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
                           "
-                          :placeholder="$t('page2.choose_prep')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_files')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>

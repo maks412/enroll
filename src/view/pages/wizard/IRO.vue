@@ -327,7 +327,7 @@
                         @change="previewImage_multi_documents"
                         v-model="documents_upload_preview"
                         :state="Boolean(file)"
-                        :placeholder="$t('common.choose_file')"
+                        :placeholder="$t('upload_format')"
                         :drop-placeholder="$t('common.drop_file')"
                         ><template slot="file-name" slot-scope="{ names }">
                           <b-badge variant="dark">{{ names[0] }}</b-badge>

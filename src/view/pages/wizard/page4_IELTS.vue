@@ -75,7 +75,7 @@
                           v-model="certificate_upload"
                           @change="previewImage"
                           :state="Boolean(file)"
-                          :placeholder="$t('page5.choose_certificate')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_files')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'

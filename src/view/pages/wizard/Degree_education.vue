@@ -140,7 +140,7 @@
                           @change="previewImage"
                           v-model="attestat_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('common.choose_file')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           required
                           :disabled="
@@ -209,7 +209,7 @@
                           @change="test_previewImage"
                           v-model="test_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('common.choose_file')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           required
                           :disabled="
@@ -278,7 +278,7 @@
                           @change="ref_previewImage"
                           v-model="ref_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('common.choose_file')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           required
                           :disabled="

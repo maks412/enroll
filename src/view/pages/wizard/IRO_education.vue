@@ -72,7 +72,7 @@
                           v-model="certificate_upload"
                           @change="previewImage"
                           :state="Boolean(file)"
-                          :placeholder="$t('page5.choose_certificate')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_files')"
                           :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                           ><template slot="file-name" slot-scope="{ names }">
@@ -138,7 +138,7 @@
                           v-model="transcript_upload"
                           @change="previewImage_trans"
                           :state="Boolean(file)"
-                          :placeholder="$t('page5.choose_certificate')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_files')"
                           ><template slot="file-name" slot-scope="{ names }">
                             <b-badge variant="dark">{{ names[0] }}</b-badge>
@@ -202,7 +202,7 @@
                             id="upload_college"
                             v-model="college_upload"
                             :state="Boolean(file)"
-                            :placeholder="$t('page6.choose_interview')"
+                            :placeholder="$t('upload_format')"
                             :drop-placeholder="$t('common.drop_file')"
                             :disabled="
                               status == 'ACCEPTED' || status == 'CONFIRMED'

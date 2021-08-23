@@ -52,7 +52,7 @@
                         v-model="certificate75"
                         @change="previewImage_multi"
                         :state="Boolean(file)"
-                        :placeholder="$t('common.choose_file')"
+                        :placeholder="$t('upload_format')"
                         :drop-placeholder="$t('common.drop_file')"
                         :disabled="status == 'ACCEPTED' || status == 'CONFIRMED'"
                         required

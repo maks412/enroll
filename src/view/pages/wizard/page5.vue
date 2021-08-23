@@ -52,7 +52,7 @@
                         v-model="certificate75"
                         @change="previewImage_multi"
                         :state="Boolean(file)"
-                        :placeholder="$t('common.choose_file')"
+                        :placeholder="$t('upload_format')"
                         :drop-placeholder="$t('common.drop_file')"
                         :disabled="
                           status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -165,7 +165,7 @@
                           id="upload_spt"
                           v-model="spt_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_spt')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -258,7 +258,7 @@
                           id="upload_infomatrix"
                           v-model="infomatrix_upload"
                           :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_inf')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -331,7 +331,7 @@
                           id="upload_studentFee"
                           v-model="student_fee"
                           :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_stud_fee')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -396,7 +396,7 @@
                           id="upload_tuitionFee"
                           v-model="tuition_fee"
                           :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_tut_fee')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -485,7 +485,7 @@
                           id="upload_creativeExam"
                           v-model="creative_exam"
                           :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_creative_exam')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -562,7 +562,7 @@
                           id="upload_pedTest"
                           v-model="pedagogical_test"
                           :state="Boolean(file)"
-                          :placeholder="$t('page6.choose_ped_test')"
+                          :placeholder="$t('upload_format')"
                           :drop-placeholder="$t('common.drop_file')"
                           :disabled="
                             status == 'ACCEPTED' || status == 'CONFIRMED'
@@ -628,7 +628,7 @@
                             id="upload_college"
                             v-model="college_upload"
                             :state="Boolean(file)"
-                            :placeholder="$t('page6.choose_college_int')"
+                            :placeholder="$t('upload_format')"
                             :drop-placeholder="$t('common.drop_file')"
                             :disabled="
                               status == 'ACCEPTED' || status == 'CONFIRMED'
