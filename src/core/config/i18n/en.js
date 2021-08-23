@@ -1,6 +1,6 @@
 // USA
 export const locale = {
-    "upload_format": "JPEG, JPG, PNG allowed",
+    "upload_format": "JPEG, JPG allowed",
     common: {
         "previous": "Previous",
         "submit": "Submit",

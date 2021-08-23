@@ -1,6 +1,6 @@
 // KZ
 export const locale = {
-    "upload_format": "JPEG, JPG, PNG жүктей аласыз",
+    "upload_format": "JPEG, JPG жүктей аласыз",
     common: {
         "previous": "Алдыңғы",
         "submit": "Жіберу",
