@@ -947,6 +947,26 @@ export default {
       }
     },
 
+    dataURLtoFile_multi: function (dataurl, id) {
+
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      if (id == "social_status") {
+        this.social_status_upload = new Blob([u8arr], { type: mime });
+        this.upload_multi_social();
+      }
+      if (id == "documents") {
+        this.documents_upload = new Blob([u8arr], { type: mime });
+        this.upload_multi_documents();
+      }
+    },
+
     upload_multi_documents: function () {
       var data_created = new FormData();
       data_created.append(
